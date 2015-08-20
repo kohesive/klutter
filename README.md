@@ -25,7 +25,7 @@ compile "uy.klutter:klutter-all:0.+"
 
 ## Modules
 
-|&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;|Injektable|Size|Topic|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Injektable|Size|Topic|
 |------|------|------|------|
 |aws-s3|Yes|tiny|Amazon AWS SDK S3 helper extensions|
 |aws|No|tiny|Amazon AWS SDK helper extensions|
