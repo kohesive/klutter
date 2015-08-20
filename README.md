@@ -7,7 +7,7 @@ Please send contributions, fork the repo, issue a pull request and write a comme
 
 ## Maven Dependnecy
 
-Each module has its own dependency.  And for any module, note if it has a version specific to your JDK version (use highest at or below), then include the dependency in your Gradle / Maven projects, ones that have Kotlin configured for Kotlin M12 versions `0.12.1218` or `0.12.1230`  For example, for the whole package (one of `klutter-all`, `klutter-all-jdk7`, or `klutter-all-jdk8`) using open dependency number while we are in development:
+Each module has its own dependency.  And for any module, note if it has a version specific to your JDK version (use highest at or below), then include the dependency in your Gradle / Maven projects, ones that have Kotlin configured for Kotlin M12 versions `0.12.1218` or `0.12.1230`  For example, for the whole package (one of `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) using open dependency number while we are in development:
 
 **Gradle:**
 ```
@@ -28,12 +28,12 @@ compile "uy.klutter:klutter-all:0.+"
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Injektable|Size|Topic|
 |------|------|------|------|
 |[aws-s3](https://github.com/klutter/klutter/tree/master/aws-s3)|Yes|tiny|Amazon AWS SDK S3 helper extensions|
-|[aws](https://github.com/klutter/klutter/tree/master/aws)|No|tiny|Amazon AWS SDK helper extensions|
+|[aws-core](https://github.com/klutter/klutter/tree/master/aws)|No|tiny|Amazon AWS SDK helper extensions|
 |[config-typesafe-jdk7](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk7)|No|medium|Typesafe Config easier loader and access to configuration|
 |[config-typesafe-jdk8](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk8)|No|medium|Same as above, but with newer version of Typesafe Config that is JDK 8 only|
 |[core](https://github.com/klutter/klutter/tree/master/core)|No|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|
-|[core-JDK-7](https://github.com/klutter/klutter/tree/master/core-jdk7)|No|tiny|Same as above with more extensions based on classes added in JDK-7, includes core|
-|[core-JDK-8](https://github.com/klutter/klutter/tree/master/core-jdk8)|No|tiny|Same as above with more extensions based on classes added in JDK-8, includes core-JDK-7 & core|
+|[core-jdk7](https://github.com/klutter/klutter/tree/master/core-jdk7)|No|tiny|Same as above with more extensions based on classes added in JDK-7, includes core|
+|[core-jdk8](https://github.com/klutter/klutter/tree/master/core-jdk8)|No|tiny|Same as above with more extensions based on classes added in JDK-8, includes core-JDK-7 & core|
 |[core-jodatime](https://github.com/klutter/klutter/tree/master/core-jodatime)|No|tiny|Joda time extension methods, includes core|
 |[json-jackson](https://github.com/klutter/klutter/tree/master/json-jackson)|Yes|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|
 |[json-jackson-jdk8](https://github.com/klutter/klutter/tree/master/json-jackson-jdk8)|Yes|tiny|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|
