@@ -25,20 +25,20 @@ compile "uy.klutter:klutter-all:0.+"
 
 ## Modules
 
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Injektable|Size|Topic|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Size|Topic|Injekt|
 |------|------|------|------|
-|[aws-s3](https://github.com/klutter/klutter/tree/master/aws-s3)|Yes|tiny|Amazon AWS SDK S3 helper extensions|
-|[aws-core](https://github.com/klutter/klutter/tree/master/aws)|No|tiny|Amazon AWS SDK helper extensions|
-|[config-typesafe-jdk7](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk7)|No|medium|Typesafe Config easier loader and access to configuration|
-|[config-typesafe-jdk8](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk8)|No|medium|Same as above, but with newer version of Typesafe Config that is JDK 8 only|
-|[core](https://github.com/klutter/klutter/tree/master/core)|No|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|
-|[core-jdk7](https://github.com/klutter/klutter/tree/master/core-jdk7)|No|tiny|Same as above with more extensions based on classes added in JDK-7, includes core|
-|[core-jdk8](https://github.com/klutter/klutter/tree/master/core-jdk8)|No|tiny|Same as above with more extensions based on classes added in JDK-8, includes core-JDK-7 & core|
-|[core-jodatime](https://github.com/klutter/klutter/tree/master/core-jodatime)|No|tiny|Joda time extension methods, includes core|
-|[json-jackson](https://github.com/klutter/klutter/tree/master/json-jackson)|Yes|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|
-|[json-jackson-jdk8](https://github.com/klutter/klutter/tree/master/json-jackson-jdk8)|Yes|tiny|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|
-|[netflix-graph](https://github.com/klutter/klutter/tree/master/netflix-graph)|No|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|
+|[aws-s3](https://github.com/klutter/klutter/tree/master/aws-s3)|tiny|Amazon AWS SDK S3 helper extensions|Yes|
+|[aws-core](https://github.com/klutter/klutter/tree/master/aws)|tiny|Amazon AWS SDK helper extensions|No|
+|[config-typesafe-jdk7](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk7)|medium|Typesafe Config easier loader and access to configuration|No|
+|[config-typesafe-jdk8](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk8)|medium|Same as above, but with newer version of Typesafe Config that is JDK 8 only|No|
+|[core](https://github.com/klutter/klutter/tree/master/core)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
+|[core-jdk7](https://github.com/klutter/klutter/tree/master/core-jdk7)|tiny|Same as above with more extensions based on classes added in JDK-7, includes core|No|
+|[core-jdk8](https://github.com/klutter/klutter/tree/master/core-jdk8)|tiny|Same as above with more extensions based on classes added in JDK-8, includes core-JDK-7 & core|No|
+|[core-jodatime](https://github.com/klutter/klutter/tree/master/core-jodatime)|tiny|Joda time extension methods, includes core|No|
+|[json-jackson](https://github.com/klutter/klutter/tree/master/json-jackson)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
+|[json-jackson-jdk8](https://github.com/klutter/klutter/tree/master/json-jackson-jdk8)|tiny|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|Yes|
+|[netflix-graph](https://github.com/klutter/klutter/tree/master/netflix-graph)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
 
-Injektable modules have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.
+Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.
 
 Some of these modules are "tiny" and may not be overly useful yet, but they carry no extra weight, only have required dependencies and can be expanded over time by anyone that wants to send pull requests.  Submitted modules or changes to existing module consist of things not conflicting with Kotlin runtime libraries, and things useful to most Kotlin developers.
