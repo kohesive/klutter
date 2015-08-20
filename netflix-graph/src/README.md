@@ -11,6 +11,23 @@ A wrapper library around the "compressed directed graph library" from [Netflix-G
 Sample Schema code:
 
 ```kotlin
+// first a few Enums so our Node Types and Relationship Types are safer
+enum class MyNodes {
+    Movie,
+    Actor,
+    Director,
+    Award
+}
+
+enum class MyRelations {
+    StarredIn,
+    Starring,
+    DirectedBy,
+    Directed,
+    WonAward,
+    AwardWinner
+}
+
 val schema = defineGraphSchema<MyNodes, MyRelations>(RelationStructure.COMPACT) {
     from(Movie).connectEdges(Starring).to(Actor).autoMirrorEdges(StarredIn)
     from(Movie).connectOneEdge(DirectedBy).to(Director).autoMirrorEdges(Directed)
