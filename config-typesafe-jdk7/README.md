@@ -8,7 +8,7 @@ See the docs for Typesafe Config: https://github.com/typesafehub/config but note
 can be ignored if you want to lose the `loadConfig()` methods from Klutter/config-typesafe.
 
 JDK 7 version using TypeSafe Config 1.2.1 (last release before Typesafe config required JDK 8)
-JDK 8 version using TypeSafe Config 1.3.0
+[JDK 8 version](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk8) using TypeSafe Config 1.3.0
 
 ## Configuration Loading
 
