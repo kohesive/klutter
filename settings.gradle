@@ -10,7 +10,10 @@ include 'core',
         'json-jackson-jdk8',
         'config-typesafe-jdk7',
         'config-typesafe-jdk8',
-        'netflix-graph'
+        'netflix-graph',
+        'all-jdk6',
+        'all-jdk7',
+        'all-jdk8'
 
 project(':core').name = 'klutter-core'
 project(':core-jdk7').name = 'klutter-core-jdk7'
@@ -23,3 +26,7 @@ project(':json-jackson-jdk8').name = 'klutter-json-jackson-jdk8'
 project(':config-typesafe-jdk7').name = 'klutter-config-typesafe-jdk7'
 project(':config-typesafe-jdk8').name = 'klutter-config-typesafe-jdk8'
 project(':netflix-graph').name = 'klutter-netflix-graph'
+
+project(':all-jdk6').name = 'klutter-all-jdk6'
+project(':all-jdk7').name = 'klutter-all-jdk7'
+project(':all-jdk8').name = 'klutter-all-jdk8'
