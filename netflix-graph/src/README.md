@@ -82,13 +82,15 @@ useGraph<MyNodes, MyRelations>(inputStream) {
 
 See the full test cases in [TestNetflixGraph.kt](https://github.com/klutter/klutter/blob/master/netflix-graph/src/test/kotlin/uy/klutter/graph/netflix/TestNetflixGraph.kt) for a good example of using the library and the API.
 
-The Netflix-Graph has been used to create graphs that take for example 12G of memory for construction, and use only 2G after derserialization.  Including 10's of millions of nodes+edges.  We have batch machings that generate
-new graphs nightly that each processing node uses locally to do 10,000 traversals or more per second.
+The Netflix-Graph has been used to create graphs that take for example 10G of memory for construction, and use only 2G after derserialization.  These graphs can include 10's of millions of nodes+edges or more, simply limited by memory and GC.  
+
+Our graph currently at [Collokia](https://www.collokia.com) is built nightly and takes 12G+ memory to construct a graph of 10's of millions of nodes+edges in about 20 minutes including serialization to disk.  We then read the graph in 90 seconds using ~ 3G of memory for use, executing thousands of node traversals per second per thread on the static graph in memory.  And this is fairly inefficient use of ordinals.  So optimization to be done.
 
 ## Road Map: (random order)
 
 * Delta building of graphs - allow adding additions incrementally with low cost at construction time by stacking graph "segments" and querying through the stack.  Same for ordinals.
 * Alterative store for ordinals allowing access from disk, possible leveldb, mapdb, lucene, or other.
+* Optimization of simple ordinal store, prefix compression, etc.
 * Traversal engine - given a starting point, and traversal rules, collect things from the graph.  This isn't a query language it is something else, fun, and we use it to do really fast traversals that are easy to write.
 * Take advantage of the recent performance improvements for building by keeping references to the builder objects.
 * Track changes for 1.6-SNAPSHOT onwards
