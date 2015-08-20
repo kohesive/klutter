@@ -45,3 +45,16 @@ compile "uy.klutter:klutter-all-jdk8:0.+"
 Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.
 
 Some of these modules are "tiny" and may not be overly useful yet, but they carry no extra weight, only have required dependencies and can be expanded over time by anyone that wants to send pull requests.  Submitted modules or changes to existing module consist of things not conflicting with Kotlin runtime libraries, and things useful to most Kotlin developers.
+
+## Recommended libraries:
+
+Other libraries that we recommend a building blocks for Kotlin applications:
+
+* [Injekt](https://github.com/kohesive/injekt/blob/master/README.md) - Injekt is a crazyily easy Dependency Injection for Kotlin. 
+* [Kovenant](http://kovenant.komponents.nl) - promises for Kotlin, easy, fun, and async! (JVM / Android)
+
+## With help from...
+
+[![Collokia Logo](https://www.collokia.com/images/collokia-logo-210x75.png)](https://www.collokia.com)
+
+
