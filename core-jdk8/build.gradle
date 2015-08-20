@@ -1,0 +1,3 @@
+dependencies {
+    compile relativeProject(':klutter-core-jdk7')
+}

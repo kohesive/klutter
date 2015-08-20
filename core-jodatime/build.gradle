@@ -1,0 +1,4 @@
+dependencies {
+    compile relativeProject(':klutter-core')
+    compile "joda-time:joda-time:$version_jodatime"
+}
