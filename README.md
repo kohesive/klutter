@@ -46,7 +46,37 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |[json-jackson-jdk8](https://github.com/klutter/klutter/tree/master/json-jackson-jdk8)|tiny|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|Yes|
 |[netflix-graph](https://github.com/klutter/klutter/tree/master/netflix-graph)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
 
-Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.
+Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.  Using an Injekt module looks something like:
+
+```kotlin
+class MyApp {
+    companion object : InjektMain() {
+        // my app starts here with a static main()
+        platformStatic public fun main(args: Array<String>) {
+            MyApp().run()
+        }
+
+        // the Injekt system will call me back here on a method I override.  And all my functions for registration are
+        // easy to find on the receiver class
+        override fun InjektRegistrar.registerInjectables() {
+            // add my singletons, factories, keyed factories, per-thread factories, ...
+            ...
+ 
+            // import prebuilt Injekt modules
+            importModule(AmazonS3Injektables)  
+            importModule(JacksonWithKotlinAndJdk8Injektables)
+        }
+    }
+
+    ...
+    // later, use them in properties
+    val s3: AmazonS3Client by Delegates.injectLazy()
+    // or use them anywhere
+    val myObject: CoolObject = Inject.get<ObjectMapper>().readValue(jsonString)
+    // or
+    val mapper: ObjectMapper = Inject.get()
+}
+```
 
 Some of these modules are "tiny" and may not be overly useful yet, but they carry no extra weight, only have required dependencies and can be expanded over time by anyone that wants to send pull requests.  Submitted modules or changes to existing module consist of things not conflicting with Kotlin runtime libraries, and things useful to most Kotlin developers.
 
