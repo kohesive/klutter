@@ -25,18 +25,18 @@ compile "uy.klutter:klutter-all:0.+"
 
 ## Modules
 
-|Artifact|Injektable|Topic|
-|------|------|------|
-|aws-s3|Yes|Amazon AWS SDK S3 helper extensions|
-|aws|No|Amazon AWS SDK helper extensions|
-|config-typesafe-jdk7|No|Typesafe Config easier loader and access to configuration|
-|config-typesafe-jdk8|No|Same as above, but with newer version of Typesafe Config that is JDK 8 only|
-|core|No|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|
-|core-JDK-7|No|Same as above with more extensions based on classes added in JDK-7, includes core|
-|core-JDK-8|No|Same as above with more extensions based on classes added in JDK-8, includes core-JDK-7 & core|
-|core-jodatime|No|Joda time extension methods, includes core|
-|json-jackson|Yes|Jackson JSON Data Binding extensions + loading of Kotlin module|
-|json-jackson-jdk8|Yes|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|
-|netflix-graph|No|In memory graph building and compression/serialization wrapper adding schema and much easier to use API|
+|&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;|Injektable|Size|Topic|
+|------|------|------|------|
+|aws-s3|Yes|tiny|Amazon AWS SDK S3 helper extensions|
+|aws|No|tiny|Amazon AWS SDK helper extensions|
+|config-typesafe-jdk7|No|medium|Typesafe Config easier loader and access to configuration|
+|config-typesafe-jdk8|No|medium|Same as above, but with newer version of Typesafe Config that is JDK 8 only|
+|core|No|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|
+|core-JDK-7|No|tiny|Same as above with more extensions based on classes added in JDK-7, includes core|
+|core-JDK-8|No|tiny|Same as above with more extensions based on classes added in JDK-8, includes core-JDK-7 & core|
+|core-jodatime|No|tiny|Joda time extension methods, includes core|
+|json-jackson|Yes|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|
+|json-jackson-jdk8|Yes|tiny|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|
+|netflix-graph|No|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|
 
 Injektable modules have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.
