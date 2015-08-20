@@ -1,0 +1,5 @@
+dependencies {
+    compile "uy.kohesive.injekt:injekt-core:${version_kohesive_injekt}"
+
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson"
+}

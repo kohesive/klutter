@@ -1,0 +1,25 @@
+rootProject.name = "klutter"
+
+include 'core',
+        'core-jdk7',
+        'core-jdk8',
+        'core-jodatime',
+        'aws',
+        'aws-s3',
+        'json-jackson',
+        'json-jackson-jdk8',
+        'config-typesafe-jdk7',
+        'config-typesafe-jdk8',
+        'netflix-graph'
+
+project(':core').name = 'klutter-core'
+project(':core-jdk7').name = 'klutter-core-jdk7'
+project(':core-jdk8').name = 'klutter-core-jdk8'
+project(':core-jodatime').name = 'klutter-core-jodatime'
+project(':aws').name = 'klutter-aws-core'
+project(':aws-s3').name = 'klutter-aws-s3'
+project(':json-jackson').name = 'klutter-json-jackson'
+project(':json-jackson-jdk8').name = 'klutter-json-jackson-jdk8'
+project(':config-typesafe-jdk7').name = 'klutter-config-typesafe-jdk7'
+project(':config-typesafe-jdk8').name = 'klutter-config-typesafe-jdk8'
+project(':netflix-graph').name = 'klutter-netflix-graph'
