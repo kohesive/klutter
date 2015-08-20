@@ -1,7 +1,9 @@
 [![Kotlin M12](https://img.shields.io/badge/Kotlin-M12%20%40%200.12.1230-blue.svg)](http://kotlinlang.org) [![Maven Version](https://img.shields.io/maven-central/v/uy.klutter/klutter-core.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter%22) [![CircleCI branch](https://img.shields.io/circleci/project/klutter/klutter/master.svg)](https://circleci.com/gh/klutter/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/klutter/klutter.svg)](https://github.com/klutter/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/klutter/klutter/blob/master/LICENSE) 
 
 # klutter
-Random small libraries, usually extensions making other libraries happier
+Random small libraries, usually extensions making other libraries happier.  
+
+Please send contributions, fork the repo, issue a pull request and write a comment in the pull request granting the rights for the code to be used in Klutter.
 
 ## Maven Dependnecy
 
