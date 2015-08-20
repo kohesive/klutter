@@ -1,8 +1,7 @@
 ## klutter/netflix-graph
 
-A wrapper library around the directed graph library from [Netflix-Graph project](https://github.com/Netflix/netflix-graph) 
-providing a Kotlin library to contruct, serialize and compress, then load and use a directed graph data.  In addition to
-the features of Netflix-Graph, Klutter includes:
+A wrapper library around the "compressed directed graph library" from [Netflix-Graph project](https://github.com/Netflix/netflix-graph) 
+-- a Kotlin library to construct, serialize and compress, then load and use a directed graph data at in-memory speeds.  In addition to the features of Netflix-Graph, Klutter includes:
 
 * Schema definition - define node types and relationships as Enums, and allowed linkages
 * Ordinal tracking - easy ways to track the ordinals for every node, and use them both in construction and with serialization/deserialization of the graph
@@ -91,3 +90,5 @@ new graphs nightly that each processing node uses locally to do 10,000 traversal
 * Delta building of graphs - allow adding additions incrementally with low cost at construction time by stacking graph "segments" and querying through the stack.  Same for ordinals.
 * Alterative store for ordinals allowing access from disk, possible leveldb, mapdb, lucene, or other.
 * Traversal engine - given a starting point, and traversal rules, collect things from the graph.  This isn't a query language it is something else, fun, and we use it to do really fast traversals that are easy to write.
+* Take advantage of the recent performance improvements for building by keeping references to the builder objects.
+* Track changes for 1.6-SNAPSHOT onwards
