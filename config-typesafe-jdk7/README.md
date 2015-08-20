@@ -114,3 +114,6 @@ public fun foo(stuff: ConfiguredValue) {
 All extensions can be seen in [TypesafeConfig_Ext.kt](https://github.com/klutter/klutter/blob/master/config-typesafe-jdk7/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt)
 
 
+## Other Modules
+
+There are other cool Klutter modules at the [Klutter github page](https://github.com/klutter/klutter)
