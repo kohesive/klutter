@@ -11,7 +11,7 @@ Each module has its own dependency.  And for any module, note if it has a versio
 
 For example, for the whole package (one of `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) and using an open-ended dependency number while we are in development:
 
-Current Version:  `0.1.1` 
+Current Version:  `0.1.1`  (exists in Maven Central, but waiting on maven search pages to update)
 
 **Gradle:**
 
