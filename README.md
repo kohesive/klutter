@@ -7,18 +7,21 @@ Please send contributions, fork the repo, issue a pull request and write a comme
 
 ## Maven Dependnecy
 
-Each module has its own dependency.  And for any module, note if it has a version specific to your JDK version (use highest at or below), then include the dependency in your Gradle / Maven projects, ones that have Kotlin configured for Kotlin M12 versions `0.12.1218` or `0.12.1230`  For example, for the whole package (one of `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) using open dependency number while we are in development:
+Each module has its own dependency.  And for any module, note if it has a version specific to your JDK version (use highest at or below), then include the dependency in your Gradle / Maven projects, ones that have Kotlin configured for Kotlin M12 versions `0.12.1218` or `0.12.1230`
+
+For example, for the whole package (one of `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) and using an open-ended dependency number while we are in development:
 
 **Gradle:**
+
 ```
-compile "uy.klutter:klutter-all:0.+"
+compile "uy.klutter:klutter-all-jdk8:0.+"
 ```
 
 **Maven:**
 ```
 <dependency>
     <groupId>uy.klutter</groupId>
-    <artifactId>klutter-all</artifactId>
+    <artifactId>klutter-all-jdk8</artifactId>
     <version>[0.1.0,1.0.0)</version>
 </dependency>
 ```
