@@ -94,3 +94,7 @@ Our graph currently at [Collokia](https://www.collokia.com) is built nightly and
 * Traversal engine - given a starting point, and traversal rules, collect things from the graph.  This isn't a query language it is something else, fun, and we use it to do really fast traversals that are easy to write.
 * Take advantage of the recent performance improvements for building by keeping references to the builder objects.
 * Track changes for 1.6-SNAPSHOT onwards
+
+## Other Modules
+
+There are other cool Klutter modules at the [Klutter github page](https://github.com/klutter/klutter)
