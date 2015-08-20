@@ -113,6 +113,10 @@ public fun foo(stuff: ConfiguredValue) {
 
 All extensions can be seen in [TypesafeConfig_Ext.kt](https://github.com/klutter/klutter/blob/master/config-typesafe-jdk7/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt)
 
+## Roadmap (random order)
+
+* File/Path lists
+* Same API of loading, fallback and ConfiguredValue over straight JSON or Maps (although waiting to see if there is really demand) 
 
 ## Other Modules
 
