@@ -11,10 +11,12 @@ Each module has its own dependency.  And for any module, note if it has a versio
 
 For example, for the whole package (one of `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) and using an open-ended dependency number while we are in development:
 
+Current Version:  `0.1.1` 
+
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all-jdk8:0.+"
+compile "uy.klutter:klutter-all-jdk8:0.1.+"
 ```
 
 **Maven:**
@@ -22,7 +24,7 @@ compile "uy.klutter:klutter-all-jdk8:0.+"
 <dependency>
     <groupId>uy.klutter</groupId>
     <artifactId>klutter-all-jdk8</artifactId>
-    <version>[0.1.0,1.0.0)</version>
+    <version>[0.1.0,0.2.0)</version>
 </dependency>
 ```
  
