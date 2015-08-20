@@ -37,4 +37,4 @@ compile "uy.klutter:klutter-all:0.+"
 |json-jackson-jdk8|Yes|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|
 |netflix-graph|No|In memory graph building and compression/serialization wrapper adding schema and much easier to use API|
 
-Injektable modules have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import.
+Injektable modules have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.
