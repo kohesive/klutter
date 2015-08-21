@@ -3,25 +3,30 @@
 # klutter
 Random small libraries, usually extensions making other libraries happier.  
 
-Please send contributions, fork the repo, issue a pull request and write a comment in the pull request granting the rights for the code to be used in Klutter.
+Please send contributions, fork the repo, issue a pull request and write a comment in the pull request granting the
+rights for the code to be used in Klutter.
 
-## Maven Dependnecy
+## Maven Dependency
 
-Each module has its own dependency.  And for any module, note if it has a version specific to your JDK version (use highest at or below), then include the dependency in your Gradle / Maven projects, ones that have Kotlin configured for Kotlin M12 versions `0.12.1218` or `0.12.1230`
+Each module has its own set of dependencies.  There is a main dependency which is always the most current JDK
+version of the module, and also a version suffixed by the JDK version for which it is compatible (that version or newer).
+Include the dependency in your Gradle / Maven projects, ones that already have Kotlin configured for Kotlin M12 versions
+`0.12.1218` or `0.12.1230`
 
-For example, for the whole package (one of `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) and using an open-ended dependency number while we are in development:
+For example, for the whole package (one of `klutter-all` (lastest JDK), `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) and using an
+open-ended dependency number while Klutter is in early active development:
 
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all-jdk8:0.2.+"
+compile "uy.klutter:klutter-all:0.2.+"
 ```
 
 **Maven:**
 ```
 <dependency>
     <groupId>uy.klutter</groupId>
-    <artifactId>klutter-all-jdk8</artifactId>
+    <artifactId>klutter-all</artifactId>
     <version>[0.2.0,0.3.0)</version>
 </dependency>
 ```
@@ -34,14 +39,10 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |------|------|------|------|
 |[aws-s3](https://github.com/klutter/klutter/tree/master/aws-s3)|tiny|Amazon AWS SDK S3 helper extensions|Yes|
 |[aws-core](https://github.com/klutter/klutter/tree/master/aws)|tiny|Amazon AWS SDK helper extensions|No|
-|[config-typesafe-jdk7](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk7)|medium|Typesafe Config easier loader and access to configuration|No|
-|[config-typesafe-jdk8](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk8)|medium|Same as above, but with newer version of Typesafe Config that is JDK 8 only|No|
+|[config-typesafe](https://github.com/klutter/klutter/tree/master/config-typesafe)|medium|Typesafe Config easier loader and access to configuration|No|
 |[core](https://github.com/klutter/klutter/tree/master/core)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
-|[core-jdk7](https://github.com/klutter/klutter/tree/master/core-jdk7)|tiny|Same as above with more extensions based on classes added in JDK-7, includes core|No|
-|[core-jdk8](https://github.com/klutter/klutter/tree/master/core-jdk8)|tiny|Same as above with more extensions based on classes added in JDK-8, includes core-JDK-7 & core|No|
 |[core-jodatime](https://github.com/klutter/klutter/tree/master/core-jodatime)|tiny|Joda time extension methods, includes core|No|
 |[json-jackson](https://github.com/klutter/klutter/tree/master/json-jackson)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
-|[json-jackson-jdk8](https://github.com/klutter/klutter/tree/master/json-jackson-jdk8)|tiny|Same as above + loading of JDK 8 datatypes, JDK 8 date/time, and JDK 8 parameter names modules|Yes|
 |[netflix-graph](https://github.com/klutter/klutter/tree/master/netflix-graph)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
 
 Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.  Using an Injekt module looks something like:
