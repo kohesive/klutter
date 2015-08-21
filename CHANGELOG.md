@@ -2,6 +2,12 @@
 
 ...
 
+=========================================================
+2015-08-20 v0.2.1 release
+=========================================================
+
+Moved JDK7 typesafe config extension methods into .jdk7 subpackage until Kotlin can merge
+two package fragments from two jars better.
 
 =========================================================
 2015-08-21 v0.2.0 release

@@ -6,5 +6,5 @@ import com.typesafe.config.ConfigParseOptions
 import java.io.File
 import java.nio.file.Path
 
-public class FileConfig(path: Path, failIfMissing: Boolean): uy.klutter.config.typesafe.FileConfig(path.toFile(), failIfMissing)
+public class FileConfig(path: Path, failIfMissing: Boolean = true): uy.klutter.config.typesafe.FileConfig(path.toFile(), failIfMissing)
 

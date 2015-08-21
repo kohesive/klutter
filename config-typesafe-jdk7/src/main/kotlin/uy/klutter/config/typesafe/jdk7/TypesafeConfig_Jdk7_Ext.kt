@@ -1,5 +1,6 @@
-package uy.klutter.config.typesafe
+package uy.klutter.config.typesafe.jdk7
 
+import uy.klutter.config.typesafe.ConfiguredValue
 import java.nio.file.Path
 import java.nio.file.Paths
 
