@@ -7,7 +7,6 @@ import com.typesafe.config.ConfigResolveOptions
 import java.io.File
 import java.io.Reader
 import java.net.URL
-import java.nio.file.Path
 import java.util.*
 
 
@@ -134,9 +133,7 @@ public class ClassResourceConfig(val resouceName: String, val klass: Class<*>, v
     }
 }
 
-public class FileConfig(val file: File, val failIfMissing: Boolean = true) : ConfigLoader() {
-    constructor (path: Path, failIfMissing: Boolean) : this(path.toFile(), failIfMissing) {}
-
+open public class FileConfig(val file: File, val failIfMissing: Boolean = true) : ConfigLoader() {
     public override fun load(): Config {
         val options = ConfigParseOptions.defaults().setAllowMissing(failIfMissing)
         return ConfigFactory.parseFileAnySyntax(file, options)

@@ -15,6 +15,7 @@ buildscript {
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath "com.prezi.pride:gradle-pride-plugin:0.11"
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
         // one day... classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.1-SNAPSHOT"
     }
 }
@@ -110,7 +111,10 @@ if (rootProject != project) {
 subprojects {
     apply plugin: 'com.bmuschko.nexus'
 
-    def pomOnlyModule = !(new File(projectDir, "src/main/kotlin").exists())
+    def pomOnlyModule = !(new File("${projectDir.toString()}/src/main/kotlin").exists())
+    if (pomOnlyModule) {
+        println("Project $name is POM ONLY (has no code of its own)")
+    }
 
     task jars() {
         dependsOn build

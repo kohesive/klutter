@@ -1,0 +1,5 @@
+dependencies {
+    runtime relativeProject(":klutter-core-jdk6")
+    runtime relativeProject(":klutter-core-jdk7")
+    runtime relativeProject(":klutter-core-jdk8")
+}

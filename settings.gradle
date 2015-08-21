@@ -1,35 +1,47 @@
 rootProject.name = "klutter"
 
 include 'core',
+        'core-jdk6',
         'core-jdk7',
         'core-jdk8',
         'core-jodatime',
-        'aws',
+        'core-jodatime-jdk6',
+        'aws-core',
+        'aws-core-jdk6',
         'aws-s3',
+        'aws-s3-jdk6',
         'json-jackson',
+        'json-jackson-jdk6',
         'json-jackson-jdk8',
         'config-typesafe',
         'config-typesafe-jdk6',
         'config-typesafe-jdk7',
         'config-typesafe-jdk8',
         'netflix-graph',
+        'netflix-graph-jdk6',
         'all-jdk6',
         'all-jdk7',
         'all-jdk8'
 
 project(':core').name = 'klutter-core'
+project(':core-jdk6').name = 'klutter-core-jdk6'
 project(':core-jdk7').name = 'klutter-core-jdk7'
 project(':core-jdk8').name = 'klutter-core-jdk8'
 project(':core-jodatime').name = 'klutter-core-jodatime'
-project(':aws').name = 'klutter-aws-core'
+project(':core-jodatime-jdk6').name = 'klutter-core-jodatime-jdk6'
+project(':aws-core').name = 'klutter-aws-core'
+project(':aws-core-jdk6').name = 'klutter-aws-core-jdk6'
 project(':aws-s3').name = 'klutter-aws-s3'
+project(':aws-s3-jdk6').name = 'klutter-aws-s3-jdk6'
 project(':json-jackson').name = 'klutter-json-jackson'
+project(':json-jackson-jdk6').name = 'klutter-json-jackson-jdk6'
 project(':json-jackson-jdk8').name = 'klutter-json-jackson-jdk8'
 project(':config-typesafe-jdk6').name = 'klutter-config-typesafe-jdk6'
 project(':config-typesafe-jdk7').name = 'klutter-config-typesafe-jdk7'
 project(':config-typesafe-jdk8').name = 'klutter-config-typesafe-jdk8'
 project(':config-typesafe').name = 'klutter-config-typesafe'
 project(':netflix-graph').name = 'klutter-netflix-graph'
+project(':netflix-graph-jdk6').name = 'klutter-netflix-graph-jdk6'
 
 project(':all-jdk6').name = 'klutter-all-jdk6'
 project(':all-jdk7').name = 'klutter-all-jdk7'

@@ -5,8 +5,6 @@ import com.typesafe.config.ConfigFactory
 import com.typesafe.config.ConfigResolveOptions
 import java.io.File
 import java.net.URI
-import java.nio.file.Path
-import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
 

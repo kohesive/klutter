@@ -1,4 +1,3 @@
 dependencies {
-    compile relativeProject(":klutter-core")
-    compile "com.netflix.nfgraph:netflix-graph:$version_netflix_graph"
+    runtime relativeProject(":klutter-netflix-graph-jdk6")
 }

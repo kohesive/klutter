@@ -1,3 +1,5 @@
 dependencies {
-    compile relativeProject(":klutter-config-typesafe-jdk8")
+    runtime relativeProject(":klutter-config-typesafe-jdk6")
+    runtime relativeProject(":klutter-config-typesafe-jdk7")
+    runtime relativeProject(":klutter-config-typesafe-jdk8")
 }
