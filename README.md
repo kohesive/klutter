@@ -37,13 +37,13 @@ See all modules and current versions on [Maven Central search](http://search.mav
 
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Size|Topic|Injekt|
 |------|------|------|------|
-|[aws-s3](https://github.com/klutter/klutter/tree/master/aws-s3)|tiny|Amazon AWS SDK S3 helper extensions|Yes|
-|[aws-core](https://github.com/klutter/klutter/tree/master/aws)|tiny|Amazon AWS SDK helper extensions|No|
-|[config-typesafe](https://github.com/klutter/klutter/tree/master/config-typesafe)|medium|Typesafe Config easier loader and access to configuration|No|
-|[core](https://github.com/klutter/klutter/tree/master/core)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
-|[core-jodatime](https://github.com/klutter/klutter/tree/master/core-jodatime)|tiny|Joda time extension methods, includes core|No|
-|[json-jackson](https://github.com/klutter/klutter/tree/master/json-jackson)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
-|[netflix-graph](https://github.com/klutter/klutter/tree/master/netflix-graph)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
+|[aws-s3](aws-s3/)|tiny|Amazon AWS SDK S3 helper extensions|Yes|
+|[aws-core](aws-core/)|tiny|Amazon AWS SDK helper extensions|No|
+|[config-typesafe](config-typesafe/)|medium|Typesafe Config easier loader and access to configuration|No|
+|[core](core/)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
+|[core-jodatime](core-jodatime/)|tiny|Joda time extension methods, includes core|No|
+|[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
+|[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
 
 Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.  Using an Injekt module looks something like:
 
