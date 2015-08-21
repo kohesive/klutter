@@ -130,3 +130,33 @@ Since the Fragment can be used in many ways, there are helper methods for the `e
 Other properties, fluent methods, hasXYZ() methods, clearXYZ() methods, and more can be seen by exploring the `UriBuilder` class.
 
 When an instance is full built, you can `toString()`, `toURI()` or `build()` (as Immutable copy) the URI.
+
+### JDK 7 Extensions (in module klutter/klutter-core-jdk7 or higher JDK)
+
+Extension functions for:
+
+* Path.exists()
+* Path.notExists()
+* Path.deleteRecursively()  - Kotlin has File.deleteRecursively() but not for JDK 7 Path class
+
+### JDK 8 Extensions (in module klutter/klutter-core-jdk8 or higher JDK)
+
+Top-level functions for:
+
+* utcNow() - return current time as UTC Instant
+* isoDateFormat() - return formatter for ISO date in the form `yyyy-MM-dd`T`hh:mm:ss.SSSZ`
+
+Extension functions for:
+
+* Temporal.toIsoString() - convert any JDK 8 Date/Time class to ISO formatted string `yyyy-MM-dd`T`hh:mm:ss.SSSZ`
+
+### JodaTime Extensions (in module klutter/klutter-core-jodatime)
+
+Top-level functions for:
+
+* utcNow() - return current time as UTC timezone Joda DateTime
+* isoDateFormat() - return Joda DateTimeFormatter for ISO date in the form `yyyy-MM-dd`T`hh:mm:ss.SSSZ`
+
+Extension functions for:
+
+* DateTime.toIsoString() - convert Joda DateTime class to ISO formatted string `yyyy-MM-dd`T`hh:mm:ss.SSSZ`
