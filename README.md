@@ -42,7 +42,6 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |[aws-core](aws-core/)|tiny|Amazon AWS SDK helper extensions|No|
 |[config-typesafe](config-typesafe/)|medium|Typesafe Config easier loader and access to configuration|No|
 |[core](core/)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
-|[core-jodatime](core-jodatime/)|tiny|Joda time extension methods, includes core|No|
 |[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
 |[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
 
