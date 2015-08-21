@@ -15,6 +15,7 @@ buildscript {
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath "com.prezi.pride:gradle-pride-plugin:0.11"
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
         // one day... classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.1-SNAPSHOT"
     }
 }
@@ -31,14 +32,18 @@ subprojects {
         println("Project ${name} set to JDK 8")
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    } else  if (name.endsWith("jdk7")) {
+    } else if (name.endsWith("jdk7")) {
         println("Project ${name} set to JDK 7")
         sourceCompatibility = JavaVersion.VERSION_1_7
         targetCompatibility = JavaVersion.VERSION_1_7
-    } else {
-        println("Project ${name} set to JDK 6 (default)")
+    } else  if (name.endsWith("jdk6")) {
+        println("Project ${name} set to JDK 6")
         sourceCompatibility = JavaVersion.VERSION_1_6
         targetCompatibility = JavaVersion.VERSION_1_6
+    } else {
+        println("Project ${name} set to JDK 8 (default, likely pom-only project)")
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     tasks.withType(JavaCompile) {
@@ -106,12 +111,25 @@ if (rootProject != project) {
 subprojects {
     apply plugin: 'com.bmuschko.nexus'
 
+    def pomOnlyModule = !(new File("${projectDir.toString()}/src/main/kotlin").exists())
+    if (pomOnlyModule) {
+        println("Project $name is POM ONLY (has no code of its own)")
+    }
+
     task jars() {
         dependsOn build
     }
 
-    task subRelease() {
-        dependsOn jars, uploadArchives
+    if (pomOnlyModule) {
+       artifacts {}
+       task subRelease() {
+            dependsOn uploadArchives
+       }
+    }
+    else {
+        task subRelease() {
+            dependsOn jars, uploadArchives
+        }
     }
 
     modifyPom {

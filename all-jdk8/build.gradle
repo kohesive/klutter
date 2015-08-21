@@ -1,11 +1,9 @@
 // libraries that make sense for JDK 8
 dependencies {
-    compile relativeProject(":klutter-aws-core")
-    compile relativeProject(":klutter-aws-s3")
-    compile relativeProject(":klutter-config-typesafe-jdk8")
-    compile relativeProject(":klutter-core")
-    compile relativeProject(":klutter-core-jdk7")
-    compile relativeProject(":klutter-core-jdk8")
-    compile relativeProject(":klutter-json-jackson-jdk8")
-    compile relativeProject(":klutter-netflix-graph")
+    runtime relativeProject(":klutter-aws-core-jdk6")
+    runtime relativeProject(":klutter-aws-s3-jdk6")
+    runtime relativeProject(":klutter-config-typesafe-jdk8")
+    runtime relativeProject(":klutter-core-jdk8")
+    runtime relativeProject(":klutter-json-jackson-jdk8")
+    runtime relativeProject(":klutter-netflix-graph-jdk6")
 }

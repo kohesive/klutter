@@ -1,4 +1,3 @@
 dependencies {
-    compile relativeProject(":klutter-config-typesafe-jdk6")
     compile "com.typesafe:config:$version_typesafe_config"
 }

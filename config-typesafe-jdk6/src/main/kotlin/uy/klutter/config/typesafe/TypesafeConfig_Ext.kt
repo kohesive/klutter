@@ -5,8 +5,6 @@ import com.typesafe.config.ConfigFactory
 import com.typesafe.config.ConfigResolveOptions
 import java.io.File
 import java.net.URI
-import java.nio.file.Path
-import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
 
@@ -35,15 +33,6 @@ public fun Config.render(): String = this.root().render()
  * Intermediate object for providing additional functionality on a configured item
  */
 public class ConfiguredValue(val cfg: Config, val key: String) {
-    fun asPath(): Path = Paths.get(cfg.getString(key).trim()).toAbsolutePath()
-    fun asPathOrNull(): Path? = if (exists()) asPath() else null
-
-    fun asPathRelative(relativeTo: Path): Path = relativeTo.resolve(cfg.getString(key).trim()).toAbsolutePath()
-    fun asPathRelativeOrNull(relativeTo: Path): Path? = if (exists()) asPathRelative(relativeTo) else null
-
-    fun asPathSibling(relativeTo: Path): Path = relativeTo.resolveSibling(cfg.getString(key).trim()).toAbsolutePath()
-    fun asPathSiblingOrNull(relativeTo: Path): Path? = if (exists()) asPathSibling(relativeTo) else null
-
     fun asFile(): File = File(asString())
     fun asFileOrNull(): File? = if (exists()) asFile() else null
 
