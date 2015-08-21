@@ -1,6 +1,13 @@
 ## klutter/aws-core
 
-Core helper functions for AWS in general.  This is a tiny module, currently has these methods:
+Core helper functions for AWS in general.  
+
+Module is available in artifacts:
+
+* uy.klutter:klutter-core (latest JDK, currently JDK 6)
+* [uy.klutter:klutter-core-jdk6](../aws-core-jdk6)
+
+This is a tiny module, currently has these methods:
 
 ### Safe Credentials Provider
 
