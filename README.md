@@ -68,12 +68,14 @@ class MyApp {
     }
 
     ...
-    // later, use them in properties
+    // later, use them in properties in any class
     val s3: AmazonS3Client by Delegates.injectLazy()
-    // or use them anywhere
+    // or use them anywhere in code
     val myObject: CoolObject = Inject.get<ObjectMapper>().readValue(jsonString)
-    // or
+    // or another form of the same
     val mapper: ObjectMapper = Inject.get()
+    // or within constructor or method definitions as default values
+    public fun doSomethingWithS3(s3: AmazonS3Client = Inject.get()) { ... }
 }
 ```
 
