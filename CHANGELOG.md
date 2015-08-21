@@ -7,10 +7,16 @@
 2015-08-20 v0.2.0 release
 =========================================================
 
+Documentation added for every module.
+
 Change naming so that all libraries have the JDK target in the name.  And the default module name
-without the JDK version is always "latest JDK" (at this moment, JDK8).
+without the JDK version is always "latest JDK" (at this moment, JDK8 or highest available for the module).
 
 Klutter-Config-Typesafe now has JDK6 build.
+
+`Long.humanReadonable()` extension mispelling fixed
+
+`Path.deleteRecursive()` renamed to `deleteRecursively` to match Kotlin `File.deleteRecursively`
 
 
 =========================================================
