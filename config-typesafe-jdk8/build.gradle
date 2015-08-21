@@ -1,3 +1,4 @@
 dependencies {
+    compile relativeProject(':klutter-config-typesafe-jdk7')
     compile "com.typesafe:config:$version_typesafe_config_jdk8"
 }

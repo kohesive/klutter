@@ -2,6 +2,7 @@
 dependencies {
     compile relativeProject(":klutter-aws-core")
     compile relativeProject(":klutter-aws-s3")
+    compile relativeProject(":klutter-config-typesafe-jdk6")
     compile relativeProject(":klutter-core")
     compile relativeProject(":klutter-core-jodatime")
     compile relativeProject(":klutter-json-jackson")

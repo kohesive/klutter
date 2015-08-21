@@ -8,6 +8,8 @@ include 'core',
         'aws-s3',
         'json-jackson',
         'json-jackson-jdk8',
+        'config-typesafe',
+        'config-typesafe-jdk6',
         'config-typesafe-jdk7',
         'config-typesafe-jdk8',
         'netflix-graph',
@@ -23,8 +25,10 @@ project(':aws').name = 'klutter-aws-core'
 project(':aws-s3').name = 'klutter-aws-s3'
 project(':json-jackson').name = 'klutter-json-jackson'
 project(':json-jackson-jdk8').name = 'klutter-json-jackson-jdk8'
+project(':config-typesafe-jdk6').name = 'klutter-config-typesafe-jdk6'
 project(':config-typesafe-jdk7').name = 'klutter-config-typesafe-jdk7'
 project(':config-typesafe-jdk8').name = 'klutter-config-typesafe-jdk8'
+project(':config-typesafe').name = 'klutter-config-typesafe'
 project(':netflix-graph').name = 'klutter-netflix-graph'
 
 project(':all-jdk6').name = 'klutter-all-jdk6'
