@@ -7,9 +7,9 @@ chain that says what you want loaded, and how.  If `ConfigFactory.load()` has to
 See the docs for Typesafe Config: https://github.com/typesafehub/config but note that anything related to loading configuration files
 can be ignored if you want to lose the `loadConfig()` methods from Klutter/config-typesafe.
 
-JDK 6 version using TypeSafe Config 1.2.1 (last release before Typesafe config required JDK 8)
-JDK 7 version using TypeSafe Config 1.2.1 (last release before Typesafe config required JDK 8)
-JDK 8 version using TypeSafe Config 1.3.0
+* JDK 6 version using TypeSafe Config 1.2.1 (last release before Typesafe config required JDK 8)
+* JDK 7 version using TypeSafe Config 1.2.1 (last release before Typesafe config required JDK 8)
+* [JDK 8 version](https://github.com/klutter/klutter/tree/master/config-typesafe-jdk8) using TypeSafe Config 1.3.0
 
 ## Configuration Loading
 
@@ -114,4 +114,15 @@ public fun foo(stuff: ConfiguredValue) {
 
 All extensions can be seen in [TypesafeConfig_Ext.kt](https://github.com/klutter/klutter/blob/master/config-typesafe-jdk7/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt)
 
+## Examples in the Wild
 
+For a sligthly demented use of this library (and one of the original sources of the code), see [Solr-Undertow configuration](https://github.com/bremeld/solr-undertow/blob/master/src/main/kotlin/org/bremeld/solr/undertow/Config.kt) which loads and layers config in a specific order to keep consistent behavior with how Solr was traditionally loaded with a mix of environment variables overriding configuration files.  Whereas Typesafe Config is the reverse.  This is evident in the [load chain from Solr-Undertow](https://github.com/bremeld/solr-undertow/blob/1624d41f0b222be0f946efeeb2485601a3ba49ab/src/main/kotlin/org/bremeld/solr/undertow/Config.kt#L84-L87).  The main use of configuration starts in the [ServerConfig class](https://github.com/bremeld/solr-undertow/blob/1624d41f0b222be0f946efeeb2485601a3ba49ab/src/main/kotlin/org/bremeld/solr/undertow/Config.kt#L144) which loads configuration paths relative to the configuration file.  A bit of Klutter-core library is sprinkled throughout.
+
+## Roadmap (random order)
+
+* File/Path lists
+* Same API of loading, fallback and ConfiguredValue over straight JSON or Maps (although waiting to see if there is really demand) 
+
+## Other Modules
+
+There are other cool Klutter modules at the [Klutter github page](https://github.com/klutter/klutter)
