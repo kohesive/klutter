@@ -1,6 +1,11 @@
 ## klutter/aws-s3
 
-Helper functions for Amazon AWS S3 objects.  See [extension functions in the source code](src/main/kotlin/uy/klutter/aws/s3/AmazonS3Client_Ext.kt).
+Helper functions for Amazon AWS S3 objects.  See [extension functions in the source code](../aws-s3-jdk6/src/main/kotlin/uy/klutter/aws/s3/AmazonS3Client_Ext.kt).
+
+Module is available in artifacts:
+
+* uy.klutter:klutter-aws-s3 (latest JDK, currently JDK 6)
+* [uy.klutter:klutter-aws-s3-jdk6](../aws-s3-jdk6)
 
 ## Injekt
 
