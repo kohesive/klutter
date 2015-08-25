@@ -91,11 +91,14 @@ public class TestUriBuilder {
         builder3.decodedQueryDeduped = mapOf("one" to "1", "two" to "2", "two" to "2again", "three" to "3")
         assertEquals("http://www.klutter.uy?one=1&two=2again&three=3", builder3.toString())
 
-        val builder4 = buildUri("http://www.klutter.uy?one=1&two=2&two=2again&three=3").addQueryParams("two" to "2mas")
-        assertEquals("http://www.klutter.uy?one=1&two=2&two=2again&two=2mas&three=3", builder4.toString())
+        // added %20 in the query key and value for one
+        // added empty parameter as well
+        // added parameter without value
+        val builder4 = buildUri("http://www.klutter.uy?one=1&&%20two%20=%202%20&two=2again&three=3&four=").addQueryParams("two" to "2mas")
+        assertEquals("http://www.klutter.uy?one=1&two=2&two=2again&two=2mas&three=3&four=", builder4.toString())
         builder4.replaceQueryParams("two" to "2replace")
-        assertEquals("http://www.klutter.uy?one=1&two=2replace&three=3", builder4.toString())
-        builder4.removeQueryParams("two", "three")
+        assertEquals("http://www.klutter.uy?one=1&two=2replace&three=3&four=", builder4.toString())
+        builder4.removeQueryParams("two", "three", "four")
         assertEquals("http://www.klutter.uy?one=1", builder4.toString())
     }
 
