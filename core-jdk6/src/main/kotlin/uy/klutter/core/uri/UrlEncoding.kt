@@ -442,44 +442,48 @@ public object UrlEncoding {
 
     public fun decodeQueryStringToMultiMap(encodedQuery: String): Map<String, List<String>> {
         return encodedQuery
-                .split('&').asSequence()
+                .splitToSequence('&')
                 .filter { it.isNotBlank() }
-                .map { val parts = it.split('='); Pair(parts.first(), parts.drop(1).firstOrNull() ?: "") }
-                .filter { it.first.isNotBlank() }
-                .map { UrlEncoding.decode(it.first) to (UrlEncoding.decode(it.second)) }
+                .map {
+                    val parts = it.split('=', limit = 2)
+                    Pair(UrlEncoding.decode(parts.first()).trim(), UrlEncoding.decode(parts.drop(1).firstOrNull() ?: "").trim())
+                }
+                .filter { it.first.isNotEmpty() }
                 .groupBy { it.first }
                 .map { groupPair -> groupPair.getKey() to groupPair.getValue().map { it.second } }
                 .toMap()
     }
     public fun decodeQueryToMap(encodedQuery: String): Map<String, String> {
         return encodedQuery
-                .split('&').asSequence()
+                .splitToSequence('&')
                 .filter { it.isNotBlank() }
-                .map { val parts = it.split('='); Pair(parts.first(), parts.drop(1).firstOrNull() ?: "") }
-                .filter { it.first.isNotBlank() }
-                .map { UrlEncoding.decode(it.first) to UrlEncoding.decode(it.second) }
-                .toList()  // kotlin bug?  why can't sequence go directly to the map?
+                .map {
+                    val parts = it.split('=', limit = 2)
+                    Pair(UrlEncoding.decode(parts.first()).trim(), UrlEncoding.decode(parts.drop(1).firstOrNull() ?: "").trim())
+                }
+                .filter { it.first.isNotEmpty() }
                 .toMap()
     }
     public fun dedupeQueryFromMultiMapToMap(decodedQuery: Map<String, List<String>>): Map<String, String> {
         return decodedQuery
+                .asSequence()
                 .filter { it.getKey().isNotBlank() }
-                .map { pair -> pair.getValue().map { pair.getKey() to it } }
-                .flatten()
+                .flatMap { pair -> pair.getValue().asSequence().map { pair.getKey() to it } }
                 .toMap()
     }
     public fun encodeQueryMultiMapToString(decodedQuery: Map<String, List<String>>): String {
         return decodedQuery
+                .asSequence()
                 .filter { it.getKey().isNotBlank() }
-                .map { pair -> pair.getValue().map { pair.getKey() to it } }
-                .flatten()
-                .map { UrlEncoding.encodeQueryNameOrValueNoParen(it.first) + "=" +  UrlEncoding.encodeQueryNameOrValue(it.second) }
+                .flatMap { pair -> pair.getValue().asSequence().map { pair.getKey() to it } }
+                .map { UrlEncoding.encodeQueryNameOrValueNoParen(it.first.trim()) + "=" +  UrlEncoding.encodeQueryNameOrValue(it.second.trim()) }
                 .joinToString("&")
     }
     public fun encodeQueryMapToString(decodedQuery: Map<String, String>): String {
         return decodedQuery
+                .asSequence()
                 .filter { it.getKey().isNotBlank() }
-                .map { UrlEncoding.encodeQueryNameOrValueNoParen(it.getKey()) + "=" +  UrlEncoding.encodeQueryNameOrValue(it.getValue()) }
+                .map { UrlEncoding.encodeQueryNameOrValueNoParen(it.getKey().trim()) + "=" +  UrlEncoding.encodeQueryNameOrValue(it.getValue().trim()) }
                 .joinToString("&")
     }
 }
