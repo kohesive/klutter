@@ -445,7 +445,7 @@ public object UrlEncoding {
                 .splitToSequence('&')
                 .filter { it.isNotBlank() }
                 .map {
-                    val parts = it.split('=', limit = 2)
+                    val parts = it.splitToSequence('=', limit = 2)
                     Pair(UrlEncoding.decode(parts.first()).trim(), UrlEncoding.decode(parts.drop(1).firstOrNull() ?: "").trim())
                 }
                 .filter { it.first.isNotEmpty() }
@@ -458,10 +458,11 @@ public object UrlEncoding {
                 .splitToSequence('&')
                 .filter { it.isNotBlank() }
                 .map {
-                    val parts = it.split('=', limit = 2)
+                    val parts = it.splitToSequence('=', limit = 2)
                     Pair(UrlEncoding.decode(parts.first()).trim(), UrlEncoding.decode(parts.drop(1).firstOrNull() ?: "").trim())
                 }
                 .filter { it.first.isNotEmpty() }
+                .toList() // until M13
                 .toMap()
     }
     public fun dedupeQueryFromMultiMapToMap(decodedQuery: Map<String, List<String>>): Map<String, String> {
@@ -469,6 +470,7 @@ public object UrlEncoding {
                 .asSequence()
                 .filter { it.getKey().isNotBlank() }
                 .flatMap { pair -> pair.getValue().asSequence().map { pair.getKey() to it } }
+                .toList() // until M13
                 .toMap()
     }
     public fun encodeQueryMultiMapToString(decodedQuery: Map<String, List<String>>): String {
