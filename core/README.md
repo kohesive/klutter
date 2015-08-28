@@ -16,7 +16,7 @@ When initializing members or variables, these extensions allow you to encapsulat
 
 Further Initialization:
 
-```
+```kotlin
 val myData = SomeDataClass() initializedBy { 
         it.addExtraData(123) 
         it.setRateName("fast") 
@@ -25,7 +25,7 @@ val myData = SomeDataClass() initializedBy {
 
 Verification before use:
 
-```
+```kotlin
 val server = ServerConfigLoader(configFile) verifiedBy { loader ->
         if (!loader.loggingDir.exists()) {
             throw IllegalArgumentException("Invalid logging dir")
@@ -38,11 +38,19 @@ val server = ServerConfigLoader(configFile) verifiedBy { loader ->
 
 Turning an instance into a receiver (similar to `with(instance) {}` but is `instance.with {}` and can be used in an expression:
 
-```
+```kotlin
 val userSet = getAllUsers().with { 
        addUser("Frank")
        addUser("Gillian")
     }.map { it.userId }.toSet()
+```
+
+Or when you want to execute code when something is not null, kinda the opposite of `?:` operator:
+
+```kotlin
+val byName: List<Company> = name.whenNotNull { companyService.findCompanyByName(name!!) }.whenNotNull { listOf(it) } ?: emptyList()
+val byCountry: List<Company> = country.whenNotNull { companyService.findCompaniesByCountry(country!!) } ?: emptyList()
+return (byName + byCountry).toSet()
 ```
 
 ### Number Extensions
@@ -52,7 +60,7 @@ To all of the Number classes (Int, Long, Byte, Short, Double, ...)...
 * minimum / maximum
 * coerce
 
-```
+```kotlin
 val threadCount = serverConfig.workerThreads.mimimum(8).maximum(64)
 // or
 val threadCount = serverConfig.workerThreads.coerce(8..64)
@@ -62,7 +70,7 @@ Note:  these have since been added to Kotlin std runtime with different names.  
 
 Also available for Long and Int, `humanReadable`:
 
-```
+```kotlin
 println(1024.humanReadble()) // 1KB 
 ```
 
