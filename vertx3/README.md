@@ -33,7 +33,7 @@ wrap Throwables that are not Exceptions with a wrapped exception so that they pl
 
 The following top-level functions work with Promises all returning a `Promise<Vertx, Exception>``:
 
-* `vertx()``
+* `vertx()`
 * `vertx(options: VertxOptions)`
 * `vertxCluster(options: VertxOptions)` (requires vert-hazelcast module)
 
