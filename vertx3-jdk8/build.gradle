@@ -1,0 +1,18 @@
+dependencies {
+    compile relativeProject(":klutter-core-jdk8")
+    compile relativeProject(":klutter-json-jackson-jdk8")
+
+    compile "nl.komponents.kovenant:kovenant:$version_kovenant"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
+
+    compile "io.vertx:vertx-core:$version_vertx"
+    compile "io.vertx:vertx-web:$version_vertx"
+    compile "io.vertx:vertx-hazelcast:$version_vertx"
+
+    compile "org.slf4j:slf4j-api:$version_slf4j"
+
+    testCompile "io.vertx:vertx-unit:$version_vertx"
+    testRuntime "ch.qos.logback:logback-classic:$version_logback"
+}
