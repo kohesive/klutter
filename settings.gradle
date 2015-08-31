@@ -19,6 +19,8 @@ include 'core',
         'config-typesafe-jdk8',
         'netflix-graph',
         'netflix-graph-jdk6',
+        'vertx3',
+        'vertx3-jdk8',
         'all-jdk6',
         'all-jdk7',
         'all-jdk8',
@@ -43,6 +45,8 @@ project(':config-typesafe-jdk8').name = 'klutter-config-typesafe-jdk8'
 project(':config-typesafe').name = 'klutter-config-typesafe'
 project(':netflix-graph').name = 'klutter-netflix-graph'
 project(':netflix-graph-jdk6').name = 'klutter-netflix-graph-jdk6'
+project(':vertx3').name = 'klutter-vertx3'
+project(':vertx3-jdk8').name = 'klutter-vertx3-jdk8'
 
 project(':all').name = 'klutter-all'
 project(':all-jdk6').name = 'klutter-all-jdk6'

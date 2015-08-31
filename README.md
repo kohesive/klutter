@@ -44,6 +44,7 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |[core](core/)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
 |[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
 |[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
+|[vertx3](vertx3/)|medium|Vert.x-3 helpers and integration with Kovenant Promises|Yes|
 
 Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.  Using an Injekt module looks something like:
 
@@ -87,6 +88,7 @@ Other libraries that we recommend a building blocks for Kotlin applications:
 
 * [Injekt](https://github.com/kohesive/injekt/blob/master/README.md) - Injekt is a crazyily easy Dependency Injection for Kotlin. 
 * [Kovenant](http://kovenant.komponents.nl) - promises for Kotlin, easy, fun, and async! (JVM / Android)
+* [Kovert](https://github.com/kohesive/kovert) - invisible REST framework for Kotlin + Vert.x
 
 ## With help from...
 
