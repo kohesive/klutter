@@ -174,23 +174,46 @@ public fun <T : AbstractVerticle> Vertx.deployVerticle(verticleClass: Class<T>):
     deployVerticle(verticleClass.getName())
 }
 
+public class NADA {} // we can't deal with Void return type Vert.x likes to define but really means NULL but isn't nullable
+val nada = NADA()
+
 /**
- * Undeploy a verticle, returning a Promise<Void, Exception>
+ * Undeploy a verticle, returning a Promise<NADA, Exception>
  */
-public fun Vertx.promiseUndeploy(deploymentId: String): Promise<Void, Exception> {
+public fun Vertx.promiseUndeploy(deploymentId: String): Promise<NADA, Exception> {
     VertxInit.ensure()
 
-    val deferred = deferred<Void, Exception>()
-    this.undeploy(deploymentId, promiseResult(deferred))
+    val deferred = deferred<NADA, Exception>()
+    this.undeploy(deploymentId, { completion ->
+        if (completion.succeeded()) {
+            deferred.resolve(nada)
+        } else {
+            if (completion.cause() is Exception) {
+                deferred.reject(completion.cause() as Exception)
+            } else {
+                deferred.reject(WrappedThrowableException(completion.cause()))
+            }
+        }
+    })
     return deferred.promise
 }
 
 /**
  * Close vertx, returning a Promise<Void, Exception>
  */
-public fun Vertx.promiseClose(): Promise<Void, Exception> {
-    val deferred = deferred<Void, Exception>()
-    this.close(promiseResult(deferred))
+public fun Vertx.promiseClose(): Promise<NADA, Exception> {
+    val deferred = deferred<NADA, Exception>()
+    this.close({ completion ->
+        if (completion.succeeded()) {
+            deferred.resolve(nada)
+        } else {
+            if (completion.cause() is Exception) {
+                deferred.reject(completion.cause() as Exception)
+            } else {
+                deferred.reject(WrappedThrowableException(completion.cause()))
+            }
+        }
+    })
     return deferred.promise
 }
 
