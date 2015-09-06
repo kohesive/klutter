@@ -174,7 +174,6 @@ public fun <T : AbstractVerticle> Vertx.deployVerticle(verticleClass: Class<T>):
     deployVerticle(verticleClass.getName())
 }
 
-
 public class NADA {} // we can't deal with Void return type Vert.x likes to define but really means NULL but isn't nullable
 val nada = NADA()
 
