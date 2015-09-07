@@ -260,7 +260,7 @@ public fun <T> Vertx.executeBlocking(blockingCode: () -> T): Promise<T, Exceptio
  * Setup Kovenant do dispatch via Vert-x, and ensure the Vert.x Jackson object mapper is setup for Kotlin and JDK 8 types
  */
 
-private object VertxInit {
+public object VertxInit {
     val fallbackContext = Kovenant.createContext {
         workerContext.dispatcher {
             name = "worker-fallback"
