@@ -19,7 +19,7 @@ open-ended dependency number while Klutter is in early active development:
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all:0.2.+"
+compile "uy.klutter:klutter-all:0.4.+"
 ```
 
 **Maven:**
@@ -27,7 +27,7 @@ compile "uy.klutter:klutter-all:0.2.+"
 <dependency>
     <groupId>uy.klutter</groupId>
     <artifactId>klutter-all</artifactId>
-    <version>[0.2.0,0.3.0)</version>
+    <version>[0.4.0,0.5.0)</version>
 </dependency>
 ```
  
@@ -42,6 +42,7 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |[aws-core](aws-core/)|tiny|Amazon AWS SDK helper extensions|No|
 |[config-typesafe](config-typesafe/)|medium|Typesafe Config easier loader and access to configuration|No|
 |[core](core/)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
+|[elasticsearch](elasticsearch/)|medium|Extensions to ElasticSearch client library|No|
 |[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
 |[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
 |[vertx3](vertx3/)|medium|Vert.x-3 helpers and integration with Kovenant Promises|Yes|
