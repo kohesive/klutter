@@ -21,6 +21,8 @@ include 'core',
         'netflix-graph-jdk6',
         'vertx3',
         'vertx3-jdk8',
+        'elasticsearch-jdk7',
+        'elasticsearch',
         'all-jdk6',
         'all-jdk7',
         'all-jdk8',
@@ -47,6 +49,8 @@ project(':netflix-graph').name = 'klutter-netflix-graph'
 project(':netflix-graph-jdk6').name = 'klutter-netflix-graph-jdk6'
 project(':vertx3').name = 'klutter-vertx3'
 project(':vertx3-jdk8').name = 'klutter-vertx3-jdk8'
+project(':elasticsearch').name = 'klutter-elasticsearch'
+project(':elasticsearch-jdk7').name = 'klutter-elasticsearch-jdk7'
 
 project(':all').name = 'klutter-all'
 project(':all-jdk6').name = 'klutter-all-jdk6'
