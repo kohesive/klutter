@@ -8,7 +8,7 @@ import uy.kohesive.injekt.api.InjektModule
 import uy.kohesive.injekt.api.InjektRegistrar
 import kotlin.test.assertEquals
 
-class TestTypesafeConfigInjection {
+class TestInjektConfig {
     companion object : KonfigAndInjektMain() {
         override fun configFactory(): Config {
             return loadConfig(MapAsConfig(kotlin.mapOf(
