@@ -59,7 +59,7 @@ public interface ImmutableUri {
     fun fragmentAsDecodedQueryDeduped(): Map<String, String>? = if (encodedFragment == null) null else UrlEncoding.decodeQueryToMap(encodedFragment!!)
 }
 
-class UriBuilder(scheme: String? = null, encodedUserInfo: String? = null, host: String? = null, port: Int? = null, encodedPath: String? = null, encodedQuery: String? = null, encodedFragment: String? = null): ImmutableUri {
+public class UriBuilder(scheme: String? = null, encodedUserInfo: String? = null, host: String? = null, port: Int? = null, encodedPath: String? = null, encodedQuery: String? = null, encodedFragment: String? = null): ImmutableUri {
     override var scheme: String? = scheme
     override var host: String? = host
     override var port: Int? = port

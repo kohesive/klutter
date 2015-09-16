@@ -74,7 +74,7 @@ public class CompiledGraphSchema<N : Enum<N>, R : Enum<R>>(val schema: GraphSche
                         val fullyQualify = groupMembers.size() > 1
                         groupMembers.forEach { trippleKey ->
                             val relateName = if (fullyQualify) "${trippleKey.relationship.name()}.${trippleKey.toNode.name()}" else trippleKey.relationship.name()
-                            propSpecs.add(NFPropertySpec(relateName, trippleKey.toNode.name(), relationshipFlags.get(trippleKey)))
+                            propSpecs.add(NFPropertySpec(relateName, trippleKey.toNode.name(), relationshipFlags.get(trippleKey) ?: 0))
                         }
                     }
                 }

@@ -5,7 +5,7 @@ import java.io.InputStream
 
 
 public inline fun <reified N : Enum<N>, reified R : Enum<R>> defineGraphSchema(defaultStructure: RelationStructure, init: GraphSchemaBuilder<N, R>.() -> Unit): CompiledGraphSchema<N, R> {
-    val schema = GraphSchemaBuilder(javaClass<N>(), javaClass<R>(), defaultStructure)
+    val schema = GraphSchemaBuilder(N::class.java, R::class.java, defaultStructure)
     schema.init()
     return CompiledGraphSchema(schema)
 }
@@ -17,7 +17,7 @@ public fun <N : Enum<N>, R : Enum<R>> constructGraph(schema: CompiledGraphSchema
 }
 
 public inline fun <reified N : Enum<N>, reified R : Enum<R>> useGraph(inputStream: InputStream, run: ReadOnlyGraph<N, R>.() -> Unit): ReadOnlyGraph<N, R> {
-    val graph = ReadOnlyGraph<N,R>(javaClass<N>(), javaClass<R>(), inputStream)
+    val graph = ReadOnlyGraph<N,R>(N::class.java, R::class.java, inputStream)
     graph.run()
     return graph
 }
@@ -40,7 +40,7 @@ public enum class RelationStructure(override val flags: Int) : GraphRelationOpti
     HASH(com.netflix.nfgraph.spec.NFPropertySpec.HASH)
 }
 
-private interface GraphRelationOptions {
+internal interface GraphRelationOptions {
     val flags: Int
 }
 

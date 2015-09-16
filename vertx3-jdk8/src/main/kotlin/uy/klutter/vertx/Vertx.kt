@@ -222,7 +222,7 @@ public fun Vertx.promiseClose(): Promise<NADA, Exception> {
  * vertx dispatching are united, this is the same as doing async { ... } in Kovenant, no need to call on a
  * vertx instance.
  */
-public fun <T> Vertx.promiseExecuteBlocking(blockingCode: () -> T): Promise<T, Exception> {
+public fun <T: Any> Vertx.promiseExecuteBlocking(blockingCode: () -> T): Promise<T, Exception> {
     VertxInit.ensure()
 
     val deferred = deferred<T, Exception>()
@@ -241,7 +241,7 @@ public fun <T> Vertx.promiseExecuteBlocking(blockingCode: () -> T): Promise<T, E
  * vertx dispatching are united, this is the same as doing async { ... } in Kovenant, no need to call on a
  * vertx instance.
  */
-public fun <T> Vertx.executeBlocking(blockingCode: () -> T): Promise<T, Exception> {
+public fun <T: Any> Vertx.executeBlocking(blockingCode: () -> T): Promise<T, Exception> {
     VertxInit.ensure()
 
     val deferred = deferred<T, Exception>()
@@ -291,7 +291,7 @@ public object VertxInit {
 
     }
 
-    @suppress("NOTHING_TO_INLINE")
+    @Suppress("NOTHING_TO_INLINE")
     public inline fun ensure() {
         // TODO: here to be sure we have intiailized anything related before using,
         //       although this function may remain empty it causes initializers on the
@@ -309,7 +309,7 @@ public object VertxInit {
  *           return deferred.promise
  *       }
  */
-public fun <T> promiseResult(deferred: Deferred<T, Exception>): (AsyncResult<T>) -> Unit {
+public fun <T: Any> promiseResult(deferred: Deferred<T, Exception>): (AsyncResult<T>) -> Unit {
     return { completion ->
         if (completion.succeeded()) {
             deferred.resolve(completion.result())

@@ -6,11 +6,11 @@ import com.amazonaws.services.s3.model.ObjectMetadata
 import org.apache.http.HttpStatus
 import uy.klutter.aws.defaultSafeCredentialsProviderChain
 
-fun AmazonS3Client.exists(bucket: String, key: String): Boolean {
+public fun AmazonS3Client.exists(bucket: String, key: String): Boolean {
     return ifExistsReturnMetadata(bucket, key) != null
 }
 
-fun AmazonS3Client.ifExistsReturnMetadata(bucket: String, key: String): ObjectMetadata? {
+public fun AmazonS3Client.ifExistsReturnMetadata(bucket: String, key: String): ObjectMetadata? {
     try {
         val metadata = getObjectMetadata(bucket, key)
         return metadata
@@ -23,7 +23,7 @@ fun AmazonS3Client.ifExistsReturnMetadata(bucket: String, key: String): ObjectMe
 }
 
 
-fun AmazonS3Client.ifExistsReturnUserMetadata(bucket: String, key: String): Map<String, String>? {
+public fun AmazonS3Client.ifExistsReturnUserMetadata(bucket: String, key: String): Map<String, String>? {
     return ifExistsReturnMetadata(bucket, key)?.getUserMetadata()
 }
 
