@@ -77,7 +77,7 @@ public fun String.mustEndWith(postfix: Char): String {
     }
 }
 
-inline public fun String.whenStartsWith(prefix: String, thenWithRest: (String)->Unit): Boolean {
+public inline fun String.whenStartsWith(prefix: String, thenWithRest: (String)->Unit): Boolean {
     if (this.startsWith(prefix)) {
         thenWithRest(this.exceptStarting(prefix.length()))
         return true
@@ -86,7 +86,7 @@ inline public fun String.whenStartsWith(prefix: String, thenWithRest: (String)->
 }
 
 
-inline public fun String.whenStartsWith(prefixes: List<String>, thenWithRest: (String)->Unit): Boolean {
+public inline fun String.whenStartsWith(prefixes: List<String>, thenWithRest: (String)->Unit): Boolean {
     prefixes.forEach { prefix ->
         if (this.startsWith(prefix)) {
             thenWithRest(this.exceptStarting(prefix.length()))

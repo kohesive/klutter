@@ -309,7 +309,7 @@ public object UrlEncoding {
         var state: ParseState = ParseState.sText
         var i = 0
         var code = 0
-        val c: Char
+        var c: Char
         var pos = 0
         var ofs = 0
         var buf: ByteArray? = null

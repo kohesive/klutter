@@ -1,12 +1,13 @@
-package uy.klutter.graph.netflix
+package uy.klutter.graph.netflix.tests
 
 import org.junit.Test
+import uy.klutter.graph.netflix.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import kotlin.test
 import kotlin.test.assertEquals
-import uy.klutter.graph.netflix.MyNodes.*
-import uy.klutter.graph.netflix.MyRelations.*
+import uy.klutter.graph.netflix.tests.MyNodes.*
+import uy.klutter.graph.netflix.tests.MyRelations.*
 
 enum class MyNodes {
     Movie,

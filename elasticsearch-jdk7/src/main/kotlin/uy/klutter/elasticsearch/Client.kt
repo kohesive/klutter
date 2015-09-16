@@ -25,11 +25,11 @@ import uy.klutter.core.common.with
 import java.nio.file.Path
 
 public object EsConfig {
-    public volatile var adminActionTimeoutInSeconds: Long = 30
-    public volatile var indexReplicaCount: Int = 1
-    public volatile var indexShardCount: Int = 4
+    public @Volatile var adminActionTimeoutInSeconds: Long = 30
+    public @Volatile var indexReplicaCount: Int = 1
+    public @Volatile var indexShardCount: Int = 4
 
-    public volatile var objectMapper: ObjectMapper = jacksonObjectMapper()
+    public @Volatile var objectMapper: ObjectMapper = jacksonObjectMapper()
 }
 
 

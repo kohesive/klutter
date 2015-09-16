@@ -1,6 +1,7 @@
-package uy.klutter.core.uri
+package uy.klutter.core.uri.tests
 
 import org.junit.Test
+import uy.klutter.core.uri.buildUri
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNull

@@ -7,7 +7,6 @@ import org.elasticsearch.action.ActionListener
 import org.elasticsearch.action.ActionRequest
 import org.elasticsearch.action.ActionRequestBuilder
 import org.elasticsearch.action.ActionResponse
-import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse
 import org.elasticsearch.client.ElasticsearchClient
 
 public fun <T: Any> promiseResult(deferred: Deferred<T, Exception>): ActionListener<T> {
