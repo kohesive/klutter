@@ -1,3 +1,6 @@
 dependencies {
     compile "com.typesafe:config:$version_typesafe_config"
+    compile "uy.kohesive.injekt:injekt-core:$version_kohesive_injekt"
+
+    compile relativeProject(":klutter-json-jackson-jdk6")
 }

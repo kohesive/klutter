@@ -1,4 +1,4 @@
-[![Kotlin M12](https://img.shields.io/badge/Kotlin-M12%20%40%200.12.1230-blue.svg)](http://kotlinlang.org) [![Maven Version](https://img.shields.io/maven-central/v/uy.klutter/klutter-all-jdk8.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter%22) [![CircleCI branch](https://img.shields.io/circleci/project/klutter/klutter/master.svg)](https://circleci.com/gh/klutter/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/klutter/klutter.svg)](https://github.com/klutter/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/klutter/klutter/blob/master/LICENSE) 
+[![Kotlin M13](https://img.shields.io/badge/Kotlin-M12%20%40%200.13.1513-blue.svg)](http://kotlinlang.org) [![Maven Version](https://img.shields.io/maven-central/v/uy.klutter/klutter-all-jdk8.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter%22) [![CircleCI branch](https://img.shields.io/circleci/project/klutter/klutter/master.svg)](https://circleci.com/gh/klutter/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/klutter/klutter.svg)](https://github.com/klutter/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/klutter/klutter/blob/master/LICENSE)
 
 # klutter
 Random small libraries, usually extensions making other libraries happier.  
@@ -10,8 +10,8 @@ rights for the code to be used in Klutter.
 
 Each module has its own set of dependencies.  There is a main dependency which is always the most current JDK
 version of the module, and also a version suffixed by the JDK version for which it is compatible (that version or newer).
-Include the dependency in your Gradle / Maven projects, ones that already have Kotlin configured for Kotlin M12 versions
-`0.12.1218` or `0.12.1230`
+Include the dependency in your Gradle / Maven projects, ones that already have Kotlin configured for Kotlin M13 versions
+`0.13.1513`
 
 For example, for the whole package (one of `klutter-all` (lastest JDK), `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) and using an
 open-ended dependency number while Klutter is in early active development:
@@ -19,7 +19,7 @@ open-ended dependency number while Klutter is in early active development:
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all:0.4.+"
+compile "uy.klutter:klutter-all:0.5.+"
 ```
 
 **Maven:**
@@ -27,7 +27,7 @@ compile "uy.klutter:klutter-all:0.4.+"
 <dependency>
     <groupId>uy.klutter</groupId>
     <artifactId>klutter-all</artifactId>
-    <version>[0.4.0,0.5.0)</version>
+    <version>[0.5.0,0.6.0)</version>
 </dependency>
 ```
  

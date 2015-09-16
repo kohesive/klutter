@@ -1,21 +1,21 @@
-package uy.klutter.config.typesafe
+package uy.klutter.config.typesafe.tests
 
 import com.typesafe.config.ConfigFactory
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
-import kotlin.platform.platformStatic
+import uy.klutter.config.typesafe.*
 import kotlin.test.assertEquals
 
 public class TestConfigLoading {
     companion object {
-        @BeforeClass @platformStatic public fun setupSystemProps() {
+        @BeforeClass @JvmStatic public fun setupSystemProps() {
             System.setProperty("systemKey", "value System")
             System.setProperty("base.value4", "four-sys")
         }
 
-        @AfterClass @platformStatic public fun removeSystemProps() {
+        @AfterClass @JvmStatic public fun removeSystemProps() {
             System.clearProperty("base.value4")
             System.clearProperty("systemKey")
             ConfigFactory.invalidateCaches()
