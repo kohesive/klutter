@@ -117,6 +117,101 @@ public fun foo(stuff: ConfiguredValue) {
 
 All extensions can be seen in [TypesafeConfig_Ext.kt](https://github.com/klutter/klutter/blob/master/config-typesafe-jdk7/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt)
 
+## Injecting Configuration into Objects
+
+Klutter/config-typesafe plus [Kohesive/Injekt](https://github.com/kohesive/injekt) support injection from [Typesafe Config](https://github.com/typesafehub/config) configuration via bound objects placed into the Injekt registry, then you may inject your configuration objects as you would any singleton.
+
+The configuration system allows you to define within modules: the configuration objects and a section of the configuration
+tree that is to be used.  Then at the main module of your application you import the module's configurables and injectables
+delegating the registation to the submodules.
+
+A few other notes:  Jackson Data Binding is used to bind configuration into objects.  (later we will replace with a lighterweight binder).
+
+**This modules is best shown by a quick example:**
+
+Using a configuration file, `myConfig.conf`
+```json
+{
+    "http": {
+        "httpPort": 8080,
+        "workerThreads": 16
+    },
+    "data": {
+        "bucket": "com.test.bucket",
+        "region": "us-east"
+    },
+    "other": {
+        "name": "frisbee"
+    }
+}
+```
+
+We then have a sub module that wants the `http` configuration bound into this data class:
+
+```kotlin
+data class HttpConfig(val httpPort: Int, val workerThreads: Int)
+```
+
+The module creates an importable module that registers a configuration class, and any injectables, and code that uses the configuration object later via injection:
+
+```kotlin
+public object ServerModuleInjectables : KonfigModule, InjektModule {
+    override fun KonfigRegistrar.registerConfigurables() {
+        // register our HttpConfig object to be bound from the root of our section of the configuration file
+        bindClassAtConfigRoot<HttpConfig>()
+    }
+
+    override fun InjektRegistrar.registerInjectables() {
+        // register injections as normal, and those can use configuration objects since they are available for injection
+        addFactory { MyHttpServer() }
+    }
+}
+
+// Our server will receive the configuration via injection
+class MyHttpServer(cfg: HttpConfig = Injekt.get()) { ... }
+```
+
+Now the main controlling class, the Application creates something similar to an `InjektMain`, but instead is a `ConfigAndInjektMain` such as:
+
+```kotlin
+class MyApp {
+    companion object : KonfigAndInjektMain() {
+        // my app starts here with a static main()
+        platformStatic public fun main(args: Array<String>) {
+            MyApp().run()
+        }
+
+        // override and load the configuration
+        override fun configFactory(): Config {
+            return loadConfig(SystemPropertiesConfig(), ApplicationConfig(), ReferenceConfig(), EnvironmentVariablesConfig())
+        }
+
+        // register any configuration bindings, and import our server module
+        override fun KonfigRegistrar.registerConfigurables() {
+            bindClassAtConfigPath<S3Config>("data")
+            bindClassAtConfigPath<OtherConfig>("other")
+
+            importModule("http", ServerModuleInjectables) // use the http:{} section of the configuration
+        }
+
+
+        // register injections as normal importing our server module
+        override fun InjektRegistrar.registerInjectables() {
+            // add my singletons, factories, keyed factories, per-thread factories, ...
+            importModule(JacksonWithKotlinInjektables)
+            importModule(ServerModuleInjectables)  // our server can be injected, and it itself has the config injected
+        }
+    }
+
+    data class DataConfig(val bucket: String, val region: String)
+    data class OtherConfig(val name: String)
+
+    // rest of class ...
+}
+```
+
+Using this system, you have a modularized way to define configuration and services (injectables) that can be managed by the Injekt registry.  Each module defines what it needs, and what it can provide.  Then the main control point of the app decides where in its overall configuration each module resides, and which modules are included.
+
 ## Examples in the Wild
 
 For a sligthly demented use of this library (and one of the original sources of the code), see [Solr-Undertow configuration](https://github.com/bremeld/solr-undertow/blob/master/src/main/kotlin/org/bremeld/solr/undertow/Config.kt) which loads and layers config in a specific order to keep consistent behavior with how Solr was traditionally loaded with a mix of environment variables overriding configuration files.  Whereas Typesafe Config is the reverse.  This is evident in the [load chain from Solr-Undertow](https://github.com/bremeld/solr-undertow/blob/1624d41f0b222be0f946efeeb2485601a3ba49ab/src/main/kotlin/org/bremeld/solr/undertow/Config.kt#L84-L87).  The main use of configuration starts in the [ServerConfig class](https://github.com/bremeld/solr-undertow/blob/1624d41f0b222be0f946efeeb2485601a3ba49ab/src/main/kotlin/org/bremeld/solr/undertow/Config.kt#L144) which loads configuration paths relative to the configuration file.  A bit of Klutter-core library is sprinkled throughout.
@@ -124,7 +219,9 @@ For a sligthly demented use of this library (and one of the original sources of 
 ## Roadmap (random order)
 
 * File/Path lists
-* Same API of loading, fallback and ConfiguredValue over straight JSON or Maps (although waiting to see if there is really demand) 
+* Same API of loading, fallback and ConfiguredValue over straight JSON or Maps (although waiting to see if there is really demand)
+* Allow binding an object that has a 1 parameter constructor, of type Config that does not use binding, but rather loads the config directly using Typesafe Config or Klutter/config-typesafe methods.  See issue #9
+
 
 ## Other Modules
 
