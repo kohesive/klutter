@@ -71,7 +71,7 @@ public class GraphSchemaBuilder<N : Enum<N>, R : Enum<R>>(internal val nodeTypeE
     }
 }
 
-internal class GraphRelationBuilder<N : Enum<N>, R : Enum<R>>(internal val relations: MutableList<GraphRelationBuilder<N, R>>,
+public class GraphRelationBuilder<N : Enum<N>, R : Enum<R>>(internal val relations: MutableList<GraphRelationBuilder<N, R>>,
                                                               private val defaultStructure: RelationStructure,
                                                               internal val fromNode: N, internal val scopeAs: RelationScope,
                                                               internal val modelScopeName: String? = null) {
@@ -98,7 +98,7 @@ internal class GraphRelationBuilder<N : Enum<N>, R : Enum<R>>(internal val relat
     }
 }
 
-internal class GraphRelationPredicateEdge<N : Enum<N>, R : Enum<R>>(private val builder: GraphRelationBuilder<N, R>) {
+public class GraphRelationPredicateEdge<N : Enum<N>, R : Enum<R>>(private val builder: GraphRelationBuilder<N, R>) {
     public fun to(nodeType: N): GraphRelationPredicateNoBackwards<N, R> {
         builder.toNode = nodeType
         builder.completeEnough()
@@ -106,7 +106,7 @@ internal class GraphRelationPredicateEdge<N : Enum<N>, R : Enum<R>>(private val 
     }
 }
 
-internal class GraphRelationPredicateNoBackwards<N : Enum<N>, R : Enum<R>>(private val builder: GraphRelationBuilder<N, R>) {
+public class GraphRelationPredicateNoBackwards<N : Enum<N>, R : Enum<R>>(private val builder: GraphRelationBuilder<N, R>) {
     public fun globalScope(): GraphRelationPredicateNoBackwards<N, R> {
         builder.forwardFlags = builder.forwardFlags - RelationScope.MODEL + RelationScope.GLOBAL
         return this
@@ -140,7 +140,7 @@ internal class GraphRelationPredicateNoBackwards<N : Enum<N>, R : Enum<R>>(priva
     }
 }
 
-internal class GraphRelationPredicateWithBackEdge<N : Enum<N>, R : Enum<R>>(private val builder: GraphRelationBuilder<N, R>) {
+public class GraphRelationPredicateWithBackEdge<N : Enum<N>, R : Enum<R>>(private val builder: GraphRelationBuilder<N, R>) {
     public fun globalScope(): GraphRelationPredicateWithBackEdge<N, R> {
         builder.backwardFlags = builder.backwardFlags - RelationScope.MODEL + RelationScope.GLOBAL
         return this
