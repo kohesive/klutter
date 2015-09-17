@@ -1,4 +1,11 @@
 =========================================================
+2015-09-14 v0.6.0 release
+=========================================================
+
+* BREAKING CHANGE: Moved vertx json functions to subpackage to avoid accidental import and collision with other json builders
+
+
+=========================================================
 2015-09-14 v0.5.0 release
 =========================================================
 

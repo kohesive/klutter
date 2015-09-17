@@ -1,4 +1,4 @@
-package uy.klutter.vertx
+package uy.klutter.vertx.json
 
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonArray
