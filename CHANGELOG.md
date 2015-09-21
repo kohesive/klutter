@@ -1,9 +1,15 @@
 =========================================================
+2015-09-21 v0.6.1 release
+=========================================================
+
+* Fix elasticsearch transport client helper function, was returning local node
+* Update dependency to Injekt 1.6.1
+
+=========================================================
 2015-09-14 v0.6.0 release
 =========================================================
 
 * BREAKING CHANGE: Moved vertx json functions to subpackage to avoid accidental import and collision with other json builders
-
 
 =========================================================
 2015-09-14 v0.5.0 release
