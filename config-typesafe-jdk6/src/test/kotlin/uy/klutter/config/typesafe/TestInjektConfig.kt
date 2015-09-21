@@ -4,8 +4,7 @@ import com.typesafe.config.Config
 import org.junit.Test
 import uy.klutter.config.typesafe.*
 import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.InjektModule
-import uy.kohesive.injekt.api.InjektRegistrar
+import uy.kohesive.injekt.api.*
 import kotlin.test.assertEquals
 
 class TestInjektConfig {
