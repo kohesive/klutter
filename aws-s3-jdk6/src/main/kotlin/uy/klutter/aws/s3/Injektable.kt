@@ -1,8 +1,7 @@
 package uy.klutter.aws.s3
 
 import com.amazonaws.services.s3.AmazonS3Client
-import uy.kohesive.injekt.api.InjektModule
-import uy.kohesive.injekt.api.InjektRegistrar
+import uy.kohesive.injekt.api.*
 import uy.klutter.aws.defaultSafeCredentialsProviderChain
 
 /**

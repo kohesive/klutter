@@ -1,7 +1,7 @@
 package uy.klutter.vertx
 
-import uy.kohesive.injekt.api.InjektModule
-import uy.kohesive.injekt.api.InjektRegistrar
+import com.fasterxml.jackson.databind.ObjectMapper
+import uy.kohesive.injekt.api.*
 import org.slf4j.Logger as Slf4jLogger
 import org.slf4j.LoggerFactory as Slf4jLoggerFactory
 
@@ -33,7 +33,7 @@ public object VertxWithSlf4jInjektables : VertxInjektModule() {
 public abstract class VertxInjektModule : InjektModule {
     fun InjektRegistrar.common() {
         VertxInit.ensure()
-        addSingleton<com.fasterxml.jackson.databind.ObjectMapper>(io.vertx.core.json.Json.mapper)
+        addSingleton<ObjectMapper>(io.vertx.core.json.Json.mapper)
     }
 }
 

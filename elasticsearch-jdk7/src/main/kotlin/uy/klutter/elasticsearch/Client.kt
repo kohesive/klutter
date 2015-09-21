@@ -72,7 +72,7 @@ public fun esTransportClient(clusterName: String, nodes: List<TransportAddress>,
     nodes.forEach {
         client.addTransportAddress(it)
     }
-    return NodeBuilder.nodeBuilder().settings(settings).node().client()
+    return client
 }
 
 

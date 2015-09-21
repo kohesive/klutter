@@ -9,6 +9,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule
 import uy.kohesive.injekt.api.InjektModule
 import uy.kohesive.injekt.api.InjektRegistrar
+import uy.kohesive.injekt.api.addSingletonFactory
 
 /**
  * Add an ObjectMapper singleton factory to Injekt registry that is enabled for Kotlin + JDK8 classes (core, temporal, parameter names)
