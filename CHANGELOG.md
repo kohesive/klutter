@@ -1,4 +1,10 @@
 =========================================================
+2015-09-21 v0.6.3 release
+=========================================================
+
+* Change Kovenant + Vert.x dispatcher to NOT order serially the async calls, but run them in parallel.  Use `vertx.executeBlocking` methods directly to change this behavior.
+
+=========================================================
 2015-09-21 v0.6.2 release
 =========================================================
 
