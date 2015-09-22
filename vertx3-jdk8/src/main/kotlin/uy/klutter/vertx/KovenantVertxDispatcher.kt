@@ -61,7 +61,7 @@ internal class VertxWorkerDispatcher(private val ctx: Context) : BasicDispatcher
     override fun offer(task: () -> Unit): Boolean {
         ctx.owner().executeBlocking<Unit>({
             task()
-        }, null)
+        }, false, null)
         return true
     }
 }
