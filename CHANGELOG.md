@@ -1,4 +1,11 @@
 =========================================================
+2015-09-21 v0.6.4 release
+=========================================================
+
+* ElasticSearch mappings now have init builder as optional
+* mapping helper methods names change, see deprecated warnings for new names
+
+=========================================================
 2015-09-21 v0.6.3 release
 =========================================================
 
