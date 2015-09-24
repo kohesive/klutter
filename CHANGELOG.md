@@ -4,6 +4,7 @@
 
 * ElasticSearch mappings now have init builder as optional
 * mapping helper methods names change, see deprecated warnings for new names
+* added mapping helpers using a class as the guide for field names so you can pass in property references
 
 =========================================================
 2015-09-21 v0.6.3 release
