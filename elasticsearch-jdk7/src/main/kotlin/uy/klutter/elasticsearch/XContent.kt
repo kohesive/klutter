@@ -3,8 +3,9 @@ package uy.klutter.elasticsearch
 import org.elasticsearch.common.xcontent.XContentBuilder
 import org.elasticsearch.common.xcontent.XContentFactory
 import java.math.BigDecimal
+import kotlin.reflect.KProperty1
 
-public class XContentJsonObjectWithFields<T: Enum<T>>(x: XContentBuilder): XContentJsonObject(x)  {
+public class XContentJsonObjectWithEnum<T: Enum<T>>(x: XContentBuilder): XContentJsonObject(x)  {
     public fun setValue(field: T, value: String): Unit { x.field(field.name(), value) }
     public fun setValue(field: T, value: Long): Unit { x.field(field.name(), value) }
     public fun setValue(field: T, value: Int): Unit { x.field(field.name(), value) }
@@ -20,8 +21,51 @@ public class XContentJsonObjectWithFields<T: Enum<T>>(x: XContentBuilder): XCont
         XContentJsonObject(x).init()
         x.endObject()
     }
+    public fun <R: Enum<R>> ObjectWithFieldEnum(field: T, init: XContentJsonObjectWithEnum<R>.()->Unit): Unit {
+        x.startObject(field.name())
+        XContentJsonObjectWithEnum<R>(x).init()
+        x.endObject()
+    }
+    public fun <R: Any> ObjectWithFieldClass(field: T, init: XContentJsonObjectWithClass<R>.()->Unit): Unit {
+        x.startObject(field.name())
+        XContentJsonObjectWithClass<R>(x).init()
+        x.endObject()
+    }
     public fun Array(field: T, init: XContentJsonArray.()->Unit): Unit {
         x.startArray(field.name())
+        XContentJsonArray(x).init()
+        x.endArray()
+    }
+}
+
+public class XContentJsonObjectWithClass<T: Any>(x: XContentBuilder): XContentJsonObject(x)  {
+    public fun setValue(field: KProperty1<T, *>, value: String): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: Long): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: Int): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: Short): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: Byte): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: Double): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: Float): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: BigDecimal): Unit { x.field(field.name, value) }
+    public fun setValue(field: KProperty1<T, *>, value: Boolean): Unit { x.field(field.name, value) }
+    public fun setValueNull(field: KProperty1<T, *>): Unit { x.nullField(field.name) }
+    public fun Object(field: KProperty1<T, *>, init: XContentJsonObject.()->Unit): Unit {
+        x.startObject(field.name)
+        XContentJsonObject(x).init()
+        x.endObject()
+    }
+    public fun <R: Enum<R>> ObjectWithFieldEnum(field:  KProperty1<T, *>, init: XContentJsonObjectWithEnum<R>.()->Unit): Unit {
+        x.startObject(field.name)
+        XContentJsonObjectWithEnum<R>(x).init()
+        x.endObject()
+    }
+    public fun <R: Any> ObjectWithFieldClass(field:  KProperty1<T, *>, init: XContentJsonObjectWithClass<R>.()->Unit): Unit {
+        x.startObject(field.name)
+        XContentJsonObjectWithClass<R>(x).init()
+        x.endObject()
+    }
+    public fun Array(field: KProperty1<T, *>, init: XContentJsonArray.()->Unit): Unit {
+        x.startArray(field.name)
         XContentJsonArray(x).init()
         x.endArray()
     }
@@ -43,9 +87,14 @@ public open class XContentJsonObject(protected val x: XContentBuilder) {
         XContentJsonObject(x).init()
         x.endObject()
     }
-    public fun <T: Enum<T>> ObjectWithFields(name: String, init: XContentJsonObjectWithFields<T>.()->Unit): Unit {
+    public fun <R: Enum<R>> ObjectWithFieldEnum(name: String, init: XContentJsonObjectWithEnum<R>.()->Unit): Unit {
         x.startObject(name)
-        XContentJsonObjectWithFields<T>(x).init()
+        XContentJsonObjectWithEnum<R>(x).init()
+        x.endObject()
+    }
+    public fun <R: Any> ObjectWithFieldClass(name: String, init: XContentJsonObjectWithClass<R>.()->Unit): Unit {
+        x.startObject(name)
+        XContentJsonObjectWithClass<R>(x).init()
         x.endObject()
     }
     public fun Array(name: String, init: XContentJsonArray.()->Unit): Unit {
@@ -78,10 +127,18 @@ public class XContentJsonArray(private val x: XContentBuilder) {
     }
 }
 
-public fun xsonObjectWithFields<T: Enum<T>>(init: XContentJsonObjectWithFields<T>.()->Unit): XContentBuilder {
+public fun xsonObjectWithFieldEnum<T: Enum<T>>(init: XContentJsonObjectWithEnum<T>.()->Unit): XContentBuilder {
     val builder = XContentFactory.jsonBuilder()
     builder.startObject()
-    XContentJsonObjectWithFields<T>(builder).init()
+    XContentJsonObjectWithEnum<T>(builder).init()
+    builder.endObject()
+    return builder
+}
+
+public fun xsonObjectWithFieldClass<T: Any>(init: XContentJsonObjectWithClass<T>.()->Unit): XContentBuilder {
+    val builder = XContentFactory.jsonBuilder()
+    builder.startObject()
+    XContentJsonObjectWithClass<T>(builder).init()
     builder.endObject()
     return builder
 }
