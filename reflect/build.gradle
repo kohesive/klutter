@@ -1,0 +1,4 @@
+dependencies {
+    runtime relativeProject(":klutter-reflect-core-jdk6")
+    runtime relativeProject(":klutter-reflect-full-jdk6")
+}
