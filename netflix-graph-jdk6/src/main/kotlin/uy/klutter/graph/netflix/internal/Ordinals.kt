@@ -35,8 +35,8 @@ public abstract class GraphOrdinalContainer<N : Enum<N>>(private val readOnlyOrd
     }
 
     public fun N.toNord(id: String): NodeAndOrd<N> = NodeAndOrd(this, toOrd(this, id))
-    public fun N.get(id: String): NodeAndOrd<N> = NodeAndOrd(this, toOrd(this, id))
-    public fun N.invoke(id: String): NodeAndId<N> = NodeAndId(this, id)
+    public operator fun N.get(id: String): NodeAndOrd<N> = NodeAndOrd(this, toOrd(this, id))
+    public operator fun N.invoke(id: String): NodeAndId<N> = NodeAndId(this, id)
     public fun N.toNid(id: String): NodeAndId<N> = NodeAndId(this, id)
 
     public fun NodeAndId<N>.toNord(): NodeAndOrd<N> = nodeType.get(id)

@@ -4,10 +4,10 @@ import org.junit.Test
 import uy.klutter.graph.netflix.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import kotlin.test
-import kotlin.test.assertEquals
 import uy.klutter.graph.netflix.tests.MyNodes.*
 import uy.klutter.graph.netflix.tests.MyRelations.*
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 enum class MyNodes {
     Movie,
@@ -83,11 +83,11 @@ public class TestNetflixGraph {
 
         // bring graph out of serializatino and use
         useGraph<MyNodes, MyRelations>(ByteArrayInputStream(outputBuffer.toByteArray())) {
-            test.assertTrue(Actor["Harrison Ford"].getConnections(StarredIn).hasOnly(setOf(Movie("Star Wars"), Movie("Indiana Jones"))))
+            assertTrue(Actor["Harrison Ford"].getConnections(StarredIn).hasOnly(setOf(Movie("Star Wars"), Movie("Indiana Jones"))))
             assertEquals(Movie("Star Wars"), Actor["Mark Hamill"].getSingleConnection(StarredIn))
             assertEquals(Movie("Star Wars"), Actor["Carrie Fisher"].getSingleConnection(StarredIn))
             assertEquals(Movie("Star Wars"), Actor["Peter Mayhew"].getSingleConnection(StarredIn))
-            test.assertTrue(Movie["Star Wars"].getConnections(Starring).hasOnly(setOf(Actor("Harrison Ford"), Actor("Mark Hamill"), Actor("Carrie Fisher"), Actor("Peter Mayhew"))))
+            assertTrue(Movie["Star Wars"].getConnections(Starring).hasOnly(setOf(Actor("Harrison Ford"), Actor("Mark Hamill"), Actor("Carrie Fisher"), Actor("Peter Mayhew"))))
             assertEquals(Director("George Lucas"), Movie["Star Wars"].getSingleConnection(DirectedBy))
             assertEquals(Movie("Star Wars"), Director["George Lucas"].getSingleConnection(Directed))
 
@@ -96,7 +96,7 @@ public class TestNetflixGraph {
             assertEquals(Movie("Star Wars"), Award["1979 Academy Award for Best Visual Effects"].getSingleConnection(AwardWinner))
             assertEquals(Movie("Star Wars"), Award["1979 Academy Award for Best Original Music Score"].getSingleConnection(AwardWinner))
 
-            test.assertTrue(Award["People's Choice Award"].getConnections(AwardWinner).hasOnly(setOf(Movie("Star Wars"), Movie("Indiana Jones"), Director("Steven Spielberg"), Actor("Harrison Ford"))))
+            assertTrue(Award["People's Choice Award"].getConnections(AwardWinner).hasOnly(setOf(Movie("Star Wars"), Movie("Indiana Jones"), Director("Steven Spielberg"), Actor("Harrison Ford"))))
         }
     }
 }

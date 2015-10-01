@@ -1,0 +1,10 @@
+dependencies {
+    compile relativeProject(":klutter-reflect-core-jdk6")
+    compile "org.jetbrains.kotlinx:kotlinx.reflect.lite:${version_kotlin}"
+}
+
+repositories {
+    maven {
+        url "http://dl.bintray.com/kotlin/kotlinx.reflect.lite"
+    }
+}

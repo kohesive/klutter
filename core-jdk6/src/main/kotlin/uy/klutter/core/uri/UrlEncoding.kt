@@ -43,7 +43,7 @@ public object UrlEncoding {
         return temp
     }
 
-    private fun BitSet.plus(other: BitSet): BitSet {
+    private operator  fun BitSet.plus(other: BitSet): BitSet {
         val temp = BitSet()
         temp.or(this)
         temp.or(other)

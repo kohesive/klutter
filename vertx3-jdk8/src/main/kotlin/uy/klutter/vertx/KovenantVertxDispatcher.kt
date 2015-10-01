@@ -27,8 +27,8 @@ internal class VertxKovenantContext(val originalContext: nl.komponents.kovenant.
             }
         }
 
-    override val multipleCompletion: (Any, Any) -> Unit
-        get() = { curVal: Any, newVal: Any -> throw IllegalStateException("Value[$curVal] is set, can't override with new value[$newVal]") }
+    override val multipleCompletion: (curVal: Any?, newVal: Any?) -> Unit
+        get() = { curVal: Any?, newVal: Any? -> throw IllegalStateException("Value[$curVal] is set, can't override with new value[$newVal]") }
 }
 
 internal class VertxCallbackDispatcherContext(private val ctx: Context) : DispatcherContext {

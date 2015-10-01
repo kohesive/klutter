@@ -20,7 +20,7 @@ public inline fun <T> T.initializedBy(initWith: (T) -> Unit): T {
  * Make initialization of a parameter more readable with its initialization work done inline with the declaration
  */
 public inline fun <T> T.with(initWith: T.() -> Unit): T {
-    this.initWith()
+    this.initWith().let{}
     return this
 }
 
@@ -28,4 +28,3 @@ public inline fun <T> T.with(initWith: T.() -> Unit): T {
  * When something isn't null do something, kinda the opposite of ?:
  */
 public inline fun <T: Any, R: Any> T?.whenNotNull(thenDo: (T) -> R?): R? = if (this == null) null else thenDo(this)
-
