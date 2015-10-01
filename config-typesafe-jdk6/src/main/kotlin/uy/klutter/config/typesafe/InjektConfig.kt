@@ -106,7 +106,7 @@ public interface KonfigRegistrar : InjektRegistrar {
  * A package of configuration bound items that can be included into a scope of someone else
  */
 public interface KonfigModule {
-    final internal fun registerWith(intoModule: KonfigRegistrar) {
+    final fun registerWith(intoModule: KonfigRegistrar) {
         intoModule.registerConfigurables()
     }
 

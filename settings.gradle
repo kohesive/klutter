@@ -24,6 +24,8 @@ include 'core',
         'elasticsearch-jdk7',
         'elasticsearch',
         'reflect-core-jdk6',
+        'reflect-core-jdk7',
+        'reflect-core-jdk8',
         'reflect-lite-jdk6',
         'reflect-full-jdk6',
         'reflect',
@@ -56,6 +58,8 @@ project(':vertx3-jdk8').name = 'klutter-vertx3-jdk8'
 project(':elasticsearch').name = 'klutter-elasticsearch'
 project(':elasticsearch-jdk7').name = 'klutter-elasticsearch-jdk7'
 project(':reflect-core-jdk6').name = 'klutter-reflect-core-jdk6'
+project(':reflect-core-jdk7').name = 'klutter-reflect-core-jdk7'
+project(':reflect-core-jdk8').name = 'klutter-reflect-core-jdk8'
 project(':reflect-lite-jdk6').name = 'klutter-reflect-lite-jdk6'
 project(':reflect-full-jdk6').name = 'klutter-reflect-full-jdk6'
 project(':reflect').name = 'klutter-reflect'

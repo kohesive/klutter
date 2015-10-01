@@ -8,6 +8,6 @@ dependencies {
     runtime relativeProject(":klutter-json-jackson-jdk6")
     runtime relativeProject(":klutter-netflix-graph-jdk6")
     runtime relativeProject(":klutter-elasticsearch-jdk7")
-    runtime relativeProject(":klutter-reflect-core-jdk6")
+    runtime relativeProject(":klutter-reflect-core-jdk7")
     runtime relativeProject(":klutter-reflect-full-jdk6")
 }

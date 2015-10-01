@@ -1,9 +1,12 @@
 =========================================================
-2015-09-?? v0.7.0 release
+2015-10-01 v0.7.0 release
 =========================================================
 
-* Kotlin to 0.13.1514
-* Added Reflect modules:  reflect-core, reflect-lite, and reflect-full for class/type and reflection helpers
+* Kotlin to 0.14.449
+* Updated to Kovenant 2.7.0
+* Updated to Injekt 1.7.0
+
+reflect module is incubating, do not use without risk.
 
 =========================================================
 2015-09-21 v0.6.4 / v0.6.5 / v0.6.6 releases
