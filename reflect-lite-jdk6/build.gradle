@@ -1,6 +1,6 @@
 dependencies {
     compile relativeProject(":klutter-reflect-core-jdk6")
-    compile "org.jetbrains.kotlinx:kotlinx.reflect.lite:${version_kotlin}"
+   // compile "org.jetbrains.kotlinx:kotlinx.reflect.lite:${version_kotlin_reflect_lite}"
 }
 
 repositories {
