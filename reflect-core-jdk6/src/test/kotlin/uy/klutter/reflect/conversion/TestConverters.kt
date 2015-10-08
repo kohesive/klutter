@@ -23,6 +23,37 @@ public class TestConverters {
         assertEquals("10", s)
     }
 
+    @Test public fun testBooleanConversions() {
+        val bT: Boolean = converter.convertValue("true")
+        val bF: Boolean = converter.convertValue("False")
+        assertTrue(bT)
+        assertFalse(bF)
+
+        val bT1: Boolean = converter.convertValue(1)
+        val bF0: Boolean = converter.convertValue(0)
+        assertTrue(bT1)
+        assertFalse(bF0)
+
+        val bTCT: Boolean = converter.convertValue('T')
+        val bFCF: Boolean = converter.convertValue('F')
+        assertTrue(bTCT)
+        assertFalse(bFCF)
+
+        val bsTrue: String = converter.convertValue(true)
+        val bsFalse: String = converter.convertValue(false)
+        val biTrue: Int = converter.convertValue(true)
+        val biFalse: Int = converter.convertValue(false)
+        val bcTrue: Char = converter.convertValue(true)
+        val bcFalse: Char = converter.convertValue(false)
+
+        assertEquals("true", bsTrue)
+        assertEquals("false", bsFalse)
+        assertEquals(1, biTrue)
+        assertEquals(0, biFalse)
+        assertEquals('T', bcTrue)
+        assertEquals('F', bcFalse)
+    }
+
     @Test public fun testStringEnumConversions() {
         val x1: EnumThings = converter.convertValue("two")
         assertEquals(EnumThings.two, x1)

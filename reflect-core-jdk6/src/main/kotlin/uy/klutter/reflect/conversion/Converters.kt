@@ -114,6 +114,7 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             BigDecimal::class.java -> BigDecimal(value)
             BigInteger::class.java -> BigDecimal(value)
             CharSequence::class.java -> value
+            Boolean::class.java, java.lang.Boolean::class.java -> value.toBoolean()
             ByteArray::class.java -> value.toByteArray() // UTF-8 always
             File::class.java -> File(value)
             URL::class.java -> URL(value)
@@ -129,6 +130,7 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             }
         }
         is CharSequence -> when (toType) {
+            CharSequence::class.java -> value // identity
             String::class.java -> value.toString()
             ByteArray::class.java -> value.toString().toByteArray() // UTF-8 always
             else -> throw IllegalStateException("Unknown CharSequence conversion from ${fromType} to ${toType}")
@@ -157,7 +159,7 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             }
         }
         is Char -> when (toType) {
-            Char::class.java, java.lang.Character::class.java -> value
+            Char::class.java, java.lang.Character::class.java -> value     // identity
             Short::class.java, java.lang.Short::class.java -> value.toShort()
             Byte::class.java, java.lang.Byte::class.java -> value.toByte()
             Int::class.java, java.lang.Integer::class.java -> value.toInt()
@@ -170,12 +172,27 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             Boolean::class.java, java.lang.Boolean::class.java -> value == '1' || value == 'T' || value == 't'
             else -> throw IllegalStateException("Unknown char conversion from ${fromType} to ${toType}")
         }
+        is Boolean -> when (toType) {
+            Boolean::class.java, java.lang.Boolean::class.java -> value      // identity
+            Char::class.java, java.lang.Character::class.java -> if (value) 'T' else 'F'
+            Short::class.java, java.lang.Short::class.java -> (if (value) 1 else 0).toShort()
+            Byte::class.java, java.lang.Byte::class.java ->  (if (value) 1 else 0).toByte()
+            Int::class.java, java.lang.Integer::class.java -> (if (value) 1 else 0).toInt()
+            Long::class.java, java.lang.Long::class.java ->  (if (value) 1 else 0).toLong()
+            Double::class.java, java.lang.Double::class.java -> (if (value) 1 else 0).toDouble()
+            Float::class.java, java.lang.Float::class.java -> (if (value) 1 else 0).toFloat()
+            BigDecimal::class.java -> BigDecimal(if (value) 1 else 0)
+            BigInteger::class.java -> BigDecimal(if (value) 1 else 0)
+            String::class.java -> value.toString()
+            else -> throw IllegalStateException("Unknown boolean conversion from ${fromType} to ${toType}")
+        }
         is Date -> when (toType) {
             Date::class.java -> value   // identity
             Long::class.java, java.lang.Long::class.java -> value.time
             else -> throw IllegalStateException("Unknown date conversion from ${fromType} to ${toType}")
         }
         is ByteArray -> when (toType) {
+            ByteArray::class.java -> value // identity
             String::class.java -> kotlin.String(value, "UTF-8") // always UTF-8
             else -> throw IllegalStateException("Unknown ByteArray conversion from ${fromType} to ${toType}")
         }
@@ -196,15 +213,18 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             }
         }
         is File -> when (toType) {
+            File::class.java -> value // identity
             String::class.java -> value.absolutePath
             else -> throw IllegalStateException("Unknown File conversion from ${fromType} to ${toType}")
         }
         is URL -> when (toType) {
+            URL::class.java -> value // identity
             String::class.java -> value.toString()
             URI::class.java -> value.toURI()
             else -> throw IllegalStateException("Unknown URL conversion from ${fromType} to ${toType}")
         }
         is URI -> when (toType) {
+            URI::class.java -> value // identity
             String::class.java -> value.toString()
             URL::class.java -> value.toURL()
             else -> throw IllegalStateException("Unknown URI conversion from ${fromType} to ${toType}")
@@ -229,6 +249,7 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
             BigInteger::class.java,
             CharSequence::class.java,
             ByteArray::class.java,
+            Boolean::class.java, java.lang.Boolean::class.java,
             File::class.java,
             URL::class.java,
             URI::class.java -> true
@@ -242,6 +263,7 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
             }
         }
         CharSequence::class.isAssignableFrom(fromType) -> when (toType) {
+            CharSequence::class.java,
             String::class.java,
             ByteArray::class.java -> true
             else -> false
@@ -283,12 +305,28 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
             Boolean::class.java, java.lang.Boolean::class.java -> true
             else -> false
         }
+        Boolean::class.isAssignableFrom(fromType),
+        java.lang.Boolean::class.isAssignableFrom(fromType)-> when (toType) {
+            Boolean::class.java, java.lang.Boolean::class.java,
+            Char::class.java, java.lang.Character::class.java,
+            Short::class.java, java.lang.Short::class.java,
+            Byte::class.java, java.lang.Byte::class.java,
+            Int::class.java, java.lang.Integer::class.java,
+            Long::class.java, java.lang.Long::class.java,
+            Double::class.java, java.lang.Double::class.java,
+            Float::class.java, java.lang.Float::class.java,
+            BigDecimal::class.java,
+            BigInteger::class.java,
+            String::class.java -> true
+            else -> false
+        }
         Date::class.isAssignableFrom(fromType) -> when (toType) {
             Date::class.java,
             Long::class.java, java.lang.Long::class.java -> true
             else -> false
         }
         fromType == ByteArray::class.java -> when (toType) {
+            ByteArray::class.java,
             String::class.java -> true
             else -> false
         }
@@ -308,15 +346,18 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
             }
         }
         fromType == File::class.java -> when (toType) {
+            File::class.java,
             String::class.java -> true
             else -> false
         }
         fromType == URI::class.java -> when (toType) {
+            URI::class.java,
             String::class.java,
             URL::class.java -> true
             else -> false
         }
         fromType == URL::class.java -> when (toType) {
+            URL::class.java,
             String::class.java,
             URI::class.java -> true
             else -> false
