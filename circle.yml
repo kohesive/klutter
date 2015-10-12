@@ -14,4 +14,4 @@ deployment:
   snapshots:
       branch: [kotlin-snapshot]
       commands:
-        - ./gradlew
+        - ./gradlew uploadArchives
