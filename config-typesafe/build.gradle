@@ -1,5 +1,5 @@
 dependencies {
-    runtime relativeProject(":klutter-config-typesafe-jdk6")
-    runtime relativeProject(":klutter-config-typesafe-jdk7")
-    runtime relativeProject(":klutter-config-typesafe-jdk8")
+    runtime project(":klutter-config-typesafe-jdk6")
+    runtime project(":klutter-config-typesafe-jdk7")
+    runtime project(":klutter-config-typesafe-jdk8")
 }

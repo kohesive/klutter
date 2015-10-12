@@ -1,5 +1,5 @@
 dependencies {
-    compile relativeProject(":klutter-json-jackson-jdk6")
+    compile project(":klutter-json-jackson-jdk6")
 
     compile "uy.kohesive.injekt:injekt-core:${version_kohesive_injekt}"
 
@@ -9,7 +9,7 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$version_jackson"
     compile "com.fasterxml.jackson.module:jackson-module-parameter-names:$version_jackson"
 
-    compile relativeProject(":jackson-module-kotlin-jdk6")
+    compile project(":jackson-module-kotlin-jdk6")
 
     compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
 }

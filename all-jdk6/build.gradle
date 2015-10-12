@@ -1,12 +1,12 @@
 // libraries that make sense for JDK 6
 dependencies {
-    runtime relativeProject(":klutter-aws-core-jdk6")
-    runtime relativeProject(":klutter-aws-s3-jdk6")
-    runtime relativeProject(":klutter-config-typesafe-jdk6")
-    runtime relativeProject(":klutter-core-jdk6")
-    runtime relativeProject(":klutter-core-jodatime-jdk6")
-    runtime relativeProject(":klutter-json-jackson-jdk6")
-    runtime relativeProject(":klutter-netflix-graph-jdk6")
-    runtime relativeProject(":klutter-reflect-core-jdk6")
-    runtime relativeProject(":klutter-reflect-full-jdk6")
+    runtime project(":klutter-aws-core-jdk6")
+    runtime project(":klutter-aws-s3-jdk6")
+    runtime project(":klutter-config-typesafe-jdk6")
+    runtime project(":klutter-core-jdk6")
+    runtime project(":klutter-core-jodatime-jdk6")
+    runtime project(":klutter-json-jackson-jdk6")
+    runtime project(":klutter-netflix-graph-jdk6")
+    runtime project(":klutter-reflect-core-jdk6")
+    runtime project(":klutter-reflect-full-jdk6")
 }
