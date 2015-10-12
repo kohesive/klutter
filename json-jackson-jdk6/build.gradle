@@ -7,4 +7,6 @@ dependencies {
     compile relativeProject(":jackson-module-kotlin-jdk6")
 
     compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
+
+    testCompile "com.fasterxml.jackson.datatype:jackson-datatype-joda:$version_jackson"
 }
