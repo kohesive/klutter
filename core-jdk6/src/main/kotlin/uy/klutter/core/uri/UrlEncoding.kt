@@ -9,7 +9,6 @@ import uy.klutter.core.jdk.mustStartWith
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
 import java.util.BitSet
-import kotlin.with
 
 /**
  * Converted to Kotlin from https://github.com/resteasy/Resteasy/blob/master/jaxrs/resteasy-jaxrs/src/main/java/org/jboss/resteasy/util/URLUtils.java
@@ -96,7 +95,7 @@ public object UrlEncoding {
     /**
      * unreserved = ALPHA / DIGIT / "-" / "." / "_" / "~"
      */
-    private val UNRESERVED = (ALPHA + DIGIT) with {
+    private val UNRESERVED = (ALPHA + DIGIT).with {
         set('-')
         set('.')
         set('_')
@@ -110,7 +109,7 @@ public object UrlEncoding {
      * Note: we don't allow escaped here since we will escape it ourselves, so we don't want to allow them in the
      * unescaped sequences
      */
-    private val PCHAR = (UNRESERVED + SUB_DELIMS) with {
+    private val PCHAR = (UNRESERVED + SUB_DELIMS).with {
         set(':')
         set('@')
     }
@@ -122,7 +121,7 @@ public object UrlEncoding {
      * Note: we don't allow escaped here since we will escape it ourselves, so we don't want to allow them in the
      * unescaped sequences
      */
-    private val USER_INFO = (UNRESERVED + SUB_DELIMS) with {
+    private val USER_INFO = (UNRESERVED + SUB_DELIMS).with {
         set(':')
     }
 
@@ -281,7 +280,7 @@ public object UrlEncoding {
      */
     private fun encodePart(part: String, charset: Charset, allowed: BitSet): String {
         // start at *3 for the worst case when everything is %encoded on one byte
-        val encoded = StringBuffer(part.length() * 3)
+        val encoded = StringBuffer(part.length * 3)
         val toEncode = part.toCharArray()
         for (c in toEncode) {
             if (allowed.get(c.toInt())) {
@@ -303,7 +302,7 @@ public object UrlEncoding {
      */
     public fun decode(s: String, charset: Charset = Charsets.UTF_8): String {
         var decoded = false
-        val l = s.length()
+        val l = s.length
         val sb = StringBuffer(if (l > 1024) l / 3 else l)
 
         var state: ParseState = ParseState.sText
@@ -315,7 +314,7 @@ public object UrlEncoding {
         var buf: ByteArray? = null
         var processDig = false
         while (i < l) {
-            c = s.charAt(i)
+            c = s[i]
             when (c) {
                 '+' -> {
                     decoded = true
@@ -450,7 +449,7 @@ public object UrlEncoding {
                 }
                 .filter { it.first.isNotEmpty() }
                 .groupBy { it.first }
-                .map { groupPair -> groupPair.getKey() to groupPair.getValue().map { it.second } }
+                .map { groupPair -> groupPair.key to groupPair.value.map { it.second } }
                 .toMap()
     }
     public fun decodeQueryToMap(encodedQuery: String): Map<String, String> {
@@ -468,24 +467,24 @@ public object UrlEncoding {
     public fun dedupeQueryFromMultiMapToMap(decodedQuery: Map<String, List<String>>): Map<String, String> {
         return decodedQuery
                 .asSequence()
-                .filter { it.getKey().isNotBlank() }
-                .flatMap { pair -> pair.getValue().asSequence().map { pair.getKey() to it } }
+                .filter { it.key.isNotBlank() }
+                .flatMap { pair -> pair.value.asSequence().map { pair.key to it } }
                 .toList() // until M13
                 .toMap()
     }
     public fun encodeQueryMultiMapToString(decodedQuery: Map<String, List<String>>): String {
         return decodedQuery
                 .asSequence()
-                .filter { it.getKey().isNotBlank() }
-                .flatMap { pair -> pair.getValue().asSequence().map { pair.getKey() to it } }
+                .filter { it.key.isNotBlank() }
+                .flatMap { pair -> pair.value.asSequence().map { pair.key to it } }
                 .map { UrlEncoding.encodeQueryNameOrValueNoParen(it.first.trim()) + "=" +  UrlEncoding.encodeQueryNameOrValue(it.second.trim()) }
                 .joinToString("&")
     }
     public fun encodeQueryMapToString(decodedQuery: Map<String, String>): String {
         return decodedQuery
                 .asSequence()
-                .filter { it.getKey().isNotBlank() }
-                .map { UrlEncoding.encodeQueryNameOrValueNoParen(it.getKey().trim()) + "=" +  UrlEncoding.encodeQueryNameOrValue(it.getValue().trim()) }
+                .filter { it.key.isNotBlank() }
+                .map { UrlEncoding.encodeQueryNameOrValueNoParen(it.key.trim()) + "=" +  UrlEncoding.encodeQueryNameOrValue(it.value.trim()) }
                 .joinToString("&")
     }
 }

@@ -6,33 +6,33 @@ import java.math.BigDecimal
 import kotlin.reflect.KProperty1
 
 public class XContentJsonObjectWithEnum<T: Enum<T>>(x: XContentBuilder): XContentJsonObject(x)  {
-    public fun setValue(field: T, value: String): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: Long): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: Int): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: Short): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: Byte): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: Double): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: Float): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: BigDecimal): Unit { x.field(field.name(), value) }
-    public fun setValue(field: T, value: Boolean): Unit { x.field(field.name(), value) }
-    public fun setValueNull(field: T): Unit { x.nullField(field.name()) }
+    public fun setValue(field: T, value: String): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: Long): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: Int): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: Short): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: Byte): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: Double): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: Float): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: BigDecimal): Unit { x.field(field.name, value) }
+    public fun setValue(field: T, value: Boolean): Unit { x.field(field.name, value) }
+    public fun setValueNull(field: T): Unit { x.nullField(field.name) }
     public fun Object(field: T, init: XContentJsonObject.()->Unit): Unit {
-        x.startObject(field.name())
+        x.startObject(field.name)
         XContentJsonObject(x).init()
         x.endObject()
     }
     public fun <R: Enum<R>> ObjectWithFieldEnum(field: T, init: XContentJsonObjectWithEnum<R>.()->Unit): Unit {
-        x.startObject(field.name())
+        x.startObject(field.name)
         XContentJsonObjectWithEnum<R>(x).init()
         x.endObject()
     }
     public fun <R: Any> ObjectWithFieldClass(field: T, init: XContentJsonObjectWithClass<R>.()->Unit): Unit {
-        x.startObject(field.name())
+        x.startObject(field.name)
         XContentJsonObjectWithClass<R>(x).init()
         x.endObject()
     }
     public fun Array(field: T, init: XContentJsonArray.()->Unit): Unit {
-        x.startArray(field.name())
+        x.startArray(field.name)
         XContentJsonArray(x).init()
         x.endArray()
     }
@@ -127,7 +127,7 @@ public class XContentJsonArray(private val x: XContentBuilder) {
     }
 }
 
-public fun xsonObjectWithFieldEnum<T: Enum<T>>(init: XContentJsonObjectWithEnum<T>.()->Unit): XContentBuilder {
+public fun <T: Enum<T>> xsonObjectWithFieldEnum(init: XContentJsonObjectWithEnum<T>.()->Unit): XContentBuilder {
     val builder = XContentFactory.jsonBuilder()
     builder.startObject()
     XContentJsonObjectWithEnum<T>(builder).init()
@@ -135,7 +135,7 @@ public fun xsonObjectWithFieldEnum<T: Enum<T>>(init: XContentJsonObjectWithEnum<
     return builder
 }
 
-public fun xsonObjectWithFieldClass<T: Any>(init: XContentJsonObjectWithClass<T>.()->Unit): XContentBuilder {
+public fun <T: Any> xsonObjectWithFieldClass(init: XContentJsonObjectWithClass<T>.()->Unit): XContentBuilder {
     val builder = XContentFactory.jsonBuilder()
     builder.startObject()
     XContentJsonObjectWithClass<T>(builder).init()

@@ -119,5 +119,5 @@ public class TestKt9005 {
     }
 }
 
-private data class Nothing(val n: Int)
+public data class Nothing(val n: Int)
 

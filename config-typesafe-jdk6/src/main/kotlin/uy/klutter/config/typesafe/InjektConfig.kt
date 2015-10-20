@@ -66,40 +66,41 @@ public interface KonfigRegistrar : InjektRegistrar {
     /**
      * bind a class bindings its values from a configuration path immediately
      */
-    final inline fun <reified T : Any> bindClassAtConfigPath(configPath: String) {
-        bindClassAtConfigPath(configPath, fullType<T>())
-    }
-
-    /**
-     * bind a class bindings its values from a configuration path immediately
-     */
     fun <T : Any> bindClassAtConfigPath(configPath: String, klass: TypeReference<T>)
-
-    /**
-     * bind a class bindings its values from a configuration path immediately
-     */
-    final inline fun <reified T : Any> bindClassAtConfigPath(configPath: String, klass: Class<T>) {
-        bindClassAtConfigPath(configPath, fullType<T>())
-    }
-
-    /**
-     * bind a class bindings its values from the root of the current configuration path immediately
-     */
-    final inline fun <reified T : Any> bindClassAtConfigRoot() {
-        bindClassAtConfigRoot(fullType<T>())
-    }
 
     /**
      * bind a class bindings its values from the root of the current configuration path immediately
      */
     fun <T : Any> bindClassAtConfigRoot(klass: TypeReference<T>)
 
-    /**
-     * bind a class bindings its values from the root of the current configuration path immediately
-     */
-    final inline fun <reified T : Any> bindClassAtConfigRoot(klass: Class<T>) {
-        bindClassAtConfigRoot(fullType<T>())
-    }
+}
+
+/**
+ * bind a class bindings its values from a configuration path immediately
+ */
+public inline fun <reified T : Any> KonfigRegistrar.bindClassAtConfigPath(configPath: String) {
+    bindClassAtConfigPath(configPath, fullType<T>())
+}
+
+/**
+ * bind a class bindings its values from a configuration path immediately
+ */
+public inline fun <reified T : Any> KonfigRegistrar.bindClassAtConfigPath(configPath: String, klass: Class<T>) {
+    bindClassAtConfigPath(configPath, fullType<T>())
+}
+
+/**
+ * bind a class bindings its values from the root of the current configuration path immediately
+ */
+public inline fun <reified T : Any> KonfigRegistrar.bindClassAtConfigRoot() {
+    bindClassAtConfigRoot(fullType<T>())
+}
+
+/**
+ * bind a class bindings its values from the root of the current configuration path immediately
+ */
+public inline fun <reified T : Any> KonfigRegistrar.bindClassAtConfigRoot(klass: Class<T>) {
+    bindClassAtConfigRoot(fullType<T>())
 }
 
 /**

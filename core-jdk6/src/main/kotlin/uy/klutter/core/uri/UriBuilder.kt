@@ -136,7 +136,7 @@ public class UriBuilder(scheme: String? = null, encodedUserInfo: String? = null,
     override var decodedQueryDeduped: Map<String, String>?
         set(value) {
             _encodedQuery = if (value == null) null else UrlEncoding.encodeQueryMapToString(value)
-            _decodedQuery = value?.map { it.getKey() to listOf(it.getValue()) }?.toMap()
+            _decodedQuery = value?.map { it.key to listOf(it.value) }?.toMap()
             _decodedQueryDeduped = value
         }
         get() = _decodedQueryDeduped

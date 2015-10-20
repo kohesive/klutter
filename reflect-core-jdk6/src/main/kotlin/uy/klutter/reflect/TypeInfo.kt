@@ -7,7 +7,7 @@ public inline fun <reified T: Any> fullType(): TypeReference<T> = object:TypeRef
 
 public abstract class TypeReference<T> protected constructor() {
     public val type: Type by lazy {
-        javaClass.getGenericSuperclass() let { superClass ->
+        javaClass.getGenericSuperclass().let { superClass ->
             if (superClass is Class<*>) {
                 throw IllegalArgumentException("Internal error: TypeReference constructed without actual type information")
             }
