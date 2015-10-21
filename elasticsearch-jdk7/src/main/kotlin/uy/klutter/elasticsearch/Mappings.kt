@@ -19,7 +19,7 @@ public enum class EsIndexedField {
     NOT_ANALYZED, ANALYZED, NOT_INDEXED
 }
 
-public fun mappingsForTypeWithEnum<T: Enum<T>>(type: String, allowDynamic: Boolean = false, initTopLevel: XContentJsonObjectWithEnum<EsSystemFields>.()->Unit = {}, initProperties:  XContentJsonObjectWithEnum<T>.()->Unit): IndexTypeMapping {
+public fun <T: Enum<T>> mappingsForTypeWithEnum(type: String, allowDynamic: Boolean = false, initTopLevel: XContentJsonObjectWithEnum<EsSystemFields>.()->Unit = {}, initProperties:  XContentJsonObjectWithEnum<T>.()->Unit): IndexTypeMapping {
      val mappings = xsonObject {
          ObjectWithFieldEnum<EsSystemFields>(type) {
              setValue("dynamic", if (allowDynamic) "true" else "strict")
@@ -33,11 +33,11 @@ public fun mappingsForTypeWithEnum<T: Enum<T>>(type: String, allowDynamic: Boole
 }
 
 @Deprecated("use mappingsForTypeWithClass()")
-public fun mappingsForTypeForClass<T: Any>(type: String, allowDynamic: Boolean = false, initTopLevel: XContentJsonObjectWithEnum<EsSystemFields>.()->Unit = {}, initProperties:  XContentJsonObjectWithClass<T>.()->Unit): IndexTypeMapping {
+public fun <T: Any> mappingsForTypeForClass(type: String, allowDynamic: Boolean = false, initTopLevel: XContentJsonObjectWithEnum<EsSystemFields>.()->Unit = {}, initProperties:  XContentJsonObjectWithClass<T>.()->Unit): IndexTypeMapping {
     return mappingsForTypeWithClass(type, allowDynamic, initTopLevel, initProperties)
 }
 
-public fun mappingsForTypeWithClass<T: Any>(type: String, allowDynamic: Boolean = false, initTopLevel: XContentJsonObjectWithEnum<EsSystemFields>.()->Unit = {}, initProperties:  XContentJsonObjectWithClass<T>.()->Unit): IndexTypeMapping {
+public fun <T: Any> mappingsForTypeWithClass(type: String, allowDynamic: Boolean = false, initTopLevel: XContentJsonObjectWithEnum<EsSystemFields>.()->Unit = {}, initProperties:  XContentJsonObjectWithClass<T>.()->Unit): IndexTypeMapping {
     val mappings = xsonObject {
         ObjectWithFieldEnum<EsSystemFields>(type) {
             setValue("dynamic", if (allowDynamic) "true" else "strict")
@@ -65,56 +65,56 @@ public fun mappingsForType(type: String, allowDynamic: Boolean = false, initTopL
 
 @Deprecated("use stringFieldMapping")
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.stringField(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    stringFieldMapping(field.name(), indexed, stored, init)
+    stringFieldMapping(field.name, indexed, stored, init)
 }
 
 @Deprecated("use ignoreFieldMapping")
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.ignoreField(field: T) {
-    ignoreFieldMapping(field.name())
+    ignoreFieldMapping(field.name)
 }
 
 @Deprecated("use dateFieldMapping")
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.dateField(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    dateFieldMapping(field.name(), indexed, stored, init)
+    dateFieldMapping(field.name, indexed, stored, init)
 }
 
 @Deprecated("use booleanFieldMapping")
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.booleanField(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    booleanFieldMapping(field.name(), indexed, stored, init)
+    booleanFieldMapping(field.name, indexed, stored, init)
 }
 
 @Deprecated("use integerFieldMapping")
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.integerField(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    integerFieldMapping(field.name(), indexed, stored, init)
+    integerFieldMapping(field.name, indexed, stored, init)
 }
 
 @Deprecated("use longFieldMapping")
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.longField(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    longFieldMapping(field.name(), indexed, stored, init)
+    longFieldMapping(field.name, indexed, stored, init)
 }
 
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.stringFieldMapping(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    stringFieldMapping(field.name(), indexed, stored, init)
+    stringFieldMapping(field.name, indexed, stored, init)
 }
 
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.ignoreFieldMapping(field: T) {
-    ignoreFieldMapping(field.name())
+    ignoreFieldMapping(field.name)
 }
 
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.dateFieldMapping(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    dateFieldMapping(field.name(), indexed, stored, init)
+    dateFieldMapping(field.name, indexed, stored, init)
 }
 
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.booleanFieldMapping(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    booleanFieldMapping(field.name(), indexed, stored, init)
+    booleanFieldMapping(field.name, indexed, stored, init)
 }
 
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.integerFieldMapping(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    integerFieldMapping(field.name(), indexed, stored, init)
+    integerFieldMapping(field.name, indexed, stored, init)
 }
 
 public fun <T: Enum<T>> XContentJsonObjectWithEnum<T>.longFieldMapping(field: T, indexed: EsIndexedField = EsIndexedField.NOT_ANALYZED, stored: EsStoredField = EsStoredField.NOT_STORED, init: XContentJsonObject.()->Unit = {}) {
-    longFieldMapping(field.name(), indexed, stored, init)
+    longFieldMapping(field.name, indexed, stored, init)
 }
 
 // ===

@@ -62,7 +62,7 @@ public class CompiledGraphSchema<N : Enum<N>, R : Enum<R>>(val schema: GraphSche
             }
         }
 
-        val relationshipGroupsPerNodeType = relationshipGroups.keySet().groupBy { it.fromNode }
+        val relationshipGroupsPerNodeType = relationshipGroups.keys.groupBy { it.fromNode }
         nodeTypes.forEach { node ->
             val nodeRelationGroups = relationshipGroupsPerNodeType.get(node) ?: listOf()
             val propSpecs = arrayListOf<NFPropertySpec>()
@@ -71,14 +71,14 @@ public class CompiledGraphSchema<N : Enum<N>, R : Enum<R>>(val schema: GraphSche
                 nodeRelationGroups.forEach { pairKey ->
                     val groupMembers = relationshipGroups.getOrElse(pairKey, { hashSetOf() })
                     if (groupMembers.isNotEmpty()) {
-                        val fullyQualify = groupMembers.size() > 1
+                        val fullyQualify = groupMembers.size > 1
                         groupMembers.forEach { trippleKey ->
-                            val relateName = if (fullyQualify) "${trippleKey.relationship.name()}.${trippleKey.toNode.name()}" else trippleKey.relationship.name()
-                            propSpecs.add(NFPropertySpec(relateName, trippleKey.toNode.name(), relationshipFlags.get(trippleKey) ?: 0))
+                            val relateName = if (fullyQualify) "${trippleKey.relationship.name}.${trippleKey.toNode.name}" else trippleKey.relationship.name
+                            propSpecs.add(NFPropertySpec(relateName, trippleKey.toNode.name, relationshipFlags.get(trippleKey) ?: 0))
                         }
                     }
                 }
-                graphSpec.addNodeSpec(NFNodeSpec(node.name(), *(propSpecs.toTypedArray())))
+                graphSpec.addNodeSpec(NFNodeSpec(node.name, *(propSpecs.toTypedArray())))
             }
         }
     }
@@ -129,11 +129,11 @@ public class GraphBuilder<N : Enum<N>, R : Enum<R>>(val schema: CompiledGraphSch
 
         val nodeRelations = schema.relationshipGroups.getOrElse(pairKey, { setOf<RelationshipTrippleKey<N,R>>() })
         if (nodeRelations.isNotEmpty()) {
-            val fullyQualify = nodeRelations.size() > 1
+            val fullyQualify = nodeRelations.size > 1
             val matchingRelation = nodeRelations.filter { it == trippleKey }.firstOrNull()
             if (matchingRelation != null) {
-                val relateName = if (fullyQualify) "${trippleKey.relationship.name()}.${trippleKey.toNode.name()}" else trippleKey.relationship.name()
-                graphBuilder.addConnection(matchingRelation.fromNode.name(), fromNodeWithOrd.ord, relateName, toNodeWithOrd.ord)
+                val relateName = if (fullyQualify) "${trippleKey.relationship.name}.${trippleKey.toNode.name}" else trippleKey.relationship.name
+                graphBuilder.addConnection(matchingRelation.fromNode.name, fromNodeWithOrd.ord, relateName, toNodeWithOrd.ord)
                 return trippleKey
             } else {
                 throw RuntimeException("No relationship for ${trippleKey} exists, cannot connect these nodes!")
@@ -189,38 +189,38 @@ public class GraphBuilder<N : Enum<N>, R : Enum<R>>(val schema: CompiledGraphSch
             // Partial Schema:
             dataStream.writeUTF(GRAPH_MARKERS_SCHEMA_HEADER)
             val values = schema.nodeTypes
-            dataStream.writeInt(values.size())
+            dataStream.writeInt(values.size)
             values.forEach { nodeType ->
-                dataStream.writeUTF(nodeType.name())
+                dataStream.writeUTF(nodeType.name)
             }
             val groups = schema.relationshipGroups
-            dataStream.writeInt(groups.size())
-            groups.entrySet().forEach { groupEntry ->
-                dataStream.writeUTF(groupEntry.getKey().fromNode.name())
-                dataStream.writeUTF(groupEntry.getKey().relationship.name())
-                dataStream.writeInt(groupEntry.getValue().size())
-                groupEntry.getValue().forEach { target ->
-                    dataStream.writeUTF(target.toNode.name())
+            dataStream.writeInt(groups.size)
+            groups.entries.forEach { groupEntry ->
+                dataStream.writeUTF(groupEntry.key.fromNode.name)
+                dataStream.writeUTF(groupEntry.key.relationship.name)
+                dataStream.writeInt(groupEntry.value.size)
+                groupEntry.value.forEach { target ->
+                    dataStream.writeUTF(target.toNode.name)
                 }
             }
             val mirrors = schema.relationshipMirrors
-            dataStream.writeInt(mirrors.size())
-            mirrors.entrySet().forEach { mirrorEntry ->
-                dataStream.writeUTF(mirrorEntry.getKey().fromNode.name())
-                dataStream.writeUTF(mirrorEntry.getKey().relationship.name())
-                dataStream.writeUTF(mirrorEntry.getKey().toNode.name())
-                dataStream.writeUTF(mirrorEntry.getValue().fromNode.name())
-                dataStream.writeUTF(mirrorEntry.getValue().relationship.name())
-                dataStream.writeUTF(mirrorEntry.getValue().toNode.name())
+            dataStream.writeInt(mirrors.size)
+            mirrors.entries.forEach { mirrorEntry ->
+                dataStream.writeUTF(mirrorEntry.key.fromNode.name)
+                dataStream.writeUTF(mirrorEntry.key.relationship.name)
+                dataStream.writeUTF(mirrorEntry.key.toNode.name)
+                dataStream.writeUTF(mirrorEntry.value.fromNode.name)
+                dataStream.writeUTF(mirrorEntry.value.relationship.name)
+                dataStream.writeUTF(mirrorEntry.value.toNode.name)
             }
 
             // Ordinals:
             dataStream.writeUTF(GRAPH_MARKERS_ORDINAL_HEADER)
-            dataStream.writeInt(ordinalsByType.size())
+            dataStream.writeInt(ordinalsByType.size)
             ordinalsByType.forEach { entry ->
-                dataStream.writeUTF(entry.getKey().name())
-                dataStream.writeInt(entry.getValue().size())
-                entry.getValue().asSequence().forEach { ordValue ->
+                dataStream.writeUTF(entry.key.name)
+                dataStream.writeInt(entry.value.size())
+                entry.value.asSequence().forEach { ordValue ->
                     dataStream.writeUTF(ordValue)
                 }
             }

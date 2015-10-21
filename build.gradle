@@ -8,12 +8,14 @@ buildscript {
         maven {
             url 'http://repo.spring.io/plugins-release'
         }
+        maven {
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
     }
     //noinspection GroovyAssignabilityCheck
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
-        classpath "com.prezi.pride:gradle-pride-plugin:0.11"
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
         // one day... classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.1-SNAPSHOT"
@@ -26,7 +28,6 @@ subprojects {
     apply plugin: 'propdeps-idea'
     apply plugin: 'java'
     apply plugin: 'kotlin'
-    apply plugin: 'pride'
 
     if (name.endsWith("jdk8")) {
         println("Project ${name} set to JDK 8")
@@ -102,14 +103,6 @@ subprojects {
 
     }
 }
-
-if (rootProject != project) {
-    // if we are not the root project, we must have prezi-pride in a level above, configure it to be able to generate IDE projects
-    configure(rootProject) {
-        apply plugin: 'idea'
-    }
-}
-
 
 subprojects {
     apply plugin: 'com.bmuschko.nexus'

@@ -50,10 +50,6 @@ public interface ImmutableUri {
         return URI(scheme, encodedUserInfo, host, port ?: -1, encodedPath, encodedQuery, encodedFragment)
     }
 
-    override public fun toString(): String {
-        return toURI().toString()
-    }
-
     fun fragmentAsDecodedPath(): List<String>? = if (encodedFragment == null) null else UrlEncoding.decodePathToSegments(encodedFragment!!)
     fun fragmentAsDecodedQuery(): Map<String, List<String>>? = if (encodedFragment == null) null else UrlEncoding.decodeQueryStringToMultiMap(encodedFragment!!)
     fun fragmentAsDecodedQueryDeduped(): Map<String, String>? = if (encodedFragment == null) null else UrlEncoding.decodeQueryToMap(encodedFragment!!)
@@ -140,7 +136,7 @@ public class UriBuilder(scheme: String? = null, encodedUserInfo: String? = null,
     override var decodedQueryDeduped: Map<String, String>?
         set(value) {
             _encodedQuery = if (value == null) null else UrlEncoding.encodeQueryMapToString(value)
-            _decodedQuery = value?.map { it.getKey() to listOf(it.getValue()) }?.toMap()
+            _decodedQuery = value?.map { it.key to listOf(it.value) }?.toMap()
             _decodedQueryDeduped = value
         }
         get() = _decodedQueryDeduped
@@ -251,11 +247,19 @@ public class UriBuilder(scheme: String? = null, encodedUserInfo: String? = null,
                 encodedFragment, decodedFragment)
     }
 
+    override public fun toString(): String {
+        return toURI().toString()
+    }
+
     data class BuiltUri(override val scheme: String?, override val encodedUserInfo: String?, override val decodedUserInfo: String?,
                         override val host: String?, override val port: Int?,
                         override val encodedPath: String?, override val decodedPath: List<String>?,
                         override val encodedQuery: String?, override val decodedQuery: Map<String, List<String>>?, override val decodedQueryDeduped: Map<String, String>?,
-                        override val encodedFragment: String?, override val decodedFragment: String?) : ImmutableUri
+                        override val encodedFragment: String?, override val decodedFragment: String?) : ImmutableUri  {
+       override public fun toString(): String {
+            return toURI().toString()
+        }
+    }
 
 }
 

@@ -20,7 +20,7 @@ import kotlin.reflect.jvm.java
  *  might.
  */
 
-public class WrappedThrowableException(cause: Throwable): Exception(cause.getMessage(), cause)
+public class WrappedThrowableException(cause: Throwable): Exception(cause.message, cause)
 
 /**
  * Start vert.x returning a Kovenant Promise<Vertx, Exception>

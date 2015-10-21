@@ -27,7 +27,7 @@ enum class MyRelations {
 
 public class TestNetflixGraph {
     private fun Set<NodeAndId<MyNodes>>.hasOnly(testFor: Set<NodeAndId<MyNodes>>): Boolean {
-        return (this.size() == testFor.size() && this.containsAll(testFor))
+        return (this.size == testFor.size && this.containsAll(testFor))
     }
 
     @Test fun basicGraphBuilding() {

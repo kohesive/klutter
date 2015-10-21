@@ -28,9 +28,9 @@ public fun Session.removeSafely(key: String): Any? {
  * Extract unencoded path?query#hash from URL and return as a string.
  */
 private fun pathPlusParmsOfUrl(original: URI): String {
-    val path = original.getRawPath() let { if (it.isNullOrBlank()) "" else it.mustStartWith('/') }
-    val query = original.getRawQuery() let { if (it.isNullOrBlank()) "" else it.mustStartWith('?') }
-    val fragment = original.getRawFragment() let { if (it.isNullOrBlank()) "" else it.mustStartWith('#')}
+    val path = original.getRawPath().let { if (it.isNullOrBlank()) "" else it.mustStartWith('/') }
+    val query = original.getRawQuery().let { if (it.isNullOrBlank()) "" else it.mustStartWith('?') }
+    val fragment = original.getRawFragment().let { if (it.isNullOrBlank()) "" else it.mustStartWith('#')}
     return "$path$query$fragment"
 }
 
@@ -60,7 +60,7 @@ public fun RoutingContext.externalizeUrl(url: String): String {
     val requestUri: URI = URI(request().absoluteURI()) // fallback values for scheme/host/port  ... and for relative paths
 
     val requestScheme: String = run {
-        return@run request().getHeader("X-Forwarded-Proto") let { scheme: String? ->
+        return@run request().getHeader("X-Forwarded-Proto").let { scheme: String? ->
             if (scheme == null || scheme.isEmpty()) {
                 requestUri.getScheme()
             } else {
@@ -70,7 +70,7 @@ public fun RoutingContext.externalizeUrl(url: String): String {
     }
 
     val requestHost: String = run {
-        return@run request().getHeader("X-Forwarded-Host") let inner@ { host: String? ->
+        return@run request().getHeader("X-Forwarded-Host").let inner@ { host: String? ->
             val hostWithPossiblePort = if (host == null || host.isEmpty()) {
                 requestUri.getHost()
             } else {
@@ -83,7 +83,7 @@ public fun RoutingContext.externalizeUrl(url: String): String {
 
 
     val requestPort = run {
-        val defaultPort = requestUri.getPort() let inner@ { explicitPort ->
+        val defaultPort: Int = requestUri.getPort().let inner@ { explicitPort ->
             return@inner if (explicitPort == 0) {
                 if ("https" == requestScheme) 443 else 80
             } else {
@@ -91,16 +91,16 @@ public fun RoutingContext.externalizeUrl(url: String): String {
             }
         }
 
-        return@run request().getHeader("X-Forwarded-Port") let inner@ { proxyOrLoadBalancerPort ->
-            val finalPort = if (proxyOrLoadBalancerPort.isNullOrBlank()) {
+        return@run request().getHeader("X-Forwarded-Port").let inner@ { proxyOrLoadBalancerPort ->
+            val finalPort: Int = if (proxyOrLoadBalancerPort.isNullOrBlank()) {
                 defaultPort
             } else {
-                proxyOrLoadBalancerPort
+                proxyOrLoadBalancerPort.toInt()
             }
 
-            return@inner if (requestScheme == "https" && finalPort == "443") {
+            return@inner if (requestScheme == "https" && finalPort == 443) {
                 ""
-            } else if (requestScheme == "http" && finalPort == "80") {
+            } else if (requestScheme == "http" && finalPort == 80) {
                 ""
             } else {
                 ":$finalPort"

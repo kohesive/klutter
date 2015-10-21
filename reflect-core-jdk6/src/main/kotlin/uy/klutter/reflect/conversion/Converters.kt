@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap
 public object TypeConversionConfig {
     public @Volatile var permiteEnumToEnum: Boolean = false
 
-    public @Volatile var defaultConverter = TypeConverters() with {
+    public @Volatile var defaultConverter = TypeConverters().with {
         register(primitiveConversionPredicate, primitiveConversion)
         val services = ServiceLoader.load(SelfRegisteringConverters::class.java)
         services.forEach {
@@ -123,7 +123,7 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
                 val toErased = toType.erasedType()
                 if (toErased.isEnum) {
                     val ecls = toErased as Class<Enum<*>>
-                    ecls.getEnumConstants().filter { it.name() == value }.first() ?: IllegalStateException("Unknown Enum conversion from ${fromType} to ${toType}, no matching value ${value}")
+                    ecls.getEnumConstants().filter { it.name == value }.first() ?: IllegalStateException("Unknown Enum conversion from ${fromType} to ${toType}, no matching value ${value}")
                 } else {
                     throw IllegalStateException("Unknown String conversion from ${fromType} to ${toType}")
                 }
@@ -197,16 +197,16 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             else -> throw IllegalStateException("Unknown ByteArray conversion from ${fromType} to ${toType}")
         }
         is Enum<*> -> when (toType) {
-            String::class.java -> value.name()
-            Byte::class.java, java.lang.Byte::class.java -> value.ordinal().toByte()
-            Short::class.java, java.lang.Short::class.java -> value.ordinal().toShort()
-            Int::class.java, java.lang.Integer::class.java -> value.ordinal()
-            Long::class.java, java.lang.Long::class.java -> value.ordinal().toLong()
+            String::class.java -> value.name
+            Byte::class.java, java.lang.Byte::class.java -> value.ordinal.toByte()
+            Short::class.java, java.lang.Short::class.java -> value.ordinal.toShort()
+            Int::class.java, java.lang.Integer::class.java -> value.ordinal
+            Long::class.java, java.lang.Long::class.java -> value.ordinal.toLong()
             else -> {
                 val toErased = toType.erasedType()
                 if (toErased.isEnum && TypeConversionConfig.permiteEnumToEnum) {
                     val ecls = toErased as Class<Enum<*>>
-                    ecls.getEnumConstants().filter { it.name() == value.name() }.firstOrNull() ?: IllegalStateException("Unknown Enum conversion from ${fromType} to ${toType}, no matching value ${value}")
+                    ecls.getEnumConstants().filter { it.name == value.name }.firstOrNull() ?: IllegalStateException("Unknown Enum conversion from ${fromType} to ${toType}, no matching value ${value}")
                 } else {
                     throw IllegalStateException("Unknown Enum conversion from ${fromType} to ${toType}")
                 }

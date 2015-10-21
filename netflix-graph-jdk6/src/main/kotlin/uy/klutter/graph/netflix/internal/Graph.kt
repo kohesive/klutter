@@ -17,10 +17,12 @@ private fun checkHeaderValue(input: DataInputStream, testValue: String) {
 }
 
 public class ReadOnlyGraph<N : Enum<N>, R : Enum<R>>(private val nodeTypeEnum: Class<N>, private val relationTypeEnum: Class<R>, private val input: InputStream) : GraphOrdinalContainer<N>(true) {
+    @Suppress("EXPOSED_PROPERTY_TYPE")
     protected val relationshipGroups: MutableMap<RelationshipPairKey<N, R>, MutableSet<RelationshipTrippleKey<N, R>>> = hashMapOf()
+    @Suppress("EXPOSED_PROPERTY_TYPE")
     protected val relationshipMirrors: MutableMap<RelationshipTrippleKey<N, R>, RelationshipTrippleKey<N, R>> = hashMapOf()
-    internal val nodeTypes: Map<String,N> = nodeTypeEnum.getEnumConstants().map { Pair(it.name(),it) }.toMap()
-    internal val relationTypes: Map<String,R> = relationTypeEnum.getEnumConstants().map { Pair(it.name(),it) }.toMap()
+    internal val nodeTypes: Map<String,N> = nodeTypeEnum.getEnumConstants().map { Pair(it.name,it) }.toMap()
+    internal val relationTypes: Map<String,R> = relationTypeEnum.getEnumConstants().map { Pair(it.name,it) }.toMap()
 
     protected val graph: NFGraph = run {
         DataInputStream(input).use { dataStream ->
@@ -118,7 +120,7 @@ public class ReadOnlyGraph<N : Enum<N>, R : Enum<R>>(private val nodeTypeEnum: C
     }
 
     protected fun makeRelationshipName(relation: R, toNodeType: N): String {
-        return "${relation.name()}.${toNodeType.name()}"
+        return "${relation.name}.${toNodeType.name}"
     }
 
     protected fun NFGraph.getConnection(nodeAndOrd: NodeAndOrd<N>, relation: R): NodeAndId<N>? {
@@ -127,21 +129,21 @@ public class ReadOnlyGraph<N : Enum<N>, R : Enum<R>>(private val nodeTypeEnum: C
 
     protected fun NFGraph.getConnection(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): NodeAndId<N>? {
         val targets = getRelationTargets(nodeAndOrd.nodeType, relation)
-        val qualifyFully = targets.size() > 1
+        val qualifyFully = targets.size > 1
         val results = linkedListOf<NodeAndId<N>>()
         targets.forEach { toNodeType ->
             val ordsForTarget = nodeOrdMap(toNodeType)
-            val relate = if (qualifyFully) makeRelationshipName(relation, toNodeType) else relation.name()
+            val relate = if (qualifyFully) makeRelationshipName(relation, toNodeType) else relation.name
             val ord = if (model.isNotEmpty()) {
-                getConnection(nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relate)
+                getConnection(nodeAndOrd.nodeType.name, nodeAndOrd.ord, relate)
             } else {
-                getConnection(model, nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relate)
+                getConnection(model, nodeAndOrd.nodeType.name, nodeAndOrd.ord, relate)
             }
             if (ord >= 0) {
                 results.add(NodeAndId(toNodeType, ordsForTarget.get(ord)))
             }
         }
-        if (results.size() > 1) {
+        if (results.size > 1) {
             throw RuntimeException("Tried to get connections from graph node as single, but multiple existed instead: from ${nodeAndOrd} via ${relation} resulted in ${results.joinToString(",")}")
         }
         return results.firstOrNull()
@@ -153,11 +155,11 @@ public class ReadOnlyGraph<N : Enum<N>, R : Enum<R>>(private val nodeTypeEnum: C
 
     protected fun NFGraph.getConnectionSet(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): Set<NodeAndId<N>> {
         val targets = getRelationTargets(nodeAndOrd.nodeType, relation)
-        val qualifyFully = targets.size() > 1
+        val qualifyFully = targets.size > 1
         val results = linkedListOf<NodeAndId<N>>()
         targets.forEach { toNodeType ->
             val ordsForTarget = nodeOrdMap(toNodeType)
-            val relate = if (qualifyFully) makeRelationshipName(relation, toNodeType) else relation.name()
+            val relate = if (qualifyFully) makeRelationshipName(relation, toNodeType) else relation.name
             val ordIterable = if (model.isEmpty()) {
                 connectionsAsIterable(nodeAndOrd, relate)
             } else {
@@ -207,19 +209,19 @@ public class ReadOnlyGraph<N : Enum<N>, R : Enum<R>>(private val nodeTypeEnum: C
 
     // TODO: for this as well public fun NodeAndOrdList<N>.
 
-    protected fun NFGraph.connectionsAsIterable(nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIterable = OrdinalIterable(this.getConnectionIterator(nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relation.name()))
-    protected fun NFGraph.connectionsAsIterable(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIterable = OrdinalIterable(this.getConnectionIterator(model, nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relation.name()))
+    protected fun NFGraph.connectionsAsIterable(nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIterable = OrdinalIterable(this.getConnectionIterator(nodeAndOrd.nodeType.name, nodeAndOrd.ord, relation.name))
+    protected fun NFGraph.connectionsAsIterable(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIterable = OrdinalIterable(this.getConnectionIterator(model, nodeAndOrd.nodeType.name, nodeAndOrd.ord, relation.name))
     protected fun NFGraph.connectionsAsIterable(nodeAndOrd: NodeAndOrd<N>, relationName: String): OrdinalIterable {
-        return OrdinalIterable(this.getConnectionIterator(nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relationName))
+        return OrdinalIterable(this.getConnectionIterator(nodeAndOrd.nodeType.name, nodeAndOrd.ord, relationName))
     }
-    protected fun NFGraph.connectionsAsIterable(model: String, nodeAndOrd: NodeAndOrd<N>, relationName: String): OrdinalIterable = OrdinalIterable(this.getConnectionIterator(model, nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relationName))
+    protected fun NFGraph.connectionsAsIterable(model: String, nodeAndOrd: NodeAndOrd<N>, relationName: String): OrdinalIterable = OrdinalIterable(this.getConnectionIterator(model, nodeAndOrd.nodeType.name, nodeAndOrd.ord, relationName))
 
 
-    protected fun NFGraph.connectionsAsIterator(nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIteration = OrdinalIteration(this.getConnectionIterator(nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relation.name()))
-    protected fun NFGraph.connectionsAsIterator(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIteration = OrdinalIteration(this.getConnectionIterator(model, nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relation.name()))
+    protected fun NFGraph.connectionsAsIterator(nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIteration = OrdinalIteration(this.getConnectionIterator(nodeAndOrd.nodeType.name, nodeAndOrd.ord, relation.name))
+    protected fun NFGraph.connectionsAsIterator(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): OrdinalIteration = OrdinalIteration(this.getConnectionIterator(model, nodeAndOrd.nodeType.name, nodeAndOrd.ord, relation.name))
 
-    protected fun NFGraph.connectionsAsSet(nodeAndOrd: NodeAndOrd<N>, relation: R): Set<Int> = OrdinalIterable(this.getConnectionIterator(nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relation.name())).toSet()
-    protected fun NFGraph.connectionsAsSet(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): Set<Int> = OrdinalIterable(this.getConnectionIterator(model, nodeAndOrd.nodeType.name(), nodeAndOrd.ord, relation.name())).toSet()
+    protected fun NFGraph.connectionsAsSet(nodeAndOrd: NodeAndOrd<N>, relation: R): Set<Int> = OrdinalIterable(this.getConnectionIterator(nodeAndOrd.nodeType.name, nodeAndOrd.ord, relation.name)).toSet()
+    protected fun NFGraph.connectionsAsSet(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): Set<Int> = OrdinalIterable(this.getConnectionIterator(model, nodeAndOrd.nodeType.name, nodeAndOrd.ord, relation.name)).toSet()
 
 }
 

@@ -40,7 +40,7 @@ public enum class RelationStructure(override val flags: Int) : GraphRelationOpti
     HASH(com.netflix.nfgraph.spec.NFPropertySpec.HASH)
 }
 
-internal interface GraphRelationOptions {
+public interface GraphRelationOptions {
     val flags: Int
 }
 
