@@ -1,9 +1,0 @@
-dependencies {
-    compile "com.fasterxml.jackson.core:jackson-databind:$version_jackson"
-    compile "com.fasterxml.jackson.core:jackson-annotations:$version_jackson"
-
-    compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
-
-    testCompile "joda-time:joda-time:$version_jodatime"
-    testCompile "com.fasterxml.jackson.datatype:jackson-datatype-joda:$version_jackson"
-}
