@@ -1,4 +1,4 @@
 dependencies {
-    compile relativeProject(":klutter-core")
+    compile project(":klutter-core")
     compile "com.netflix.nfgraph:netflix-graph:$version_netflix_graph"
 }

@@ -1,4 +1,4 @@
 dependencies {
-    compile relativeProject(':klutter-core-jdk6')
+    compile project(':klutter-core-jdk6')
     compile "joda-time:joda-time:$version_jodatime"
 }

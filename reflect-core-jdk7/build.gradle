@@ -1,3 +1,3 @@
 dependencies {
-    compile relativeProject(":klutter-reflect-core-jdk6")
+    compile project(":klutter-reflect-core-jdk6")
 }

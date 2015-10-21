@@ -26,7 +26,6 @@ public fun Short.coerce(range: ShortRange): Short = this.minimum(range.start).ma
 public fun Double.minimum(minVal: Double): Double = Math.max(this, minVal)
 public fun Double.maximum(maxVal: Double): Double = Math.min(this, maxVal)
 public fun Double.coerce(minVal: Double, maxVal: Double): Double = this.minimum(minVal).maximum(maxVal)
-public fun Double.coerce(range: DoubleRange): Double = this.minimum(range.start).maximum(range.end)
 
 public fun Long.humanReadable(): String {
     if (this <= 0) return "0"

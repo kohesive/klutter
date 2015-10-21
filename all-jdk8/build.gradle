@@ -1,13 +1,13 @@
 // libraries that make sense for JDK 8
 dependencies {
-    runtime relativeProject(":klutter-aws-core-jdk6")
-    runtime relativeProject(":klutter-aws-s3-jdk6")
-    runtime relativeProject(":klutter-config-typesafe-jdk8")
-    runtime relativeProject(":klutter-core-jdk8")
-    runtime relativeProject(":klutter-json-jackson-jdk8")
-    runtime relativeProject(":klutter-netflix-graph-jdk6")
-    runtime relativeProject(":klutter-vertx3-jdk8")
-    runtime relativeProject(":klutter-elasticsearch-jdk7")
-    runtime relativeProject(":klutter-reflect-core-jdk8")
-    runtime relativeProject(":klutter-reflect-full-jdk6")
+    runtime project(":klutter-aws-core-jdk6")
+    runtime project(":klutter-aws-s3-jdk6")
+    runtime project(":klutter-config-typesafe-jdk8")
+    runtime project(":klutter-core-jdk8")
+    runtime project(":klutter-json-jackson-jdk8")
+    runtime project(":klutter-netflix-graph-jdk6")
+    runtime project(":klutter-vertx3-jdk8")
+    runtime project(":klutter-elasticsearch-jdk7")
+    runtime project(":klutter-reflect-core-jdk8")
+    runtime project(":klutter-reflect-full-jdk6")
 }

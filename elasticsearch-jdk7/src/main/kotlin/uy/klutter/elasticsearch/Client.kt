@@ -35,8 +35,8 @@ public object EsConfig {
 
 public fun esNodeClient(clusterName: String, settings: Map<String, String>): Client {
     return esNodeClient(clusterName) {
-        settings.entrySet().forEach {
-            put(it.getKey(), it.getValue())
+        settings.entries.forEach {
+            put(it.key, it.value)
         }
     }
 }
@@ -56,8 +56,8 @@ public fun esNodeClient(clusterName: String, init: ImmutableSettings.Builder.()-
 
 public fun esTransportClient(clusterName: String, nodes: List<TransportAddress>, settings: Map<String, String>): Client {
     return esTransportClient(clusterName, nodes) {
-        settings.entrySet().forEach {
-            put(it.getKey(), it.getValue())
+        settings.entries.forEach {
+            put(it.key, it.value)
         }
     }
 }
@@ -78,8 +78,8 @@ public fun esTransportClient(clusterName: String, nodes: List<TransportAddress>,
 
 public fun esEmbeddedClient(clusterName: String, baseDir: Path, settings: Map<String, String>): Promise<Client, Exception>  {
     return esEmbeddedClient(clusterName, baseDir) {
-        settings.entrySet().forEach {
-            put(it.getKey(), it.getValue())
+        settings.entries.forEach {
+            put(it.key, it.value)
         }
     }
 }

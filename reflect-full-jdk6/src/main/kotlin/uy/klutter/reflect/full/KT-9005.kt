@@ -23,8 +23,8 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
     private val _invokeMethod: Method = _functionClass.getMethods().filter { method ->
         method.getName() == "invoke" &&
                 !method.isBridge &&
-                method.parameterCount == _kfunc.parameters.size()
-    }.first() apply { isAccessible = true }
+                method.parameterCount == _kfunc.parameters.size
+    }.first().apply { isAccessible = true }
 
     override val name: String = _name ?: _kfunc.name
     override val returnType: KType = _invokeMethod.returnType.kotlin.defaultType
@@ -62,7 +62,7 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
     @Suppress("UNCHECKED_CAST")
     override fun callBy(args: Map<KParameter, Any?>): R {
         val parameters = parameters
-        val arguments = ArrayList<Any?>(parameters.size())
+        val arguments = ArrayList<Any?>(parameters.size)
 
         for (parameter in parameters) {
             when {
@@ -78,20 +78,6 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
         return call(*arguments.toTypedArray())
     }
 
-    private fun defaultPrimitiveValue(type: Type): Any? =
-            if (type is Class<*> && type.isPrimitive) {
-                when (type) {
-                    java.lang.Boolean.TYPE -> false
-                    java.lang.Character.TYPE -> 0.toChar()
-                    java.lang.Byte.TYPE -> 0.toByte()
-                    java.lang.Short.TYPE -> 0.toShort()
-                    java.lang.Integer.TYPE -> 0
-                    java.lang.Float.TYPE -> 0f
-                    java.lang.Long.TYPE -> 0L
-                    java.lang.Double.TYPE -> 0.0
-                    java.lang.Void.TYPE -> throw IllegalStateException("Parameter with void type is illegal")
-                    else -> throw UnsupportedOperationException("Unknown primitive: $type")
-                }
-            } else null
+
 }
 
