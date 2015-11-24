@@ -1,6 +1,7 @@
 package uy.klutter.vertx
 
 import io.vertx.core.*
+import io.vertx.core.eventbus.Message
 import nl.komponents.kovenant.Deferred
 import nl.komponents.kovenant.Kovenant
 import nl.komponents.kovenant.Promise
@@ -323,4 +324,20 @@ public fun <T: Any> promiseResult(deferred: Deferred<T, Exception>): (AsyncResul
     }
 }
 
+/**
+ * Sends the message and returns a promise of a reply to that message.
+ */
+public fun <T> Vertx.replyPromise(address: String, message: Any): Promise<T, Exception> {
+    VertxInit.ensure()
 
+    val deferred = deferred<T, Exception>()
+    eventBus().send(address, message, Handler { ar: AsyncResult<Message<T>> ->
+        if (ar.succeeded()) {
+            deferred.resolve(ar.result().body())
+        } else {
+            deferred.reject(Exception(ar.cause()))
+        }
+    })
+
+    return deferred.promise
+}
