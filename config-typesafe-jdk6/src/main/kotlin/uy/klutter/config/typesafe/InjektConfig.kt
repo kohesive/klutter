@@ -107,7 +107,7 @@ public inline fun <reified T : Any> KonfigRegistrar.bindClassAtConfigRoot(klass:
  * A package of configuration bound items that can be included into a scope of someone else
  */
 public interface KonfigModule {
-    final fun registerWith(intoModule: KonfigRegistrar) {
+    fun registerWith(intoModule: KonfigRegistrar) {
         intoModule.registerConfigurables()
     }
 
