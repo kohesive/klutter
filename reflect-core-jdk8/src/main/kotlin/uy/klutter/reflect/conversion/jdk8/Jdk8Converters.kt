@@ -14,7 +14,7 @@ public class RegisterJdk8Converters: SelfRegisteringConverters {
     override fun registerInto(conversion: TypeConverters) {
         conversion.register(fun (fromType: Type, toType: Type):Boolean {
             return when {
-                fromType == Long::class.java, fromType == java.lang.Long::class.java -> when (toType) {
+                fromType == Long::class.java || fromType == java.lang.Long::class.java -> when (toType) {
                     Instant::class.java -> true
                     else -> false
                 }

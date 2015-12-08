@@ -290,8 +290,7 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
                 }
             }
         }
-        Char::class.isAssignableFrom(fromType),
-        java.lang.Character::class.isAssignableFrom(fromType) -> when (toType) {
+        Char::class.isAssignableFrom(fromType) || java.lang.Character::class.isAssignableFrom(fromType) -> when (toType) {
             Char::class.java, java.lang.Character::class.java,
             Short::class.java, java.lang.Short::class.java,
             Byte::class.java, java.lang.Byte::class.java,
@@ -305,8 +304,7 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
             Boolean::class.java, java.lang.Boolean::class.java -> true
             else -> false
         }
-        Boolean::class.isAssignableFrom(fromType),
-        java.lang.Boolean::class.isAssignableFrom(fromType)-> when (toType) {
+        Boolean::class.isAssignableFrom(fromType) || java.lang.Boolean::class.isAssignableFrom(fromType) -> when (toType) {
             Boolean::class.java, java.lang.Boolean::class.java,
             Char::class.java, java.lang.Character::class.java,
             Short::class.java, java.lang.Short::class.java,

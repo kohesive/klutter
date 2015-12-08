@@ -132,19 +132,19 @@ subprojects {
         project {
             name 'Klutter for Kotlin'
             description 'Random small libraries for Kotlin.'
-            url 'https://github.com/klutter/klutter'
+            url 'https://github.com/kohesive/klutter'
             inceptionYear '2015'
 
             scm {
-                url 'https://github.com/klutter/klutter'
-                connection 'scm:https://github.com/klutter/klutter'
+                url 'https://github.com/kohesive/klutter'
+                connection 'scm:https://github.com/kohesive/klutter'
                 developerConnection 'scm:git@github.com:klutter/klutter.git'
             }
 
             licenses {
                 license {
                     name 'MIT'
-                    url 'https://github.com/klutter/klutter/blob/master/LICENSE'
+                    url 'https://github.com/kohesive/klutter/blob/master/LICENSE'
                     distribution 'repo'
                 }
             }
