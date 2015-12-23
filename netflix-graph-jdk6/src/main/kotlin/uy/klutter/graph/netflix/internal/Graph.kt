@@ -6,7 +6,7 @@ import com.netflix.nfgraph.compressed.NFCompressedGraph
 import uy.klutter.graph.netflix.*
 import java.io.DataInputStream
 import java.io.InputStream
-import kotlin.support.AbstractIterator
+import kotlin.collections.AbstractIterator
 
 
 private fun checkHeaderValue(input: DataInputStream, testValue: String) {

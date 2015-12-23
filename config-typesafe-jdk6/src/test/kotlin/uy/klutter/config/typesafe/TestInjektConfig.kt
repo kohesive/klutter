@@ -10,10 +10,10 @@ import kotlin.test.assertEquals
 class TestInjektConfig {
     companion object : KonfigAndInjektMain() {
         override fun configFactory(): Config {
-            return loadConfig(MapAsConfig(kotlin.mapOf(
-                    "http" to kotlin.mapOf("httpPort" to 8080, "workerThreads" to 16),
-                    "data" to kotlin.mapOf("bucket" to "com.test.bucket", "region" to "us-east"),
-                    "other" to kotlin.mapOf("name" to "frisbee"))))
+            return loadConfig(MapAsConfig(mapOf(
+                    "http" to mapOf("httpPort" to 8080, "workerThreads" to 16),
+                    "data" to mapOf("bucket" to "com.test.bucket", "region" to "us-east"),
+                    "other" to mapOf("name" to "frisbee"))))
         }
 
         override fun KonfigRegistrar.registerConfigurables() {

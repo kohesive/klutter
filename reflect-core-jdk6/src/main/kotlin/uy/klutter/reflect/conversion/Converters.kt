@@ -66,7 +66,7 @@ public class TypeConverters(val parent: TypeConverters? = null) {
     public fun findConverter(fromType: Type, toType: Type): ExactConverter? {
         return try {
             val tempParent = parent ?: if (this != TypeConversionConfig.defaultConverter) TypeConversionConfig.defaultConverter else null
-            tempParent?.findConverter(fromType, toType) ?: exactConvertersMap.concurrentGetOrPut(Pair(fromType, toType)) {
+            tempParent?.findConverter(fromType, toType) ?: exactConvertersMap.getOrPut(Pair(fromType, toType)) {
                 val askConverter = specialConverters.firstOrNull { it.askFunc(fromType, toType) } ?: throw IllegalStateException()
                 ExactConverter(fromType, toType, askConverter.convertFunc)
             }
@@ -193,7 +193,7 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
         }
         is ByteArray -> when (toType) {
             ByteArray::class.java -> value // identity
-            String::class.java -> kotlin.String(value, "UTF-8") // always UTF-8
+            String::class.java -> value.toString(Charsets.UTF_8) // always UTF-8
             else -> throw IllegalStateException("Unknown ByteArray conversion from ${fromType} to ${toType}")
         }
         is Enum<*> -> when (toType) {
