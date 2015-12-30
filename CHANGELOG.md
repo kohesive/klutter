@@ -4,6 +4,7 @@
 
 * Kotlin to 1.0.0-beta-4584
 * Injekt to 1.10.1
+* Fix UriBuilder to output encoded URL without using URI class, prevents double encoding or undefined results (URI is not a great class)
 
 Fixed artifacts that acted as groups of included submodules but included them as `runtime` instead of `compile`
 
