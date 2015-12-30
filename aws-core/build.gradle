@@ -1,3 +1,3 @@
 dependencies {
-    runtime project(":klutter-aws-core-jdk6")
+    compile project(":klutter-aws-core-jdk6")
 }

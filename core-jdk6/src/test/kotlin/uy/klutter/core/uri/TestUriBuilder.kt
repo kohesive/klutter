@@ -1,6 +1,7 @@
 package uy.klutter.core.uri.tests
 
 import org.junit.Test
+import uy.klutter.core.uri.UrlEncoding
 import uy.klutter.core.uri.buildUri
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -75,22 +76,27 @@ public class TestUriBuilder {
         val original = "http://www.klutter.uy"
         val builder1 = buildUri(original).encodedPath("without/leading/slash")
         assertEquals("http://www.klutter.uy/without/leading/slash", builder1.toString())
+        assertEquals(builder1.toString(), builder1.toURI().toString())
         assertEquals("/without/leading/slash", builder1.encodedPath)
         val builder2 = buildUri(original).encodedPath("/with/leading/slash")
         assertEquals("http://www.klutter.uy/with/leading/slash", builder2.toString())
+        assertEquals(builder2.toString(), builder2.toURI().toString())
         assertEquals("/with/leading/slash", builder2.encodedPath)
     }
 
     @Test public fun testDifferentQuerySetters() {
         val original = "http://www.klutter.uy"
-        val builder1 = buildUri(original).addQueryParams("one" to "1", "two" to "2", "three" to "3", "two" to "2again")
-        assertEquals("http://www.klutter.uy?one=1&two=2&two=2again&three=3", builder1.toString())
+        val builder1 = buildUri(original).addQueryParams("one" to "1", "two" to "2", "three" to "3", "two" to "2again", "four" to "a b")
+        assertEquals("http://www.klutter.uy?one=1&two=2&two=2again&three=3&four=a+b", builder1.toString())
+        assertEquals(builder1.toString(), builder1.toURI().toString())
         val builder2 = buildUri(original)
-        builder2.decodedQuery = mapOf("one" to listOf("1"), "two" to listOf("2", "2again"), "three" to listOf("3"))
-        assertEquals("http://www.klutter.uy?one=1&two=2&two=2again&three=3", builder2.toString())
+        builder2.decodedQuery = mapOf("one" to listOf("1"), "two" to listOf("2", "2again"), "three" to listOf("3"), "four" to listOf("a b"))
+        assertEquals("http://www.klutter.uy?one=1&two=2&two=2again&three=3&four=a+b", builder2.toString())
+        assertEquals(builder2.toString(), builder2.toURI().toString())
         val builder3 = buildUri(original)
-        builder3.decodedQueryDeduped = mapOf("one" to "1", "two" to "2", "two" to "2again", "three" to "3")
-        assertEquals("http://www.klutter.uy?one=1&two=2again&three=3", builder3.toString())
+        builder3.decodedQueryDeduped = mapOf("one" to "1", "two" to "2", "two" to "2again", "three" to "3", "four" to "a b")
+        assertEquals("http://www.klutter.uy?one=1&two=2again&three=3&four=a+b", builder3.toString())
+        assertEquals(builder3.toString(), builder3.toURI().toString())
 
         // added %20 in the query key and value for one
         // added empty parameter as well
@@ -99,8 +105,19 @@ public class TestUriBuilder {
         assertEquals("http://www.klutter.uy?one=1&two=2&two=2again&two=2mas&three=3&four=", builder4.toString())
         builder4.replaceQueryParams("two" to "2replace")
         assertEquals("http://www.klutter.uy?one=1&two=2replace&three=3&four=", builder4.toString())
+        assertEquals(builder4.toString(), builder4.toURI().toString())
         builder4.removeQueryParams("two", "three", "four")
         assertEquals("http://www.klutter.uy?one=1", builder4.toString())
+        assertEquals(builder4.toString(), builder4.toURI().toString())
+        builder4.addQueryParams("four" to "a b")
+        assertEquals("http://www.klutter.uy?one=1&four=a+b", builder4.toString())
+        assertEquals(builder4.toString(), builder4.toURI().toString())
+    }
+
+    @Test
+    public fun testSpaceSpecialInQuery() {
+        assertEquals("a+b+c", UrlEncoding.encodeQueryNameOrValue("a b c"))
+        assertEquals("a b c", UrlEncoding.decode("a+b+c"))
     }
 
 }

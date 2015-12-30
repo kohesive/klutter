@@ -1,3 +1,3 @@
 dependencies {
-    runtime project(":klutter-json-jackson-jdk8")
+    compile project(":klutter-json-jackson-jdk8")
 }

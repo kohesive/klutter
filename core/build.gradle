@@ -1,5 +1,5 @@
 dependencies {
-    runtime project(":klutter-core-jdk6")
-    runtime project(":klutter-core-jdk7")
-    runtime project(":klutter-core-jdk8")
+    compile project(":klutter-core-jdk6")
+    compile project(":klutter-core-jdk7")
+    compile project(":klutter-core-jdk8")
 }

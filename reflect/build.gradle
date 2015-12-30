@@ -1,6 +1,6 @@
 dependencies {
-    runtime project(":klutter-reflect-core-jdk6")
-    runtime project(":klutter-reflect-core-jdk7")
-    runtime project(":klutter-reflect-core-jdk8")
-    runtime project(":klutter-reflect-full-jdk6")
+    compile project(":klutter-reflect-core-jdk6")
+    compile project(":klutter-reflect-core-jdk7")
+    compile project(":klutter-reflect-core-jdk8")
+    compile project(":klutter-reflect-full-jdk6")
 }

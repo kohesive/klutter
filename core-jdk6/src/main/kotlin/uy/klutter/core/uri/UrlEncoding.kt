@@ -161,11 +161,11 @@ public object UrlEncoding {
         newSet.or(PCHAR)
         newSet.set('/')
         newSet.set('?')
-        // deviate from the RFC to disallow separators such as "=", "@" and the famous "+" which is treated as a space
+        // deviate from the RFC to disallow separators such as "=", "@"
         // when decoding
         newSet.clear('=')
         newSet.clear('&')
-        newSet.clear('+')
+        // newSet.clear('+')
     }
 
     /**
@@ -237,7 +237,7 @@ public object UrlEncoding {
      */
     public fun encodeQueryNameOrValue(queryNameOrValue: String): String {
         try {
-            return encodePart(queryNameOrValue, Charsets.UTF_8, QUERY)
+            return encodePart(queryNameOrValue.replace(' ','+'), Charsets.UTF_8, QUERY)
         } catch (e: UnsupportedEncodingException) {
             // should not happen
             throw RuntimeException(e)
@@ -251,7 +251,7 @@ public object UrlEncoding {
      */
     public fun encodeQueryNameOrValueNoParen(queryNameOrValueNoParen: String): String {
         try {
-            var query: String = encodePart(queryNameOrValueNoParen, Charsets.UTF_8, QUERY)
+            var query: String = encodePart(queryNameOrValueNoParen.replace(' ','+'), Charsets.UTF_8, QUERY)
             query = query.replace("(", "")
             return query.replace(")", "")
         } catch (e: UnsupportedEncodingException) {

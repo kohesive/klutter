@@ -39,6 +39,7 @@ public interface ImmutableUri {
     val decodedQuery: Map<String, List<String>>?
     val decodedQueryDeduped: Map<String, String>?
 
+    fun hasScheme(): Boolean = scheme?.isNotBlank() ?: false
     fun hasPath(): Boolean = encodedPath?.isNotBlank() ?: false
     fun hasQuery(): Boolean = encodedQuery?.isNotBlank() ?: false
     fun hasFragment(): Boolean = encodedFragment?.isNotBlank() ?: false
@@ -47,7 +48,20 @@ public interface ImmutableUri {
     fun hasUserInfo(): Boolean = encodedUserInfo?.isNotBlank() ?: false
 
     fun toURI(): URI {
-        return URI(scheme, encodedUserInfo, host, port ?: -1, encodedPath, encodedQuery, encodedFragment)
+        return URI(asString())
+    }
+
+    fun asString(): String {
+        val sb = StringBuffer()
+        if (hasScheme()) sb.append("$scheme:")
+        if (hasUserInfo() || hasHost() || hasPort()) sb.append("//")
+        if (hasUserInfo()) sb.append("$encodedUserInfo@")
+        if (hasHost()) sb.append("$host")
+        if (hasPort()) sb.append(":$port")
+        if (hasPath()) sb.append("$encodedPath")
+        if (hasQuery()) sb.append("?$encodedQuery")
+        if (hasFragment()) sb.append("#$encodedFragment")
+        return sb.toString()
     }
 
     fun fragmentAsDecodedPath(): List<String>? = if (encodedFragment == null) null else UrlEncoding.decodePathToSegments(encodedFragment!!)
@@ -248,7 +262,7 @@ public class UriBuilder(scheme: String? = null, encodedUserInfo: String? = null,
     }
 
     override public fun toString(): String {
-        return toURI().toString()
+        return asString()
     }
 
     data class BuiltUri(override val scheme: String?, override val encodedUserInfo: String?, override val decodedUserInfo: String?,
