@@ -1,5 +1,12 @@
 =========================================================
-2015-12-08 v0.11.2 release
+2015-12-30 v0.11.3 release
+=========================================================
+
+* added initializedWith function to go along with initializedBy
+* added verifiedWith function to go along with verifiedBy
+
+=========================================================
+2015-12-30 v0.11.2 release
 =========================================================
 
 * Kotlin to 1.0.0-beta-4584

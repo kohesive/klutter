@@ -2,6 +2,7 @@ package uy.klutter.core.common
 
 /**
  * Make initialization of a parameter more readable with its verification work done inline with the declaration
+ * The instance is passed as a variable to the initialization lambda
  */
 public infix inline fun <T> T.verifiedBy(verifyWith: (T) -> Unit): T {
     verifyWith(this)
@@ -9,7 +10,17 @@ public infix inline fun <T> T.verifiedBy(verifyWith: (T) -> Unit): T {
 }
 
 /**
+ * Make initialization of a parameter more readable with its verification work done inline with the declaration
+ * The receiver of the lambda is the variable to be initialized
+ */
+public infix inline fun <T> T.verifiedWith(verifyWith: T.() -> Unit): T {
+    this.verifyWith()
+    return this
+}
+
+/**
  * Make initialization of a parameter more readable with its initialization work done inline with the declaration
+ * The instance is passed as a variable to the initialization lambda
  */
 public infix inline fun <T> T.initializedBy(initWith: (T) -> Unit): T {
     initWith(this)
@@ -18,9 +29,18 @@ public infix inline fun <T> T.initializedBy(initWith: (T) -> Unit): T {
 
 /**
  * Make initialization of a parameter more readable with its initialization work done inline with the declaration
+ * The receiver of the lambda is the variable to be initialized
+ */
+public infix inline fun <T> T.initializedWith(initWith: T.() -> Unit): T {
+    this.initWith()
+    return this
+}
+
+/**
+ * Make initialization of a parameter more readable with its initialization work done inline with the declaration
  */
 public inline fun <T> T.with(initWith: T.() -> Unit): T {
-    this.initWith().let{}
+    this.initWith()
     return this
 }
 
