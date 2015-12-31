@@ -120,4 +120,47 @@ public class TestUriBuilder {
         assertEquals("a b c", UrlEncoding.decode("a+b+c"))
     }
 
+    @Test
+    public fun testToString() {
+        "http://www.klutter.uy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy:8080".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy?a=1".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy?a=1#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy:8080".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy:8080/".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy:8080/path/to/somewhere".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy:8080?a=1".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy:8080#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://www.klutter.uy:8080?a=1#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy/".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy/path/to/somewhere".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy?a=1".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy?a=1#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy?a=1".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy?a=1#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy:8080".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy:8080/".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy:8080/path/to/somewhere".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy:8080?a=1".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy:8080#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy:8080?a=1#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy/".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy/path/to/somewhere".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy?a=1".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+        "http://user:pass@www.klutter.uy?a=1#fraggy".let { assertEquals(it, buildUri(it).toString()) }
+
+        "https://www.klutter.uy".let { assertEquals(it, buildUri(it).toString()) }
+
+        "file:/something/on/my/drive".let { assertEquals(it, buildUri(it).toString()) }
+
+        // TODO: is this ok?  because we render "file:/something/on/my/drive"
+        // "file:///something/on/my/drive".let { assertEquals(it, buildUri(it).toString()) }
+    }
+
 }
