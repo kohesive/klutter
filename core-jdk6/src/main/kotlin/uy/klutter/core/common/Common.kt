@@ -39,7 +39,7 @@ public infix inline fun <T> T.initializedWith(initWith: T.() -> Unit): T {
 /**
  * Make initialization of a parameter more readable with its initialization work done inline with the declaration
  */
-public inline fun <T> T.with(initWith: T.() -> Unit): T {
+public infix inline fun <T> T.with(initWith: T.() -> Unit): T {
     this.initWith()
     return this
 }

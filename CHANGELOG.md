@@ -2,8 +2,9 @@
 2015-12-30 v0.11.3 release
 =========================================================
 
-* added initializedWith function to go along with initializedBy
-* added verifiedWith function to go along with verifiedBy
+* added `initializedWith` function to go along with `initializedBy`
+* added `verifiedWith` function to go along with `verifiedBy`
+* function `with` now allows infix usage
 
 =========================================================
 2015-12-30 v0.11.2 release
