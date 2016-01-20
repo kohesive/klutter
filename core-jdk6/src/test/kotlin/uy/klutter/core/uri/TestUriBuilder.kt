@@ -1,12 +1,12 @@
 package uy.klutter.core.uri.tests
 
 import org.junit.Test
+import uy.klutter.core.uri.UriBuilder
 import uy.klutter.core.uri.UrlEncoding
 import uy.klutter.core.uri.buildUri
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
+import java.net.URI
+import java.net.URLDecoder
+import kotlin.test.*
 
 public class TestUriBuilder {
     @Test public fun testBasicUrls() {
@@ -163,4 +163,25 @@ public class TestUriBuilder {
         // "file:///something/on/my/drive".let { assertEquals(it, buildUri(it).toString()) }
     }
 
+    @Test public fun testDollar() {
+        val dollar = '$'
+
+        val x1 = "\$100.00"
+        val x2 = "${"$"}100.00"
+        val x3 = """${"$"}100.00"""
+        val x4 = "${dollar}100.00"
+        val x5 = """${dollar}100.00"""
+
+        assertEquals(x5, x1)
+        assertEquals(x5, x2)
+        assertEquals(x5, x3)
+        assertEquals(x5, x4)
+
+        // you cannot escape in """ strings, therefore:
+
+        val odd = """\$100.00""" // creates "\$100.00" instead of "$100.00"
+        // assertEquals(x5, odd) would fail
+    }
 }
+
+

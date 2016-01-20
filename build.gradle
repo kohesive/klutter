@@ -17,8 +17,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
-        // one day... classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.1-SNAPSHOT"
+        // classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$version_dokka"
     }
 }
 
@@ -105,12 +105,69 @@ subprojects {
     }
 }
 
-subprojects {
+subprojects { subproj ->
     apply plugin: 'com.bmuschko.nexus'
 
     def pomOnlyModule = !(new File("${projectDir.toString()}/src/main/kotlin").exists())
     if (pomOnlyModule) {
         println("Project $name is POM ONLY (has no code of its own)")
+    } else {
+        apply plugin: 'org.jetbrains.dokka'
+
+        def dirname = subproj.projectDir.absoluteFile.name
+        def moduleName = subproj.name
+        def dokkaOutputBase = "${rootDir}/docs"
+        def dokkaLinkDir = "${projectDir}/src/main/kotlin"
+        def dokkaLinkUrl = "https://github.com/kohesive/klutter/blob/master/${dirname}/src/main/kotlin"
+        def dokkaLinkSuffix = "#L"
+
+        dokka {
+            outputFormat = "javadoc"
+            outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
+            linkMapping {
+                dir = dokkaLinkDir
+                url = dokkaLinkUrl
+                suffix = dokkaLinkSuffix
+            }
+        }
+
+        /*
+        task dokkaHtml(type: org.jetbrains.dokka.gradle.DokkaTask) {
+            outputFormat = "html"
+            outputDirectory = "${dokkaOutputBase}/${outputFormat}"
+            linkMapping {
+                dir = dokkaLinkDir
+                url = dokkaLinkUrl
+                suffix = dokkaLinkSuffix
+            }
+        }
+
+        task dokkaMarkdown(type: org.jetbrains.dokka.gradle.DokkaTask) {
+            outputFormat = "markdown"
+            outputDirectory = "${dokkaOutputBase}/${outputFormat}"
+            linkMapping {
+                dir = dokkaLinkDir
+                url = dokkaLinkUrl
+                suffix = dokkaLinkSuffix
+            }
+        }
+
+        task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+            outputFormat = "javadoc"
+            outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
+            linkMapping {
+                dir = dokkaLinkDir
+                url = dokkaLinkUrl
+                suffix = dokkaLinkSuffix
+            }
+        }
+
+        task dokkaAll() {
+            dependsOn dokkaHtml
+            dependsOn dokkaMarkdown
+            dependsOn dokkaJavadoc
+        }
+        */
     }
 
     task jars() {

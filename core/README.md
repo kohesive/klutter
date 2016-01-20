@@ -23,6 +23,15 @@ val myData = SomeDataClass() initializedBy {
 }
 ```
 
+or
+
+```kotlin
+val myData = SomeDataClass() initializedWith {
+        addExtraData(123)
+        setRateName("fast")
+}
+```
+
 Verification before use:
 
 ```kotlin
@@ -35,6 +44,8 @@ val server = ServerConfigLoader(configFile) verifiedBy { loader ->
         }
 }
 ```
+
+or `verifiedWith` to operate directly on the instance as `this`.
 
 Turning an instance into a receiver (similar to `with(instance) {}` but is `instance.with {}` and can be used in an expression:
 
@@ -52,6 +63,8 @@ val byName: List<Company> = name.whenNotNull { companyService.findCompanyByName(
 val byCountry: List<Company> = country.whenNotNull { companyService.findCompaniesByCountry(country!!) } ?: emptyList()
 return (byName + byCountry).toSet()
 ```
+
+or `withNotNull` to operate directly on the instance as `this`.
 
 ### Number Extensions
 
@@ -138,6 +151,11 @@ Since the Fragment can be used in many ways, there are helper methods for the `e
 Other properties, fluent methods, hasXYZ() methods, clearXYZ() methods, and more can be seen by exploring the `UriBuilder` class.
 
 When an instance is full built, you can `toString()`, `toURI()` or `build()` (as Immutable copy) the URI.
+
+### Collections
+
+* `batch` - for Sequence and Iterable, batch a sequence into a sequence of lists of max N size
+* `lazyBatch` - A purely Lazy batch must have the source consumed to progress, but does not need to materialize a list per iteration (is a combination of batch+forEach)
 
 ### JDK 7 Extensions (in module klutter/klutter-core-jdk7 or higher JDK)
 

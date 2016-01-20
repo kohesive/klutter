@@ -1,4 +1,16 @@
 =========================================================
+2016-01-20 v0.12 release
+=========================================================
+
+* Kotlin to 1.0.0-beta-4589
+* Injekt to 1.11
+* added batching for sequences and iterable (generate a sequence of max sized lists or sequences)
+* added function `withNotNull` (to go with `whenNotNull`)
+* added docs for `initializedWith`, `verifiedWith`
+* AWS SDK to 1.10.47
+* SLF4j to 1.7.13
+
+=========================================================
 2015-12-30 v0.11.3 release
 =========================================================
 

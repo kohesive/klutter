@@ -48,3 +48,9 @@ public infix inline fun <T> T.with(initWith: T.() -> Unit): T {
  * When something isn't null do something, kinda the opposite of ?:
  */
 public infix inline fun <T: Any, R: Any> T?.whenNotNull(thenDo: (T) -> R?): R? = if (this == null) null else thenDo(this)
+
+/**
+ * When something isn't null do something, kinda the opposite of ?:
+ */
+public infix inline fun <T: Any, R: Any> T?.withNotNull(thenDo: T.() -> R?): R? = if (this == null) null else this.thenDo()
+
