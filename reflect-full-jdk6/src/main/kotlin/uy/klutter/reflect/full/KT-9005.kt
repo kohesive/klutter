@@ -1,7 +1,6 @@
 package uy.klutter.reflect.full
 
 import java.lang.reflect.Method
-import java.lang.reflect.Type
 import java.util.*
 import kotlin.reflect.*
 import kotlin.reflect.jvm.reflect
@@ -31,7 +30,7 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
     override val annotations: List<Annotation> = _annotations ?: emptyList<Annotation>() + _kfunc.annotations
 
     override val parameters: List<KParameter> by lazy {
-        listOf(object : KParameter {
+        val receiver = listOf(object : KParameter {
             override val index: Int = 0
             override val isOptional: Boolean = false
             override val kind: KParameter.Kind = KParameter.Kind.INSTANCE
@@ -41,8 +40,8 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
                     get() = false
             }
             override val annotations: List<Annotation> = _annotations ?: emptyList<Annotation>() + _kfunc.annotations
-        }) +
-                _invokeMethod.parameters.withIndex().zip(_kfunc.parameters).map {
+        })
+        val realParams = _invokeMethod.parameters.withIndex().zip(_kfunc.parameters).map {
                     object : KParameter {
                         override val index: Int = it.first.index + 1
                         override val isOptional: Boolean = it.second.isOptional
@@ -52,6 +51,7 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
                         override val annotations: List<Annotation> = _annotations ?: emptyList<Annotation>() + _kfunc.annotations
                     }
                 }
+        receiver + realParams
     }
 
     @Suppress("UNCHECKED_CAST")

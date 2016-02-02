@@ -11,6 +11,15 @@ buildscript {
         maven {
             url 'http://oss.sonatype.org/content/repositories/snapshots'
         }
+        maven {
+            url 'http://dl.bintray.com/kotlin/kotlin-eap'
+        }
+        maven {
+            url 'http://dl.bintray.com/jaysonminard/kohesive'
+        }
+        maven {
+            url 'http://dl.bintray.com/mplatvoet/komponents'
+        }
     }
     //noinspection GroovyAssignabilityCheck
     dependencies {
@@ -18,7 +27,8 @@ buildscript {
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
         // classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$version_dokka"
+     //   classpath "org.jetbrains.dokka:dokka-gradle-plugin:$version_dokka"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
     }
 }
 
@@ -74,6 +84,15 @@ subprojects {
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots'
         }
+        maven {
+            url 'http://dl.bintray.com/kotlin/kotlin-eap'
+        }
+        maven {
+            url 'http://dl.bintray.com/jaysonminard/kohesive'
+        }
+        maven {
+            url 'http://dl.bintray.com/mplatvoet/komponents'
+        }
     }
 
     dependencies {
@@ -107,12 +126,13 @@ subprojects {
 
 subprojects { subproj ->
     apply plugin: 'com.bmuschko.nexus'
+    apply plugin: 'com.jfrog.bintray'
 
     def pomOnlyModule = !(new File("${projectDir.toString()}/src/main/kotlin").exists())
     if (pomOnlyModule) {
         println("Project $name is POM ONLY (has no code of its own)")
     } else {
-        apply plugin: 'org.jetbrains.dokka'
+      //  apply plugin: 'org.jetbrains.dokka'
 
         def dirname = subproj.projectDir.absoluteFile.name
         def moduleName = subproj.name
@@ -120,7 +140,7 @@ subprojects { subproj ->
         def dokkaLinkDir = "${projectDir}/src/main/kotlin"
         def dokkaLinkUrl = "https://github.com/kohesive/klutter/blob/master/${dirname}/src/main/kotlin"
         def dokkaLinkSuffix = "#L"
-
+/*
         dokka {
             outputFormat = "javadoc"
             outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
@@ -130,7 +150,7 @@ subprojects { subproj ->
                 suffix = dokkaLinkSuffix
             }
         }
-
+*/
         /*
         task dokkaHtml(type: org.jetbrains.dokka.gradle.DokkaTask) {
             outputFormat = "html"
@@ -220,6 +240,27 @@ subprojects { subproj ->
 
     nexus {
         sign = true
+    }
+
+    bintray {
+        user = "$bintrayUser"
+        key = "$bintrayKey"
+        pkg {
+            repo = 'kohesive'
+            name = project.name
+            licenses = ['MIT']
+            vcsUrl = 'scm:git:git@github.com:kohesive/klutter.git'
+
+            version {
+                name = project.version
+                desc = 'n/a'
+                released = new Date()
+            }
+            publicDownloadNumbers = false
+            configurations = ['archives']
+        }
+        publish = true
+        dryRun = false
     }
 }
 

@@ -4,7 +4,10 @@ dependencies {
 }
 
 repositories {
+    // TODO: what repo after RC EAP is this going to be?
+/*
     maven {
-        url "http://dl.bintray.com/kotlin/kotlinx.reflect.lite"
+      url "http://dl.bintray.com/kotlin/kotlinx.reflect.lite"
     }
+    */
 }

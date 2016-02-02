@@ -5,13 +5,14 @@ import uy.klutter.graph.netflix.*
 import uy.klutter.graph.netflix.RelationCardinality
 import uy.klutter.graph.netflix.RelationScope
 import uy.klutter.graph.netflix.RelationStructure
+import java.util.*
 import kotlin.properties.Delegates
 
 public class GraphSchemaBuilder<N : Enum<N>, R : Enum<R>>(internal val nodeTypeEnum: Class<N>, internal val relationTypeEnum: Class<R>, private val defaultStructure: RelationStructure = RelationStructure.HASH) {
     internal val nodeTypes: Set<N> = nodeTypeEnum.getEnumConstants().toSet()
     internal val relationTypes: Set<R> = relationTypeEnum.getEnumConstants().toSet()
 
-    internal val relations = linkedListOf<GraphRelationBuilder<N, R>>()
+    internal val relations = LinkedList<GraphRelationBuilder<N, R>>()
 
     // from(MyNode).manyEdges(Relation).to(OtherNode).mirrorOneEdge(ParentRelation)
 

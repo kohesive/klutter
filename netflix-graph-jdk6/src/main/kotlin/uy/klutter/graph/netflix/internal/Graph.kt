@@ -6,6 +6,7 @@ import com.netflix.nfgraph.compressed.NFCompressedGraph
 import uy.klutter.graph.netflix.*
 import java.io.DataInputStream
 import java.io.InputStream
+import java.util.*
 import kotlin.collections.AbstractIterator
 
 
@@ -130,7 +131,7 @@ public class ReadOnlyGraph<N : Enum<N>, R : Enum<R>>(private val nodeTypeEnum: C
     protected fun NFGraph.getConnection(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): NodeAndId<N>? {
         val targets = getRelationTargets(nodeAndOrd.nodeType, relation)
         val qualifyFully = targets.size > 1
-        val results = linkedListOf<NodeAndId<N>>()
+        val results = LinkedList<NodeAndId<N>>()
         targets.forEach { toNodeType ->
             val ordsForTarget = nodeOrdMap(toNodeType)
             val relate = if (qualifyFully) makeRelationshipName(relation, toNodeType) else relation.name
@@ -156,7 +157,7 @@ public class ReadOnlyGraph<N : Enum<N>, R : Enum<R>>(private val nodeTypeEnum: C
     protected fun NFGraph.getConnectionSet(model: String, nodeAndOrd: NodeAndOrd<N>, relation: R): Set<NodeAndId<N>> {
         val targets = getRelationTargets(nodeAndOrd.nodeType, relation)
         val qualifyFully = targets.size > 1
-        val results = linkedListOf<NodeAndId<N>>()
+        val results = LinkedList<NodeAndId<N>>()
         targets.forEach { toNodeType ->
             val ordsForTarget = nodeOrdMap(toNodeType)
             val relate = if (qualifyFully) makeRelationshipName(relation, toNodeType) else relation.name

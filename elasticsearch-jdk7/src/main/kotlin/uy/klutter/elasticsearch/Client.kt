@@ -23,6 +23,7 @@ import org.elasticsearch.common.unit.TimeValue
 import org.elasticsearch.node.NodeBuilder
 import uy.klutter.core.common.with
 import java.nio.file.Path
+import java.util.*
 
 public object EsConfig {
     public @Volatile var adminActionTimeoutInSeconds: Long = 30
@@ -144,7 +145,7 @@ public fun Client.createIndex(index: String, mappings: List<IndexTypeMapping>, s
 }
 
 public fun Client.updateIndexMappings(index: String, mappings: List<IndexTypeMapping>): Promise<List<Boolean>, Exception> {
-    val actions = linkedListOf<Promise<Boolean, Exception>>()
+    val actions = LinkedList<Promise<Boolean, Exception>>()
     mappings.forEach {
         actions.add(admin().indices().preparePutMapping(index).setType(it.type).setSource(it.json).promise { it.isAcknowledged() })
     }
