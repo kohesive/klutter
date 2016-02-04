@@ -80,15 +80,14 @@ subprojects {
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots'
         }
-        /*
+
         maven {
             url 'http://dl.bintray.com/kotlin/kotlin-eap'
         }
-        */
+/*
         maven {
             url 'http://dl.bintray.com/jaysonminard/kohesive'
         }
-        /*
         maven {
             url 'http://dl.bintray.com/mplatvoet/komponents'
         }
