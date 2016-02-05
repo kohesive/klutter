@@ -11,7 +11,7 @@ import java.net.URLClassLoader
 /**
  * A parent-last classloader that will try the child classloader first and then the parent.
  */
-internal class ChildFirstClassloader(classpath: List<URL>, parentClassLoader: ClassLoader?) : ClassLoader(parentClassLoader) {
+class ChildFirstClassloader(classpath: List<URL>, parentClassLoader: ClassLoader?) : ClassLoader(parentClassLoader) {
     private val childClassLoader = ChildURLClassLoader(classpath.toTypedArray(), parent)
 
     @Synchronized
