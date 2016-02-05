@@ -157,6 +157,10 @@ When an instance is full built, you can `toString()`, `toURI()` or `build()` (as
 * `batch` - for Sequence and Iterable, batch a sequence into a sequence of lists of max N size
 * `lazyBatch` - A purely Lazy batch must have the source consumed to progress, but does not need to materialize a list per iteration (is a combination of batch+forEach)
 
+### Classloading
+
+* `ChildFirstClassloader` - a classloader that tries to load within the child classloader, before the parent.  Adding a minimal level of isolation.  Useful for dynamic loading ino a container.
+
 ### JDK 7 Extensions (in module klutter/klutter-core-jdk7 or higher JDK)
 
 Extension functions for:
