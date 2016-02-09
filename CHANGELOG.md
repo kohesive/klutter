@@ -1,4 +1,15 @@
 =========================================================
+2016-02-09 v0.13-RC-1050 release
+=========================================================
+
+Mainly for the Kotlin 1.0 public release candidate
+
+* Kotlin to 1.0.0-rc-1050
+* Injekt to 1.12-rc-1050
+* Jackson-Kotlin module to 2.6.5-rc-1050
+* Kovenant to 3.0.0-rc.1050
+
+=========================================================
 2016-02-04 v0.13-RC-1036 release
 =========================================================
 
@@ -6,8 +17,8 @@ Mainly for the Kotlin 1.0 public release candidate
 
 * Kotlin to 1.0.0-rc-1036
 * Injekt to 1.12-rc-1036
-* Jackson to 2.6.5-rc-1036
-* Kovenent to 3.0.0-rc.1036
+* Jackson-Kotlin module to 2.6.5-rc-1036
+* Kovenant to 3.0.0-rc.1036
 
 =========================================================
 2016-02-02 v0.13-RC-1025 release
