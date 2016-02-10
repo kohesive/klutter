@@ -1,11 +1,20 @@
 =========================================================
+2016-02-10 v0.14-RC-1050 release
+=========================================================
+
+Mainly for new Injekt release, possible small breaking change on scopes
+
+* Injekt to 1.13.0-rc-1050
+* SLF4j API to 1.7.14
+
+=========================================================
 2016-02-09 v0.13-RC-1050 release
 =========================================================
 
 Mainly for the Kotlin 1.0 public release candidate
 
 * Kotlin to 1.0.0-rc-1050
-* Injekt to 1.12-rc-1050
+* Injekt to 1.12.0-rc-1050
 * Jackson-Kotlin module to 2.6.5-rc-1050
 * Kovenant to 3.0.0-rc.1050
 
@@ -16,7 +25,7 @@ Mainly for the Kotlin 1.0 public release candidate
 Mainly for the Kotlin 1.0 public release candidate
 
 * Kotlin to 1.0.0-rc-1036
-* Injekt to 1.12-rc-1036
+* Injekt to 1.12.0-rc-1036
 * Jackson-Kotlin module to 2.6.5-rc-1036
 * Kovenant to 3.0.0-rc.1036
 
