@@ -1,4 +1,4 @@
-[![Kotlin](https://img.shields.io/badge/kotlin-1.0.0--rc--1036-blue.svg)](http://kotlinlang.org) [![Maven Version](https://img.shields.io/maven-central/v/uy.klutter/klutter-all-jdk8.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter%22) [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.0.0-blue.svg)](http://kotlinlang.org) [![Maven Version](https://img.shields.io/maven-central/v/uy.klutter/klutter-all-jdk8.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter%22) [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
 
 # klutter
 Random small libraries, usually extensions making other libraries happier.  
@@ -18,7 +18,7 @@ open-ended dependency number while Klutter is in early active development:
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all:0.13.+"
+compile "uy.klutter:klutter-all:0.14.+"
 ```
 
 **Maven:**
@@ -26,7 +26,7 @@ compile "uy.klutter:klutter-all:0.13.+"
 <dependency>
     <groupId>uy.klutter</groupId>
     <artifactId>klutter-all</artifactId>
-    <version>[0.13.0,0.14.0)</version>
+    <version>[0.14.0,0.15.0]</version>
 </dependency>
 ```
  
