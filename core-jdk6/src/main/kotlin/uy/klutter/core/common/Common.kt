@@ -54,3 +54,15 @@ public infix inline fun <T: Any, R: Any> T?.whenNotNull(thenDo: (T) -> R?): R? =
  */
 public infix inline fun <T: Any, R: Any> T?.withNotNull(thenDo: T.() -> R?): R? = if (this == null) null else this.thenDo()
 
+
+fun <T: Any, R: Any> Collection<T?>.whenAllNotNull(block: (List<T>)->R) {
+    if (this.all { it != null }) {
+        block(this.filterNotNull())
+    }
+}
+
+fun <T: Any, R: Any> Collection<T?>.whenAnyNotNull(block: (List<T>)->R) {
+    if (this.any { it != null }) {
+        block(this.filterNotNull())
+    }
+}

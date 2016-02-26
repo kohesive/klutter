@@ -18,7 +18,7 @@ open-ended dependency number while Klutter is in early active development:
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all:0.14.+"
+compile "uy.klutter:klutter-all:1.15.+"
 ```
 
 **Maven:**
@@ -26,7 +26,7 @@ compile "uy.klutter:klutter-all:0.14.+"
 <dependency>
     <groupId>uy.klutter</groupId>
     <artifactId>klutter-all</artifactId>
-    <version>[0.14.0,0.15.0)</version>
+    <version>[1.15.0,1.16.0)</version>
 </dependency>
 ```
  
