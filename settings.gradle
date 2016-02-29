@@ -29,10 +29,10 @@ include 'core',
         'reflect-lite-jdk6',
         'reflect-full-jdk6',
         'reflect',
-        'all-jdk6',
-        'all-jdk7',
-        'all-jdk8',
-        'all'
+        'db-jdbi-v2-jdk6',
+        'db-jdbi-v2',
+        'db-jdbi-v3-jdk8',
+        'db-jdbi-v3'
 
 project(':core').name = 'klutter-core'
 project(':core-jdk6').name = 'klutter-core-jdk6'
@@ -63,8 +63,8 @@ project(':reflect-core-jdk8').name = 'klutter-reflect-core-jdk8'
 project(':reflect-lite-jdk6').name = 'klutter-reflect-lite-jdk6'
 project(':reflect-full-jdk6').name = 'klutter-reflect-full-jdk6'
 project(':reflect').name = 'klutter-reflect'
+project(':db-jdbi-v3-jdk8').name = 'klutter-db-jdbi-v3-jdk8'
+project(':db-jdbi-v3').name = 'klutter-db-jdbi-v3'
+project(':db-jdbi-v2-jdk6').name = 'klutter-db-jdbi-v2-jdk6'
+project(':db-jdbi-v2').name = 'klutter-db-jdbi-v2'
 
-project(':all').name = 'klutter-all'
-project(':all-jdk6').name = 'klutter-all-jdk6'
-project(':all-jdk7').name = 'klutter-all-jdk7'
-project(':all-jdk8').name = 'klutter-all-jdk8'

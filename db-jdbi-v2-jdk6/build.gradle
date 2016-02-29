@@ -1,0 +1,15 @@
+dependencies {
+    compile group:"org.jdbi", name:"jdbi", version:"$version_jdbi2"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
+    compile project(":klutter-reflect-core-jdk6")
+
+    testCompile group:"com.h2database", name:"h2", version:"$version_h2db"
+    testCompile group:"org.jdbi", name:"jdbi", version:"$version_jdbi2", classifier: "tests"
+}
+
+repositories {
+    // temporary until JDBI has extension point pull request accepted
+    maven {
+        url 'http://dl.bintray.com/jaysonminard/kohesive'
+    }
+}

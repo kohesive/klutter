@@ -1,0 +1,20 @@
+dependencies {
+    compile group:"org.jdbi", name:"jdbi3-sqlobject", version:"$version_jdbi3"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
+
+    compile(project(":klutter-db-jdbi-v2-jdk6")) {
+        exclude group: "org.jdbi"
+    }
+
+    testCompile group:"com.h2database", name:"h2", version:"$version_h2db"
+    testCompile group:"org.jdbi", name:"jdbi3", version:"$version_jdbi3", classifier: "tests"
+    testCompile group:"org.jdbi", name:"jdbi3-sqlobject", version:"$version_jdbi3", classifier: "tests"
+}
+
+
+repositories {
+    // temporary until JDBI has extension point pull request accepted
+    maven {
+        url 'http://dl.bintray.com/jaysonminard/kohesive'
+    }
+}

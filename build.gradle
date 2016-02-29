@@ -77,9 +77,7 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven {
-            url 'https://oss.sonatype.org/content/repositories/snapshots'
-        }
+        jcenter()
   /* disabled during non EAP builds
         maven {
             url 'http://dl.bintray.com/kotlin/kotlin-eap'

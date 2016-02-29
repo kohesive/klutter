@@ -1,0 +1,10 @@
+dependencies {
+    compile project(":klutter-db-jdbi-v3-jdk8")
+}
+
+repositories {
+    // temporary until JDBI has extension point pull request accepted
+    maven {
+        url 'http://dl.bintray.com/jaysonminard/kohesive'
+    }
+}
