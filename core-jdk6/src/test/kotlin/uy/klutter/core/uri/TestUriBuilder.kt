@@ -84,6 +84,22 @@ public class TestUriBuilder {
         assertEquals("/with/leading/slash", builder2.encodedPath)
     }
 
+    @Test public fun testClearingThings() {
+        val original = "http://www.klutter.uy/path?a=1&b=2&c=3#fraggy"
+        val builder1 = buildUri(original).clearQuery()
+        assertEquals("http://www.klutter.uy/path#fraggy", builder1.toString())
+        val builder2 = buildUri(original).clearFragment()
+        assertEquals("http://www.klutter.uy/path?a=1&b=2&c=3", builder2.toString())
+        val builder3 = buildUri(original).clearPath()
+        assertEquals("http://www.klutter.uy?a=1&b=2&c=3#fraggy", builder3.toString())
+        val builder4 = buildUri(original).clearQuery().clearFragment().clearPath()
+        assertEquals("http://www.klutter.uy", builder4.toString())
+        val builder5 = buildUri(original).clearQueryExcept("b")
+        assertEquals("http://www.klutter.uy/path?b=2#fraggy", builder5.toString())
+        val builder6 = buildUri(original).clearQueryExcept("a", "c")
+        assertEquals("http://www.klutter.uy/path?a=1&c=3#fraggy", builder6.toString())
+    }
+
     @Test public fun testDifferentQuerySetters() {
         val original = "http://www.klutter.uy"
         val builder1 = buildUri(original).addQueryParams("one" to "1", "two" to "2", "three" to "3", "two" to "2again", "four" to "a b")

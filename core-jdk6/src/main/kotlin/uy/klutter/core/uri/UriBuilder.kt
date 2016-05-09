@@ -185,6 +185,21 @@ public class UriBuilder(scheme: String? = null, encodedUserInfo: String? = null,
         return this
     }
 
+    fun clearQueryExcept(vararg keepParm: String): UriBuilder {
+        return clearQueryExcept(keepParm.toSet())
+    }
+
+    fun clearQueryExcept(keepParms: Collection<String>): UriBuilder {
+        val existing = decodedQuery
+        val tempMap: HashMap<String, List<String>> = if (existing is LinkedHashMap) existing else LinkedHashMap(existing ?: mapOf())
+        val killParms = tempMap.keys - keepParms
+        for (param in killParms) {
+            tempMap.remove(param)
+        }
+        decodedQuery = if (tempMap.isEmpty()) null else tempMap
+        return this
+    }
+
     fun clearFragment(): UriBuilder {
         encodedFragment = null
         return this

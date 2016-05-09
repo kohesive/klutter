@@ -1,4 +1,15 @@
 =========================================================
+2016-05-09 v1.17.0 release
+=========================================================
+
+* ChildFirstClassLoader now supports resource loading, not just classes
+* UriBuilder clearQuery now has clearQueryExcept(listOfParmsToKeep)
+* Kotlin to 1.0.1-2
+* Injekt to 1.16.0
+* Kovenant to 3.2.2
+* Jackson to 2.7.4
+
+=========================================================
 2016-02-29 v1.16.0 release
 =========================================================
 
