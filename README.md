@@ -12,9 +12,6 @@ Each module has its own set of dependencies.  There is a main dependency which i
 version of the module, and also a version suffixed by the JDK version for which it is compatible (that version or newer).
 Include the dependency in your Gradle / Maven projects, ones that already have Kotlin configured.
 
-For example, for the whole package (one of `klutter-all` (lastest JDK), `klutter-all-jdk6`, `klutter-all-jdk7`, or `klutter-all-jdk8`) and using an
-open-ended dependency number while Klutter is in early active development:
-
 **Gradle:**
 
 ```
