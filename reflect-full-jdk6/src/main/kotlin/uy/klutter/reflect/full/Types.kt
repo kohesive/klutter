@@ -1,6 +1,8 @@
 package uy.klutter.reflect.full
 
+import uy.klutter.reflect.TypeReference
 import uy.klutter.reflect.erasedType
+import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import kotlin.reflect.KClass
 import kotlin.reflect.KType

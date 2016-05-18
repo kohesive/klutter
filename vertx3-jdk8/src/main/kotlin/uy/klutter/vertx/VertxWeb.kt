@@ -1,5 +1,6 @@
 package uy.klutter.vertx
 
+import io.vertx.ext.web.Route
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.Session
 import uy.klutter.core.jdk.mustStartWith
@@ -9,7 +10,7 @@ import java.net.URI
 /**
  * Put values into session, but nulls act as removes (in Vert.x clustered, sometimes this causes a failure to put nulls)
  */
-public fun Session.putSafely(key: String, value: Any?) {
+fun Session.putSafely(key: String, value: Any?) {
     if (value == null) {
         remove(key)
     } else {
@@ -20,12 +21,16 @@ public fun Session.putSafely(key: String, value: Any?) {
 /**
  * Here for balance with putSafely
  */
-public fun Session.removeSafely(key: String): Any? {
+fun Session.removeSafely(key: String): Any? {
     return remove<Any?>(key)
 }
 
 /**
  * Extract unencoded path?query#hash from URL and return as a string.
+ *
+ * for example `http://www.klutter.uy/path1/path2?parm=123#fraggy`
+ * would return only `path1/path2?parm=123#fraggy`
+ *
  */
 private fun pathPlusParmsOfUrl(original: URI): String {
     val path = original.getRawPath().let { if (it.isNullOrBlank()) "" else it.mustStartWith('/') }
@@ -35,9 +40,13 @@ private fun pathPlusParmsOfUrl(original: URI): String {
 }
 
 /**
- * Return this routed URL as fully qualified external accessible URL
+ * Return the current routed URL as fully qualified externally accessible URL.  This takes into account proxy and
+ * load balancer headers.
+ *     X-Forwarded-Proto
+ *     X-Forwarded-Host
+ *     X-Forwarded-Port
  */
-public fun RoutingContext.externalizeUrl(): String {
+fun RoutingContext.externalizeUrl(): String {
     return externalizeUrl(pathPlusParmsOfUrl(URI(request().absoluteURI())))
 }
 
@@ -56,7 +65,7 @@ public fun RoutingContext.externalizeUrl(): String {
  *
  * Url's that will cause unknown results, those of the form "somehost.com:8983/solr" might be treated as relative paths on current server
  */
-public fun RoutingContext.externalizeUrl(url: String): String {
+fun RoutingContext.externalizeUrl(url: String): String {
     val requestUri: URI = URI(request().absoluteURI()) // fallback values for scheme/host/port  ... and for relative paths
 
     val requestScheme: String = run {
@@ -119,5 +128,32 @@ public fun RoutingContext.externalizeUrl(url: String): String {
         }
     }
     return finalUrl
+}
+
+/**
+ * If a request is not HTTPS, reroute it to the same request as HTTPS
+ *
+ * @param httpsPort optional port for https, defaults to 443
+ * @param redirectCode optional redirect HTTP status code, defauts to 302
+ */
+fun Route.redirectToHttpsHandler(httpsPort: Int = 443, redirectCode: Int = 302) {
+    handler { context ->
+        if (context.request().isSSL) {
+            // if not behind load balancer, we would see this, otherwise won't.
+            context.next()
+        } else {
+            if (context.request().getHeader("X-Forwarded-Proto") == "https") {
+                context.next()
+            } else {
+                try {
+                    val myOriginalUrl = context.externalizeUrl()
+                    val myNewUrl = uy.klutter.core.uri.buildUri(myOriginalUrl).scheme("https").port(httpsPort).toString()
+                    context.response().putHeader("location", myNewUrl).setStatusCode(redirectCode).end()
+                } catch (ex: Throwable) {
+                    context.next()
+                }
+            }
+        }
+    }
 }
 

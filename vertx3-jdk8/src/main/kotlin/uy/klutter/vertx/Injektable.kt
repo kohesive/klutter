@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory as Slf4jLoggerFactory
  * Add a singleton for Jackson object mapper sharing it with the Vertx singleton
  * Setup logger to use the Vertx logging so logging is consistent with vertx
  */
-public object VertxInjektables : VertxInjektModule() {
+object VertxInjektables : VertxInjektModule() {
     override fun InjektRegistrar.registerInjectables() {
         common()
         addLoggerFactory<io.vertx.core.logging.Logger>({ name -> io.vertx.core.logging.LoggerFactory.getLogger(name) }, { klass -> io.vertx.core.logging.LoggerFactory.getLogger(klass) })
@@ -22,7 +22,7 @@ public object VertxInjektables : VertxInjektModule() {
 /**
  * Same as VertxInjektables but routes Vert.x and Hazelcast logging facades to use Slf4j, and app directly to Slf4j
  */
-public object VertxWithSlf4jInjektables : VertxInjektModule() {
+object VertxWithSlf4jInjektables : VertxInjektModule() {
     override fun InjektRegistrar.registerInjectables() {
         setupVertxLoggingToSlf4j()
         common()
@@ -30,7 +30,7 @@ public object VertxWithSlf4jInjektables : VertxInjektModule() {
     }
 }
 
-public abstract class VertxInjektModule : InjektModule {
+abstract class VertxInjektModule : InjektModule {
     fun InjektRegistrar.common() {
         VertxInit.ensure()
         addSingleton<ObjectMapper>(io.vertx.core.json.Json.mapper)

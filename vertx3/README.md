@@ -1,4 +1,4 @@
-## klutter/vertx3
+# Module klutter/vertx3
 
 Helper functions for working with Vert.x-3 including converting async/executeBlocking calls into Kovenant Promises.  This module requires JDK 8 since Vert.x 3 requires the JDK 8 or newer.
 
@@ -79,6 +79,10 @@ If you call the top-level functions to create Vert.x, the intialization of Koven
 ```
 VertxInit.ensure()
 ```
+
+## Vert.x SharedData / AsyncMap
+
+For the SharedData and AsyncMap classes there are promise versions of each method as extensions.
 
 ## Vert.x JSON Builders
 

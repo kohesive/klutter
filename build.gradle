@@ -6,9 +6,6 @@ buildscript {
         mavenCentral()
         jcenter()
         maven {
-            url 'http://repo.spring.io/plugins-release'
-        }
-        maven {
             url 'http://oss.sonatype.org/content/repositories/snapshots'
         }
 /*  disabled during non EAP builds
@@ -20,19 +17,17 @@ buildscript {
     //noinspection GroovyAssignabilityCheck
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
-        classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
         // classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
-     //   classpath "org.jetbrains.dokka:dokka-gradle-plugin:$version_dokka"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$version_dokka"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
     }
 }
 
 subprojects {
-    apply plugin: 'propdeps'
-    apply plugin: 'propdeps-maven'
-    apply plugin: 'propdeps-idea'
     apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'idea'
     apply plugin: 'kotlin'
 
     if (name.endsWith("jdk8")) {
@@ -92,7 +87,9 @@ subprojects {
     }
 
     dependencies {
-        provided "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+        compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+        testCompile "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+        testRuntime "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
 
         testCompile "junit:junit:$version_junit"
         testCompile "org.jetbrains.kotlin:kotlin-test:$version_kotlin"
@@ -127,8 +124,17 @@ subprojects { subproj ->
     def pomOnlyModule = !(new File("${projectDir.toString()}/src/main/kotlin").exists())
     if (pomOnlyModule) {
         println("Project $name is POM ONLY (has no code of its own)")
+
+        task jars() {
+            dependsOn build
+        }
+
+        artifacts {}
+        task subRelease() {
+            dependsOn uploadArchives
+        }
     } else {
-      //  apply plugin: 'org.jetbrains.dokka'
+        apply plugin: 'org.jetbrains.dokka'
 
         def dirname = subproj.projectDir.absoluteFile.name
         def moduleName = subproj.name
@@ -136,21 +142,26 @@ subprojects { subproj ->
         def dokkaLinkDir = "${projectDir}/src/main/kotlin"
         def dokkaLinkUrl = "https://github.com/kohesive/klutter/blob/master/${dirname}/src/main/kotlin"
         def dokkaLinkSuffix = "#L"
-/*
+
+        def dokkaIncludes = [ "${projectDir}/README.md" ]
+
+        def jdkMarkerIndex = moduleName.indexOf("-jdk")
+        println("JDK MARKER: ${jdkMarkerIndex}")
+        if (jdkMarkerIndex > 0) {
+            def tempModuleName = moduleName.substring(0, jdkMarkerIndex)
+            def cleanModuleName = tempModuleName
+            if (tempModuleName.startsWith("klutter-")) {
+               cleanModuleName = tempModuleName.substring("klutter-".length())
+            }
+            // TODO: reflect-full and reflect-core should go to reflect readme, odd pattern for these two
+            dokkaIncludes = [ "${projectDir}/../${cleanModuleName}/README.md", "${projectDir}/README.md" ]
+            println(" INCLUDES: ${dokkaIncludes}")
+        }
+
+        // our form of JavaDoc for JARs in Maven (from Java perspective, not good docs for Kotlin)
         dokka {
             outputFormat = "javadoc"
-            outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
-            linkMapping {
-                dir = dokkaLinkDir
-                url = dokkaLinkUrl
-                suffix = dokkaLinkSuffix
-            }
-        }
-*/
-        /*
-        task dokkaHtml(type: org.jetbrains.dokka.gradle.DokkaTask) {
-            outputFormat = "html"
-            outputDirectory = "${dokkaOutputBase}/${outputFormat}"
+            outputDirectory = "${buildDir}/javadoc"
             linkMapping {
                 dir = dokkaLinkDir
                 url = dokkaLinkUrl
@@ -158,15 +169,30 @@ subprojects { subproj ->
             }
         }
 
-        task dokkaMarkdown(type: org.jetbrains.dokka.gradle.DokkaTask) {
-            outputFormat = "markdown"
-            outputDirectory = "${dokkaOutputBase}/${outputFormat}"
+        // output to docs directory:  HTML format
+        task dokkaHtml(type: org.jetbrains.dokka.gradle.DokkaTask) {
+            outputFormat = "html"
+            outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
             linkMapping {
                 dir = dokkaLinkDir
                 url = dokkaLinkUrl
                 suffix = dokkaLinkSuffix
             }
         }
+
+        // output to docs directory:  Markdown format
+        task dokkaMarkdown(type: org.jetbrains.dokka.gradle.DokkaTask) {
+            outputFormat = "markdown"
+            outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
+            // includes = dokkaIncludes
+            linkMapping {
+                dir = dokkaLinkDir
+                url = dokkaLinkUrl
+                suffix = dokkaLinkSuffix
+            }
+        }
+
+        // output to docs directory:  Javadoc format
 
         task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
             outputFormat = "javadoc"
@@ -179,24 +205,18 @@ subprojects { subproj ->
         }
 
         task dokkaAll() {
-            dependsOn dokkaHtml
+            // dependsOn dokkaHtml
             dependsOn dokkaMarkdown
-            dependsOn dokkaJavadoc
+            // dependsOn dokkaJavadoc
         }
-        */
-    }
 
-    task jars() {
-        dependsOn build
-    }
+        task jars() {
+            dependsOn build
+            dependsOn javadoc
+            dependsOn dokkaAll
+        }
 
-    if (pomOnlyModule) {
-       artifacts {}
-       task subRelease() {
-            dependsOn uploadArchives
-       }
-    }
-    else {
+        javadoc.dependsOn(dokka)
         task subRelease() {
             dependsOn jars, uploadArchives
         }

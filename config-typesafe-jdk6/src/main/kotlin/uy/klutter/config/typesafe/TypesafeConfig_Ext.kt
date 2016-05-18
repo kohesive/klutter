@@ -2,6 +2,7 @@ package uy.klutter.config.typesafe
 
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
+import com.typesafe.config.ConfigObject
 import com.typesafe.config.ConfigResolveOptions
 import java.io.File
 import java.net.URI
@@ -11,28 +12,30 @@ import java.util.concurrent.TimeUnit
 /**
  * Merge configurations by having the first fallback to the second
  */
-public fun Config.plus(fallback: Config): Config = this.withFallback(fallback)
+fun Config.plus(fallback: Config): Config = this.withFallback(fallback)
 
 /**
  * Return a value from configuration as a more uniform temporary object that can be checked for existance, and has
  * additional methods for retrieving values, including with defaults.
  */
-public fun Config.value(key: String): ConfiguredValue = ConfiguredValue(this, key)
+fun Config.value(key: String): ConfiguredValue = ConfiguredValue(this, key)
+fun ConfigObject.value(key: String): ConfiguredValue = ConfiguredValue(this.toConfig(), key)
 
 /**
  * Return a nested configuration
  */
-public fun Config.nested(key: String): Config = this.getConfig(key)
+fun Config.nested(key: String): Config = this.getConfig(key)
+fun ConfigObject.nested(key: String): ConfigObject = this.toConfig().getObject(key)
 
 /**
  * Render the configuration as a string, typically for logging
  */
-public fun Config.render(): String = this.root().render()
+fun Config.render(): String = this.root().render()
 
 /**
  * Intermediate object for providing additional functionality on a configured item
  */
-public class ConfiguredValue(val cfg: Config, val key: String) {
+class ConfiguredValue(val cfg: Config, val key: String) {
     fun asFile(): File = File(asString())
     fun asFileOrNull(): File? = if (exists()) asFile() else null
 
@@ -123,4 +126,11 @@ public class ConfiguredValue(val cfg: Config, val key: String) {
 
     fun exists(): Boolean = cfg.hasPath(key)
     fun notExists(): Boolean = !cfg.hasPath(key)
+
+    fun asObject(): ConfigObject = cfg.getObject(key)
+    fun asObjectOrNull(): ConfigObject? = if (exists()) cfg.getObject(key) else null
+
+    fun asObjectList(): List<ConfigObject> = cfg.getObjectList(key)
+    fun asObjectListOrNull(): List<ConfigObject>? = if (exists()) cfg.getObjectList(key) else null
+    fun asObjectListOrEmpty(): List<ConfigObject> = if (exists()) cfg.getObjectList(key) else emptyList()
 }

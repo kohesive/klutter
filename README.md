@@ -18,7 +18,7 @@ open-ended dependency number while Klutter is in early active development:
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all:1.15.+"
+compile "uy.klutter:klutter-all:1.17.+"
 ```
 
 **Maven:**
@@ -26,7 +26,7 @@ compile "uy.klutter:klutter-all:1.15.+"
 <dependency>
     <groupId>uy.klutter</groupId>
     <artifactId>klutter-all</artifactId>
-    <version>[1.15.0,1.16.0)</version>
+    <version>[1.17.0,1.18.0)</version>
 </dependency>
 ```
  
@@ -45,6 +45,7 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |[elasticsearch](elasticsearch/)|medium|Extensions to ElasticSearch client library|No|
 |[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
 |[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
+|[reflect](reflect/)|small|Helpers for Kotlin reflection|No|
 |[vertx3](vertx3/)|medium|Vert.x-3 helpers and integration with Kovenant Promises|Yes|
 
 Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.  Using an Injekt module looks something like:

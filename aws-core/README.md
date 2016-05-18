@@ -1,4 +1,4 @@
-## klutter/aws-core
+# Module klutter/aws-core
 
 Core helper functions for AWS in general.  
 

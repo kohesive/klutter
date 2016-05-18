@@ -1,4 +1,24 @@
 =========================================================
+2016-05-09 v1.17.3 release
+=========================================================
+
+* Added more Kovenant Promise versions of vert.x SharedData and AsyncMap methods that return promises.
+* Added KDoc doc for the vert.x module, generating documentation and starting to get all API's documented.  This is the start of the effort.
+
+=========================================================
+2016-05-09 v1.17.2 release
+=========================================================
+
+* Added Kovenant Promise versions of vert.x SharedData class methods
+* Update to Gradle 2.13
+
+=========================================================
+2016-05-09 v1.17.1 release
+=========================================================
+
+* Updated Typesafe Config loading to treat ConfigObject and Config the same (.value extensions work for either).   Also added methods for getting object and object list from a config.
+
+=========================================================
 2016-05-09 v1.17.0 release
 =========================================================
 

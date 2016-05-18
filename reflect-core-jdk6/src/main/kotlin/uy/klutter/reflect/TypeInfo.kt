@@ -1,12 +1,14 @@
 package uy.klutter.reflect
 
 import java.lang.reflect.*
+import kotlin.reflect.KClass
+import kotlin.reflect.KType
 
-public inline fun <reified T: Any> typeRef(): TypeReference<T> = object:TypeReference<T>(){}
-public inline fun <reified T: Any> fullType(): TypeReference<T> = object:TypeReference<T>(){}
+inline fun <reified T: Any> typeRef(): TypeReference<T> = object:TypeReference<T>(){}
+inline fun <reified T: Any> fullType(): TypeReference<T> = object:TypeReference<T>(){}
 
-public abstract class TypeReference<T> protected constructor() {
-    public val type: Type by lazy {
+abstract class TypeReference<T> protected constructor() {
+    val type: Type by lazy {
         javaClass.getGenericSuperclass().let { superClass ->
             if (superClass is Class<*>) {
                 throw IllegalArgumentException("Internal error: TypeReference constructed without actual type information")
@@ -15,11 +17,10 @@ public abstract class TypeReference<T> protected constructor() {
         }
     }
 
-    public val forClass: Class<Any> by lazy { type.erasedType() }
+    val forClass: Class<Any> by lazy { type.erasedType() }
 }
 
-@Suppress("UNCHECKED_CAST")
-public fun Type.erasedType(): Class<Any> {
+@Suppress("UNCHECKED_CAST") fun Type.erasedType(): Class<Any> {
     return when (this) {
         is Class<*> -> this as Class<Any>
         is ParameterizedType -> this.getRawType().erasedType()
