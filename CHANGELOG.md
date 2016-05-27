@@ -1,9 +1,11 @@
 =========================================================
-2016-05-09 v1.17.3 release
+2016-05-09 v1.18.0 release
 =========================================================
 
+* Kotlin to 1.0.2
 * Added more Kovenant Promise versions of vert.x SharedData and AsyncMap methods that return promises.
 * Added KDoc doc for the vert.x module, generating documentation and starting to get all API's documented.  This is the start of the effort.
+* Injekt to 1.16.1
 
 =========================================================
 2016-05-09 v1.17.2 release
