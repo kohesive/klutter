@@ -157,6 +157,12 @@ When an instance is full built, you can `toString()`, `toURI()` or `build()` (as
 * `batch` - for Sequence and Iterable, batch a sequence into a sequence of lists of max N size
 * `lazyBatch` - A purely Lazy batch must have the source consumed to progress, but does not need to materialize a list per iteration (is a combination of batch+forEach)
 
+### Immutable Collections
+
+* `*.asImmutable()` - Wraps a Collection (extension functions exist for Iterator, Collection, List, ListIterator, Set, and Map) with a lightweight delegating class (low overhead) that prevents casting back to mutable type, all methods that return other collections (i.e. map.entries) are also wrapped with a protecting class
+
+(based off of the answer from @miensol in this Stackoverflow answer http://stackoverflow.com/a/37936456/3679676)
+
 ### Classloading
 
 * `ChildFirstClassloader` - a classloader that tries to load within the child classloader, before the parent.  Adding a minimal level of isolation.  Useful for dynamic loading ino a container.

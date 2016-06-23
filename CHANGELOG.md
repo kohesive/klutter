@@ -1,4 +1,10 @@
 =========================================================
+2016-06-23 v1.19.0 release
+=========================================================
+
+* Added `asImmutable()` helper functions for most collection types to create truly protected, readonly, immutable collections.  Using lightweight delegates.
+
+=========================================================
 2016-05-09 v1.18.0 release
 =========================================================
 
