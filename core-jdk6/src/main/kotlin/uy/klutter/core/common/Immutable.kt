@@ -1,16 +1,27 @@
 package uy.klutter.core.collections
 
+import java.io.Serializable
+import java.util.*
+
 // based off of the answer from @miensol in this Stackoverflow answer http://stackoverflow.com/a/37936456/3679676
 
 /**
  * Wraps an Iterator with a lightweight delegating class that prevents casting back to mutable type
 */
-class ImmutableIterator <T> (private val delegate: Iterator<T>) : Iterator<T> by delegate
+class ImmutableIterator <T> (private val delegate: Iterator<T>) : Iterator<T> by delegate, Serializable {
+    companion object {
+        @JvmField val serialVersionUID = 1L
+    }
+}
 
 /**
  * Wraps a Collection with a lightweight delegating class that prevents casting back to mutable type
  */
-class ImmutableCollection <T> (private val delegate: Collection<T>) : Collection<T> by delegate {
+class ImmutableCollection <T> (private val delegate: Collection<T>) : Collection<T> by delegate, Serializable {
+    companion object {
+        @JvmField val serialVersionUID = 1L
+    }
+
     override fun iterator(): Iterator<T> {
         return delegate.iterator().asImmutable()
     }
@@ -19,12 +30,20 @@ class ImmutableCollection <T> (private val delegate: Collection<T>) : Collection
 /**
  * Wraps a ListIterator with a lightweight delegating class that prevents casting back to mutable type
  */
-class ImmutableListIterator <T> (private val delegate: ListIterator<T>): ListIterator<T> by delegate
+class ImmutableListIterator <T> (private val delegate: ListIterator<T>): ListIterator<T> by delegate, Serializable {
+    companion object {
+        @JvmField val serialVersionUID = 1L
+    }
+}
 
 /**
  * Wraps a List with a lightweight delegating class that prevents casting back to mutable type
  */
-class ImmutableList <T>(private val delegate: List<T>) : List<T> by delegate {
+open class ImmutableList <T>(private val delegate: List<T>) : List<T> by delegate, Serializable {
+    companion object {
+        @JvmField val serialVersionUID = 1L
+    }
+
     override fun iterator(): Iterator<T> {
         return delegate.iterator().asImmutable()
     }
@@ -43,9 +62,22 @@ class ImmutableList <T>(private val delegate: List<T>) : List<T> by delegate {
 }
 
 /**
+ * Wraps a List that is also RandomAccess with a delegating class that prevents casting back to mutable type
+ */
+class ImmutableRandomAccessList <T> (val delegate: List<T>): ImmutableList<T>(delegate), List<T>, RandomAccess, Serializable {
+    companion object {
+        @JvmField val serialVersionUID = 1L
+    }
+}
+
+/**
  * Wraps a Set with a lightweight delegating class that prevents casting back to mutable type
  */
-class ImmutableSet <T>(private val delegate: Set<T>) : Set<T> by delegate {
+class ImmutableSet <T>(private val delegate: Set<T>) : Set<T> by delegate, Serializable {
+    companion object {
+        @JvmField val serialVersionUID = 1L
+    }
+
     override fun iterator(): Iterator<T> {
         return delegate.iterator().asImmutable()
     }
@@ -54,7 +86,11 @@ class ImmutableSet <T>(private val delegate: Set<T>) : Set<T> by delegate {
 /**
  * Wraps a Map with a lightweight delegating class that prevents casting back to mutable type
  */
-class ImmutableMap <K : Any, V>(private val delegate: Map<K, V>) : Map<K, V> by delegate {
+class ImmutableMap <K : Any, V>(private val delegate: Map<K, V>) : Map<K, V> by delegate, Serializable {
+    companion object {
+        @JvmField val serialVersionUID = 1L
+    }
+
     override val keys: Set<K>
         get() = delegate.keys.asImmutable()
     override val values: Collection<V>
@@ -79,9 +115,17 @@ fun <T> ListIterator<T>.asImmutable(): ListIterator<T> = if (this is ImmutableLi
 fun <T> Collection<T>.asImmutable(): Collection<T> = if (this is ImmutableCollection) this else ImmutableCollection(this)
 
 /**
- * Wraps the List with a lightweight delegating class that prevents casting back to mutable type
+ * Wraps the List with a lightweight delegating class that prevents casting back to mutable type,
+ * specializing for the case of the RandomAccess marker interface being retained if it was there originally
  */
-fun <T> List<T>.asImmutable(): List<T> = if (this is ImmutableList) this else ImmutableList(this)
+fun <T> List<T>.asImmutable(): List<T> {
+    return when (this) {
+        is ImmutableList -> this
+        is RandomAccess -> ImmutableRandomAccessList(this)
+        else -> ImmutableList(this)
+    }
+}
+
 /**
  * Wraps the List as a Collection with a lightweight delegating class that prevents casting back to mutable type
  */

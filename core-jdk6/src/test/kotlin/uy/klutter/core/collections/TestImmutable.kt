@@ -2,6 +2,8 @@ package uy.klutter.core.collections
 
 import org.junit.Test
 import java.util.*
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class TestImmutableCollections {
     @Test(expected = ClassCastException::class) fun testImmumtableListCannotCastAsMutable() {
@@ -72,5 +74,12 @@ class TestImmutableCollections {
     @Test(expected = ClassCastException::class) fun testImmutableMapMakesImmutableEntrySet() {
         val m = mutableMapOf("one" to 1, "two" to 2, "three" to 3).asImmutable()
         val x = m.entries as AbstractSet<Map.Entry<String, Int>> // nope, protected
+    }
+
+    @Test fun testGithub35() {
+        assertTrue(arrayListOf(1,2,3) is RandomAccess)
+        assertTrue(arrayListOf(1,2,3).asImmutable() is RandomAccess)
+        assertFalse(LinkedList(listOf(1,2,3)) is RandomAccess)
+        assertFalse(LinkedList(listOf(1,2,3)).asImmutable() is RandomAccess)
     }
 }
