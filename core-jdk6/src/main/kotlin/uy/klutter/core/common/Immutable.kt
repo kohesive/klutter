@@ -64,7 +64,7 @@ open class ImmutableList <T>(private val delegate: List<T>) : List<T> by delegat
 /**
  * Wraps a List that is also RandomAccess with a delegating class that prevents casting back to mutable type
  */
-class ImmutableRandomAccessList <T> (val delegate: List<T>): ImmutableList<T>(delegate), List<T>, RandomAccess, Serializable {
+class ImmutableRandomAccessList <T> (delegate: List<T>): ImmutableList<T>(delegate), List<T>, RandomAccess, Serializable {
     companion object {
         @JvmField val serialVersionUID = 1L
     }
