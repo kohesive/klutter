@@ -42,6 +42,7 @@ class TestImmutableCollections {
         x.remove()
     }
 
+    @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
     @Test(expected = UnsupportedOperationException::class) fun testImmutableListMakesImmutableListIteratorRemove() {
         val l = arrayListOf("a", "b", "c").asImmutable()
         val x = l.listIterator() as java.util.ListIterator<String>
@@ -49,12 +50,14 @@ class TestImmutableCollections {
         x.remove()
     }
 
+    @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
     @Test(expected = UnsupportedOperationException::class) fun testImmutableListMakesImmutableListIteratorAdd() {
         val l = arrayListOf("a", "b", "c").asImmutable()
         val x = l.listIterator() as java.util.ListIterator<String>
         x.add("fish")
     }
 
+    @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
     @Test(expected = UnsupportedOperationException::class) fun testImmutableListMakesImmutableSublist() {
         val l = arrayListOf("a", "b", "c").asImmutable()
         val x = l.subList(1, 2) as java.util.List<String>

@@ -66,22 +66,22 @@ class ImmutableMap <K : Any, V>(private val delegate: Map<K, V>) : Map<K, V> by 
 /**
  * Wraps the Iterator with a lightweight delegating class that prevents casting back to mutable type
  */
-fun <T> Iterator<T>.asImmutable(): Iterator<T> = ImmutableIterator(this)
+fun <T> Iterator<T>.asImmutable(): Iterator<T> = if (this is ImmutableIterator) this else ImmutableIterator(this)
 
 /**
  * Wraps the ListIterator with a lightweight delegating class that prevents casting back to mutable type
  */
-fun <T> ListIterator<T>.asImmutable(): ListIterator<T> = ImmutableListIterator(this)
+fun <T> ListIterator<T>.asImmutable(): ListIterator<T> = if (this is ImmutableListIterator) this else ImmutableListIterator(this)
 
 /**
  * Wraps the Collection with a lightweight delegating class that prevents casting back to mutable type
  */
-fun <T> Collection<T>.asImmutable(): Collection<T> = ImmutableCollection(this)
+fun <T> Collection<T>.asImmutable(): Collection<T> = if (this is ImmutableCollection) this else ImmutableCollection(this)
 
 /**
  * Wraps the List with a lightweight delegating class that prevents casting back to mutable type
  */
-fun <T> List<T>.asImmutable(): List<T> = ImmutableList(this)
+fun <T> List<T>.asImmutable(): List<T> = if (this is ImmutableList) this else ImmutableList(this)
 /**
  * Wraps the List as a Collection with a lightweight delegating class that prevents casting back to mutable type
  */
@@ -90,7 +90,7 @@ fun <T> List<T>.asImmutableCollection(): Collection<T> = ImmutableCollection(thi
 /**
  * Wraps the Set with a lightweight delegating class that prevents casting back to mutable type
  */
-fun <T> Set<T>.asImmutable(): Set<T> = ImmutableSet(this)
+fun <T> Set<T>.asImmutable(): Set<T> = if (this is ImmutableSet) this else ImmutableSet(this)
 
 /**
  * Wraps the Set as a Collection with a lightweight delegating class that prevents casting back to mutable type
@@ -100,4 +100,4 @@ fun <T> Set<T>.asImmutableCollection(): Collection<T> = ImmutableCollection(this
 /**
  * Wraps the Map with a lightweight delegating class that prevents casting back to mutable type
  */
-fun <K : Any, V> Map<K, V>.asImmutable(): Map<K, V> = ImmutableMap(this)
+fun <K : Any, V> Map<K, V>.asImmutable(): Map<K, V> = if (this is ImmutableMap) this else ImmutableMap(this)
