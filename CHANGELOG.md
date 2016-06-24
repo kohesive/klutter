@@ -1,4 +1,14 @@
 =========================================================
+2016-06-24 v1.20.0 release
+=========================================================
+
+* BREAKING CHANGE:  from 1.19.x renamed `asImmutable()` to `asReadOnly()`
+* BREAKING CHANGE:  from 1.19.x renamed `Immutable*` collection wrappers to `ReadOnly*`
+* Added marker interface ReadOnly to the read only collection wrappers
+* For List, Map and Set added extensions `toImmutable()` which makes a copy first then protects the items from change by wrapping with `ReadOnly*` wrappers.  Only cruel reflection tricks can break them.
+* Adding `equals`, `hashCode` and `toString` for `ReadOnly*` collections
+
+=========================================================
 2016-06-23 v1.19.0 release
 =========================================================
 

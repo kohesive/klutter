@@ -157,9 +157,12 @@ When an instance is full built, you can `toString()`, `toURI()` or `build()` (as
 * `batch` - for Sequence and Iterable, batch a sequence into a sequence of lists of max N size
 * `lazyBatch` - A purely Lazy batch must have the source consumed to progress, but does not need to materialize a list per iteration (is a combination of batch+forEach)
 
-### Immutable Collections
+### ReadOnly / Immutable Collections
 
-* `*.asImmutable()` - Wraps a Collection (extension functions exist for Iterator, Collection, List, ListIterator, Set, and Map) with a lightweight delegating class (low overhead) that prevents casting back to mutable type, all methods that return other collections (i.e. map.entries) are also wrapped with a protecting class
+Kotlin collections have a read and write interface such as `List` vs. `MutableList` but these do not protect against write access since a simple cast back to the underlaying type can allow writing.  Klutter adds lightweight delegating wrappers that block this write access for the collection, and any collection they return (such as iterator, listIterator, subList, etc).
+
+* `*.asReadOnly()` - Wraps a Collection (extension functions exist for Iterator, Collection, List, ListIterator, Set, and Map) with a lightweight delegating class (low overhead) that prevents casting back to mutable type, all methods that return other collections (i.e. map.entries) are also wrapped with a protecting class
+* `*.toImmutable()` - copies the collection and then wraps it with the same as `*.asReadOnly()` to prevent write access.
 
 (based off of the answer from @miensol in this Stackoverflow answer http://stackoverflow.com/a/37936456/3679676)
 
