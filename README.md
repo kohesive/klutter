@@ -15,7 +15,7 @@ Include the dependency in your Gradle / Maven projects, ones that already have K
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all:1.19.+"
+compile "uy.klutter:klutter-all:1.20.+"
 ```
 
 **Maven:**
@@ -23,7 +23,7 @@ compile "uy.klutter:klutter-all:1.19.+"
 <dependency>
     <groupId>uy.klutter</groupId>
     <artifactId>klutter-all</artifactId>
-    <version>[1.19.0,1.20.0)</version>
+    <version>[1.20.0,1.21.0)</version>
 </dependency>
 ```
  

@@ -221,7 +221,7 @@ fun <T> List<T>.asReadOnly(): List<T> {
 @Suppress("UNCHECKED_CAST")
 fun <T> List<T>.toImmutable(): List<T> {
     val copy = when (this) {
-        is ArrayList -> this.clone() as ArrayList<T>
+        is ArrayList -> ArrayList<T>(this)
         else -> this.toList()
     }
     return when (this) {

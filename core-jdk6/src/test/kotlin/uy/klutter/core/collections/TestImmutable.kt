@@ -90,6 +90,9 @@ class TestReadOnlyAndImmutableCollections {
         assertTrue(listOf(1,2,3) == listOf(1,2,3).asReadOnly())
         assertTrue(listOf(1,2,3) == listOf(1,2,3).toImmutable())
 
+        assertTrue(listOf(1,2,3) == arrayListOf(1,2,3).asReadOnly())
+        assertTrue(listOf(1,2,3) == arrayListOf(1,2,3).toImmutable())
+
         assertEquals(mapOf("one" to 1, "two" to 2), mapOf("one" to 1, "two" to 2).asReadOnly())
         assertEquals(mapOf("one" to 1, "two" to 2), mapOf("one" to 1, "two" to 2).toImmutable())
         assertTrue(mapOf("one" to 1, "two" to 2) == mapOf("one" to 1, "two" to 2).asReadOnly())
@@ -108,7 +111,7 @@ class TestReadOnlyAndImmutableCollections {
     }
 
     @Test fun testImmutableListCannotBeModifiedFromOriginalList() {
-        val l = mutableListOf(1, 2, 3)
+        val l = arrayListOf(1, 2, 3)
         val i = l.toImmutable()
         val r = l.asReadOnly()
 
