@@ -221,10 +221,10 @@ fun <T> List<T>.asReadOnly(): List<T> {
 @Suppress("UNCHECKED_CAST")
 fun <T> List<T>.toImmutable(): List<T> {
     val copy = when (this) {
-        is ArrayList -> ArrayList<T>(this)
+        is RandomAccess -> ArrayList<T>(this)
         else -> this.toList()
     }
-    return when (this) {
+    return when (copy) {
         is RandomAccess ->  ReadOnlyRandomAccessList(copy)
         else -> ReadOnlyList(copy)
     }
