@@ -10,16 +10,16 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `BuiltUri(scheme:&nbsp;String?, encodedUserInfo:&nbsp;String?, decodedUserInfo:&nbsp;String?, host:&nbsp;String?, port:&nbsp;Int?, encodedPath:&nbsp;String?, decodedPath:&nbsp;List&lt;String&gt;?, encodedQuery:&nbsp;String?, decodedQuery:&nbsp;Map&lt;String,&nbsp;List&lt;String&gt;&gt;?, decodedQueryDeduped:&nbsp;Map&lt;String,&nbsp;String&gt;?, encodedFragment:&nbsp;String?, decodedFragment:&nbsp;String?)` |
+| [&lt;init&gt;](-init-.md) | `BuiltUri(scheme:&nbsp;String?, encodedUserInfo:&nbsp;String?, decodedUserInfo:&nbsp;String?, host:&nbsp;String?, port:&nbsp;Int?, encodedPath:&nbsp;String?, decodedPath:&nbsp;List<String>?, encodedQuery:&nbsp;String?, decodedQuery:&nbsp;Map<String,&nbsp;List<String>>?, decodedQueryDeduped:&nbsp;Map<String,&nbsp;String>?, encodedFragment:&nbsp;String?, decodedFragment:&nbsp;String?)` |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
 | [decodedFragment](decoded-fragment.md) | `val decodedFragment: String?` |
-| [decodedPath](decoded-path.md) | `val decodedPath: List&lt;String&gt;?` |
-| [decodedQuery](decoded-query.md) | `val decodedQuery: Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
-| [decodedQueryDeduped](decoded-query-deduped.md) | `val decodedQueryDeduped: Map&lt;String,&nbsp;String&gt;?` |
+| [decodedPath](decoded-path.md) | `val decodedPath: List<String>?` |
+| [decodedQuery](decoded-query.md) | `val decodedQuery: Map<String,&nbsp;List<String>>?` |
+| [decodedQueryDeduped](decoded-query-deduped.md) | `val decodedQueryDeduped: Map<String,&nbsp;String>?` |
 | [decodedUserInfo](decoded-user-info.md) | `val decodedUserInfo: String?` |
 | [encodedFragment](encoded-fragment.md) | `val encodedFragment: String?` |
 | [encodedPath](encoded-path.md) | `val encodedPath: String?` |
@@ -40,9 +40,9 @@
 |&nbsp;|&nbsp;|
 |---|---|
 | [asString](../../-immutable-uri/as-string.md) | `open fun asString(): String` |
-| [fragmentAsDecodedPath](../../-immutable-uri/fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List&lt;String&gt;?` |
-| [fragmentAsDecodedQuery](../../-immutable-uri/fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
-| [fragmentAsDecodedQueryDeduped](../../-immutable-uri/fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map&lt;String,&nbsp;String&gt;?` |
+| [fragmentAsDecodedPath](../../-immutable-uri/fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List<String>?` |
+| [fragmentAsDecodedQuery](../../-immutable-uri/fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map<String,&nbsp;List<String>>?` |
+| [fragmentAsDecodedQueryDeduped](../../-immutable-uri/fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map<String,&nbsp;String>?` |
 | [hasFragment](../../-immutable-uri/has-fragment.md) | `open fun hasFragment(): Boolean` |
 | [hasHost](../../-immutable-uri/has-host.md) | `open fun hasHost(): Boolean` |
 | [hasPath](../../-immutable-uri/has-path.md) | `open fun hasPath(): Boolean` |

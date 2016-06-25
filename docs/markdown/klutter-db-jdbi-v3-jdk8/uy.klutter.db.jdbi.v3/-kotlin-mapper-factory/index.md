@@ -16,4 +16,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [build](build.md) | `fun build(type:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), ctx:&nbsp;StatementContext): [Optional](http://docs.oracle.com/javase/6/docs/api/java/util/Optional.html)&lt;ResultSetMapper&lt;*&gt;&gt;` |
+| [build](build.md) | `fun build(type:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), ctx:&nbsp;StatementContext): [Optional](http://docs.oracle.com/javase/6/docs/api/java/util/Optional.html)<ResultSetMapper<*>>` |

@@ -5,5 +5,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [whenAllNotNull](when-all-not-null.md) | `fun &lt;T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any&gt; Collection&lt;T?&gt;.whenAllNotNull(block:&nbsp;(List&lt;T&gt;)&nbsp;-&gt;&nbsp;R): Unit` |
-| [whenAnyNotNull](when-any-not-null.md) | `fun &lt;T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any&gt; Collection&lt;T?&gt;.whenAnyNotNull(block:&nbsp;(List&lt;T&gt;)&nbsp;-&gt;&nbsp;R): Unit` |
+| [whenAllNotNull](when-all-not-null.md) | `fun <T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any> Collection<T?>.whenAllNotNull(block:&nbsp;(List<T>)&nbsp;->&nbsp;R): Unit` |
+| [whenAnyNotNull](when-any-not-null.md) | `fun <T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any> Collection<T?>.whenAnyNotNull(block:&nbsp;(List<T>)&nbsp;->&nbsp;R): Unit` |

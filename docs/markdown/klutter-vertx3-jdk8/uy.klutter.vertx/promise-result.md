@@ -2,9 +2,9 @@
 
 
 # promiseResult
-`fun &lt;T&gt; promiseResult(deferred:&nbsp;Deferred&lt;T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;): (AsyncResult&lt;T&gt;)&nbsp;-&gt;&nbsp;Unit` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L348)
+`fun <T> promiseResult(deferred:&nbsp;Deferred<T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>): (AsyncResult<T>)&nbsp;->&nbsp;Unit` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L348)
 
-Helper to convert an expectation of `AsyncResult` into a promise represented by `Deferred&lt;T,Exception&gt;`
+Helper to convert an expectation of `AsyncResult` into a promise represented by `Deferred<T,Exception>`
 
 for example:
 

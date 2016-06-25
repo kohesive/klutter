@@ -10,5 +10,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [defaultConverter](default-converter.md) | `var defaultConverter: &lt;ERROR CLASS&gt;` |
+| [defaultConverter](default-converter.md) | `var defaultConverter: <ERROR CLASS>` |
 | [permiteEnumToEnum](permite-enum-to-enum.md) | `var permiteEnumToEnum: Boolean` |

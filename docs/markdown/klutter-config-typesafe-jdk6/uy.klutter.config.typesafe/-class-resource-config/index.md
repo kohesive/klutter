@@ -10,14 +10,14 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ClassResourceConfig(resouceName:&nbsp;String, klass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)&lt;*&gt;, failIfMissing:&nbsp;Boolean&nbsp;=&nbsp;true)` |
+| [&lt;init&gt;](-init-.md) | `ClassResourceConfig(resouceName:&nbsp;String, klass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, failIfMissing:&nbsp;Boolean&nbsp;=&nbsp;true)` |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
 | [failIfMissing](fail-if-missing.md) | `val failIfMissing: Boolean` |
-| [klass](klass.md) | `val klass: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)&lt;*&gt;` |
+| [klass](klass.md) | `val klass: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>` |
 | [resouceName](resouce-name.md) | `val resouceName: String` |
 
 ### Functions

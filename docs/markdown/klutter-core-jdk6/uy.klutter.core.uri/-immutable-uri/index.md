@@ -11,9 +11,9 @@
 |&nbsp;|&nbsp;|
 |---|---|
 | [decodedFragment](decoded-fragment.md) | `abstract val decodedFragment: String?` |
-| [decodedPath](decoded-path.md) | `abstract val decodedPath: List&lt;String&gt;?` |
-| [decodedQuery](decoded-query.md) | `abstract val decodedQuery: Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
-| [decodedQueryDeduped](decoded-query-deduped.md) | `abstract val decodedQueryDeduped: Map&lt;String,&nbsp;String&gt;?` |
+| [decodedPath](decoded-path.md) | `abstract val decodedPath: List<String>?` |
+| [decodedQuery](decoded-query.md) | `abstract val decodedQuery: Map<String,&nbsp;List<String>>?` |
+| [decodedQueryDeduped](decoded-query-deduped.md) | `abstract val decodedQueryDeduped: Map<String,&nbsp;String>?` |
 | [decodedUserInfo](decoded-user-info.md) | `abstract val decodedUserInfo: String?` |
 | [encodedFragment](encoded-fragment.md) | `abstract val encodedFragment: String?` |
 | [encodedPath](encoded-path.md) | `abstract val encodedPath: String?` |
@@ -28,9 +28,9 @@
 |&nbsp;|&nbsp;|
 |---|---|
 | [asString](as-string.md) | `open fun asString(): String` |
-| [fragmentAsDecodedPath](fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List&lt;String&gt;?` |
-| [fragmentAsDecodedQuery](fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
-| [fragmentAsDecodedQueryDeduped](fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map&lt;String,&nbsp;String&gt;?` |
+| [fragmentAsDecodedPath](fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List<String>?` |
+| [fragmentAsDecodedQuery](fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map<String,&nbsp;List<String>>?` |
+| [fragmentAsDecodedQueryDeduped](fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map<String,&nbsp;String>?` |
 | [hasFragment](has-fragment.md) | `open fun hasFragment(): Boolean` |
 | [hasHost](has-host.md) | `open fun hasHost(): Boolean` |
 | [hasPath](has-path.md) | `open fun hasPath(): Boolean` |

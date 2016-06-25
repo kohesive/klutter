@@ -2,7 +2,7 @@
 
 
 # KotlinBinder
-`class KotlinBinder&nbsp;:&nbsp;Binder&lt;Bind,&nbsp;Any&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinBinder.kt#L18)
+`class KotlinBinder&nbsp;:&nbsp;Binder<Bind,&nbsp;Any>` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinBinder.kt#L18)
 
 
 
@@ -24,4 +24,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [bind](bind.md) | `fun bind(q:&nbsp;SQLStatement&lt;*&gt;, bind:&nbsp;Bind?, arg:&nbsp;Any?): Unit` |
+| [bind](bind.md) | `fun bind(q:&nbsp;SQLStatement<*>, bind:&nbsp;Bind?, arg:&nbsp;Any?): Unit` |

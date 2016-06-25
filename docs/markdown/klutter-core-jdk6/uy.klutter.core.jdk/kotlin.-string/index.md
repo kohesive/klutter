@@ -11,10 +11,15 @@
 | [exceptStarting](except-starting.md) | `fun String.exceptStarting(allAfterThisMany:&nbsp;Int): String` |
 | [fromEnd](from-end.md) | `fun String.fromEnd(howManyFromEnd:&nbsp;Int): String` |
 | [fromStart](from-start.md) | `fun String.fromStart(howManyFromStart:&nbsp;Int): String` |
-| [mustEndWith](must-end-with.md) | `fun String.mustEndWith(postfix:&nbsp;String): String`<br/>`fun String.mustEndWith(postfix:&nbsp;Char): String` |
-| [mustNotEndWith](must-not-end-with.md) | `fun String.mustNotEndWith(postfix:&nbsp;Char): String`<br/>`fun String.mustNotEndWith(postfix:&nbsp;String): String` |
-| [mustNotStartWith](must-not-start-with.md) | `fun String.mustNotStartWith(prefix:&nbsp;String): String`<br/>`fun String.mustNotStartWith(prefix:&nbsp;Char): String` |
-| [mustStartWith](must-start-with.md) | `fun String.mustStartWith(prefix:&nbsp;String): String`<br/>`fun String.mustStartWith(prefix:&nbsp;Char): String` |
+| [mustEndWith](must-end-with.md) | `fun String.mustEndWith(postfix:&nbsp;String): String`
+`fun String.mustEndWith(postfix:&nbsp;Char): String` |
+| [mustNotEndWith](must-not-end-with.md) | `fun String.mustNotEndWith(postfix:&nbsp;Char): String`
+`fun String.mustNotEndWith(postfix:&nbsp;String): String` |
+| [mustNotStartWith](must-not-start-with.md) | `fun String.mustNotStartWith(prefix:&nbsp;String): String`
+`fun String.mustNotStartWith(prefix:&nbsp;Char): String` |
+| [mustStartWith](must-start-with.md) | `fun String.mustStartWith(prefix:&nbsp;String): String`
+`fun String.mustStartWith(prefix:&nbsp;Char): String` |
 | [nullIfBlank](null-if-blank.md) | `fun String?.nullIfBlank(): String?` |
 | [nullIfEmpty](null-if-empty.md) | `fun String?.nullIfEmpty(): String?` |
-| [whenStartsWith](when-starts-with.md) | `fun String.whenStartsWith(prefix:&nbsp;String, thenWithRest:&nbsp;(String)&nbsp;-&gt;&nbsp;Unit): Boolean`<br/>`fun String.whenStartsWith(prefixes:&nbsp;List&lt;String&gt;, thenWithRest:&nbsp;(String)&nbsp;-&gt;&nbsp;Unit): Boolean` |
+| [whenStartsWith](when-starts-with.md) | `fun String.whenStartsWith(prefix:&nbsp;String, thenWithRest:&nbsp;(String)&nbsp;->&nbsp;Unit): Boolean`
+`fun String.whenStartsWith(prefixes:&nbsp;List<String>, thenWithRest:&nbsp;(String)&nbsp;->&nbsp;Unit): Boolean` |

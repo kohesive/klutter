@@ -2,7 +2,7 @@
 
 
 # ReadOnlyListIterator
-`class ReadOnlyListIterator&lt;T&gt;&nbsp;:&nbsp;ListIterator&lt;T&gt;, [ReadOnly](../-read-only.md), [Serializable](http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L59)
+`class ReadOnlyListIterator<T>&nbsp;:&nbsp;ListIterator<T>, [ReadOnly](../-read-only.md), [Serializable](http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L59)
 
 Wraps a ListIterator with a lightweight delegating class that prevents casting back to mutable type
 
@@ -12,7 +12,7 @@ Wraps a ListIterator with a lightweight delegating class that prevents casting b
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ReadOnlyListIterator(delegate:&nbsp;ListIterator&lt;T&gt;)`<p>Wraps a ListIterator with a lightweight delegating class that prevents casting back to mutable type</p> |
+| [&lt;init&gt;](-init-.md) | `ReadOnlyListIterator(delegate:&nbsp;ListIterator<T>)`<p>Wraps a ListIterator with a lightweight delegating class that prevents casting back to mutable type</p> |
 
 ### Functions
 

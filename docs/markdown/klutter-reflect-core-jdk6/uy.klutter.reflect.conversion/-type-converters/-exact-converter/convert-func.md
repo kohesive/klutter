@@ -2,6 +2,6 @@
 
 
 # convertFunc
-`val convertFunc: [ExactConverter](index.md).(Any)&nbsp;-&gt;&nbsp;Any` [(source)](https://github.com/kohesive/klutter/blob/master/reflect-core-jdk6/src/main/kotlin/uy/klutter/reflect/conversion/Converters.kt#L96)
+`val convertFunc: [ExactConverter](index.md).(Any)&nbsp;->&nbsp;Any` [(source)](https://github.com/kohesive/klutter/blob/master/reflect-core-jdk6/src/main/kotlin/uy/klutter/reflect/conversion/Converters.kt#L96)
 
 

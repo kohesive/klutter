@@ -2,6 +2,6 @@
 
 
 # encodePathStringFromSegments
-`fun encodePathStringFromSegments(decodedPath:&nbsp;List&lt;String&gt;): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UrlEncoding.kt#L436)
+`fun encodePathStringFromSegments(decodedPath:&nbsp;List<String>): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UrlEncoding.kt#L436)
 
 

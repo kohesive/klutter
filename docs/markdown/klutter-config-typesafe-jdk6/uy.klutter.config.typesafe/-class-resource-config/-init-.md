@@ -2,6 +2,6 @@
 
 
 # &lt;init&gt;
-`ClassResourceConfig(resouceName:&nbsp;String, klass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)&lt;*&gt;, failIfMissing:&nbsp;Boolean&nbsp;=&nbsp;true)`
+`ClassResourceConfig(resouceName:&nbsp;String, klass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, failIfMissing:&nbsp;Boolean&nbsp;=&nbsp;true)`
 
 

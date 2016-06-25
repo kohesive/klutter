@@ -10,4 +10,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `NoSuchColumnMapperException(string:&nbsp;String, throwable:&nbsp;Throwable)`<br/>`NoSuchColumnMapperException(cause:&nbsp;Throwable)`<br/>`NoSuchColumnMapperException(message:&nbsp;String)` |
+| [&lt;init&gt;](-init-.md) | `NoSuchColumnMapperException(string:&nbsp;String, throwable:&nbsp;Throwable)`
+`NoSuchColumnMapperException(cause:&nbsp;Throwable)`
+`NoSuchColumnMapperException(message:&nbsp;String)` |

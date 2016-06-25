@@ -15,4 +15,7 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [buildUri](build-uri.md) | `fun buildUri(uri:&nbsp;[URI](http://docs.oracle.com/javase/6/docs/api/java/net/URI.html)): [UriBuilder](-uri-builder/index.md)`<br/>`fun buildUri(uriString:&nbsp;String): [UriBuilder](-uri-builder/index.md)`<br/>`fun buildUri(url:&nbsp;[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)): [UriBuilder](-uri-builder/index.md)`<br/>`fun buildUri(uri:&nbsp;[ImmutableUri](-immutable-uri/index.md)): [UriBuilder](-uri-builder/index.md)` |
+| [buildUri](build-uri.md) | `fun buildUri(uri:&nbsp;[URI](http://docs.oracle.com/javase/6/docs/api/java/net/URI.html)): [UriBuilder](-uri-builder/index.md)`
+`fun buildUri(uriString:&nbsp;String): [UriBuilder](-uri-builder/index.md)`
+`fun buildUri(url:&nbsp;[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)): [UriBuilder](-uri-builder/index.md)`
+`fun buildUri(uri:&nbsp;[ImmutableUri](-immutable-uri/index.md)): [UriBuilder](-uri-builder/index.md)` |

@@ -5,5 +5,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [attach](attach.md) | `fun &lt;T&nbsp;:&nbsp;Any&gt; Handle.attach(sqlObjectType:&nbsp;KClass&lt;T&gt;): T` |
+| [attach](attach.md) | `fun <T&nbsp;:&nbsp;Any> Handle.attach(sqlObjectType:&nbsp;KClass<T>): T` |
 | [attachKotlinPlugin](attach-kotlin-plugin.md) | `fun Handle.attachKotlinPlugin(): Handle` |

@@ -2,7 +2,7 @@
 
 
 # promiseReply
-`fun &lt;T&nbsp;:&nbsp;Any&gt; Vertx.promiseReply(address:&nbsp;String, message:&nbsp;Any): Promise&lt;T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L266)
+`fun <T&nbsp;:&nbsp;Any> Vertx.promiseReply(address:&nbsp;String, message:&nbsp;Any): Promise<T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L266)
 
 Sends the message and returns a promise of a reply to that message.
 

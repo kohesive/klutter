@@ -10,13 +10,13 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `MapAsConfig(configMap:&nbsp;Map&lt;String,&nbsp;Any&gt;)` |
+| [&lt;init&gt;](-init-.md) | `MapAsConfig(configMap:&nbsp;Map<String,&nbsp;Any>)` |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [configMap](config-map.md) | `val configMap: Map&lt;String,&nbsp;Any&gt;` |
+| [configMap](config-map.md) | `val configMap: Map<String,&nbsp;Any>` |
 
 ### Functions
 

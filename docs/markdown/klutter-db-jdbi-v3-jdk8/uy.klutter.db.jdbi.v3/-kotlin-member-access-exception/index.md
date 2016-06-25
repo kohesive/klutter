@@ -10,4 +10,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `KotlinMemberAccessException(string:&nbsp;String, throwable:&nbsp;Throwable)`<br/>`KotlinMemberAccessException(cause:&nbsp;Throwable)`<br/>`KotlinMemberAccessException(message:&nbsp;String)` |
+| [&lt;init&gt;](-init-.md) | `KotlinMemberAccessException(string:&nbsp;String, throwable:&nbsp;Throwable)`
+`KotlinMemberAccessException(cause:&nbsp;Throwable)`
+`KotlinMemberAccessException(message:&nbsp;String)` |

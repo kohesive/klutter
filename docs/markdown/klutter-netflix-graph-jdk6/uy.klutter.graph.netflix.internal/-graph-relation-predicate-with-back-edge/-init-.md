@@ -2,6 +2,6 @@
 
 
 # &lt;init&gt;
-`GraphRelationPredicateWithBackEdge(builder:&nbsp;[GraphRelationBuilder](../-graph-relation-builder/index.md)&lt;N,&nbsp;R&gt;)`
+`GraphRelationPredicateWithBackEdge(builder:&nbsp;[GraphRelationBuilder](../-graph-relation-builder/index.md)<N,&nbsp;R>)`
 
 

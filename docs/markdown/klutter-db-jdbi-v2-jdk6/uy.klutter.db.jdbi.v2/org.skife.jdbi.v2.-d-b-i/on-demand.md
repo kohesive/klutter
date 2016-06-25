@@ -2,6 +2,6 @@
 
 
 # onDemand
-`fun &lt;T&nbsp;:&nbsp;Any&gt; DBI.onDemand(sqlObjectType:&nbsp;KClass&lt;T&gt;): T` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L31)
+`fun <T&nbsp;:&nbsp;Any> DBI.onDemand(sqlObjectType:&nbsp;KClass<T>): T` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L31)
 
 

@@ -2,6 +2,6 @@
 
 
 # nodeOrdMap
-`protected fun nodeOrdMap(nodeType:&nbsp;N): OrdinalMap&lt;String&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Ordinals.kt#L23)
+`protected fun nodeOrdMap(nodeType:&nbsp;N): OrdinalMap<String>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Ordinals.kt#L23)
 
 

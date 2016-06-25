@@ -16,5 +16,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [accepts](accepts.md) | `fun accepts(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)&lt;*&gt;, ctx:&nbsp;StatementContext): Boolean` |
-| [mapperFor](mapper-for.md) | `fun mapperFor(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)&lt;*&gt;, ctx:&nbsp;StatementContext): ResultSetMapper&lt;*&gt;?` |
+| [accepts](accepts.md) | `fun accepts(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, ctx:&nbsp;StatementContext): Boolean` |
+| [mapperFor](mapper-for.md) | `fun mapperFor(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, ctx:&nbsp;StatementContext): ResultSetMapper<*>?` |

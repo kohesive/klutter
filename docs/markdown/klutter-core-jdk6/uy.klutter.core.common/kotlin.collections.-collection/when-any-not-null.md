@@ -2,6 +2,6 @@
 
 
 # whenAnyNotNull
-`fun &lt;T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any&gt; Collection&lt;T?&gt;.whenAnyNotNull(block:&nbsp;(List&lt;T&gt;)&nbsp;-&gt;&nbsp;R): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Common.kt#L64)
+`fun <T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any> Collection<T?>.whenAnyNotNull(block:&nbsp;(List<T>)&nbsp;->&nbsp;R): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Common.kt#L64)
 
 

@@ -10,13 +10,13 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ExactConverter(fromType:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), toType:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), convertFunc:&nbsp;ExactConverter.(Any)&nbsp;-&gt;&nbsp;Any)` |
+| [&lt;init&gt;](-init-.md) | `ExactConverter(fromType:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), toType:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), convertFunc:&nbsp;ExactConverter.(Any)&nbsp;->&nbsp;Any)` |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [convertFunc](convert-func.md) | `val convertFunc: ExactConverter.(Any)&nbsp;-&gt;&nbsp;Any` |
+| [convertFunc](convert-func.md) | `val convertFunc: ExactConverter.(Any)&nbsp;->&nbsp;Any` |
 | [fromType](from-type.md) | `val fromType: [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html)` |
-| [key](key.md) | `val key: &lt;ERROR CLASS&gt;&lt;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html),&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html)&gt;` |
+| [key](key.md) | `val key: <ERROR CLASS><[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html),&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html)>` |
 | [toType](to-type.md) | `val toType: [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html)` |

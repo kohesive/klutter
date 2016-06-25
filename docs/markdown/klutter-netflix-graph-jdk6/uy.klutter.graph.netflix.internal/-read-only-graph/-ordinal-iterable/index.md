@@ -2,7 +2,7 @@
 
 
 # OrdinalIterable
-`class OrdinalIterable&nbsp;:&nbsp;Iterable&lt;Int&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L92)
+`class OrdinalIterable&nbsp;:&nbsp;Iterable<Int>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L92)
 
 
 
@@ -16,4 +16,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [iterator](iterator.md) | `fun iterator(): Iterator&lt;Int&gt;` |
+| [iterator](iterator.md) | `fun iterator(): Iterator<Int>` |

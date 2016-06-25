@@ -2,7 +2,7 @@
 
 
 # withDeferred
-`fun &lt;T&gt; withDeferred(codeBlock:&nbsp;(Deferred&lt;T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;)&nbsp;-&gt;&nbsp;Unit): Promise&lt;T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L397)
+`fun <T> withDeferred(codeBlock:&nbsp;(Deferred<T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>)&nbsp;->&nbsp;Unit): Promise<T,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L397)
 
 Helper function that creates a deferred for a block of code and returns the promise associated with the deferred
 

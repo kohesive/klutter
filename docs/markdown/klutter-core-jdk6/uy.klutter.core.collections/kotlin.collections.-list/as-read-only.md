@@ -2,7 +2,7 @@
 
 
 # asReadOnly
-`fun &lt;T&gt; List&lt;T&gt;.asReadOnly(): List&lt;T&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L208)
+`fun <T> List<T>.asReadOnly(): List<T>` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L208)
 
 Wraps the List with a lightweight delegating class that prevents casting back to mutable type,
 specializing for the case of the RandomAccess marker interface being retained if it was there originally

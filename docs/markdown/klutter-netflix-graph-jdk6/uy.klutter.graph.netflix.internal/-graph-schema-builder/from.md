@@ -2,6 +2,6 @@
 
 
 # from
-`fun from(nodeType:&nbsp;N): [GraphRelationBuilder](../-graph-relation-builder/index.md)&lt;N,&nbsp;R&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L59)
+`fun from(nodeType:&nbsp;N): [GraphRelationBuilder](../-graph-relation-builder/index.md)<N,&nbsp;R>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L59)
 
 

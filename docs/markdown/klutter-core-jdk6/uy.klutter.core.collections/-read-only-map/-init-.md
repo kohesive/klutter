@@ -2,7 +2,7 @@
 
 
 # &lt;init&gt;
-`ReadOnlyMap(delegate:&nbsp;Map&lt;K,&nbsp;V&gt;)`
+`ReadOnlyMap(delegate:&nbsp;Map<K,&nbsp;V>)`
 
 Wraps a Map with a lightweight delegating class that prevents casting back to mutable type
 

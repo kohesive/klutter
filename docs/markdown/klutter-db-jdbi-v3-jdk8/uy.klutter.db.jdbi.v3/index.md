@@ -7,9 +7,9 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [KotlinBinder](-kotlin-binder/index.md) | `class KotlinBinder&nbsp;:&nbsp;Binder&lt;Bind,&nbsp;Any&gt;` |
+| [KotlinBinder](-kotlin-binder/index.md) | `class KotlinBinder&nbsp;:&nbsp;Binder<Bind,&nbsp;Any>` |
 | [KotlinBinderFactory](-kotlin-binder-factory/index.md) | `class KotlinBinderFactory&nbsp;:&nbsp;ParameterBinderFactory` |
-| [KotlinMapper](-kotlin-mapper/index.md) | `class KotlinMapper&lt;C&nbsp;:&nbsp;Any&gt;&nbsp;:&nbsp;ResultSetMapper&lt;C&gt;` |
+| [KotlinMapper](-kotlin-mapper/index.md) | `class KotlinMapper<C&nbsp;:&nbsp;Any>&nbsp;:&nbsp;ResultSetMapper<C>` |
 | [KotlinMapperFactory](-kotlin-mapper-factory/index.md) | `class KotlinMapperFactory&nbsp;:&nbsp;ResultSetMapperFactory` |
 | [KotlinPlugin](-kotlin-plugin/index.md) | `class KotlinPlugin&nbsp;:&nbsp;JdbiPlugin` |
 
@@ -33,4 +33,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [attachSqlObject](attach-sql-object.md) | `fun &lt;T&nbsp;:&nbsp;Any&gt; attachSqlObject(handle:&nbsp;Handle, sqlObjectType:&nbsp;KClass&lt;T&gt;): T` |
+| [attachSqlObject](attach-sql-object.md) | `fun <T&nbsp;:&nbsp;Any> attachSqlObject(handle:&nbsp;Handle, sqlObjectType:&nbsp;KClass<T>): T` |

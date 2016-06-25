@@ -2,7 +2,7 @@
 
 
 # &lt;init&gt;
-`ReadOnlyCollection(delegate:&nbsp;Collection&lt;T&gt;)`
+`ReadOnlyCollection(delegate:&nbsp;Collection<T>)`
 
 Wraps a Collection with a lightweight delegating class that prevents casting back to mutable type
 

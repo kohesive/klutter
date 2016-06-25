@@ -2,6 +2,6 @@
 
 
 # &lt;init&gt;
-`MapAsConfig(configMap:&nbsp;Map&lt;String,&nbsp;Any&gt;)`
+`MapAsConfig(configMap:&nbsp;Map<String,&nbsp;Any>)`
 
 

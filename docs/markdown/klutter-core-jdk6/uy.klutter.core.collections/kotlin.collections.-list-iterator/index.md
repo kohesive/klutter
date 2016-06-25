@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [asReadOnly](as-read-only.md) | `fun &lt;T&gt; ListIterator&lt;T&gt;.asReadOnly(): ListIterator&lt;T&gt;`<p>Wraps the ListIterator with a lightweight delegating class that prevents casting back to mutable type</p> |
+| [asReadOnly](as-read-only.md) | `fun <T> ListIterator<T>.asReadOnly(): ListIterator<T>`<p>Wraps the ListIterator with a lightweight delegating class that prevents casting back to mutable type</p> |

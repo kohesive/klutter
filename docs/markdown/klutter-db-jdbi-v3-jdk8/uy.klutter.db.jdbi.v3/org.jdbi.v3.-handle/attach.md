@@ -2,6 +2,6 @@
 
 
 # attach
-`fun &lt;T&nbsp;:&nbsp;Any&gt; Handle.attach(sqlObjectType:&nbsp;KClass&lt;T&gt;): T` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/Extensions.kt#L41)
+`fun <T&nbsp;:&nbsp;Any> Handle.attach(sqlObjectType:&nbsp;KClass<T>): T` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/Extensions.kt#L41)
 
 

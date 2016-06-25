@@ -2,7 +2,7 @@
 
 
 # KotlinMapper
-`class KotlinMapper&lt;C&nbsp;:&nbsp;Any&gt;&nbsp;:&nbsp;ResultSetMapper&lt;C&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/KotlinMapper.kt#L15)
+`class KotlinMapper<C&nbsp;:&nbsp;Any>&nbsp;:&nbsp;ResultSetMapper<C>` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/KotlinMapper.kt#L15)
 
 
 

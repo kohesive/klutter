@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [isAssignableFrom](is-assignable-from.md) | `fun &lt;T&nbsp;:&nbsp;Any&gt; KClass&lt;T&gt;.isAssignableFrom(other:&nbsp;KType): Boolean` |
+| [isAssignableFrom](is-assignable-from.md) | `fun <T&nbsp;:&nbsp;Any> KClass<T>.isAssignableFrom(other:&nbsp;KType): Boolean` |

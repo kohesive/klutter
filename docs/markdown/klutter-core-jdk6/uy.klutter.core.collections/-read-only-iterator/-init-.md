@@ -2,7 +2,7 @@
 
 
 # &lt;init&gt;
-`ReadOnlyIterator(delegate:&nbsp;Iterator&lt;T&gt;)`
+`ReadOnlyIterator(delegate:&nbsp;Iterator<T>)`
 
 Wraps an Iterator with a lightweight delegating class that prevents casting back to mutable type
 

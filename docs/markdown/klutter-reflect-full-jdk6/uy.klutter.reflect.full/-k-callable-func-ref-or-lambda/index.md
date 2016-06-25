@@ -2,7 +2,7 @@
 
 
 # KCallableFuncRefOrLambda
-`class KCallableFuncRefOrLambda&lt;T&nbsp;:&nbsp;Function&lt;R&gt;, out&nbsp;R&gt;&nbsp;:&nbsp;KCallable&lt;R&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/reflect-full-jdk6/src/main/kotlin/uy/klutter/reflect/full/KT-9005.kt#L9)
+`class KCallableFuncRefOrLambda<T&nbsp;:&nbsp;Function<R>, out&nbsp;R>&nbsp;:&nbsp;KCallable<R>` [(source)](https://github.com/kohesive/klutter/blob/master/reflect-full-jdk6/src/main/kotlin/uy/klutter/reflect/full/KT-9005.kt#L9)
 
 
 
@@ -10,9 +10,9 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [annotations](annotations.md) | `val annotations: List&lt;Annotation&gt;` |
+| [annotations](annotations.md) | `val annotations: List<Annotation>` |
 | [name](name.md) | `val name: String` |
-| [parameters](parameters.md) | `val parameters: List&lt;KParameter&gt;` |
+| [parameters](parameters.md) | `val parameters: List<KParameter>` |
 | [returnType](return-type.md) | `val returnType: KType` |
 
 ### Functions
@@ -20,10 +20,11 @@
 |&nbsp;|&nbsp;|
 |---|---|
 | [call](call.md) | `fun call(vararg args:&nbsp;Any?): R` |
-| [callBy](call-by.md) | `fun callBy(args:&nbsp;Map&lt;KParameter,&nbsp;Any?&gt;): R` |
+| [callBy](call-by.md) | `fun callBy(args:&nbsp;Map<KParameter,&nbsp;Any?>): R` |
 
 ### Companion Object Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [fromInstance](from-instance.md) | `fun &lt;T&nbsp;:&nbsp;Function&lt;R&gt;, R&gt; fromInstance(functionInstance:&nbsp;T): KCallableFuncRefOrLambda&lt;T,&nbsp;R&gt;`<br/>`fun &lt;T&nbsp;:&nbsp;Function&lt;R&gt;, R&gt; fromInstance(functionInstance:&nbsp;T, name:&nbsp;String, annotations:&nbsp;List&lt;Annotation&gt;): KCallableFuncRefOrLambda&lt;T,&nbsp;R&gt;` |
+| [fromInstance](from-instance.md) | `fun <T&nbsp;:&nbsp;Function<R>, R> fromInstance(functionInstance:&nbsp;T): KCallableFuncRefOrLambda<T,&nbsp;R>`
+`fun <T&nbsp;:&nbsp;Function<R>, R> fromInstance(functionInstance:&nbsp;T, name:&nbsp;String, annotations:&nbsp;List<Annotation>): KCallableFuncRefOrLambda<T,&nbsp;R>` |

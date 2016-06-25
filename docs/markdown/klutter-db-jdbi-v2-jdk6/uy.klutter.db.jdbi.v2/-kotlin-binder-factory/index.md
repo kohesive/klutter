@@ -16,5 +16,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [accepts](accepts.md) | `fun accepts(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)&lt;*&gt;, whichMethod:&nbsp;[Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), whichParameter:&nbsp;Int): Boolean` |
-| [binderFor](binder-for.md) | `fun binderFor(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)&lt;*&gt;, whichMethod:&nbsp;[Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), whichParameter:&nbsp;Int): Binder&lt;*,&nbsp;*&gt;?` |
+| [accepts](accepts.md) | `fun accepts(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, whichMethod:&nbsp;[Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), whichParameter:&nbsp;Int): Boolean` |
+| [binderFor](binder-for.md) | `fun binderFor(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, whichMethod:&nbsp;[Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), whichParameter:&nbsp;Int): Binder<*,&nbsp;*>?` |

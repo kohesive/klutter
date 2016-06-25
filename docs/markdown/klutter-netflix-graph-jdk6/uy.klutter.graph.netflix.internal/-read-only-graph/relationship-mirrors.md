@@ -2,6 +2,6 @@
 
 
 # relationshipMirrors
-`protected val relationshipMirrors: MutableMap&lt;RelationshipTrippleKey&lt;N,&nbsp;R&gt;,&nbsp;RelationshipTrippleKey&lt;N,&nbsp;R&gt;&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L24)
+`protected val relationshipMirrors: MutableMap<RelationshipTrippleKey<N,&nbsp;R>,&nbsp;RelationshipTrippleKey<N,&nbsp;R>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L24)
 
 

@@ -2,7 +2,7 @@
 
 
 # GraphScopeModel
-`inner class GraphScopeModel&lt;N&nbsp;:&nbsp;Enum&lt;N&gt;, R&nbsp;:&nbsp;Enum&lt;R&gt;&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L68)
+`inner class GraphScopeModel<N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L68)
 
 
 
@@ -16,4 +16,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [from](from.md) | `fun from(nodeType:&nbsp;N): [GraphRelationBuilder](../../-graph-relation-builder/index.md)&lt;N,&nbsp;R&gt;` |
+| [from](from.md) | `fun from(nodeType:&nbsp;N): [GraphRelationBuilder](../../-graph-relation-builder/index.md)<N,&nbsp;R>` |

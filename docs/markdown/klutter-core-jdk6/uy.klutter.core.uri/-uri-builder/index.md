@@ -23,9 +23,9 @@
 |&nbsp;|&nbsp;|
 |---|---|
 | [decodedFragment](decoded-fragment.md) | `var decodedFragment: String?` |
-| [decodedPath](decoded-path.md) | `var decodedPath: List&lt;String&gt;?` |
-| [decodedQuery](decoded-query.md) | `var decodedQuery: Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
-| [decodedQueryDeduped](decoded-query-deduped.md) | `var decodedQueryDeduped: Map&lt;String,&nbsp;String&gt;?` |
+| [decodedPath](decoded-path.md) | `var decodedPath: List<String>?` |
+| [decodedQuery](decoded-query.md) | `var decodedQuery: Map<String,&nbsp;List<String>>?` |
+| [decodedQueryDeduped](decoded-query-deduped.md) | `var decodedQueryDeduped: Map<String,&nbsp;String>?` |
 | [decodedUserInfo](decoded-user-info.md) | `var decodedUserInfo: String?` |
 | [encodedFragment](encoded-fragment.md) | `var encodedFragment: String?` |
 | [encodedPath](encoded-path.md) | `var encodedPath: String?` |
@@ -39,14 +39,15 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [addQueryParams](add-query-params.md) | `fun addQueryParams(vararg params:&nbsp;&lt;ERROR CLASS&gt;&lt;String,&nbsp;String?&gt;): UriBuilder` |
+| [addQueryParams](add-query-params.md) | `fun addQueryParams(vararg params:&nbsp;<ERROR CLASS><String,&nbsp;String?>): UriBuilder` |
 | [build](build.md) | `fun build(): [ImmutableUri](../-immutable-uri/index.md)` |
 | [clearFragment](clear-fragment.md) | `fun clearFragment(): UriBuilder` |
 | [clearPath](clear-path.md) | `fun clearPath(): UriBuilder` |
 | [clearQuery](clear-query.md) | `fun clearQuery(): UriBuilder` |
-| [clearQueryExcept](clear-query-except.md) | `fun clearQueryExcept(vararg keepParm:&nbsp;String): UriBuilder`<br/>`fun clearQueryExcept(keepParms:&nbsp;Collection&lt;String&gt;): UriBuilder` |
+| [clearQueryExcept](clear-query-except.md) | `fun clearQueryExcept(vararg keepParm:&nbsp;String): UriBuilder`
+`fun clearQueryExcept(keepParms:&nbsp;Collection<String>): UriBuilder` |
 | [decodedFragment](decoded-fragment.md) | `fun decodedFragment(newFragment:&nbsp;String?): UriBuilder` |
-| [decodedPath](decoded-path.md) | `fun decodedPath(newPath:&nbsp;List&lt;String&gt;?): UriBuilder` |
+| [decodedPath](decoded-path.md) | `fun decodedPath(newPath:&nbsp;List<String>?): UriBuilder` |
 | [decodedUserInfo](decoded-user-info.md) | `fun decodedUserInfo(newUserInfo:&nbsp;String?): UriBuilder` |
 | [encodedFragment](encoded-fragment.md) | `fun encodedFragment(newFragment:&nbsp;String?): UriBuilder` |
 | [encodedPath](encoded-path.md) | `fun encodedPath(newPath:&nbsp;String?): UriBuilder` |
@@ -55,7 +56,7 @@
 | [host](host.md) | `fun host(newHost:&nbsp;String?): UriBuilder` |
 | [port](port.md) | `fun port(newPort:&nbsp;Int?): UriBuilder` |
 | [removeQueryParams](remove-query-params.md) | `fun removeQueryParams(vararg params:&nbsp;String): UriBuilder` |
-| [replaceQueryParams](replace-query-params.md) | `fun replaceQueryParams(vararg params:&nbsp;&lt;ERROR CLASS&gt;&lt;String,&nbsp;String?&gt;): UriBuilder` |
+| [replaceQueryParams](replace-query-params.md) | `fun replaceQueryParams(vararg params:&nbsp;<ERROR CLASS><String,&nbsp;String?>): UriBuilder` |
 | [scheme](scheme.md) | `fun scheme(newScheme:&nbsp;String?): UriBuilder` |
 | [toString](to-string.md) | `fun toString(): String` |
 
@@ -64,9 +65,9 @@
 |&nbsp;|&nbsp;|
 |---|---|
 | [asString](../-immutable-uri/as-string.md) | `open fun asString(): String` |
-| [fragmentAsDecodedPath](../-immutable-uri/fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List&lt;String&gt;?` |
-| [fragmentAsDecodedQuery](../-immutable-uri/fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
-| [fragmentAsDecodedQueryDeduped](../-immutable-uri/fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map&lt;String,&nbsp;String&gt;?` |
+| [fragmentAsDecodedPath](../-immutable-uri/fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List<String>?` |
+| [fragmentAsDecodedQuery](../-immutable-uri/fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map<String,&nbsp;List<String>>?` |
+| [fragmentAsDecodedQueryDeduped](../-immutable-uri/fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map<String,&nbsp;String>?` |
 | [hasFragment](../-immutable-uri/has-fragment.md) | `open fun hasFragment(): Boolean` |
 | [hasHost](../-immutable-uri/has-host.md) | `open fun hasHost(): Boolean` |
 | [hasPath](../-immutable-uri/has-path.md) | `open fun hasPath(): Boolean` |

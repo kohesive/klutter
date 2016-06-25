@@ -2,6 +2,6 @@
 
 
 # ObjectWithFieldClass
-`fun &lt;R&nbsp;:&nbsp;Any&gt; ObjectWithFieldClass(field:&nbsp;KProperty1&lt;T,&nbsp;*&gt;, init:&nbsp;[XContentJsonObjectWithClass](index.md)&lt;R&gt;.()&nbsp;-&gt;&nbsp;Unit): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L62)
+`fun <R&nbsp;:&nbsp;Any> ObjectWithFieldClass(field:&nbsp;KProperty1<T,&nbsp;*>, init:&nbsp;[XContentJsonObjectWithClass](index.md)<R>.()&nbsp;->&nbsp;Unit): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L62)
 
 

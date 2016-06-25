@@ -2,6 +2,6 @@
 
 
 # asIntArrayOrEmpty
-`fun asIntArrayOrEmpty(): Array&lt;Int&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L120)
+`fun asIntArrayOrEmpty(): Array<Int>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L120)
 
 

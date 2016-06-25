@@ -5,5 +5,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [map](map.md) | `fun &lt;O&nbsp;:&nbsp;Map&lt;String,&nbsp;Any?&gt;, T&nbsp;:&nbsp;Any&gt; Query&lt;O&gt;.map(toClass:&nbsp;KClass&lt;T&gt;): Query&lt;T&gt;` |
-| [useSequence](use-sequence.md) | `fun &lt;O&nbsp;:&nbsp;Any&gt; Query&lt;O&gt;.useSequence(block:&nbsp;(Sequence&lt;O&gt;)&nbsp;-&gt;&nbsp;Unit): Unit`<br/>`fun &lt;O&nbsp;:&nbsp;Map&lt;String,&nbsp;Any?&gt;, T&nbsp;:&nbsp;Any&gt; Query&lt;O&gt;.useSequence(toClass:&nbsp;KClass&lt;T&gt;, block:&nbsp;(Sequence&lt;T&gt;)&nbsp;-&gt;&nbsp;Unit): Unit` |
+| [map](map.md) | `fun <O&nbsp;:&nbsp;Map<String,&nbsp;Any?>, T&nbsp;:&nbsp;Any> Query<O>.map(toClass:&nbsp;KClass<T>): Query<T>` |
+| [useSequence](use-sequence.md) | `fun <O&nbsp;:&nbsp;Any> Query<O>.useSequence(block:&nbsp;(Sequence<O>)&nbsp;->&nbsp;Unit): Unit`
+`fun <O&nbsp;:&nbsp;Map<String,&nbsp;Any?>, T&nbsp;:&nbsp;Any> Query<O>.useSequence(toClass:&nbsp;KClass<T>, block:&nbsp;(Sequence<T>)&nbsp;->&nbsp;Unit): Unit` |

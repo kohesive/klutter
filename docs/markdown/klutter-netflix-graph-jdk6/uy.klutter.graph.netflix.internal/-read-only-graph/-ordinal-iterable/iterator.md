@@ -2,6 +2,6 @@
 
 
 # iterator
-`fun iterator(): Iterator&lt;Int&gt;` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L93)
+`fun iterator(): Iterator<Int>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L93)
 
 
