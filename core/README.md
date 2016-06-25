@@ -194,8 +194,8 @@ Extension functions for:
 Top-level functions for:
 
 * utcNow() - return current time as UTC timezone Joda DateTime
-* isoDateFormat() - return Joda DateTimeFormatter for ISO date in the form ```yyyy-MM-dd`T`hh:mm:ss.SSSZ``
+* isoDateFormat() - return Joda DateTimeFormatter for ISO date in the form ``yyyy-MM-dd`T`hh:mm:ss.SSSZ``
 
 Extension functions for:
 
-* DateTime.toIsoString() - convert Joda DateTime class to ISO formatted string ```yyyy-MM-dd`T`hh:mm:ss.SSSZ``
+* DateTime.toIsoString() - convert Joda DateTime class to ISO formatted string ``yyyy-MM-dd`T`hh:mm:ss.SSSZ``

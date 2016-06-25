@@ -5,7 +5,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [coerce](coerce.md) | `fun Short.coerce(minVal:&nbsp;Short, maxVal:&nbsp;Short): Short`
-`fun Short.coerce(range:&nbsp;IntRange): Short` |
-| [maximum](maximum.md) | `fun Short.maximum(maxVal:&nbsp;Short): Short` |
-| [minimum](minimum.md) | `fun Short.minimum(minVal:&nbsp;Short): Short` |
+| [coerce](coerce.md) | <code>fun Short.coerce(minVal: Short, maxVal: Short): Short</code><br/><code>fun Short.coerce(range: IntRange): Short</code><br/> |
+| [maximum](maximum.md) | <code>fun Short.maximum(maxVal: Short): Short</code><br/> |
+| [minimum](minimum.md) | <code>fun Short.minimum(minVal: Short): Short</code><br/> |

@@ -2,6 +2,5 @@
 
 
 # _parent
-`_parent` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L11)
-
+<code>_parent</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L11)<br/>
 

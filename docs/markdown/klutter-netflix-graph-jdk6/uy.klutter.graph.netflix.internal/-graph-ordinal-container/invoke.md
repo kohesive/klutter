@@ -2,6 +2,5 @@
 
 
 # invoke
-`operator fun N.invoke(id:&nbsp;String): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Ordinals.kt#L39)
-
+<code>operator fun N.invoke(id: String): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Ordinals.kt#L39)<br/>
 

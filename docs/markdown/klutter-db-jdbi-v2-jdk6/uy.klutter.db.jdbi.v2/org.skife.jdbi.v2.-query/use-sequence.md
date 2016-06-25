@@ -2,7 +2,5 @@
 
 
 # useSequence
-`fun <O&nbsp;:&nbsp;Any> Query<O>.useSequence(block:&nbsp;(Sequence<O>)&nbsp;->&nbsp;Unit): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L51)
-`fun <O&nbsp;:&nbsp;Map<String,&nbsp;Any?>, T&nbsp;:&nbsp;Any> Query<O>.useSequence(toClass:&nbsp;KClass<T>, block:&nbsp;(Sequence<T>)&nbsp;->&nbsp;Unit): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L57)
-
+<code>fun <O : Any> Query<O>.useSequence(block: (Sequence<O>) -> Unit): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L51)<br/><code>fun <O : Map<String, Any?>, T : Any> Query<O>.useSequence(toClass: KClass<T>, block: (Sequence<T>) -> Unit): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L57)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # asStringArrayOrEmpty
-`fun asStringArrayOrEmpty(): Array<String>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L115)
-
+<code>fun asStringArrayOrEmpty(): Array<String></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L115)<br/>
 

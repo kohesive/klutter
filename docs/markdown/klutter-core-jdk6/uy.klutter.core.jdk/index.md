@@ -7,7 +7,7 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [ChildFirstClassloader](-child-first-classloader/index.md) | `class ChildFirstClassloader&nbsp;:&nbsp;[ClassLoader](http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html)`<p>A parent-last classloader that will try the child classloader first and then the parent.</p> |
+| [ChildFirstClassloader](-child-first-classloader/index.md) | <code>class ChildFirstClassloader : [ClassLoader](http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html)</code><br/>A parent-last classloader that will try the child classloader first and then the parent. |
 
 ### Extensions for External Classes
 

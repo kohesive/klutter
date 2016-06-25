@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`RegisterJdk8Converters()`
-
+<code>RegisterJdk8Converters()</code><br/>
 

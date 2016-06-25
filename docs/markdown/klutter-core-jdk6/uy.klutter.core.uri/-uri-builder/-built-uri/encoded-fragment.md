@@ -2,7 +2,6 @@
 
 
 # encodedFragment
-`val encodedFragment: String?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L287)
-Overrides [ImmutableUri.encodedFragment](../../-immutable-uri/encoded-fragment.md)
+<code>val encodedFragment: String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L287)<br/>Overrides [ImmutableUri.encodedFragment](../../-immutable-uri/encoded-fragment.md)
 
 

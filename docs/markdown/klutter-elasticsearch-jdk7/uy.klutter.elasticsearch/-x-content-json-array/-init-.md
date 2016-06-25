@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`XContentJsonArray(x:&nbsp;XContentBuilder)`
-
+<code>XContentJsonArray(x: XContentBuilder)</code><br/>
 

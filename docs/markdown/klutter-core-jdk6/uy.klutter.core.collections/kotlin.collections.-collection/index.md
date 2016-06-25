@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [asReadOnly](as-read-only.md) | `fun <T> Collection<T>.asReadOnly(): Collection<T>`<p>Wraps the Collection with a lightweight delegating class that prevents casting back to mutable type</p> |
+| [asReadOnly](as-read-only.md) | <code>fun <T> Collection<T>.asReadOnly(): Collection<T></code><br/>Wraps the Collection with a lightweight delegating class that prevents casting back to mutable type |

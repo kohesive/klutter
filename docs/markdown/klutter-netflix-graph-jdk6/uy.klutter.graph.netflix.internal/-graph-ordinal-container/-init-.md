@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`GraphOrdinalContainer(readOnlyOrdinals:&nbsp;Boolean)`
-
+<code>GraphOrdinalContainer(readOnlyOrdinals: Boolean)</code><br/>
 

@@ -2,7 +2,6 @@
 
 
 # flags
-`val flags: Int` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/NetflixGraph.kt#L49)
-Overrides [GraphRelationOptions.flags](../-graph-relation-options/flags.md)
+<code>val flags: Int</code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/NetflixGraph.kt#L49)<br/>Overrides [GraphRelationOptions.flags](../-graph-relation-options/flags.md)
 
 

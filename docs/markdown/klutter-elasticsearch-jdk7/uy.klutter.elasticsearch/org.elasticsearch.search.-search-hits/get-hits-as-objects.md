@@ -2,6 +2,5 @@
 
 
 # getHitsAsObjects
-`inline fun <reified&nbsp;T&nbsp;:&nbsp;Any> SearchHits.getHitsAsObjects(): Sequence<T>` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Results.kt#L12)
-
+<code>inline fun <reified T : Any> SearchHits.getHitsAsObjects(): Sequence<T></code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Results.kt#L12)<br/>
 

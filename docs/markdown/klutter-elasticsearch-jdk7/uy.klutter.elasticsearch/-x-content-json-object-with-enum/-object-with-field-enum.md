@@ -2,6 +2,5 @@
 
 
 # ObjectWithFieldEnum
-`fun <R&nbsp;:&nbsp;Enum<R>> ObjectWithFieldEnum(field:&nbsp;T, init:&nbsp;[XContentJsonObjectWithEnum](index.md)<R>.()&nbsp;->&nbsp;Unit): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L24)
-
+<code>fun <R : Enum<R>> ObjectWithFieldEnum(field: T, init: [XContentJsonObjectWithEnum](index.md)<R>.() -> Unit): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L24)<br/>
 

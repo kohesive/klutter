@@ -2,29 +2,20 @@
 
 
 # XContentJsonArray
-`class XContentJsonArray` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L107)
-
+<code>class XContentJsonArray</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L107)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `XContentJsonArray(x:&nbsp;XContentBuilder)` |
+| [&lt;init&gt;](-init-.md) | <code>XContentJsonArray(x: XContentBuilder)</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [addArray](add-array.md) | `fun addArray(init:&nbsp;XContentJsonArray.()&nbsp;->&nbsp;Unit): Unit` |
-| [addObject](add-object.md) | `fun addObject(init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit): Unit` |
-| [addValue](add-value.md) | `fun addValue(value:&nbsp;String): Unit`
-`fun addValue(value:&nbsp;Long): Unit`
-`fun addValue(value:&nbsp;Int): Unit`
-`fun addValue(value:&nbsp;Short): Unit`
-`fun addValue(value:&nbsp;Byte): Unit`
-`fun addValue(value:&nbsp;Double): Unit`
-`fun addValue(value:&nbsp;Float): Unit`
-`fun addValue(value:&nbsp;[BigDecimal](http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html)): Unit`
-`fun addValue(value:&nbsp;Boolean): Unit` |
-| [addValueNull](add-value-null.md) | `fun addValueNull(): Unit` |
+| [addArray](add-array.md) | <code>fun addArray(init: XContentJsonArray.() -> Unit): Unit</code><br/> |
+| [addObject](add-object.md) | <code>fun addObject(init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit): Unit</code><br/> |
+| [addValue](add-value.md) | <code>fun addValue(value: String): Unit</code><br/><code>fun addValue(value: Long): Unit</code><br/><code>fun addValue(value: Int): Unit</code><br/><code>fun addValue(value: Short): Unit</code><br/><code>fun addValue(value: Byte): Unit</code><br/><code>fun addValue(value: Double): Unit</code><br/><code>fun addValue(value: Float): Unit</code><br/><code>fun addValue(value: [BigDecimal](http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html)): Unit</code><br/><code>fun addValue(value: Boolean): Unit</code><br/> |
+| [addValueNull](add-value-null.md) | <code>fun addValueNull(): Unit</code><br/> |

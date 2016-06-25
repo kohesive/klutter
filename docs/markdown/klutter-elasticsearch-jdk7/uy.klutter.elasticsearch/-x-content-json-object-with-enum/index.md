@@ -2,79 +2,56 @@
 
 
 # XContentJsonObjectWithEnum
-`class XContentJsonObjectWithEnum<T&nbsp;:&nbsp;Enum<T>>&nbsp;:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L8)
-
+<code>class XContentJsonObjectWithEnum<T : Enum<T>> : [XContentJsonObject](../-x-content-json-object/index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L8)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `XContentJsonObjectWithEnum(x:&nbsp;XContentBuilder)` |
+| [&lt;init&gt;](-init-.md) | <code>XContentJsonObjectWithEnum(x: XContentBuilder)</code><br/> |
 
 ### Inherited Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [x](../-x-content-json-object/x.md) | `val x: XContentBuilder` |
+| [x](../-x-content-json-object/x.md) | <code>val x: XContentBuilder</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [Array](-array.md) | `fun Array(field:&nbsp;T, init:&nbsp;[XContentJsonArray](../-x-content-json-array/index.md).()&nbsp;->&nbsp;Unit): Unit` |
-| [Object](-object.md) | `fun Object(field:&nbsp;T, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit): Unit` |
-| [ObjectWithFieldClass](-object-with-field-class.md) | `fun <R&nbsp;:&nbsp;Any> ObjectWithFieldClass(field:&nbsp;T, init:&nbsp;[XContentJsonObjectWithClass](../-x-content-json-object-with-class/index.md)<R>.()&nbsp;->&nbsp;Unit): Unit` |
-| [ObjectWithFieldEnum](-object-with-field-enum.md) | `fun <R&nbsp;:&nbsp;Enum<R>> ObjectWithFieldEnum(field:&nbsp;T, init:&nbsp;XContentJsonObjectWithEnum<R>.()&nbsp;->&nbsp;Unit): Unit` |
-| [setValue](set-value.md) | `fun setValue(field:&nbsp;T, value:&nbsp;String): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;Long): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;Int): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;Short): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;Byte): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;Double): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;Float): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;[BigDecimal](http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html)): Unit`
-`fun setValue(field:&nbsp;T, value:&nbsp;Boolean): Unit` |
-| [setValueNull](set-value-null.md) | `fun setValueNull(field:&nbsp;T): Unit` |
+| [Array](-array.md) | <code>fun Array(field: T, init: [XContentJsonArray](../-x-content-json-array/index.md).() -> Unit): Unit</code><br/> |
+| [Object](-object.md) | <code>fun Object(field: T, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit): Unit</code><br/> |
+| [ObjectWithFieldClass](-object-with-field-class.md) | <code>fun <R : Any> ObjectWithFieldClass(field: T, init: [XContentJsonObjectWithClass](../-x-content-json-object-with-class/index.md)<R>.() -> Unit): Unit</code><br/> |
+| [ObjectWithFieldEnum](-object-with-field-enum.md) | <code>fun <R : Enum<R>> ObjectWithFieldEnum(field: T, init: XContentJsonObjectWithEnum<R>.() -> Unit): Unit</code><br/> |
+| [setValue](set-value.md) | <code>fun setValue(field: T, value: String): Unit</code><br/><code>fun setValue(field: T, value: Long): Unit</code><br/><code>fun setValue(field: T, value: Int): Unit</code><br/><code>fun setValue(field: T, value: Short): Unit</code><br/><code>fun setValue(field: T, value: Byte): Unit</code><br/><code>fun setValue(field: T, value: Double): Unit</code><br/><code>fun setValue(field: T, value: Float): Unit</code><br/><code>fun setValue(field: T, value: [BigDecimal](http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html)): Unit</code><br/><code>fun setValue(field: T, value: Boolean): Unit</code><br/> |
+| [setValueNull](set-value-null.md) | <code>fun setValueNull(field: T): Unit</code><br/> |
 
 ### Inherited Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [Array](../-x-content-json-object/-array.md) | `fun Array(name:&nbsp;String, init:&nbsp;[XContentJsonArray](../-x-content-json-array/index.md).()&nbsp;->&nbsp;Unit): Unit` |
-| [Object](../-x-content-json-object/-object.md) | `fun Object(name:&nbsp;String, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit): Unit` |
-| [ObjectWithFieldClass](../-x-content-json-object/-object-with-field-class.md) | `fun <R&nbsp;:&nbsp;Any> ObjectWithFieldClass(name:&nbsp;String, init:&nbsp;[XContentJsonObjectWithClass](../-x-content-json-object-with-class/index.md)<R>.()&nbsp;->&nbsp;Unit): Unit` |
-| [ObjectWithFieldEnum](../-x-content-json-object/-object-with-field-enum.md) | `fun <R&nbsp;:&nbsp;Enum<R>> ObjectWithFieldEnum(name:&nbsp;String, init:&nbsp;XContentJsonObjectWithEnum<R>.()&nbsp;->&nbsp;Unit): Unit` |
-| [setValue](../-x-content-json-object/set-value.md) | `fun setValue(name:&nbsp;String, value:&nbsp;String): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;Long): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;Int): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;Short): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;Byte): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;Double): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;Float): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;[BigDecimal](http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html)): Unit`
-`fun setValue(name:&nbsp;String, value:&nbsp;Boolean): Unit` |
-| [setValueNull](../-x-content-json-object/set-value-null.md) | `fun setValueNull(name:&nbsp;String): Unit` |
+| [Array](../-x-content-json-object/-array.md) | <code>fun Array(name: String, init: [XContentJsonArray](../-x-content-json-array/index.md).() -> Unit): Unit</code><br/> |
+| [Object](../-x-content-json-object/-object.md) | <code>fun Object(name: String, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit): Unit</code><br/> |
+| [ObjectWithFieldClass](../-x-content-json-object/-object-with-field-class.md) | <code>fun <R : Any> ObjectWithFieldClass(name: String, init: [XContentJsonObjectWithClass](../-x-content-json-object-with-class/index.md)<R>.() -> Unit): Unit</code><br/> |
+| [ObjectWithFieldEnum](../-x-content-json-object/-object-with-field-enum.md) | <code>fun <R : Enum<R>> ObjectWithFieldEnum(name: String, init: XContentJsonObjectWithEnum<R>.() -> Unit): Unit</code><br/> |
+| [setValue](../-x-content-json-object/set-value.md) | <code>fun setValue(name: String, value: String): Unit</code><br/><code>fun setValue(name: String, value: Long): Unit</code><br/><code>fun setValue(name: String, value: Int): Unit</code><br/><code>fun setValue(name: String, value: Short): Unit</code><br/><code>fun setValue(name: String, value: Byte): Unit</code><br/><code>fun setValue(name: String, value: Double): Unit</code><br/><code>fun setValue(name: String, value: Float): Unit</code><br/><code>fun setValue(name: String, value: [BigDecimal](http://docs.oracle.com/javase/6/docs/api/java/math/BigDecimal.html)): Unit</code><br/><code>fun setValue(name: String, value: Boolean): Unit</code><br/> |
+| [setValueNull](../-x-content-json-object/set-value-null.md) | <code>fun setValueNull(name: String): Unit</code><br/> |
 
 ### Extension Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [booleanField](../boolean-field.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.~~booleanField~~(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
-| [booleanFieldMapping](../boolean-field-mapping.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.booleanFieldMapping(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit`
-`fun [XContentJsonObject](../-x-content-json-object/index.md).booleanFieldMapping(field:&nbsp;String, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
-| [dateField](../date-field.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.~~dateField~~(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
-| [dateFieldMapping](../date-field-mapping.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.dateFieldMapping(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit`
-`fun [XContentJsonObject](../-x-content-json-object/index.md).dateFieldMapping(field:&nbsp;String, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
-| [ignoreField](../ignore-field.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.~~ignoreField~~(field:&nbsp;T): Unit` |
-| [ignoreFieldMapping](../ignore-field-mapping.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.ignoreFieldMapping(field:&nbsp;T): Unit`
-`fun [XContentJsonObject](../-x-content-json-object/index.md).ignoreFieldMapping(field:&nbsp;String): Unit` |
-| [integerField](../integer-field.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.~~integerField~~(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
-| [integerFieldMapping](../integer-field-mapping.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.integerFieldMapping(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit`
-`fun [XContentJsonObject](../-x-content-json-object/index.md).integerFieldMapping(field:&nbsp;String, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit): Unit` |
-| [longField](../long-field.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.~~longField~~(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
-| [longFieldMapping](../long-field-mapping.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.longFieldMapping(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit`
-`fun [XContentJsonObject](../-x-content-json-object/index.md).longFieldMapping(field:&nbsp;String, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit): Unit` |
-| [stringField](../string-field.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.~~stringField~~(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
-| [stringFieldMapping](../string-field-mapping.md) | `fun <T&nbsp;:&nbsp;Enum<T>> XContentJsonObjectWithEnum<T>.stringFieldMapping(field:&nbsp;T, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit`
-`fun [XContentJsonObject](../-x-content-json-object/index.md).stringFieldMapping(field:&nbsp;String, indexed:&nbsp;[EsIndexedField](../-es-indexed-field/index.md)&nbsp;=&nbsp;EsIndexedField.NOT_ANALYZED, stored:&nbsp;[EsStoredField](../-es-stored-field/index.md)&nbsp;=&nbsp;EsStoredField.NOT_STORED, init:&nbsp;[XContentJsonObject](../-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}): Unit` |
+| [booleanField](../boolean-field.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.~~booleanField~~(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |
+| [booleanFieldMapping](../boolean-field-mapping.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.booleanFieldMapping(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/><code>fun [XContentJsonObject](../-x-content-json-object/index.md).booleanFieldMapping(field: String, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |
+| [dateField](../date-field.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.~~dateField~~(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |
+| [dateFieldMapping](../date-field-mapping.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.dateFieldMapping(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/><code>fun [XContentJsonObject](../-x-content-json-object/index.md).dateFieldMapping(field: String, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |
+| [ignoreField](../ignore-field.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.~~ignoreField~~(field: T): Unit</code><br/> |
+| [ignoreFieldMapping](../ignore-field-mapping.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.ignoreFieldMapping(field: T): Unit</code><br/><code>fun [XContentJsonObject](../-x-content-json-object/index.md).ignoreFieldMapping(field: String): Unit</code><br/> |
+| [integerField](../integer-field.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.~~integerField~~(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |
+| [integerFieldMapping](../integer-field-mapping.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.integerFieldMapping(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/><code>fun [XContentJsonObject](../-x-content-json-object/index.md).integerFieldMapping(field: String, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit): Unit</code><br/> |
+| [longField](../long-field.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.~~longField~~(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |
+| [longFieldMapping](../long-field-mapping.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.longFieldMapping(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/><code>fun [XContentJsonObject](../-x-content-json-object/index.md).longFieldMapping(field: String, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit): Unit</code><br/> |
+| [stringField](../string-field.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.~~stringField~~(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |
+| [stringFieldMapping](../string-field-mapping.md) | <code>fun <T : Enum<T>> XContentJsonObjectWithEnum<T>.stringFieldMapping(field: T, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/><code>fun [XContentJsonObject](../-x-content-json-object/index.md).stringFieldMapping(field: String, indexed: [EsIndexedField](../-es-indexed-field/index.md) = EsIndexedField.NOT_ANALYZED, stored: [EsStoredField](../-es-stored-field/index.md) = EsStoredField.NOT_STORED, init: [XContentJsonObject](../-x-content-json-object/index.md).() -> Unit = {}): Unit</code><br/> |

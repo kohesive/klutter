@@ -2,6 +2,5 @@
 
 
 # subList
-`open fun subList(fromIndex:&nbsp;Int, toIndex:&nbsp;Int): List<T>` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L97)
-
+<code>open fun subList(fromIndex: Int, toIndex: Int): List<T></code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L97)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`ExactConverter(fromType:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), toType:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), convertFunc:&nbsp;[ExactConverter](index.md).(Any)&nbsp;->&nbsp;Any)`
-
+<code>ExactConverter(fromType: [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), toType: [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html), convertFunc: [ExactConverter](index.md).(Any) -> Any)</code><br/>
 

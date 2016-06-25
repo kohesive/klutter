@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`FileConfig(path:&nbsp;[Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html), failIfMissing:&nbsp;Boolean&nbsp;=&nbsp;true)`
-
+<code>FileConfig(path: [Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html), failIfMissing: Boolean = true)</code><br/>
 

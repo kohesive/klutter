@@ -2,6 +2,5 @@
 
 
 # failIfMissing
-`val failIfMissing: Boolean` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L143)
-
+<code>val failIfMissing: Boolean</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L143)<br/>
 

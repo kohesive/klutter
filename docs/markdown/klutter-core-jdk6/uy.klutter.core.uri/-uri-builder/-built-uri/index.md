@@ -2,52 +2,51 @@
 
 
 # BuiltUri
-`data class BuiltUri&nbsp;:&nbsp;[ImmutableUri](../../-immutable-uri/index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L283)
-
+<code>data class BuiltUri : [ImmutableUri](../../-immutable-uri/index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L283)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `BuiltUri(scheme:&nbsp;String?, encodedUserInfo:&nbsp;String?, decodedUserInfo:&nbsp;String?, host:&nbsp;String?, port:&nbsp;Int?, encodedPath:&nbsp;String?, decodedPath:&nbsp;List<String>?, encodedQuery:&nbsp;String?, decodedQuery:&nbsp;Map<String,&nbsp;List<String>>?, decodedQueryDeduped:&nbsp;Map<String,&nbsp;String>?, encodedFragment:&nbsp;String?, decodedFragment:&nbsp;String?)` |
+| [&lt;init&gt;](-init-.md) | <code>BuiltUri(scheme: String?, encodedUserInfo: String?, decodedUserInfo: String?, host: String?, port: Int?, encodedPath: String?, decodedPath: List<String>?, encodedQuery: String?, decodedQuery: Map<String, List<String>>?, decodedQueryDeduped: Map<String, String>?, encodedFragment: String?, decodedFragment: String?)</code><br/> |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [decodedFragment](decoded-fragment.md) | `val decodedFragment: String?` |
-| [decodedPath](decoded-path.md) | `val decodedPath: List<String>?` |
-| [decodedQuery](decoded-query.md) | `val decodedQuery: Map<String,&nbsp;List<String>>?` |
-| [decodedQueryDeduped](decoded-query-deduped.md) | `val decodedQueryDeduped: Map<String,&nbsp;String>?` |
-| [decodedUserInfo](decoded-user-info.md) | `val decodedUserInfo: String?` |
-| [encodedFragment](encoded-fragment.md) | `val encodedFragment: String?` |
-| [encodedPath](encoded-path.md) | `val encodedPath: String?` |
-| [encodedQuery](encoded-query.md) | `val encodedQuery: String?` |
-| [encodedUserInfo](encoded-user-info.md) | `val encodedUserInfo: String?` |
-| [host](host.md) | `val host: String?` |
-| [port](port.md) | `val port: Int?` |
-| [scheme](scheme.md) | `val scheme: String?` |
+| [decodedFragment](decoded-fragment.md) | <code>val decodedFragment: String?</code><br/> |
+| [decodedPath](decoded-path.md) | <code>val decodedPath: List<String>?</code><br/> |
+| [decodedQuery](decoded-query.md) | <code>val decodedQuery: Map<String, List<String>>?</code><br/> |
+| [decodedQueryDeduped](decoded-query-deduped.md) | <code>val decodedQueryDeduped: Map<String, String>?</code><br/> |
+| [decodedUserInfo](decoded-user-info.md) | <code>val decodedUserInfo: String?</code><br/> |
+| [encodedFragment](encoded-fragment.md) | <code>val encodedFragment: String?</code><br/> |
+| [encodedPath](encoded-path.md) | <code>val encodedPath: String?</code><br/> |
+| [encodedQuery](encoded-query.md) | <code>val encodedQuery: String?</code><br/> |
+| [encodedUserInfo](encoded-user-info.md) | <code>val encodedUserInfo: String?</code><br/> |
+| [host](host.md) | <code>val host: String?</code><br/> |
+| [port](port.md) | <code>val port: Int?</code><br/> |
+| [scheme](scheme.md) | <code>val scheme: String?</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [toString](to-string.md) | `fun toString(): String` |
+| [toString](to-string.md) | <code>fun toString(): String</code><br/> |
 
 ### Inherited Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [asString](../../-immutable-uri/as-string.md) | `open fun asString(): String` |
-| [fragmentAsDecodedPath](../../-immutable-uri/fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List<String>?` |
-| [fragmentAsDecodedQuery](../../-immutable-uri/fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map<String,&nbsp;List<String>>?` |
-| [fragmentAsDecodedQueryDeduped](../../-immutable-uri/fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map<String,&nbsp;String>?` |
-| [hasFragment](../../-immutable-uri/has-fragment.md) | `open fun hasFragment(): Boolean` |
-| [hasHost](../../-immutable-uri/has-host.md) | `open fun hasHost(): Boolean` |
-| [hasPath](../../-immutable-uri/has-path.md) | `open fun hasPath(): Boolean` |
-| [hasPort](../../-immutable-uri/has-port.md) | `open fun hasPort(): Boolean` |
-| [hasQuery](../../-immutable-uri/has-query.md) | `open fun hasQuery(): Boolean` |
-| [hasScheme](../../-immutable-uri/has-scheme.md) | `open fun hasScheme(): Boolean` |
-| [hasUserInfo](../../-immutable-uri/has-user-info.md) | `open fun hasUserInfo(): Boolean` |
-| [toURI](../../-immutable-uri/to-u-r-i.md) | `open fun toURI(): [URI](http://docs.oracle.com/javase/6/docs/api/java/net/URI.html)` |
+| [asString](../../-immutable-uri/as-string.md) | <code>open fun asString(): String</code><br/> |
+| [fragmentAsDecodedPath](../../-immutable-uri/fragment-as-decoded-path.md) | <code>open fun fragmentAsDecodedPath(): List<String>?</code><br/> |
+| [fragmentAsDecodedQuery](../../-immutable-uri/fragment-as-decoded-query.md) | <code>open fun fragmentAsDecodedQuery(): Map<String, List<String>>?</code><br/> |
+| [fragmentAsDecodedQueryDeduped](../../-immutable-uri/fragment-as-decoded-query-deduped.md) | <code>open fun fragmentAsDecodedQueryDeduped(): Map<String, String>?</code><br/> |
+| [hasFragment](../../-immutable-uri/has-fragment.md) | <code>open fun hasFragment(): Boolean</code><br/> |
+| [hasHost](../../-immutable-uri/has-host.md) | <code>open fun hasHost(): Boolean</code><br/> |
+| [hasPath](../../-immutable-uri/has-path.md) | <code>open fun hasPath(): Boolean</code><br/> |
+| [hasPort](../../-immutable-uri/has-port.md) | <code>open fun hasPort(): Boolean</code><br/> |
+| [hasQuery](../../-immutable-uri/has-query.md) | <code>open fun hasQuery(): Boolean</code><br/> |
+| [hasScheme](../../-immutable-uri/has-scheme.md) | <code>open fun hasScheme(): Boolean</code><br/> |
+| [hasUserInfo](../../-immutable-uri/has-user-info.md) | <code>open fun hasUserInfo(): Boolean</code><br/> |
+| [toURI](../../-immutable-uri/to-u-r-i.md) | <code>open fun toURI(): [URI](http://docs.oracle.com/javase/6/docs/api/java/net/URI.html)</code><br/> |

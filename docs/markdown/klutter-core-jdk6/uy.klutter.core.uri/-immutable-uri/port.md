@@ -2,6 +2,5 @@
 
 
 # port
-`abstract val port: Int?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L33)
-
+<code>abstract val port: Int?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L33)<br/>
 

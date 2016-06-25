@@ -2,6 +2,5 @@
 
 
 # registerInto
-`fun registerInto(conversion:&nbsp;TypeConverters): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/reflect-core-jdk7/src/main/kotlin/uy/klutter/reflect/conversion/jdk7/Jdk7Converters.kt#L11)
-
+<code>fun registerInto(conversion: TypeConverters): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/reflect-core-jdk7/src/main/kotlin/uy/klutter/reflect/conversion/jdk7/Jdk7Converters.kt#L11)<br/>
 

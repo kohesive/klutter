@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`UrlConfig(url:&nbsp;[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html), failIfMissing:&nbsp;Boolean&nbsp;=&nbsp;true)`
-
+<code>UrlConfig(url: [URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html), failIfMissing: Boolean = true)</code><br/>
 

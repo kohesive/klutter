@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`GraphBuilderTempStep2(fromNodeWithOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R, completr:&nbsp;([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>,&nbsp;R,&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>)&nbsp;->&nbsp;Unit)`
-
+<code>GraphBuilderTempStep2(fromNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R, completr: ([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, R, [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>) -> Unit)</code><br/>
 

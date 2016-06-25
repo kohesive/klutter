@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`TempGraphFlags(flags:&nbsp;Int)`
-
+<code>TempGraphFlags(flags: Int)</code><br/>
 

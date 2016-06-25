@@ -2,7 +2,5 @@
 
 
 # mustNotStartWith
-`fun String.mustNotStartWith(prefix:&nbsp;String): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L28)
-`fun String.mustNotStartWith(prefix:&nbsp;Char): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L37)
-
+<code>fun String.mustNotStartWith(prefix: String): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L28)<br/><code>fun String.mustNotStartWith(prefix: Char): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L37)<br/>
 

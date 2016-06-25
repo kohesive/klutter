@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [isAssignableFrom](is-assignable-from.md) | `fun [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>.isAssignableFrom(other:&nbsp;KType): Boolean` |
+| [isAssignableFrom](is-assignable-from.md) | <code>fun [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>.isAssignableFrom(other: KType): Boolean</code><br/> |

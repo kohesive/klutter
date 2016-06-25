@@ -2,8 +2,7 @@
 
 
 # &lt;init&gt;
-`ConfiguredValue(cfg:&nbsp;Config, key:&nbsp;String)`
-
+<code>ConfiguredValue(cfg: Config, key: String)</code><br/>
 Intermediate object for providing additional functionality on a configured item
 
 

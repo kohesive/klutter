@@ -2,6 +2,5 @@
 
 
 # removeQueryParams
-`fun removeQueryParams(vararg params:&nbsp;String): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L258)
-
+<code>fun removeQueryParams(vararg params: String): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L258)<br/>
 

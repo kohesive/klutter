@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [getHitsAsObjects](get-hits-as-objects.md) | `fun <T&nbsp;:&nbsp;Any> SearchHits.getHitsAsObjects(): Sequence<T>` |
+| [getHitsAsObjects](get-hits-as-objects.md) | <code>fun <T : Any> SearchHits.getHitsAsObjects(): Sequence<T></code><br/> |

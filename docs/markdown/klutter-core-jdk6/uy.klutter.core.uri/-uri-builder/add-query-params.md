@@ -2,6 +2,5 @@
 
 
 # addQueryParams
-`fun addQueryParams(vararg params:&nbsp;<ERROR CLASS><String,&nbsp;String?>): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L248)
-
+<code>fun addQueryParams(vararg params: <ERROR CLASS><String, String?>): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L248)<br/>
 

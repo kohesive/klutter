@@ -2,8 +2,7 @@
 
 
 # VertxInjektables
-`object VertxInjektables&nbsp;:&nbsp;[VertxInjektModule](../-vertx-injekt-module/index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Injektable.kt#L15)
-
+<code>object VertxInjektables : [VertxInjektModule](../-vertx-injekt-module/index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Injektable.kt#L15)<br/>
 This Injekt Module does a few things:
 
 Make sure Vertx is setup to work with Kovenant for promises
@@ -18,10 +17,10 @@ Setup logger to use the Vertx logging so logging is consistent with vertx
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [registerInjectables](register-injectables.md) | `fun InjektRegistrar.registerInjectables(): Unit` |
+| [registerInjectables](register-injectables.md) | <code>fun InjektRegistrar.registerInjectables(): Unit</code><br/> |
 
 ### Inherited Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [common](../-vertx-injekt-module/common.md) | `fun InjektRegistrar.common(): Unit` |
+| [common](../-vertx-injekt-module/common.md) | <code>fun InjektRegistrar.common(): Unit</code><br/> |

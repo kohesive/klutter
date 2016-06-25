@@ -2,25 +2,24 @@
 
 
 # GraphBuilderTempStep1
-`class GraphBuilderTempStep1<N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L87)
-
+<code>class GraphBuilderTempStep1<N : Enum<N>, R : Enum<R>></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L87)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `GraphBuilderTempStep1(fromNodeWithOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, completr:&nbsp;([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>,&nbsp;R,&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>)&nbsp;->&nbsp;Unit)` |
+| [&lt;init&gt;](-init-.md) | <code>GraphBuilderTempStep1(fromNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, completr: ([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, R, [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>) -> Unit)</code><br/> |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [completr](completr.md) | `val completr: ([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>,&nbsp;R,&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>)&nbsp;->&nbsp;Unit` |
-| [fromNodeWithOrd](from-node-with-ord.md) | `val fromNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>` |
+| [completr](completr.md) | <code>val completr: ([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, R, [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>) -> Unit</code><br/> |
+| [fromNodeWithOrd](from-node-with-ord.md) | <code>val fromNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N></code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [edge](edge.md) | `fun edge(relation:&nbsp;R): [GraphBuilderTempStep2](../-graph-builder-temp-step2/index.md)<N,&nbsp;R>` |
+| [edge](edge.md) | <code>fun edge(relation: R): [GraphBuilderTempStep2](../-graph-builder-temp-step2/index.md)<N, R></code><br/> |

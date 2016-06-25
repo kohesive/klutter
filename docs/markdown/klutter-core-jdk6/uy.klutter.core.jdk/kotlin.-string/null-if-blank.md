@@ -2,6 +2,5 @@
 
 
 # nullIfBlank
-`fun String?.nullIfBlank(): String?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L99)
-
+<code>fun String?.nullIfBlank(): String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L99)<br/>
 

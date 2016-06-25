@@ -5,7 +5,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [coerce](coerce.md) | `fun Byte.coerce(minVal:&nbsp;Byte, maxVal:&nbsp;Byte): Byte`
-`fun Byte.coerce(range:&nbsp;IntRange): Byte` |
-| [maximum](maximum.md) | `fun Byte.maximum(maxVal:&nbsp;Byte): Byte` |
-| [minimum](minimum.md) | `fun Byte.minimum(minVal:&nbsp;Byte): Byte` |
+| [coerce](coerce.md) | <code>fun Byte.coerce(minVal: Byte, maxVal: Byte): Byte</code><br/><code>fun Byte.coerce(range: IntRange): Byte</code><br/> |
+| [maximum](maximum.md) | <code>fun Byte.maximum(maxVal: Byte): Byte</code><br/> |
+| [minimum](minimum.md) | <code>fun Byte.minimum(minVal: Byte): Byte</code><br/> |

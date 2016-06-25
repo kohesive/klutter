@@ -2,7 +2,6 @@
 
 
 # encodedPath
-`val encodedPath: String?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L285)
-Overrides [ImmutableUri.encodedPath](../../-immutable-uri/encoded-path.md)
+<code>val encodedPath: String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L285)<br/>Overrides [ImmutableUri.encodedPath](../../-immutable-uri/encoded-path.md)
 
 

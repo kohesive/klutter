@@ -7,7 +7,7 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [KCallableFuncRefOrLambda](-k-callable-func-ref-or-lambda/index.md) | `class KCallableFuncRefOrLambda<T&nbsp;:&nbsp;Function<R>, out&nbsp;R>&nbsp;:&nbsp;KCallable<R>` |
+| [KCallableFuncRefOrLambda](-k-callable-func-ref-or-lambda/index.md) | <code>class KCallableFuncRefOrLambda<T : Function<R>, out R> : KCallable<R></code><br/> |
 
 ### Extensions for External Classes
 

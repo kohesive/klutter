@@ -2,6 +2,5 @@
 
 
 # attachKotlinPlugin
-`fun DBI.attachKotlinPlugin(): DBI` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinPlugin.kt#L28)
-
+<code>fun DBI.attachKotlinPlugin(): DBI</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinPlugin.kt#L28)<br/>
 

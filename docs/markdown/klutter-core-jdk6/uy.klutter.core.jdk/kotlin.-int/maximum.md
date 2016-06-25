@@ -2,6 +2,5 @@
 
 
 # maximum
-`fun Int.maximum(maxVal:&nbsp;Int): Int` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Numbers.kt#L7)
-
+<code>fun Int.maximum(maxVal: Int): Int</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Numbers.kt#L7)<br/>
 

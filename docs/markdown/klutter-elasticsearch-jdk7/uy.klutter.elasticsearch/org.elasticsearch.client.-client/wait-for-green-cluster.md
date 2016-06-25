@@ -2,6 +2,5 @@
 
 
 # waitForGreenCluster
-`fun Client.waitForGreenCluster(): Promise<ClusterHealthStatus,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Client.kt#L118)
-
+<code>fun Client.waitForGreenCluster(): Promise<ClusterHealthStatus, [Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)></code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Client.kt#L118)<br/>
 

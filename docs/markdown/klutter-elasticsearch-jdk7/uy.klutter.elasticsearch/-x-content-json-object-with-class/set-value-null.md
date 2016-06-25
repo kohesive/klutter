@@ -2,6 +2,5 @@
 
 
 # setValueNull
-`fun setValueNull(field:&nbsp;KProperty1<T,&nbsp;*>): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L51)
-
+<code>fun setValueNull(field: KProperty1<T, *>): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L51)<br/>
 

@@ -2,13 +2,4 @@
 
 
 # promisePutIfAbsent
-`fun <K&nbsp;:&nbsp;Any, V> AsyncMap<K,&nbsp;V>.promisePutIfAbsent(key:&nbsp;K, value:&nbsp;V): Promise<V,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/VertxSharedData.kt#L145)
-
-Put a value into the async map if absent (see Vert.x AsncMap class for more full documentation)
-
-
-`fun <K&nbsp;:&nbsp;Any, V> AsyncMap<K,&nbsp;V>.promisePutIfAbsent(key:&nbsp;K, value:&nbsp;V, ttl:&nbsp;Long): Promise<V,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/VertxSharedData.kt#L159)
-
-Put a value into the async map if absent with TTL value (see Vert.x AsncMap class for more full documentation)
-
-
+<code>fun <K : Any, V> AsyncMap<K, V>.promisePutIfAbsent(key: K, value: V): Promise<V, [Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)></code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/VertxSharedData.kt#L145)<br/><p>Put a value into the async map if absent (see Vert.x AsncMap class for more full documentation)</p><br/><br/><code>fun <K : Any, V> AsyncMap<K, V>.promisePutIfAbsent(key: K, value: V, ttl: Long): Promise<V, [Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)></code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/VertxSharedData.kt#L159)<br/><p>Put a value into the async map if absent with TTL value (see Vert.x AsncMap class for more full documentation)</p><br/><br/>

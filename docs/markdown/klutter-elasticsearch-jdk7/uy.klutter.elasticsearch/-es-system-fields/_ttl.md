@@ -2,6 +2,5 @@
 
 
 # _ttl
-`_ttl` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L11)
-
+<code>_ttl</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L11)<br/>
 

@@ -2,8 +2,7 @@
 
 
 # &lt;init&gt;
-`ReadOnlyListIterator(delegate:&nbsp;ListIterator<T>)`
-
+<code>ReadOnlyListIterator(delegate: ListIterator<T>)</code><br/>
 Wraps a ListIterator with a lightweight delegating class that prevents casting back to mutable type
 
 

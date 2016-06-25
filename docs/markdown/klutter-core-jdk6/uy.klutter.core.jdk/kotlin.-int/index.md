@@ -5,8 +5,7 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [coerce](coerce.md) | `fun Int.coerce(minVal:&nbsp;Int, maxVal:&nbsp;Int): Int`
-`fun Int.coerce(range:&nbsp;IntRange): Int` |
-| [humanReadable](human-readable.md) | `fun Int.humanReadable(): String` |
-| [maximum](maximum.md) | `fun Int.maximum(maxVal:&nbsp;Int): Int` |
-| [minimum](minimum.md) | `fun Int.minimum(minVal:&nbsp;Int): Int` |
+| [coerce](coerce.md) | <code>fun Int.coerce(minVal: Int, maxVal: Int): Int</code><br/><code>fun Int.coerce(range: IntRange): Int</code><br/> |
+| [humanReadable](human-readable.md) | <code>fun Int.humanReadable(): String</code><br/> |
+| [maximum](maximum.md) | <code>fun Int.maximum(maxVal: Int): Int</code><br/> |
+| [minimum](minimum.md) | <code>fun Int.minimum(minVal: Int): Int</code><br/> |

@@ -2,8 +2,7 @@
 
 
 # toIsoString
-`fun DateTime.toIsoString(): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jodatime-jdk6/src/main/kotlin/uy/klutter/core/jodatime/Dates.kt#L28)
-
+<code>fun DateTime.toIsoString(): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jodatime-jdk6/src/main/kotlin/uy/klutter/core/jodatime/Dates.kt#L28)<br/>
 Convert the date into a String in the ISO Date Time format yyyy-MM-dd`T`hh:mm:ss.SSSZ
 
 **Return**

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`CompiledGraphSchema(schema:&nbsp;[GraphSchemaBuilder](../-graph-schema-builder/index.md)<N,&nbsp;R>)`
-
+<code>CompiledGraphSchema(schema: [GraphSchemaBuilder](../-graph-schema-builder/index.md)<N, R>)</code><br/>
 

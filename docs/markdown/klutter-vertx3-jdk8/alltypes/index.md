@@ -11,8 +11,8 @@
 | [io.vertx.ext.web.Session](../uy.klutter.vertx/io.vertx.ext.web.-session/index.md) (extensions in package uy.klutter.vertx) |  |
 | [io.vertx.core.shareddata.SharedData](../uy.klutter.vertx/io.vertx.core.shareddata.-shared-data/index.md) (extensions in package uy.klutter.vertx) |  |
 | [io.vertx.core.Vertx](../uy.klutter.vertx/io.vertx.core.-vertx/index.md) (extensions in package uy.klutter.vertx) |  |
-| [uy.klutter.vertx.VertxInit](../uy.klutter.vertx/-vertx-init/index.md) | <p>Setup Kovenant do dispatch via Vert.x, and ensure the Vert.x Jackson object mapper is setup for Kotlin and JDK 8 types.</p> |
+| [uy.klutter.vertx.VertxInit](../uy.klutter.vertx/-vertx-init/index.md) | Setup Kovenant do dispatch via Vert.x, and ensure the Vert.x Jackson object mapper is setup for Kotlin and JDK 8 types. |
 | [uy.klutter.vertx.VertxInjektModule](../uy.klutter.vertx/-vertx-injekt-module/index.md) |  |
-| [uy.klutter.vertx.VertxInjektables](../uy.klutter.vertx/-vertx-injektables/index.md) | <p>This Injekt Module does a few things:</p> |
-| [uy.klutter.vertx.VertxWithSlf4jInjektables](../uy.klutter.vertx/-vertx-with-slf4j-injektables/index.md) | <p>Same as VertxInjektables but routes Vert.x and Hazelcast logging facades to use Slf4j, and app directly to Slf4j</p> |
+| [uy.klutter.vertx.VertxInjektables](../uy.klutter.vertx/-vertx-injektables/index.md) | This Injekt Module does a few things: |
+| [uy.klutter.vertx.VertxWithSlf4jInjektables](../uy.klutter.vertx/-vertx-with-slf4j-injektables/index.md) | Same as VertxInjektables but routes Vert.x and Hazelcast logging facades to use Slf4j, and app directly to Slf4j |
 | [uy.klutter.vertx.WrappedThrowableException](../uy.klutter.vertx/-wrapped-throwable-exception/index.md) |  |

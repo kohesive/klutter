@@ -2,6 +2,5 @@
 
 
 # minimum
-`fun Byte.minimum(minVal:&nbsp;Byte): Byte` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Numbers.kt#L16)
-
+<code>fun Byte.minimum(minVal: Byte): Byte</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Numbers.kt#L16)<br/>
 

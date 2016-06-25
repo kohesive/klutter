@@ -2,6 +2,5 @@
 
 
 # values
-`val values: Collection<V>` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L170)
-
+<code>val values: Collection<V></code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L170)<br/>
 

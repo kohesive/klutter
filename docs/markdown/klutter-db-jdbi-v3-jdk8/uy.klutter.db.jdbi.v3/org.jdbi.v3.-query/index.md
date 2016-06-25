@@ -5,6 +5,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [map](map.md) | `fun <O&nbsp;:&nbsp;Map<String,&nbsp;Any?>, T&nbsp;:&nbsp;Any> Query<O>.map(toClass:&nbsp;KClass<T>): Query<T>` |
-| [useSequence](use-sequence.md) | `fun <O&nbsp;:&nbsp;Any> Query<O>.useSequence(block:&nbsp;(Sequence<O>)&nbsp;->&nbsp;Unit): Unit`
-`fun <O&nbsp;:&nbsp;Map<String,&nbsp;Any?>, T&nbsp;:&nbsp;Any> Query<O>.useSequence(toClass:&nbsp;KClass<T>, block:&nbsp;(Sequence<T>)&nbsp;->&nbsp;Unit): Unit` |
+| [map](map.md) | <code>fun <O : Map<String, Any?>, T : Any> Query<O>.map(toClass: KClass<T>): Query<T></code><br/> |
+| [useSequence](use-sequence.md) | <code>fun <O : Any> Query<O>.useSequence(block: (Sequence<O>) -> Unit): Unit</code><br/><code>fun <O : Map<String, Any?>, T : Any> Query<O>.useSequence(toClass: KClass<T>, block: (Sequence<T>) -> Unit): Unit</code><br/> |

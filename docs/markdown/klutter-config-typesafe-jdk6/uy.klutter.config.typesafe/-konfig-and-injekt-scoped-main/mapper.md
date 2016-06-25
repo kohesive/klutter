@@ -2,6 +2,5 @@
 
 
 # mapper
-`val mapper: ObjectMapper` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L21)
-
+<code>val mapper: ObjectMapper</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L21)<br/>
 

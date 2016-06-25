@@ -2,7 +2,6 @@
 
 
 # decodedPath
-`val decodedPath: List<String>?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L285)
-Overrides [ImmutableUri.decodedPath](../../-immutable-uri/decoded-path.md)
+<code>val decodedPath: List<String>?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L285)<br/>Overrides [ImmutableUri.decodedPath](../../-immutable-uri/decoded-path.md)
 
 

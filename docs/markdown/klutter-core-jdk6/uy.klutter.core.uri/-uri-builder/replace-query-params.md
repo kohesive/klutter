@@ -2,6 +2,5 @@
 
 
 # replaceQueryParams
-`fun replaceQueryParams(vararg params:&nbsp;<ERROR CLASS><String,&nbsp;String?>): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L238)
-
+<code>fun replaceQueryParams(vararg params: <ERROR CLASS><String, String?>): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L238)<br/>
 

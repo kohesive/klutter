@@ -7,7 +7,7 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [FileConfig](-file-config/index.md) | `class FileConfig&nbsp;:&nbsp;FileConfig` |
+| [FileConfig](-file-config/index.md) | <code>class FileConfig : FileConfig</code><br/> |
 
 ### Extensions for External Classes
 

@@ -2,8 +2,7 @@
 
 
 # jsonArray
-`inline fun jsonArray(init:&nbsp;JsonArray.()&nbsp;->&nbsp;Unit): JsonArray` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/json/VertxJson.kt#L73)
-
+<code>inline fun jsonArray(init: JsonArray.() -> Unit): JsonArray</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/json/VertxJson.kt#L73)<br/>
 A builder function to start creating a JsonArray
 
 ```

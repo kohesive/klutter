@@ -2,8 +2,7 @@
 
 
 # bindClassAtConfigPath
-`abstract fun <T&nbsp;:&nbsp;Any> bindClassAtConfigPath(configPath:&nbsp;String, klass:&nbsp;TypeReference<T>): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L69)
-
+<code>abstract fun <T : Any> bindClassAtConfigPath(configPath: String, klass: TypeReference<T>): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L69)<br/>
 bind a class bindings its values from a configuration path immediately
 
 

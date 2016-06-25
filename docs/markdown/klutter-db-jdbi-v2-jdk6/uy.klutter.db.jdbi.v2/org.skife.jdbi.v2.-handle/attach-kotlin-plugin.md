@@ -2,6 +2,5 @@
 
 
 # attachKotlinPlugin
-`fun Handle.attachKotlinPlugin(): Handle` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinPlugin.kt#L24)
-
+<code>fun Handle.attachKotlinPlugin(): Handle</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinPlugin.kt#L24)<br/>
 

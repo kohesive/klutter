@@ -2,47 +2,46 @@
 
 
 # ImmutableUri
-`interface ImmutableUri` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L28)
-
+<code>interface ImmutableUri</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L28)<br/>
 
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [decodedFragment](decoded-fragment.md) | `abstract val decodedFragment: String?` |
-| [decodedPath](decoded-path.md) | `abstract val decodedPath: List<String>?` |
-| [decodedQuery](decoded-query.md) | `abstract val decodedQuery: Map<String,&nbsp;List<String>>?` |
-| [decodedQueryDeduped](decoded-query-deduped.md) | `abstract val decodedQueryDeduped: Map<String,&nbsp;String>?` |
-| [decodedUserInfo](decoded-user-info.md) | `abstract val decodedUserInfo: String?` |
-| [encodedFragment](encoded-fragment.md) | `abstract val encodedFragment: String?` |
-| [encodedPath](encoded-path.md) | `abstract val encodedPath: String?` |
-| [encodedQuery](encoded-query.md) | `abstract val encodedQuery: String?` |
-| [encodedUserInfo](encoded-user-info.md) | `abstract val encodedUserInfo: String?` |
-| [host](host.md) | `abstract val host: String?` |
-| [port](port.md) | `abstract val port: Int?` |
-| [scheme](scheme.md) | `abstract val scheme: String?` |
+| [decodedFragment](decoded-fragment.md) | <code>abstract val decodedFragment: String?</code><br/> |
+| [decodedPath](decoded-path.md) | <code>abstract val decodedPath: List<String>?</code><br/> |
+| [decodedQuery](decoded-query.md) | <code>abstract val decodedQuery: Map<String, List<String>>?</code><br/> |
+| [decodedQueryDeduped](decoded-query-deduped.md) | <code>abstract val decodedQueryDeduped: Map<String, String>?</code><br/> |
+| [decodedUserInfo](decoded-user-info.md) | <code>abstract val decodedUserInfo: String?</code><br/> |
+| [encodedFragment](encoded-fragment.md) | <code>abstract val encodedFragment: String?</code><br/> |
+| [encodedPath](encoded-path.md) | <code>abstract val encodedPath: String?</code><br/> |
+| [encodedQuery](encoded-query.md) | <code>abstract val encodedQuery: String?</code><br/> |
+| [encodedUserInfo](encoded-user-info.md) | <code>abstract val encodedUserInfo: String?</code><br/> |
+| [host](host.md) | <code>abstract val host: String?</code><br/> |
+| [port](port.md) | <code>abstract val port: Int?</code><br/> |
+| [scheme](scheme.md) | <code>abstract val scheme: String?</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [asString](as-string.md) | `open fun asString(): String` |
-| [fragmentAsDecodedPath](fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List<String>?` |
-| [fragmentAsDecodedQuery](fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map<String,&nbsp;List<String>>?` |
-| [fragmentAsDecodedQueryDeduped](fragment-as-decoded-query-deduped.md) | `open fun fragmentAsDecodedQueryDeduped(): Map<String,&nbsp;String>?` |
-| [hasFragment](has-fragment.md) | `open fun hasFragment(): Boolean` |
-| [hasHost](has-host.md) | `open fun hasHost(): Boolean` |
-| [hasPath](has-path.md) | `open fun hasPath(): Boolean` |
-| [hasPort](has-port.md) | `open fun hasPort(): Boolean` |
-| [hasQuery](has-query.md) | `open fun hasQuery(): Boolean` |
-| [hasScheme](has-scheme.md) | `open fun hasScheme(): Boolean` |
-| [hasUserInfo](has-user-info.md) | `open fun hasUserInfo(): Boolean` |
-| [toURI](to-u-r-i.md) | `open fun toURI(): [URI](http://docs.oracle.com/javase/6/docs/api/java/net/URI.html)` |
+| [asString](as-string.md) | <code>open fun asString(): String</code><br/> |
+| [fragmentAsDecodedPath](fragment-as-decoded-path.md) | <code>open fun fragmentAsDecodedPath(): List<String>?</code><br/> |
+| [fragmentAsDecodedQuery](fragment-as-decoded-query.md) | <code>open fun fragmentAsDecodedQuery(): Map<String, List<String>>?</code><br/> |
+| [fragmentAsDecodedQueryDeduped](fragment-as-decoded-query-deduped.md) | <code>open fun fragmentAsDecodedQueryDeduped(): Map<String, String>?</code><br/> |
+| [hasFragment](has-fragment.md) | <code>open fun hasFragment(): Boolean</code><br/> |
+| [hasHost](has-host.md) | <code>open fun hasHost(): Boolean</code><br/> |
+| [hasPath](has-path.md) | <code>open fun hasPath(): Boolean</code><br/> |
+| [hasPort](has-port.md) | <code>open fun hasPort(): Boolean</code><br/> |
+| [hasQuery](has-query.md) | <code>open fun hasQuery(): Boolean</code><br/> |
+| [hasScheme](has-scheme.md) | <code>open fun hasScheme(): Boolean</code><br/> |
+| [hasUserInfo](has-user-info.md) | <code>open fun hasUserInfo(): Boolean</code><br/> |
+| [toURI](to-u-r-i.md) | <code>open fun toURI(): [URI](http://docs.oracle.com/javase/6/docs/api/java/net/URI.html)</code><br/> |
 
 ### Inheritors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [BuiltUri](../-uri-builder/-built-uri/index.md) | `data class BuiltUri&nbsp;:&nbsp;ImmutableUri` |
-| [UriBuilder](../-uri-builder/index.md) | `class UriBuilder&nbsp;:&nbsp;ImmutableUri` |
+| [BuiltUri](../-uri-builder/-built-uri/index.md) | <code>data class BuiltUri : ImmutableUri</code><br/> |
+| [UriBuilder](../-uri-builder/index.md) | <code>class UriBuilder : ImmutableUri</code><br/> |

@@ -2,8 +2,7 @@
 
 
 # &lt;init&gt;
-`ReadOnlyList(delegate:&nbsp;List<T>)`
-
+<code>ReadOnlyList(delegate: List<T>)</code><br/>
 Wraps a List with a lightweight delegating class that prevents casting back to mutable type
 
 

@@ -2,19 +2,4 @@
 
 
 # deployVerticle
-`fun <T&nbsp;:&nbsp;AbstractVerticle> Vertx.deployVerticle(verticleClass:&nbsp;KClass<T>): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L186)
-
-Deploy a verticle async without waiting for it to complete or tracking it in any way
-
-### Parameters
-`verticleClass` - reference to Verticle class (Kotlin `KClass`) to deploy
-
-
-`fun <T&nbsp;:&nbsp;AbstractVerticle> Vertx.deployVerticle(verticleClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<T>): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L196)
-
-Deploy a verticle async without waiting for it to complete or tracking it in any way
-
-### Parameters
-`verticleClass` - reference to Verticle class (Java `Class<*>`) to deploy
-
-
+<code>fun <T : AbstractVerticle> Vertx.deployVerticle(verticleClass: KClass<T>): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L186)<br/><p>Deploy a verticle async without waiting for it to complete or tracking it in any way</p>### Parameters<br/><code>verticleClass</code> - reference to Verticle class (Kotlin <code>KClass</code>) to deploy<br/><br/><br/><code>fun <T : AbstractVerticle> Vertx.deployVerticle(verticleClass: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<T>): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L196)<br/><p>Deploy a verticle async without waiting for it to complete or tracking it in any way</p>### Parameters<br/><code>verticleClass</code> - reference to Verticle class (Java <code>Class<*></code>) to deploy<br/><br/><br/>

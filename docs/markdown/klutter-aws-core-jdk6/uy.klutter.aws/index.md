@@ -7,4 +7,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [defaultSafeCredentialsProviderChain](default-safe-credentials-provider-chain.md) | `fun defaultSafeCredentialsProviderChain(): AWSCredentialsProviderChain` |
+| [defaultSafeCredentialsProviderChain](default-safe-credentials-provider-chain.md) | <code>fun defaultSafeCredentialsProviderChain(): AWSCredentialsProviderChain</code><br/> |

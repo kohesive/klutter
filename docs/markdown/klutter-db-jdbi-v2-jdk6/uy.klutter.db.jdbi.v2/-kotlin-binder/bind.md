@@ -2,6 +2,5 @@
 
 
 # bind
-`fun bind(q:&nbsp;SQLStatement<*>, bind:&nbsp;Bind?, arg:&nbsp;Any?): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinBinder.kt#L21)
-
+<code>fun bind(q: SQLStatement<*>, bind: Bind?, arg: Any?): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinBinder.kt#L21)<br/>
 

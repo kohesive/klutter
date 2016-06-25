@@ -2,6 +2,5 @@
 
 
 # accepts
-`fun accepts(forClass:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, ctx:&nbsp;StatementContext): Boolean` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Factories.kt#L28)
-
+<code>fun accepts(forClass: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>, ctx: StatementContext): Boolean</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Factories.kt#L28)<br/>
 

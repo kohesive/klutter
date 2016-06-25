@@ -2,8 +2,5 @@
 
 
 # &lt;init&gt;
-`NoSuchColumnMapperException(string:&nbsp;String, throwable:&nbsp;Throwable)`
-`NoSuchColumnMapperException(cause:&nbsp;Throwable)`
-`NoSuchColumnMapperException(message:&nbsp;String)`
-
+<code>NoSuchColumnMapperException(string: String, throwable: Throwable)</code><br/><code>NoSuchColumnMapperException(cause: Throwable)</code><br/><code>NoSuchColumnMapperException(message: String)</code><br/>
 

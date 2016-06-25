@@ -2,7 +2,6 @@
 
 
 # load
-`open fun load(): Config` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L137)
-Overrides [ConfigLoader.load](../-config-loader/load.md)
+<code>open fun load(): Config</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L137)<br/>Overrides [ConfigLoader.load](../-config-loader/load.md)
 
 

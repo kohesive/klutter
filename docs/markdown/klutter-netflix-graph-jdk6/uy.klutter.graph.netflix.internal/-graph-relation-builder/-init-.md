@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`GraphRelationBuilder(relations:&nbsp;MutableList<[GraphRelationBuilder](index.md)<N,&nbsp;R>>, defaultStructure:&nbsp;[RelationStructure](../../uy.klutter.graph.netflix/-relation-structure/index.md), fromNode:&nbsp;N, scopeAs:&nbsp;[RelationScope](../../uy.klutter.graph.netflix/-relation-scope/index.md), modelScopeName:&nbsp;String?&nbsp;=&nbsp;null)`
-
+<code>GraphRelationBuilder(relations: MutableList<[GraphRelationBuilder](index.md)<N, R>>, defaultStructure: [RelationStructure](../../uy.klutter.graph.netflix/-relation-structure/index.md), fromNode: N, scopeAs: [RelationScope](../../uy.klutter.graph.netflix/-relation-scope/index.md), modelScopeName: String? = null)</code><br/>
 

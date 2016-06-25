@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`WrappedThrowableException(cause:&nbsp;Throwable)`
-
+<code>WrappedThrowableException(cause: Throwable)</code><br/>
 

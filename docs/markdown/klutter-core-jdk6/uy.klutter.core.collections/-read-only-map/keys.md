@@ -2,6 +2,5 @@
 
 
 # keys
-`val keys: Set<K>` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L168)
-
+<code>val keys: Set<K></code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L168)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`ReaderConfig(reader:&nbsp;[Reader](http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html))`
-
+<code>ReaderConfig(reader: [Reader](http://docs.oracle.com/javase/6/docs/api/java/io/Reader.html))</code><br/>
 

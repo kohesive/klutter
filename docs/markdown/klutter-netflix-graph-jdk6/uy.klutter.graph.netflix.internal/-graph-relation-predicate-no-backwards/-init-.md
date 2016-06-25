@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`GraphRelationPredicateNoBackwards(builder:&nbsp;[GraphRelationBuilder](../-graph-relation-builder/index.md)<N,&nbsp;R>)`
-
+<code>GraphRelationPredicateNoBackwards(builder: [GraphRelationBuilder](../-graph-relation-builder/index.md)<N, R>)</code><br/>
 

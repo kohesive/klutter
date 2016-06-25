@@ -2,6 +2,5 @@
 
 
 # toId
-`fun toId(nodeType:&nbsp;N, ordinal:&nbsp;Int): String` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Ordinals.kt#L32)
-
+<code>fun toId(nodeType: N, ordinal: Int): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Ordinals.kt#L32)<br/>
 

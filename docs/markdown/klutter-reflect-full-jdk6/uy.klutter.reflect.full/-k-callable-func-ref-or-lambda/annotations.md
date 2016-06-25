@@ -2,6 +2,5 @@
 
 
 # annotations
-`val annotations: List<Annotation>` [(source)](https://github.com/kohesive/klutter/blob/master/reflect-full-jdk6/src/main/kotlin/uy/klutter/reflect/full/KT-9005.kt#L30)
-
+<code>val annotations: List<Annotation></code> [(source)](https://github.com/kohesive/klutter/blob/master/reflect-full-jdk6/src/main/kotlin/uy/klutter/reflect/full/KT-9005.kt#L30)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`ResolveConfig()`
-
+<code>ResolveConfig()</code><br/>
 

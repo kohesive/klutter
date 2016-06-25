@@ -5,6 +5,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [deleteRecursively](delete-recursively.md) | `fun [Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html).deleteRecursively(): Boolean` |
-| [exists](exists.md) | `fun [Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html).exists(): Boolean` |
-| [notExists](not-exists.md) | `fun [Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html).notExists(): Boolean` |
+| [deleteRecursively](delete-recursively.md) | <code>fun [Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html).deleteRecursively(): Boolean</code><br/> |
+| [exists](exists.md) | <code>fun [Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html).exists(): Boolean</code><br/> |
+| [notExists](not-exists.md) | <code>fun [Path](http://docs.oracle.com/javase/6/docs/api/java/nio/file/Path.html).notExists(): Boolean</code><br/> |

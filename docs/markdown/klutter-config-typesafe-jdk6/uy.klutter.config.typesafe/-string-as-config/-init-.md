@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`StringAsConfig(configString:&nbsp;String)`
-
+<code>StringAsConfig(configString: String)</code><br/>
 

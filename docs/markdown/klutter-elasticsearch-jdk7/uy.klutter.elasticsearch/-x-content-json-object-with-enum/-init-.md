@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`XContentJsonObjectWithEnum(x:&nbsp;XContentBuilder)`
-
+<code>XContentJsonObjectWithEnum(x: XContentBuilder)</code><br/>
 

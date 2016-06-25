@@ -2,8 +2,7 @@
 
 
 # ReadOnlyList
-`open class ReadOnlyList<T>&nbsp;:&nbsp;List<T>, [ReadOnly](../-read-only.md), [Serializable](http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L80)
-
+<code>open class ReadOnlyList<T> : List<T>, [ReadOnly](../-read-only.md), [Serializable](http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L80)<br/>
 Wraps a List with a lightweight delegating class that prevents casting back to mutable type
 
 
@@ -12,45 +11,44 @@ Wraps a List with a lightweight delegating class that prevents casting back to m
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ReadOnlyList(delegate:&nbsp;List<T>)`<p>Wraps a List with a lightweight delegating class that prevents casting back to mutable type</p> |
+| [&lt;init&gt;](-init-.md) | <code>ReadOnlyList(delegate: List<T>)</code><br/>Wraps a List with a lightweight delegating class that prevents casting back to mutable type |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [delegate](delegate.md) | `val delegate: List<T>` |
+| [delegate](delegate.md) | <code>val delegate: List<T></code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [equals](equals.md) | `open fun equals(other:&nbsp;Any?): Boolean` |
-| [hashCode](hash-code.md) | `open fun hashCode(): Int` |
-| [iterator](iterator.md) | `open fun iterator(): Iterator<T>` |
-| [listIterator](list-iterator.md) | `open fun listIterator(): ListIterator<T>`
-`open fun listIterator(index:&nbsp;Int): ListIterator<T>` |
-| [subList](sub-list.md) | `open fun subList(fromIndex:&nbsp;Int, toIndex:&nbsp;Int): List<T>` |
-| [toString](to-string.md) | `open fun toString(): String` |
+| [equals](equals.md) | <code>open fun equals(other: Any?): Boolean</code><br/> |
+| [hashCode](hash-code.md) | <code>open fun hashCode(): Int</code><br/> |
+| [iterator](iterator.md) | <code>open fun iterator(): Iterator<T></code><br/> |
+| [listIterator](list-iterator.md) | <code>open fun listIterator(): ListIterator<T></code><br/><code>open fun listIterator(index: Int): ListIterator<T></code><br/> |
+| [subList](sub-list.md) | <code>open fun subList(fromIndex: Int, toIndex: Int): List<T></code><br/> |
+| [toString](to-string.md) | <code>open fun toString(): String</code><br/> |
 
 ### Companion Object Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [serialVersionUID](serial-version-u-i-d.md) | `val serialVersionUID: Long` |
+| [serialVersionUID](serial-version-u-i-d.md) | <code>val serialVersionUID: Long</code><br/> |
 
 ### Extension Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [asReadOnlyCollection](../kotlin.collections.-list/as-read-only-collection.md) | `fun <T> List<T>.asReadOnlyCollection(): Collection<T>`<p>Wraps the List as a Collection with a lightweight delegating class that prevents casting back to mutable type</p> |
-| [batch](../kotlin.collections.-iterable/batch.md) | `fun <T> Iterable<T>.batch(n:&nbsp;Int): <ERROR CLASS><List<T>>`<p>Batch a sequence into a sequence of lists of max N size</p>`fun <T> Iterable<T>.batch(n:&nbsp;Int, forEachDo:&nbsp;(List<T>)&nbsp;->&nbsp;Unit): Unit`<p>Batch a sequence into a sequence of lists of max N size, and execute a lambda for each group</p> |
-| [lazyBatch](../kotlin.collections.-iterable/lazy-batch.md) | `fun <T> Iterable<T>.lazyBatch(n:&nbsp;Int, forEachDo:&nbsp;(<ERROR CLASS><T>)&nbsp;->&nbsp;Unit): Unit`<p>A purely Lazy batch must have the source consumed to progress, but does not need to materialize a list per iteration<br/>So, for purely lazy we only allow basically forEach when completely lazy</p> |
-| [toImmutable](../kotlin.collections.-list/to-immutable.md) | `fun <T> List<T>.toImmutable(): List<T>`<p>Copies the List and then wraps with a lightweight delegating class that prevents casting back to mutable type,<br/>specializing for the case of the RandomAccess marker interface being retained if it was there originally</p> |
-| [whenAllNotNull](../../uy.klutter.core.common/kotlin.collections.-collection/when-all-not-null.md) | `fun <T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any> Collection<T?>.whenAllNotNull(block:&nbsp;(List<T>)&nbsp;->&nbsp;R): Unit` |
-| [whenAnyNotNull](../../uy.klutter.core.common/kotlin.collections.-collection/when-any-not-null.md) | `fun <T&nbsp;:&nbsp;Any, R&nbsp;:&nbsp;Any> Collection<T?>.whenAnyNotNull(block:&nbsp;(List<T>)&nbsp;->&nbsp;R): Unit` |
+| [asReadOnlyCollection](../kotlin.collections.-list/as-read-only-collection.md) | <code>fun <T> List<T>.asReadOnlyCollection(): Collection<T></code><br/>Wraps the List as a Collection with a lightweight delegating class that prevents casting back to mutable type |
+| [batch](../kotlin.collections.-iterable/batch.md) | <code>fun <T> Iterable<T>.batch(n: Int): <ERROR CLASS><List<T>></code><br/>Batch a sequence into a sequence of lists of max N size<code>fun <T> Iterable<T>.batch(n: Int, forEachDo: (List<T>) -> Unit): Unit</code><br/>Batch a sequence into a sequence of lists of max N size, and execute a lambda for each group |
+| [lazyBatch](../kotlin.collections.-iterable/lazy-batch.md) | <code>fun <T> Iterable<T>.lazyBatch(n: Int, forEachDo: (<ERROR CLASS><T>) -> Unit): Unit</code><br/>A purely Lazy batch must have the source consumed to progress, but does not need to materialize a list per iteration<br/>So, for purely lazy we only allow basically forEach when completely lazy |
+| [toImmutable](../kotlin.collections.-list/to-immutable.md) | <code>fun <T> List<T>.toImmutable(): List<T></code><br/>Copies the List and then wraps with a lightweight delegating class that prevents casting back to mutable type,<br/>specializing for the case of the RandomAccess marker interface being retained if it was there originally |
+| [whenAllNotNull](../../uy.klutter.core.common/kotlin.collections.-collection/when-all-not-null.md) | <code>fun <T : Any, R : Any> Collection<T?>.whenAllNotNull(block: (List<T>) -> R): Unit</code><br/> |
+| [whenAnyNotNull](../../uy.klutter.core.common/kotlin.collections.-collection/when-any-not-null.md) | <code>fun <T : Any, R : Any> Collection<T?>.whenAnyNotNull(block: (List<T>) -> R): Unit</code><br/> |
 
 ### Inheritors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [ReadOnlyRandomAccessList](../-read-only-random-access-list/index.md) | `class ReadOnlyRandomAccessList<T>&nbsp;:&nbsp;ReadOnlyList<T>, List<T>, [ReadOnly](../-read-only.md), [RandomAccess](http://docs.oracle.com/javase/6/docs/api/java/util/RandomAccess.html), [Serializable](http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html)`<p>Wraps a List that is also RandomAccess with a delegating class that prevents casting back to mutable type</p> |
+| [ReadOnlyRandomAccessList](../-read-only-random-access-list/index.md) | <code>class ReadOnlyRandomAccessList<T> : ReadOnlyList<T>, List<T>, [ReadOnly](../-read-only.md), [RandomAccess](http://docs.oracle.com/javase/6/docs/api/java/util/RandomAccess.html), [Serializable](http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html)</code><br/>Wraps a List that is also RandomAccess with a delegating class that prevents casting back to mutable type |

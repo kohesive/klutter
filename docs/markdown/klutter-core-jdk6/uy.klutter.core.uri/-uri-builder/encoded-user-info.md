@@ -2,8 +2,6 @@
 
 
 # encodedUserInfo
-`var encodedUserInfo: String?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L106)
-Overrides [ImmutableUri.encodedUserInfo](../-immutable-uri/encoded-user-info.md)
-`fun encodedUserInfo(newUserInfo:&nbsp;String?): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L163)
-
+<code>var encodedUserInfo: String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L106)<br/>Overrides [ImmutableUri.encodedUserInfo](../-immutable-uri/encoded-user-info.md)
+<code>fun encodedUserInfo(newUserInfo: String?): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L163)<br/>
 

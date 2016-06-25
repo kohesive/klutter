@@ -2,12 +2,11 @@
 
 
 # MULTIPLE
-`MULTIPLE` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/NetflixGraph.kt#L30)
-
+<code>MULTIPLE</code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/NetflixGraph.kt#L30)<br/>
 
 
 ### Inherited Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [flags](flags.md) | `val flags: Int` |
+| [flags](flags.md) | <code>val flags: Int</code><br/> |

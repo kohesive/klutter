@@ -2,6 +2,5 @@
 
 
 # asObjectList
-`fun asObjectList(): List<ConfigObject>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L133)
-
+<code>fun asObjectList(): List<ConfigObject></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L133)<br/>
 

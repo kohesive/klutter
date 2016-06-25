@@ -2,18 +2,17 @@
 
 
 # CompiledGraphSchema
-`class CompiledGraphSchema<N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L12)
-
+<code>class CompiledGraphSchema<N : Enum<N>, R : Enum<R>></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L12)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `CompiledGraphSchema(schema:&nbsp;[GraphSchemaBuilder](../-graph-schema-builder/index.md)<N,&nbsp;R>)` |
+| [&lt;init&gt;](-init-.md) | <code>CompiledGraphSchema(schema: [GraphSchemaBuilder](../-graph-schema-builder/index.md)<N, R>)</code><br/> |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [schema](schema.md) | `val schema: [GraphSchemaBuilder](../-graph-schema-builder/index.md)<N,&nbsp;R>` |
+| [schema](schema.md) | <code>val schema: [GraphSchemaBuilder](../-graph-schema-builder/index.md)<N, R></code><br/> |

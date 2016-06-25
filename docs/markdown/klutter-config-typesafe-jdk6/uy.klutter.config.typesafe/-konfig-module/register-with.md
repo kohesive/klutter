@@ -2,6 +2,5 @@
 
 
 # registerWith
-`open fun registerWith(intoModule:&nbsp;[KonfigRegistrar](../-konfig-registrar/index.md)): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L110)
-
+<code>open fun registerWith(intoModule: [KonfigRegistrar](../-konfig-registrar/index.md)): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L110)<br/>
 

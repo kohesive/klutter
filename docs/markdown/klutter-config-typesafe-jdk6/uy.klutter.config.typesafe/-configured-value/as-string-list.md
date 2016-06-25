@@ -2,7 +2,5 @@
 
 
 # asStringList
-`fun asStringList(): List<String>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L82)
-`fun asStringList(defaultValue:&nbsp;List<String>): List<String>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L83)
-
+<code>fun asStringList(): List<String></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L82)<br/><code>fun asStringList(defaultValue: List<String>): List<String></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L83)<br/>
 

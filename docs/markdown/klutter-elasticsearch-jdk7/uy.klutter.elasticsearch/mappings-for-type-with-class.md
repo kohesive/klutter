@@ -2,6 +2,5 @@
 
 
 # mappingsForTypeWithClass
-`fun <T&nbsp;:&nbsp;Any> mappingsForTypeWithClass(type:&nbsp;String, allowDynamic:&nbsp;Boolean&nbsp;=&nbsp;false, initTopLevel:&nbsp;[XContentJsonObjectWithEnum](-x-content-json-object-with-enum/index.md)<[EsSystemFields](-es-system-fields/index.md)>.()&nbsp;->&nbsp;Unit&nbsp;=&nbsp;{}, initProperties:&nbsp;[XContentJsonObjectWithClass](-x-content-json-object-with-class/index.md)<T>.()&nbsp;->&nbsp;Unit): [IndexTypeMapping](-index-type-mapping/index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L40)
-
+<code>fun <T : Any> mappingsForTypeWithClass(type: String, allowDynamic: Boolean = false, initTopLevel: [XContentJsonObjectWithEnum](-x-content-json-object-with-enum/index.md)<[EsSystemFields](-es-system-fields/index.md)>.() -> Unit = {}, initProperties: [XContentJsonObjectWithClass](-x-content-json-object-with-class/index.md)<T>.() -> Unit): [IndexTypeMapping](-index-type-mapping/index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L40)<br/>
 

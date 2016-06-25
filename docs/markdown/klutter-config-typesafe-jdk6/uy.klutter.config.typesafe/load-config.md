@@ -2,8 +2,7 @@
 
 
 # loadConfig
-`fun loadConfig(vararg loaders:&nbsp;[ConfigLoader](-config-loader/index.md)): Config` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L40)
-
+<code>fun loadConfig(vararg loaders: [ConfigLoader](-config-loader/index.md)): Config</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L40)<br/>
 Load a configuration chain, in the order of priority with NO default behavior (i.e. no environment vars, reference conf loading, nor system props)
 
 loadConfig(a, b, c) would have values from "a" override values from "b" overriding values from "c"

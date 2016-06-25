@@ -5,21 +5,16 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [exceptEnding](except-ending.md) | `fun String.exceptEnding(allButThisMany:&nbsp;Int): String` |
-| [exceptFirst](except-first.md) | `fun String.exceptFirst(): String` |
-| [exceptLast](except-last.md) | `fun String.exceptLast(): String` |
-| [exceptStarting](except-starting.md) | `fun String.exceptStarting(allAfterThisMany:&nbsp;Int): String` |
-| [fromEnd](from-end.md) | `fun String.fromEnd(howManyFromEnd:&nbsp;Int): String` |
-| [fromStart](from-start.md) | `fun String.fromStart(howManyFromStart:&nbsp;Int): String` |
-| [mustEndWith](must-end-with.md) | `fun String.mustEndWith(postfix:&nbsp;String): String`
-`fun String.mustEndWith(postfix:&nbsp;Char): String` |
-| [mustNotEndWith](must-not-end-with.md) | `fun String.mustNotEndWith(postfix:&nbsp;Char): String`
-`fun String.mustNotEndWith(postfix:&nbsp;String): String` |
-| [mustNotStartWith](must-not-start-with.md) | `fun String.mustNotStartWith(prefix:&nbsp;String): String`
-`fun String.mustNotStartWith(prefix:&nbsp;Char): String` |
-| [mustStartWith](must-start-with.md) | `fun String.mustStartWith(prefix:&nbsp;String): String`
-`fun String.mustStartWith(prefix:&nbsp;Char): String` |
-| [nullIfBlank](null-if-blank.md) | `fun String?.nullIfBlank(): String?` |
-| [nullIfEmpty](null-if-empty.md) | `fun String?.nullIfEmpty(): String?` |
-| [whenStartsWith](when-starts-with.md) | `fun String.whenStartsWith(prefix:&nbsp;String, thenWithRest:&nbsp;(String)&nbsp;->&nbsp;Unit): Boolean`
-`fun String.whenStartsWith(prefixes:&nbsp;List<String>, thenWithRest:&nbsp;(String)&nbsp;->&nbsp;Unit): Boolean` |
+| [exceptEnding](except-ending.md) | <code>fun String.exceptEnding(allButThisMany: Int): String</code><br/> |
+| [exceptFirst](except-first.md) | <code>fun String.exceptFirst(): String</code><br/> |
+| [exceptLast](except-last.md) | <code>fun String.exceptLast(): String</code><br/> |
+| [exceptStarting](except-starting.md) | <code>fun String.exceptStarting(allAfterThisMany: Int): String</code><br/> |
+| [fromEnd](from-end.md) | <code>fun String.fromEnd(howManyFromEnd: Int): String</code><br/> |
+| [fromStart](from-start.md) | <code>fun String.fromStart(howManyFromStart: Int): String</code><br/> |
+| [mustEndWith](must-end-with.md) | <code>fun String.mustEndWith(postfix: String): String</code><br/><code>fun String.mustEndWith(postfix: Char): String</code><br/> |
+| [mustNotEndWith](must-not-end-with.md) | <code>fun String.mustNotEndWith(postfix: Char): String</code><br/><code>fun String.mustNotEndWith(postfix: String): String</code><br/> |
+| [mustNotStartWith](must-not-start-with.md) | <code>fun String.mustNotStartWith(prefix: String): String</code><br/><code>fun String.mustNotStartWith(prefix: Char): String</code><br/> |
+| [mustStartWith](must-start-with.md) | <code>fun String.mustStartWith(prefix: String): String</code><br/><code>fun String.mustStartWith(prefix: Char): String</code><br/> |
+| [nullIfBlank](null-if-blank.md) | <code>fun String?.nullIfBlank(): String?</code><br/> |
+| [nullIfEmpty](null-if-empty.md) | <code>fun String?.nullIfEmpty(): String?</code><br/> |
+| [whenStartsWith](when-starts-with.md) | <code>fun String.whenStartsWith(prefix: String, thenWithRest: (String) -> Unit): Boolean</code><br/><code>fun String.whenStartsWith(prefixes: List<String>, thenWithRest: (String) -> Unit): Boolean</code><br/> |

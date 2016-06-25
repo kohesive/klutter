@@ -2,8 +2,7 @@
 
 
 # addArray
-`inline fun JsonArray.addArray(init:&nbsp;JsonArray.()&nbsp;->&nbsp;Unit): JsonArray` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/json/VertxJson.kt#L106)
-
+<code>inline fun JsonArray.addArray(init: JsonArray.() -> Unit): JsonArray</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/json/VertxJson.kt#L106)<br/>
 A builder function to nest JSON arrays within an array
 
 

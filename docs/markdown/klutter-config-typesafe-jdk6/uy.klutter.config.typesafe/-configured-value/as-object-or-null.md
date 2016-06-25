@@ -2,6 +2,5 @@
 
 
 # asObjectOrNull
-`fun asObjectOrNull(): ConfigObject?` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L131)
-
+<code>fun asObjectOrNull(): ConfigObject?</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L131)<br/>
 

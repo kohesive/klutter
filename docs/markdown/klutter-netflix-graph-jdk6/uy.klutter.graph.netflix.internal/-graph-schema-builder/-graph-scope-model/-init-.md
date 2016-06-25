@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`GraphScopeModel()`
-
+<code>GraphScopeModel()</code><br/>
 

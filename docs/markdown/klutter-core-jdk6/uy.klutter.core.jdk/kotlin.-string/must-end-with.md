@@ -2,7 +2,5 @@
 
 
 # mustEndWith
-`fun String.mustEndWith(postfix:&nbsp;String): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L64)
-`fun String.mustEndWith(postfix:&nbsp;Char): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L72)
-
+<code>fun String.mustEndWith(postfix: String): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L64)<br/><code>fun String.mustEndWith(postfix: Char): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L72)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # fragmentAsDecodedQuery
-`open fun fragmentAsDecodedQuery(): Map<String,&nbsp;List<String>>?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L68)
-
+<code>open fun fragmentAsDecodedQuery(): Map<String, List<String>>?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L68)<br/>
 

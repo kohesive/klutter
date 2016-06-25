@@ -13,5 +13,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [isoDateFormat](iso-date-format.md) | `fun isoDateFormat(): DateTimeFormatter`<p>Make a date formatter for ISO Date Time yyyy-MM-dd`T`hh:mm:ss.SSSZ</p> |
-| [utcNow](utc-now.md) | `fun utcNow(): DateTime`<p>Current time UTC</p> |
+| [isoDateFormat](iso-date-format.md) | <code>fun isoDateFormat(): DateTimeFormatter</code><br/>Make a date formatter for ISO Date Time yyyy-MM-dd`T`hh:mm:ss.SSSZ |
+| [utcNow](utc-now.md) | <code>fun utcNow(): DateTime</code><br/>Current time UTC |

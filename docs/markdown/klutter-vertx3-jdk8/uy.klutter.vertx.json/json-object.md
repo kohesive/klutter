@@ -2,8 +2,7 @@
 
 
 # jsonObject
-`inline fun jsonObject(init:&nbsp;JsonObject.()&nbsp;->&nbsp;Unit): JsonObject` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/json/VertxJson.kt#L57)
-
+<code>inline fun jsonObject(init: JsonObject.() -> Unit): JsonObject</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/json/VertxJson.kt#L57)<br/>
 A builder function to start creating a JsonObject
 
 ```

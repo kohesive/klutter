@@ -2,6 +2,5 @@
 
 
 # xsonObject
-`fun xsonObject(init:&nbsp;[XContentJsonObject](-x-content-json-object/index.md).()&nbsp;->&nbsp;Unit): XContentBuilder` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L146)
-
+<code>fun xsonObject(init: [XContentJsonObject](-x-content-json-object/index.md).() -> Unit): XContentBuilder</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L146)<br/>
 

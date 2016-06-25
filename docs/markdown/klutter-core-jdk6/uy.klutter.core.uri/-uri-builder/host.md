@@ -2,8 +2,6 @@
 
 
 # host
-`var host: String?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L74)
-Overrides [ImmutableUri.host](../-immutable-uri/host.md)
-`fun host(newHost:&nbsp;String?): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L173)
-
+<code>var host: String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L74)<br/>Overrides [ImmutableUri.host](../-immutable-uri/host.md)
+<code>fun host(newHost: String?): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L173)<br/>
 

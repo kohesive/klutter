@@ -2,7 +2,5 @@
 
 
 # asDoubleList
-`fun asDoubleList(): List<Double>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L97)
-`fun asDoubleList(defaultValue:&nbsp;List<Double>): List<Double>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L98)
-
+<code>fun asDoubleList(): List<Double></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L97)<br/><code>fun asDoubleList(defaultValue: List<Double>): List<Double></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L98)<br/>
 

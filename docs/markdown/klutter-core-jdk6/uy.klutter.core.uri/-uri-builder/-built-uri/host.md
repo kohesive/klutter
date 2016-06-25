@@ -2,7 +2,6 @@
 
 
 # host
-`val host: String?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L284)
-Overrides [ImmutableUri.host](../../-immutable-uri/host.md)
+<code>val host: String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L284)<br/>Overrides [ImmutableUri.host](../../-immutable-uri/host.md)
 
 

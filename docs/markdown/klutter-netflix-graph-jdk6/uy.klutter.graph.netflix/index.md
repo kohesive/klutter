@@ -7,20 +7,20 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [GraphRelationOptions](-graph-relation-options/index.md) | `interface GraphRelationOptions` |
-| [NodeAndId](-node-and-id/index.md) | `data class NodeAndId<N&nbsp;:&nbsp;Enum<N>>` |
-| [NodeAndOrd](-node-and-ord/index.md) | `data class NodeAndOrd<N&nbsp;:&nbsp;Enum<N>>` |
-| [RelationCardinality](-relation-cardinality/index.md) | `enum class RelationCardinality&nbsp;:&nbsp;[GraphRelationOptions](-graph-relation-options/index.md)` |
-| [RelationScope](-relation-scope/index.md) | `enum class RelationScope&nbsp;:&nbsp;[GraphRelationOptions](-graph-relation-options/index.md)` |
-| [RelationStructure](-relation-structure/index.md) | `enum class RelationStructure&nbsp;:&nbsp;[GraphRelationOptions](-graph-relation-options/index.md)` |
-| [TempGraphFlags](-temp-graph-flags/index.md) | `class TempGraphFlags&nbsp;:&nbsp;[GraphRelationOptions](-graph-relation-options/index.md)` |
+| [GraphRelationOptions](-graph-relation-options/index.md) | <code>interface GraphRelationOptions</code><br/> |
+| [NodeAndId](-node-and-id/index.md) | <code>data class NodeAndId<N : Enum<N>></code><br/> |
+| [NodeAndOrd](-node-and-ord/index.md) | <code>data class NodeAndOrd<N : Enum<N>></code><br/> |
+| [RelationCardinality](-relation-cardinality/index.md) | <code>enum class RelationCardinality : [GraphRelationOptions](-graph-relation-options/index.md)</code><br/> |
+| [RelationScope](-relation-scope/index.md) | <code>enum class RelationScope : [GraphRelationOptions](-graph-relation-options/index.md)</code><br/> |
+| [RelationStructure](-relation-structure/index.md) | <code>enum class RelationStructure : [GraphRelationOptions](-graph-relation-options/index.md)</code><br/> |
+| [TempGraphFlags](-temp-graph-flags/index.md) | <code>class TempGraphFlags : [GraphRelationOptions](-graph-relation-options/index.md)</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [constructGraph](construct-graph.md) | `fun <N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>> constructGraph(schema:&nbsp;[CompiledGraphSchema](../uy.klutter.graph.netflix.internal/-compiled-graph-schema/index.md)<N,&nbsp;R>, init:&nbsp;[GraphBuilder](../uy.klutter.graph.netflix.internal/-graph-builder/index.md)<N,&nbsp;R>.()&nbsp;->&nbsp;Unit): [GraphBuilder](../uy.klutter.graph.netflix.internal/-graph-builder/index.md)<N,&nbsp;R>` |
-| [defineGraphSchema](define-graph-schema.md) | `fun <N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>> defineGraphSchema(defaultStructure:&nbsp;[RelationStructure](-relation-structure/index.md), init:&nbsp;[GraphSchemaBuilder](../uy.klutter.graph.netflix.internal/-graph-schema-builder/index.md)<N,&nbsp;R>.()&nbsp;->&nbsp;Unit): [CompiledGraphSchema](../uy.klutter.graph.netflix.internal/-compiled-graph-schema/index.md)<N,&nbsp;R>` |
-| [minus](minus.md) | `operator fun [GraphRelationOptions](-graph-relation-options/index.md).minus(other:&nbsp;[GraphRelationOptions](-graph-relation-options/index.md)): [GraphRelationOptions](-graph-relation-options/index.md)` |
-| [plus](plus.md) | `operator fun [GraphRelationOptions](-graph-relation-options/index.md).plus(other:&nbsp;[GraphRelationOptions](-graph-relation-options/index.md)): [GraphRelationOptions](-graph-relation-options/index.md)` |
-| [useGraph](use-graph.md) | `fun <N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>> useGraph(inputStream:&nbsp;[InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html), run:&nbsp;[ReadOnlyGraph](../uy.klutter.graph.netflix.internal/-read-only-graph/index.md)<N,&nbsp;R>.()&nbsp;->&nbsp;Unit): [ReadOnlyGraph](../uy.klutter.graph.netflix.internal/-read-only-graph/index.md)<N,&nbsp;R>` |
+| [constructGraph](construct-graph.md) | <code>fun <N : Enum<N>, R : Enum<R>> constructGraph(schema: [CompiledGraphSchema](../uy.klutter.graph.netflix.internal/-compiled-graph-schema/index.md)<N, R>, init: [GraphBuilder](../uy.klutter.graph.netflix.internal/-graph-builder/index.md)<N, R>.() -> Unit): [GraphBuilder](../uy.klutter.graph.netflix.internal/-graph-builder/index.md)<N, R></code><br/> |
+| [defineGraphSchema](define-graph-schema.md) | <code>fun <N : Enum<N>, R : Enum<R>> defineGraphSchema(defaultStructure: [RelationStructure](-relation-structure/index.md), init: [GraphSchemaBuilder](../uy.klutter.graph.netflix.internal/-graph-schema-builder/index.md)<N, R>.() -> Unit): [CompiledGraphSchema](../uy.klutter.graph.netflix.internal/-compiled-graph-schema/index.md)<N, R></code><br/> |
+| [minus](minus.md) | <code>operator fun [GraphRelationOptions](-graph-relation-options/index.md).minus(other: [GraphRelationOptions](-graph-relation-options/index.md)): [GraphRelationOptions](-graph-relation-options/index.md)</code><br/> |
+| [plus](plus.md) | <code>operator fun [GraphRelationOptions](-graph-relation-options/index.md).plus(other: [GraphRelationOptions](-graph-relation-options/index.md)): [GraphRelationOptions](-graph-relation-options/index.md)</code><br/> |
+| [useGraph](use-graph.md) | <code>fun <N : Enum<N>, R : Enum<R>> useGraph(inputStream: [InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html), run: [ReadOnlyGraph](../uy.klutter.graph.netflix.internal/-read-only-graph/index.md)<N, R>.() -> Unit): [ReadOnlyGraph](../uy.klutter.graph.netflix.internal/-read-only-graph/index.md)<N, R></code><br/> |

@@ -2,6 +2,5 @@
 
 
 # fromStart
-`fun String.fromStart(howManyFromStart:&nbsp;Int): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L4)
-
+<code>fun String.fromStart(howManyFromStart: Int): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L4)<br/>
 

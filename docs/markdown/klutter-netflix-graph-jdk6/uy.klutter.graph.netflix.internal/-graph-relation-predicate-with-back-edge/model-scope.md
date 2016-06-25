@@ -2,6 +2,5 @@
 
 
 # modelScope
-`fun modelScope(): [GraphRelationPredicateWithBackEdge](index.md)<N,&nbsp;R>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L150)
-
+<code>fun modelScope(): [GraphRelationPredicateWithBackEdge](index.md)<N, R></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L150)<br/>
 

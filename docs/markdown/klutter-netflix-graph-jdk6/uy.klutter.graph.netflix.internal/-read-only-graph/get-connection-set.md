@@ -2,7 +2,5 @@
 
 
 # getConnectionSet
-`protected fun NFGraph.getConnectionSet(nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L153)
-`protected fun NFGraph.getConnectionSet(model:&nbsp;String, nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L157)
-
+<code>protected fun NFGraph.getConnectionSet(nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L153)<br/><code>protected fun NFGraph.getConnectionSet(model: String, nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L157)<br/>
 

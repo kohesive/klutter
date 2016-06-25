@@ -2,6 +2,5 @@
 
 
 # nested
-`fun ConfigObject.nested(key:&nbsp;String): ConfigObject` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L28)
-
+<code>fun ConfigObject.nested(key: String): ConfigObject</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L28)<br/>
 

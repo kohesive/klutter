@@ -2,8 +2,7 @@
 
 
 # &lt;init&gt;
-`ReadOnlyRandomAccessList(delegate:&nbsp;List<T>)`
-
+<code>ReadOnlyRandomAccessList(delegate: List<T>)</code><br/>
 Wraps a List that is also RandomAccess with a delegating class that prevents casting back to mutable type
 
 

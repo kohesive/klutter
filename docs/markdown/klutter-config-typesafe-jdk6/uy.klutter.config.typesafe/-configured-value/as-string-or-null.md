@@ -2,6 +2,5 @@
 
 
 # asStringOrNull
-`fun asStringOrNull(): String?` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L50)
-
+<code>fun asStringOrNull(): String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L50)<br/>
 

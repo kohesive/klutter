@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`KotlinBinder(method:&nbsp;[Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), paramIdx:&nbsp;Int)`
-
+<code>KotlinBinder(method: [Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), paramIdx: Int)</code><br/>
 

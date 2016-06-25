@@ -5,6 +5,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [attachKotlinPlugin](attach-kotlin-plugin.md) | `fun DBI.attachKotlinPlugin(): DBI` |
-| [onDemand](on-demand.md) | `fun <T&nbsp;:&nbsp;Any> DBI.onDemand(sqlObjectType:&nbsp;KClass<T>): T` |
-| [open](open.md) | `fun <T&nbsp;:&nbsp;Any> DBI.open(sqlObjectType:&nbsp;KClass<T>): T` |
+| [attachKotlinPlugin](attach-kotlin-plugin.md) | <code>fun DBI.attachKotlinPlugin(): DBI</code><br/> |
+| [onDemand](on-demand.md) | <code>fun <T : Any> DBI.onDemand(sqlObjectType: KClass<T>): T</code><br/> |
+| [open](open.md) | <code>fun <T : Any> DBI.open(sqlObjectType: KClass<T>): T</code><br/> |

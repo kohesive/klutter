@@ -2,8 +2,7 @@
 
 
 # encodeQueryNameOrValue
-`fun encodeQueryNameOrValue(queryNameOrValue:&nbsp;String): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UrlEncoding.kt#L238)
-
+<code>fun encodeQueryNameOrValue(queryNameOrValue: String): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UrlEncoding.kt#L238)<br/>
 Encodes a string to be a valid query, which means it can contain PCHAR* | "?" | "/" without "=" | "&amp;" | "+". Uses
 UTF-8.
 

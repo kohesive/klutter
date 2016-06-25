@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`OrdinalIteration(iterator:&nbsp;OrdinalIterator)`
-
+<code>OrdinalIteration(iterator: OrdinalIterator)</code><br/>
 

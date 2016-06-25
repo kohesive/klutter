@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`GraphRelationPredicateEdge(builder:&nbsp;[GraphRelationBuilder](../-graph-relation-builder/index.md)<N,&nbsp;R>)`
-
+<code>GraphRelationPredicateEdge(builder: [GraphRelationBuilder](../-graph-relation-builder/index.md)<N, R>)</code><br/>
 

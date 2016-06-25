@@ -5,5 +5,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [nested](nested.md) | `fun ConfigObject.nested(key:&nbsp;String): ConfigObject` |
-| [value](value.md) | `fun ConfigObject.value(key:&nbsp;String): [ConfiguredValue](../-configured-value/index.md)` |
+| [nested](nested.md) | <code>fun ConfigObject.nested(key: String): ConfigObject</code><br/> |
+| [value](value.md) | <code>fun ConfigObject.value(key: String): [ConfiguredValue](../-configured-value/index.md)</code><br/> |

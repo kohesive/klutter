@@ -2,7 +2,5 @@
 
 
 # clearQueryExcept
-`fun clearQueryExcept(vararg keepParm:&nbsp;String): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L188)
-`fun clearQueryExcept(keepParms:&nbsp;Collection<String>): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L192)
-
+<code>fun clearQueryExcept(vararg keepParm: String): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L188)<br/><code>fun clearQueryExcept(keepParms: Collection<String>): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L192)<br/>
 

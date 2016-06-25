@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`NodeAndId(nodeType:&nbsp;N, id:&nbsp;String)`
-
+<code>NodeAndId(nodeType: N, id: String)</code><br/>
 

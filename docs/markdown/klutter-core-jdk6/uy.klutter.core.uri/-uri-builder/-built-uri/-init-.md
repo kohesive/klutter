@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`BuiltUri(scheme:&nbsp;String?, encodedUserInfo:&nbsp;String?, decodedUserInfo:&nbsp;String?, host:&nbsp;String?, port:&nbsp;Int?, encodedPath:&nbsp;String?, decodedPath:&nbsp;List<String>?, encodedQuery:&nbsp;String?, decodedQuery:&nbsp;Map<String,&nbsp;List<String>>?, decodedQueryDeduped:&nbsp;Map<String,&nbsp;String>?, encodedFragment:&nbsp;String?, decodedFragment:&nbsp;String?)`
-
+<code>BuiltUri(scheme: String?, encodedUserInfo: String?, decodedUserInfo: String?, host: String?, port: Int?, encodedPath: String?, decodedPath: List<String>?, encodedQuery: String?, decodedQuery: Map<String, List<String>>?, decodedQueryDeduped: Map<String, String>?, encodedFragment: String?, decodedFragment: String?)</code><br/>
 

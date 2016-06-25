@@ -2,6 +2,5 @@
 
 
 # customizeHandle
-`fun customizeHandle(handle:&nbsp;Handle): Handle` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/KotlinPlugin.kt#L15)
-
+<code>fun customizeHandle(handle: Handle): Handle</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/KotlinPlugin.kt#L15)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`IndexTypeMapping(type:&nbsp;String, json:&nbsp;XContentBuilder)`
-
+<code>IndexTypeMapping(type: String, json: XContentBuilder)</code><br/>
 

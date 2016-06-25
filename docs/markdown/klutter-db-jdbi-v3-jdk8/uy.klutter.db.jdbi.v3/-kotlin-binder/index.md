@@ -2,25 +2,24 @@
 
 
 # KotlinBinder
-`class KotlinBinder&nbsp;:&nbsp;Binder<Bind,&nbsp;Any>` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/KotlinBinder.kt#L17)
-
+<code>class KotlinBinder : Binder<Bind, Any></code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v3-jdk8/src/main/kotlin/uy/klutter/db/jdbi/v3/KotlinBinder.kt#L17)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `KotlinBinder(method:&nbsp;[Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), paramIdx:&nbsp;Int)` |
+| [&lt;init&gt;](-init-.md) | <code>KotlinBinder(method: [Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html), paramIdx: Int)</code><br/> |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [method](method.md) | `val method: [Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html)` |
-| [paramIdx](param-idx.md) | `val paramIdx: Int` |
+| [method](method.md) | <code>val method: [Method](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Method.html)</code><br/> |
+| [paramIdx](param-idx.md) | <code>val paramIdx: Int</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [bind](bind.md) | `fun bind(q:&nbsp;SQLStatement<*>, parameter:&nbsp;[Parameter](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Parameter.html), bind:&nbsp;Bind?, arg:&nbsp;Any?): Unit` |
+| [bind](bind.md) | <code>fun bind(q: SQLStatement<*>, parameter: [Parameter](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Parameter.html), bind: Bind?, arg: Any?): Unit</code><br/> |

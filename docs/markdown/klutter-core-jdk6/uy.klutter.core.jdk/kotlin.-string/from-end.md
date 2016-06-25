@@ -2,6 +2,5 @@
 
 
 # fromEnd
-`fun String.fromEnd(howManyFromEnd:&nbsp;Int): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L3)
-
+<code>fun String.fromEnd(howManyFromEnd: Int): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Strings.kt#L3)<br/>
 

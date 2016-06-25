@@ -7,7 +7,7 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [AmazonS3Injektables](-amazon-s3-injektables/index.md) | `object AmazonS3Injektables&nbsp;:&nbsp;InjektModule`<p>Add an AmazonS3Client singleton factory to Injekt registry that uses the default safe credentials provider chain</p> |
+| [AmazonS3Injektables](-amazon-s3-injektables/index.md) | <code>object AmazonS3Injektables : InjektModule</code><br/>Add an AmazonS3Client singleton factory to Injekt registry that uses the default safe credentials provider chain |
 
 ### Extensions for External Classes
 

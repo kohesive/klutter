@@ -7,18 +7,18 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [KotlinBinder](-kotlin-binder/index.md) | `class KotlinBinder&nbsp;:&nbsp;Binder<Bind,&nbsp;Any>` |
-| [KotlinBinderFactory](-kotlin-binder-factory/index.md) | `class KotlinBinderFactory&nbsp;:&nbsp;ParameterBinderFactory` |
-| [KotlinMapper](-kotlin-mapper/index.md) | `class KotlinMapper<C&nbsp;:&nbsp;Any>&nbsp;:&nbsp;ResultSetMapper<C>` |
-| [KotlinMapperFactory](-kotlin-mapper-factory/index.md) | `class KotlinMapperFactory&nbsp;:&nbsp;ResultSetMapperFactory` |
-| [KotlinPlugin](-kotlin-plugin/index.md) | `class KotlinPlugin&nbsp;:&nbsp;JdbiPlugin` |
+| [KotlinBinder](-kotlin-binder/index.md) | <code>class KotlinBinder : Binder<Bind, Any></code><br/> |
+| [KotlinBinderFactory](-kotlin-binder-factory/index.md) | <code>class KotlinBinderFactory : ParameterBinderFactory</code><br/> |
+| [KotlinMapper](-kotlin-mapper/index.md) | <code>class KotlinMapper<C : Any> : ResultSetMapper<C></code><br/> |
+| [KotlinMapperFactory](-kotlin-mapper-factory/index.md) | <code>class KotlinMapperFactory : ResultSetMapperFactory</code><br/> |
+| [KotlinPlugin](-kotlin-plugin/index.md) | <code>class KotlinPlugin : JdbiPlugin</code><br/> |
 
 ### Exceptions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [KotlinMemberAccessException](-kotlin-member-access-exception/index.md) | `class KotlinMemberAccessException&nbsp;:&nbsp;DBIException` |
-| [NoSuchColumnMapperException](-no-such-column-mapper-exception/index.md) | `class NoSuchColumnMapperException&nbsp;:&nbsp;DBIException` |
+| [KotlinMemberAccessException](-kotlin-member-access-exception/index.md) | <code>class KotlinMemberAccessException : DBIException</code><br/> |
+| [NoSuchColumnMapperException](-no-such-column-mapper-exception/index.md) | <code>class NoSuchColumnMapperException : DBIException</code><br/> |
 
 ### Extensions for External Classes
 
@@ -33,4 +33,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [attachSqlObject](attach-sql-object.md) | `fun <T&nbsp;:&nbsp;Any> attachSqlObject(handle:&nbsp;Handle, sqlObjectType:&nbsp;KClass<T>): T` |
+| [attachSqlObject](attach-sql-object.md) | <code>fun <T : Any> attachSqlObject(handle: Handle, sqlObjectType: KClass<T>): T</code><br/> |

@@ -2,8 +2,7 @@
 
 
 # nested
-`fun Config.nested(key:&nbsp;String): Config` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L27)
-
+<code>fun Config.nested(key: String): Config</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L27)<br/>
 Return a nested configuration
 
 

@@ -2,37 +2,36 @@
 
 
 # ConfigLoader
-`abstract class ConfigLoader` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L59)
-
+<code>abstract class ConfigLoader</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L59)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ConfigLoader()` |
+| [&lt;init&gt;](-init-.md) | <code>ConfigLoader()</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [afterAttached](after-attached.md) | `open fun afterAttached(fullConfig:&nbsp;Config): Unit` |
-| [load](load.md) | `abstract fun load(): Config` |
+| [afterAttached](after-attached.md) | <code>open fun afterAttached(fullConfig: Config): Unit</code><br/> |
+| [load](load.md) | <code>abstract fun load(): Config</code><br/> |
 
 ### Inheritors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [ApplicationConfig](../-application-config/index.md) | `class ApplicationConfig&nbsp;:&nbsp;ConfigLoader` |
-| [ClassResourceConfig](../-class-resource-config/index.md) | `class ClassResourceConfig&nbsp;:&nbsp;ConfigLoader` |
-| [EnvironmentVariablesConfig](../-environment-variables-config/index.md) | `class EnvironmentVariablesConfig&nbsp;:&nbsp;ConfigLoader` |
-| [FileConfig](../-file-config/index.md) | `open class FileConfig&nbsp;:&nbsp;ConfigLoader` |
-| [MapAsConfig](../-map-as-config/index.md) | `class MapAsConfig&nbsp;:&nbsp;ConfigLoader` |
-| [PropertiesAsConfig](../-properties-as-config/index.md) | `class PropertiesAsConfig&nbsp;:&nbsp;ConfigLoader` |
-| [ReaderConfig](../-reader-config/index.md) | `class ReaderConfig&nbsp;:&nbsp;ConfigLoader` |
-| [ReferenceConfig](../-reference-config/index.md) | `class ReferenceConfig&nbsp;:&nbsp;ConfigLoader` |
-| [ResolveConfig](../-resolve-config/index.md) | `class ResolveConfig&nbsp;:&nbsp;ConfigLoader` |
-| [ResourceConfig](../-resource-config/index.md) | `class ResourceConfig&nbsp;:&nbsp;ConfigLoader` |
-| [StringAsConfig](../-string-as-config/index.md) | `class StringAsConfig&nbsp;:&nbsp;ConfigLoader` |
-| [SystemPropertiesConfig](../-system-properties-config/index.md) | `class SystemPropertiesConfig&nbsp;:&nbsp;ConfigLoader` |
-| [UrlConfig](../-url-config/index.md) | `class UrlConfig&nbsp;:&nbsp;ConfigLoader` |
+| [ApplicationConfig](../-application-config/index.md) | <code>class ApplicationConfig : ConfigLoader</code><br/> |
+| [ClassResourceConfig](../-class-resource-config/index.md) | <code>class ClassResourceConfig : ConfigLoader</code><br/> |
+| [EnvironmentVariablesConfig](../-environment-variables-config/index.md) | <code>class EnvironmentVariablesConfig : ConfigLoader</code><br/> |
+| [FileConfig](../-file-config/index.md) | <code>open class FileConfig : ConfigLoader</code><br/> |
+| [MapAsConfig](../-map-as-config/index.md) | <code>class MapAsConfig : ConfigLoader</code><br/> |
+| [PropertiesAsConfig](../-properties-as-config/index.md) | <code>class PropertiesAsConfig : ConfigLoader</code><br/> |
+| [ReaderConfig](../-reader-config/index.md) | <code>class ReaderConfig : ConfigLoader</code><br/> |
+| [ReferenceConfig](../-reference-config/index.md) | <code>class ReferenceConfig : ConfigLoader</code><br/> |
+| [ResolveConfig](../-resolve-config/index.md) | <code>class ResolveConfig : ConfigLoader</code><br/> |
+| [ResourceConfig](../-resource-config/index.md) | <code>class ResourceConfig : ConfigLoader</code><br/> |
+| [StringAsConfig](../-string-as-config/index.md) | <code>class StringAsConfig : ConfigLoader</code><br/> |
+| [SystemPropertiesConfig](../-system-properties-config/index.md) | <code>class SystemPropertiesConfig : ConfigLoader</code><br/> |
+| [UrlConfig](../-url-config/index.md) | <code>class UrlConfig : ConfigLoader</code><br/> |

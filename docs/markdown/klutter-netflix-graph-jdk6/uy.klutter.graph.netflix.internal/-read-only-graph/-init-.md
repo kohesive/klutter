@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`ReadOnlyGraph(nodeTypeEnum:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<N>, relationTypeEnum:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<R>, input:&nbsp;[InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html))`
-
+<code>ReadOnlyGraph(nodeTypeEnum: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<N>, relationTypeEnum: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<R>, input: [InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html))</code><br/>
 

@@ -7,7 +7,7 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [TypeReference](-type-reference/index.md) | `abstract class TypeReference<T>` |
+| [TypeReference](-type-reference/index.md) | <code>abstract class TypeReference<T></code><br/> |
 
 ### Extensions for External Classes
 
@@ -21,7 +21,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [fullType](full-type.md) | `fun <T&nbsp;:&nbsp;Any> fullType(): [TypeReference](-type-reference/index.md)<T>` |
-| [typeRef](type-ref.md) | `fun <T&nbsp;:&nbsp;Any> typeRef(): [TypeReference](-type-reference/index.md)<T>` |
-| [unwrapInvokeException](unwrap-invoke-exception.md) | `fun unwrapInvokeException(rawEx:&nbsp;Throwable): Throwable`
-`fun unwrapInvokeException(rawEx:&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)): Throwable` |
+| [fullType](full-type.md) | <code>fun <T : Any> fullType(): [TypeReference](-type-reference/index.md)<T></code><br/> |
+| [typeRef](type-ref.md) | <code>fun <T : Any> typeRef(): [TypeReference](-type-reference/index.md)<T></code><br/> |
+| [unwrapInvokeException](unwrap-invoke-exception.md) | <code>fun unwrapInvokeException(rawEx: Throwable): Throwable</code><br/><code>fun unwrapInvokeException(rawEx: [Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)): Throwable</code><br/> |

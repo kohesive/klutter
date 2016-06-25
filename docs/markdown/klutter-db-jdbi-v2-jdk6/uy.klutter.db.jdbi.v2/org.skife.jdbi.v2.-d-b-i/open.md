@@ -2,6 +2,5 @@
 
 
 # open
-`fun <T&nbsp;:&nbsp;Any> DBI.open(sqlObjectType:&nbsp;KClass<T>): T` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L23)
-
+<code>fun <T : Any> DBI.open(sqlObjectType: KClass<T>): T</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/Extensions.kt#L23)<br/>
 

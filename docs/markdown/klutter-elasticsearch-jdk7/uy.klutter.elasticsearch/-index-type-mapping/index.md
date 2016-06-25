@@ -2,19 +2,18 @@
 
 
 # IndexTypeMapping
-`data class IndexTypeMapping` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L8)
-
+<code>data class IndexTypeMapping</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L8)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `IndexTypeMapping(type:&nbsp;String, json:&nbsp;XContentBuilder)` |
+| [&lt;init&gt;](-init-.md) | <code>IndexTypeMapping(type: String, json: XContentBuilder)</code><br/> |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [json](json.md) | `val json: XContentBuilder` |
-| [type](type.md) | `val type: String` |
+| [json](json.md) | <code>val json: XContentBuilder</code><br/> |
+| [type](type.md) | <code>val type: String</code><br/> |

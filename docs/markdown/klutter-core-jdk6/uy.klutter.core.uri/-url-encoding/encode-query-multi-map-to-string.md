@@ -2,6 +2,5 @@
 
 
 # encodeQueryMultiMapToString
-`fun encodeQueryMultiMapToString(decodedQuery:&nbsp;Map<String,&nbsp;List<String>>): String` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UrlEncoding.kt#L475)
-
+<code>fun encodeQueryMultiMapToString(decodedQuery: Map<String, List<String>>): String</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UrlEncoding.kt#L475)<br/>
 

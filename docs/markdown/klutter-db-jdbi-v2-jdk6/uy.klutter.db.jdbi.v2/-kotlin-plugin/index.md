@@ -2,19 +2,18 @@
 
 
 # KotlinPlugin
-`class KotlinPlugin` [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinPlugin.kt#L6)
-
+<code>class KotlinPlugin</code> [(source)](https://github.com/kohesive/klutter/blob/master/db-jdbi-v2-jdk6/src/main/kotlin/uy/klutter/db/jdbi/v2/KotlinPlugin.kt#L6)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `KotlinPlugin()` |
+| [&lt;init&gt;](-init-.md) | <code>KotlinPlugin()</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [customizeDBI](customize-d-b-i.md) | `fun customizeDBI(dbi:&nbsp;DBI): DBI` |
-| [customizeHandle](customize-handle.md) | `fun customizeHandle(handle:&nbsp;Handle): Handle` |
+| [customizeDBI](customize-d-b-i.md) | <code>fun customizeDBI(dbi: DBI): DBI</code><br/> |
+| [customizeHandle](customize-handle.md) | <code>fun customizeHandle(handle: Handle): Handle</code><br/> |

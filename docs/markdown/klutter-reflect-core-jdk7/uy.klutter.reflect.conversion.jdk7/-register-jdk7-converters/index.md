@@ -2,18 +2,17 @@
 
 
 # RegisterJdk7Converters
-`class RegisterJdk7Converters&nbsp;:&nbsp;SelfRegisteringConverters` [(source)](https://github.com/kohesive/klutter/blob/master/reflect-core-jdk7/src/main/kotlin/uy/klutter/reflect/conversion/jdk7/Jdk7Converters.kt#L10)
-
+<code>class RegisterJdk7Converters : SelfRegisteringConverters</code> [(source)](https://github.com/kohesive/klutter/blob/master/reflect-core-jdk7/src/main/kotlin/uy/klutter/reflect/conversion/jdk7/Jdk7Converters.kt#L10)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `RegisterJdk7Converters()` |
+| [&lt;init&gt;](-init-.md) | <code>RegisterJdk7Converters()</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [registerInto](register-into.md) | `fun registerInto(conversion:&nbsp;TypeConverters): Unit` |
+| [registerInto](register-into.md) | <code>fun registerInto(conversion: TypeConverters): Unit</code><br/> |

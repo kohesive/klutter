@@ -5,5 +5,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [asReadOnly](as-read-only.md) | `fun <K&nbsp;:&nbsp;Any, V> Map<K,&nbsp;V>.asReadOnly(): Map<K,&nbsp;V>`<p>Wraps the Map with a lightweight delegating class that prevents casting back to mutable type</p> |
-| [toImmutable](to-immutable.md) | `fun <K&nbsp;:&nbsp;Any, V> Map<K,&nbsp;V>.toImmutable(): Map<K,&nbsp;V>`<p>Copies the Map and then wraps with a lightweight delegating class that prevents casting back to mutable type</p> |
+| [asReadOnly](as-read-only.md) | <code>fun <K : Any, V> Map<K, V>.asReadOnly(): Map<K, V></code><br/>Wraps the Map with a lightweight delegating class that prevents casting back to mutable type |
+| [toImmutable](to-immutable.md) | <code>fun <K : Any, V> Map<K, V>.toImmutable(): Map<K, V></code><br/>Copies the Map and then wraps with a lightweight delegating class that prevents casting back to mutable type |

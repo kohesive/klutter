@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`ConfigLoader()`
-
+<code>ConfigLoader()</code><br/>
 

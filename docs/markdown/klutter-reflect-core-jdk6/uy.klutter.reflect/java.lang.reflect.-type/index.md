@@ -5,7 +5,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [erasedType](erased-type.md) | `fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).erasedType(): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<Any>` |
-| [isAssignableFrom](is-assignable-from.md) | `fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).isAssignableFrom(other:&nbsp;[Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html)): Boolean`
-`fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).isAssignableFrom(other:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>): Boolean`
-`fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).isAssignableFrom(other:&nbsp;KClass<*>): Boolean` |
+| [erasedType](erased-type.md) | <code>fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).erasedType(): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<Any></code><br/> |
+| [isAssignableFrom](is-assignable-from.md) | <code>fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).isAssignableFrom(other: [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html)): Boolean</code><br/><code>fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).isAssignableFrom(other: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>): Boolean</code><br/><code>fun [Type](http://docs.oracle.com/javase/6/docs/api/java/lang/reflect/Type.html).isAssignableFrom(other: KClass<*>): Boolean</code><br/> |

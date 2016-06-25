@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`NodeAndOrd(nodeType:&nbsp;N, ord:&nbsp;Int)`
-
+<code>NodeAndOrd(nodeType: N, ord: Int)</code><br/>
 

@@ -2,8 +2,7 @@
 
 
 # JacksonWithKotlinAndJdk8Injektables
-`object JacksonWithKotlinAndJdk8Injektables&nbsp;:&nbsp;InjektModule` [(source)](https://github.com/kohesive/klutter/blob/master/json-jackson-jdk8/src/main/kotlin/uy/klutter/json/jackson/jdk8/Injektable.kt#L17)
-
+<code>object JacksonWithKotlinAndJdk8Injektables : InjektModule</code> [(source)](https://github.com/kohesive/klutter/blob/master/json-jackson-jdk8/src/main/kotlin/uy/klutter/json/jackson/jdk8/Injektable.kt#L17)<br/>
 Add an ObjectMapper singleton factory to Injekt registry that is enabled for Kotlin + JDK8 classes (core, temporal, parameter names)
 
 
@@ -12,4 +11,4 @@ Add an ObjectMapper singleton factory to Injekt registry that is enabled for Kot
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [registerInjectables](register-injectables.md) | `fun InjektRegistrar.registerInjectables(): Unit` |
+| [registerInjectables](register-injectables.md) | <code>fun InjektRegistrar.registerInjectables(): Unit</code><br/> |

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`RegisterJdk7Converters()`
-
+<code>RegisterJdk7Converters()</code><br/>
 

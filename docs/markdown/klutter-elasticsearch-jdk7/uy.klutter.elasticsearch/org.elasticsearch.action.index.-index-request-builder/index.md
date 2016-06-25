@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [setSourceFromObject](set-source-from-object.md) | `fun IndexRequestBuilder.setSourceFromObject(pojo:&nbsp;Any): Unit` |
+| [setSourceFromObject](set-source-from-object.md) | <code>fun IndexRequestBuilder.setSourceFromObject(pojo: Any): Unit</code><br/> |

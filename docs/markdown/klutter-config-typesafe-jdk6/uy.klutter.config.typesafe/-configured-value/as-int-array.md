@@ -2,7 +2,5 @@
 
 
 # asIntArray
-`fun asIntArray(): Array<Int>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L117)
-`fun asIntArray(defaultValue:&nbsp;Array<Int>): Array<Int>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L118)
-
+<code>fun asIntArray(): Array<Int></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L117)<br/><code>fun asIntArray(defaultValue: Array<Int>): Array<Int></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L118)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`KotlinBinderFactory()`
-
+<code>KotlinBinderFactory()</code><br/>
 

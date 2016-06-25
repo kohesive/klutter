@@ -2,12 +2,11 @@
 
 
 # MODEL
-`MODEL` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/NetflixGraph.kt#L35)
-
+<code>MODEL</code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/NetflixGraph.kt#L35)<br/>
 
 
 ### Inherited Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [flags](flags.md) | `val flags: Int` |
+| [flags](flags.md) | <code>val flags: Int</code><br/> |

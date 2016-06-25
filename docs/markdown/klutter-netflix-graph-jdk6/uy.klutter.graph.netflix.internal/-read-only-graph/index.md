@@ -2,60 +2,46 @@
 
 
 # ReadOnlyGraph
-`class ReadOnlyGraph<N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>>&nbsp;:&nbsp;[GraphOrdinalContainer](../-graph-ordinal-container/index.md)<N>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L20)
-
+<code>class ReadOnlyGraph<N : Enum<N>, R : Enum<R>> : [GraphOrdinalContainer](../-graph-ordinal-container/index.md)<N></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Graph.kt#L20)<br/>
 
 
 ### Types
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [OrdinalIterable](-ordinal-iterable/index.md) | `class OrdinalIterable&nbsp;:&nbsp;Iterable<Int>` |
-| [OrdinalIteration](-ordinal-iteration/index.md) | `class OrdinalIteration` |
+| [OrdinalIterable](-ordinal-iterable/index.md) | <code>class OrdinalIterable : Iterable<Int></code><br/> |
+| [OrdinalIteration](-ordinal-iteration/index.md) | <code>class OrdinalIteration</code><br/> |
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ReadOnlyGraph(nodeTypeEnum:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<N>, relationTypeEnum:&nbsp;[Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<R>, input:&nbsp;[InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html))` |
+| [&lt;init&gt;](-init-.md) | <code>ReadOnlyGraph(nodeTypeEnum: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<N>, relationTypeEnum: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<R>, input: [InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html))</code><br/> |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [graph](graph.md) | `val graph: NFGraph` |
-| [relationshipGroups](relationship-groups.md) | `val relationshipGroups: MutableMap<RelationshipPairKey<N,&nbsp;R>,&nbsp;MutableSet<RelationshipTrippleKey<N,&nbsp;R>>>` |
-| [relationshipMirrors](relationship-mirrors.md) | `val relationshipMirrors: MutableMap<RelationshipTrippleKey<N,&nbsp;R>,&nbsp;RelationshipTrippleKey<N,&nbsp;R>>` |
+| [graph](graph.md) | <code>val graph: NFGraph</code><br/> |
+| [relationshipGroups](relationship-groups.md) | <code>val relationshipGroups: MutableMap<RelationshipPairKey<N, R>, MutableSet<RelationshipTrippleKey<N, R>>></code><br/> |
+| [relationshipMirrors](relationship-mirrors.md) | <code>val relationshipMirrors: MutableMap<RelationshipTrippleKey<N, R>, RelationshipTrippleKey<N, R>></code><br/> |
 
 ### Inherited Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [ordinalsByType](../-graph-ordinal-container/ordinals-by-type.md) | `val ordinalsByType: MutableMap<N,&nbsp;OrdinalMap<String>>` |
+| [ordinalsByType](../-graph-ordinal-container/ordinals-by-type.md) | <code>val ordinalsByType: MutableMap<N, OrdinalMap<String>></code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [connectionsAsIterable](connections-as-iterable.md) | `fun NFGraph.connectionsAsIterable(nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): [OrdinalIterable](-ordinal-iterable/index.md)`
-`fun NFGraph.connectionsAsIterable(model:&nbsp;String, nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): [OrdinalIterable](-ordinal-iterable/index.md)`
-`fun NFGraph.connectionsAsIterable(nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relationName:&nbsp;String): [OrdinalIterable](-ordinal-iterable/index.md)`
-`fun NFGraph.connectionsAsIterable(model:&nbsp;String, nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relationName:&nbsp;String): [OrdinalIterable](-ordinal-iterable/index.md)` |
-| [connectionsAsIterator](connections-as-iterator.md) | `fun NFGraph.connectionsAsIterator(nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): [OrdinalIteration](-ordinal-iteration/index.md)`
-`fun NFGraph.connectionsAsIterator(model:&nbsp;String, nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): [OrdinalIteration](-ordinal-iteration/index.md)` |
-| [connectionsAsSet](connections-as-set.md) | `fun NFGraph.connectionsAsSet(nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): Set<Int>`
-`fun NFGraph.connectionsAsSet(model:&nbsp;String, nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): Set<Int>` |
-| [getConnection](get-connection.md) | `fun NFGraph.getConnection(nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?`
-`fun NFGraph.getConnection(model:&nbsp;String, nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?` |
-| [getConnectionSet](get-connection-set.md) | `fun NFGraph.getConnectionSet(nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>`
-`fun NFGraph.getConnectionSet(model:&nbsp;String, nodeAndOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>` |
-| [getConnections](get-connections.md) | `fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getConnections(relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>`
-`fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getConnections(model:&nbsp;String, relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>`
-`fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getConnections(relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>`
-`fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getConnections(model:&nbsp;String, relation:&nbsp;R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>>` |
-| [getRelationTargets](get-relation-targets.md) | `fun getRelationTargets(nodeType:&nbsp;N, relation:&nbsp;R): List<N>` |
-| [getSingleConnection](get-single-connection.md) | `fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getSingleConnection(relation:&nbsp;R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?`
-`fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getSingleConnection(model:&nbsp;String, relation:&nbsp;R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?`
-`fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getSingleConnection(relation:&nbsp;R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?`
-`fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getSingleConnection(model:&nbsp;String, relation:&nbsp;R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?` |
-| [makeRelationshipName](make-relationship-name.md) | `fun makeRelationshipName(relation:&nbsp;R, toNodeType:&nbsp;N): String` |
+| [connectionsAsIterable](connections-as-iterable.md) | <code>fun NFGraph.connectionsAsIterable(nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): [OrdinalIterable](-ordinal-iterable/index.md)</code><br/><code>fun NFGraph.connectionsAsIterable(model: String, nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): [OrdinalIterable](-ordinal-iterable/index.md)</code><br/><code>fun NFGraph.connectionsAsIterable(nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relationName: String): [OrdinalIterable](-ordinal-iterable/index.md)</code><br/><code>fun NFGraph.connectionsAsIterable(model: String, nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relationName: String): [OrdinalIterable](-ordinal-iterable/index.md)</code><br/> |
+| [connectionsAsIterator](connections-as-iterator.md) | <code>fun NFGraph.connectionsAsIterator(nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): [OrdinalIteration](-ordinal-iteration/index.md)</code><br/><code>fun NFGraph.connectionsAsIterator(model: String, nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): [OrdinalIteration](-ordinal-iteration/index.md)</code><br/> |
+| [connectionsAsSet](connections-as-set.md) | <code>fun NFGraph.connectionsAsSet(nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): Set<Int></code><br/><code>fun NFGraph.connectionsAsSet(model: String, nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): Set<Int></code><br/> |
+| [getConnection](get-connection.md) | <code>fun NFGraph.getConnection(nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?</code><br/><code>fun NFGraph.getConnection(model: String, nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?</code><br/> |
+| [getConnectionSet](get-connection-set.md) | <code>fun NFGraph.getConnectionSet(nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code><br/><code>fun NFGraph.getConnectionSet(model: String, nodeAndOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code><br/> |
+| [getConnections](get-connections.md) | <code>fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getConnections(relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code><br/><code>fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getConnections(model: String, relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code><br/><code>fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getConnections(relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code><br/><code>fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getConnections(model: String, relation: R): Set<[NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>></code><br/> |
+| [getRelationTargets](get-relation-targets.md) | <code>fun getRelationTargets(nodeType: N, relation: R): List<N></code><br/> |
+| [getSingleConnection](get-single-connection.md) | <code>fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getSingleConnection(relation: R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?</code><br/><code>fun [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>.getSingleConnection(model: String, relation: R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?</code><br/><code>fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getSingleConnection(relation: R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?</code><br/><code>fun [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>.getSingleConnection(model: String, relation: R): [NodeAndId](../../uy.klutter.graph.netflix/-node-and-id/index.md)<N>?</code><br/> |
+| [makeRelationshipName](make-relationship-name.md) | <code>fun makeRelationshipName(relation: R, toNodeType: N): String</code><br/> |

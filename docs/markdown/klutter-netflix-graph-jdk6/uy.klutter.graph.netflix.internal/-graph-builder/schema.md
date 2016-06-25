@@ -2,6 +2,5 @@
 
 
 # schema
-`val schema: [CompiledGraphSchema](../-compiled-graph-schema/index.md)<N,&nbsp;R>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L100)
-
+<code>val schema: [CompiledGraphSchema](../-compiled-graph-schema/index.md)<N, R></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L100)<br/>
 

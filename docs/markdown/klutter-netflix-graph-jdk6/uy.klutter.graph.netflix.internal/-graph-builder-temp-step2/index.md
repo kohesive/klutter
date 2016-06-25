@@ -2,26 +2,25 @@
 
 
 # GraphBuilderTempStep2
-`class GraphBuilderTempStep2<N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L93)
-
+<code>class GraphBuilderTempStep2<N : Enum<N>, R : Enum<R>></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L93)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `GraphBuilderTempStep2(fromNodeWithOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation:&nbsp;R, completr:&nbsp;([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>,&nbsp;R,&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>)&nbsp;->&nbsp;Unit)` |
+| [&lt;init&gt;](-init-.md) | <code>GraphBuilderTempStep2(fromNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, relation: R, completr: ([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, R, [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>) -> Unit)</code><br/> |
 
 ### Properties
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [completr](completr.md) | `val completr: ([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>,&nbsp;R,&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>)&nbsp;->&nbsp;Unit` |
-| [fromNodeWithOrd](from-node-with-ord.md) | `val fromNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>` |
-| [relation](relation.md) | `val relation: R` |
+| [completr](completr.md) | <code>val completr: ([NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>, R, [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>) -> Unit</code><br/> |
+| [fromNodeWithOrd](from-node-with-ord.md) | <code>val fromNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N></code><br/> |
+| [relation](relation.md) | <code>val relation: R</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [to](to.md) | `fun to(toNodeWithOrd:&nbsp;[NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>): Unit` |
+| [to](to.md) | <code>fun to(toNodeWithOrd: [NodeAndOrd](../../uy.klutter.graph.netflix/-node-and-ord/index.md)<N>): Unit</code><br/> |

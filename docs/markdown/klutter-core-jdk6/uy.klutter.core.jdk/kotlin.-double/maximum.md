@@ -2,6 +2,5 @@
 
 
 # maximum
-`fun Double.maximum(maxVal:&nbsp;Double): Double` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Numbers.kt#L27)
-
+<code>fun Double.maximum(maxVal: Double): Double</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/Numbers.kt#L27)<br/>
 

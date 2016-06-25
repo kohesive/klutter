@@ -5,5 +5,5 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [putSafely](put-safely.md) | `fun Session.putSafely(key:&nbsp;String, value:&nbsp;Any?): Unit`<p>Put values into session, but nulls act as removes (in Vert.x clustered, sometimes this causes a failure to put nulls)</p> |
-| [removeSafely](remove-safely.md) | `fun Session.removeSafely(key:&nbsp;String): Any?`<p>Here for balance with putSafely</p> |
+| [putSafely](put-safely.md) | <code>fun Session.putSafely(key: String, value: Any?): Unit</code><br/>Put values into session, but nulls act as removes (in Vert.x clustered, sometimes this causes a failure to put nulls) |
+| [removeSafely](remove-safely.md) | <code>fun Session.removeSafely(key: String): Any?</code><br/>Here for balance with putSafely |

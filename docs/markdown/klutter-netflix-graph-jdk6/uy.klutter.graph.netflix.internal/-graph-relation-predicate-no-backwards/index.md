@@ -2,23 +2,22 @@
 
 
 # GraphRelationPredicateNoBackwards
-`class GraphRelationPredicateNoBackwards<N&nbsp;:&nbsp;Enum<N>, R&nbsp;:&nbsp;Enum<R>>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L110)
-
+<code>class GraphRelationPredicateNoBackwards<N : Enum<N>, R : Enum<R>></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L110)<br/>
 
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `GraphRelationPredicateNoBackwards(builder:&nbsp;[GraphRelationBuilder](../-graph-relation-builder/index.md)<N,&nbsp;R>)` |
+| [&lt;init&gt;](-init-.md) | <code>GraphRelationPredicateNoBackwards(builder: [GraphRelationBuilder](../-graph-relation-builder/index.md)<N, R>)</code><br/> |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [autoMirrorEdges](auto-mirror-edges.md) | `fun autoMirrorEdges(backRelation:&nbsp;R): [GraphRelationPredicateWithBackEdge](../-graph-relation-predicate-with-back-edge/index.md)<N,&nbsp;R>` |
-| [autoMirrorOneEdge](auto-mirror-one-edge.md) | `fun autoMirrorOneEdge(backRelation:&nbsp;R): [GraphRelationPredicateWithBackEdge](../-graph-relation-predicate-with-back-edge/index.md)<N,&nbsp;R>` |
-| [compact](compact.md) | `fun compact(): GraphRelationPredicateNoBackwards<N,&nbsp;R>` |
-| [globalScope](global-scope.md) | `fun globalScope(): GraphRelationPredicateNoBackwards<N,&nbsp;R>` |
-| [hashed](hashed.md) | `fun hashed(): GraphRelationPredicateNoBackwards<N,&nbsp;R>` |
-| [modelScope](model-scope.md) | `fun modelScope(): GraphRelationPredicateNoBackwards<N,&nbsp;R>` |
+| [autoMirrorEdges](auto-mirror-edges.md) | <code>fun autoMirrorEdges(backRelation: R): [GraphRelationPredicateWithBackEdge](../-graph-relation-predicate-with-back-edge/index.md)<N, R></code><br/> |
+| [autoMirrorOneEdge](auto-mirror-one-edge.md) | <code>fun autoMirrorOneEdge(backRelation: R): [GraphRelationPredicateWithBackEdge](../-graph-relation-predicate-with-back-edge/index.md)<N, R></code><br/> |
+| [compact](compact.md) | <code>fun compact(): GraphRelationPredicateNoBackwards<N, R></code><br/> |
+| [globalScope](global-scope.md) | <code>fun globalScope(): GraphRelationPredicateNoBackwards<N, R></code><br/> |
+| [hashed](hashed.md) | <code>fun hashed(): GraphRelationPredicateNoBackwards<N, R></code><br/> |
+| [modelScope](model-scope.md) | <code>fun modelScope(): GraphRelationPredicateNoBackwards<N, R></code><br/> |

@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`TypeConverters(parent:&nbsp;[TypeConverters](index.md)?&nbsp;=&nbsp;null)`
-
+<code>TypeConverters(parent: [TypeConverters](index.md)? = null)</code><br/>
 

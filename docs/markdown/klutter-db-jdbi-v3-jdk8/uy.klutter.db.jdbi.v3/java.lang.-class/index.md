@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [isKotlinClass](is-kotlin-class.md) | `fun [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>.isKotlinClass(): Boolean` |
+| [isKotlinClass](is-kotlin-class.md) | <code>fun [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>.isKotlinClass(): Boolean</code><br/> |

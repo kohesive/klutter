@@ -2,6 +2,5 @@
 
 
 # asDoubleListOrEmpty
-`fun asDoubleListOrEmpty(): List<Double>` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L100)
-
+<code>fun asDoubleListOrEmpty(): List<Double></code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L100)<br/>
 

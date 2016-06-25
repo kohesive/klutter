@@ -2,6 +2,5 @@
 
 
 # compact
-`fun compact(): [GraphRelationPredicateNoBackwards](index.md)<N,&nbsp;R>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L121)
-
+<code>fun compact(): [GraphRelationPredicateNoBackwards](index.md)<N, R></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Schema.kt#L121)<br/>
 

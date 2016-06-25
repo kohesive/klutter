@@ -2,8 +2,7 @@
 
 
 # ChildFirstClassloader
-`class ChildFirstClassloader&nbsp;:&nbsp;[ClassLoader](http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/ChildFirstClassloader.kt#L17)
-
+<code>class ChildFirstClassloader : [ClassLoader](http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/jdk/ChildFirstClassloader.kt#L17)<br/>
 A parent-last classloader that will try the child classloader first and then the parent.
 
 
@@ -12,27 +11,26 @@ A parent-last classloader that will try the child classloader first and then the
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [UrlEnumeration](-url-enumeration/index.md) | `class UrlEnumeration&nbsp;:&nbsp;[Enumeration](http://docs.oracle.com/javase/6/docs/api/java/util/Enumeration.html)<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)>` |
+| [UrlEnumeration](-url-enumeration/index.md) | <code>class UrlEnumeration : [Enumeration](http://docs.oracle.com/javase/6/docs/api/java/util/Enumeration.html)<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)></code><br/> |
 
 ### Constructors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ChildFirstClassloader(classpath:&nbsp;List<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)>, parentClassLoader:&nbsp;[ClassLoader](http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html)?)`<p>A parent-last classloader that will try the child classloader first and then the parent.</p> |
+| [&lt;init&gt;](-init-.md) | <code>ChildFirstClassloader(classpath: List<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)>, parentClassLoader: [ClassLoader](http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html)?)</code><br/>A parent-last classloader that will try the child classloader first and then the parent. |
 
 ### Functions
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [clearAssertionStatus](clear-assertion-status.md) | `fun clearAssertionStatus(): Unit` |
-| [findClass](find-class.md) | `fun findClass(name:&nbsp;String): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>` |
-| [findResource](find-resource.md) | `fun findResource(name:&nbsp;String): [URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)?` |
-| [findResources](find-resources.md) | `fun findResources(name:&nbsp;String): [Enumeration](http://docs.oracle.com/javase/6/docs/api/java/util/Enumeration.html)<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)>` |
-| [getResource](get-resource.md) | `fun getResource(name:&nbsp;String): [URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)?` |
-| [getResourceAsStream](get-resource-as-stream.md) | `fun getResourceAsStream(name:&nbsp;String): [InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html)?` |
-| [getResources](get-resources.md) | `fun getResources(name:&nbsp;String): [Enumeration](http://docs.oracle.com/javase/6/docs/api/java/util/Enumeration.html)<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)>` |
-| [loadClass](load-class.md) | `fun loadClass(name:&nbsp;String, resolve:&nbsp;Boolean): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>`
-`fun loadClass(name:&nbsp;String): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*>` |
-| [setClassAssertionStatus](set-class-assertion-status.md) | `fun setClassAssertionStatus(className:&nbsp;String?, enabled:&nbsp;Boolean): Unit` |
-| [setDefaultAssertionStatus](set-default-assertion-status.md) | `fun setDefaultAssertionStatus(enabled:&nbsp;Boolean): Unit` |
-| [setPackageAssertionStatus](set-package-assertion-status.md) | `fun setPackageAssertionStatus(packageName:&nbsp;String, enabled:&nbsp;Boolean): Unit` |
+| [clearAssertionStatus](clear-assertion-status.md) | <code>fun clearAssertionStatus(): Unit</code><br/> |
+| [findClass](find-class.md) | <code>fun findClass(name: String): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*></code><br/> |
+| [findResource](find-resource.md) | <code>fun findResource(name: String): [URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)?</code><br/> |
+| [findResources](find-resources.md) | <code>fun findResources(name: String): [Enumeration](http://docs.oracle.com/javase/6/docs/api/java/util/Enumeration.html)<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)></code><br/> |
+| [getResource](get-resource.md) | <code>fun getResource(name: String): [URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)?</code><br/> |
+| [getResourceAsStream](get-resource-as-stream.md) | <code>fun getResourceAsStream(name: String): [InputStream](http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html)?</code><br/> |
+| [getResources](get-resources.md) | <code>fun getResources(name: String): [Enumeration](http://docs.oracle.com/javase/6/docs/api/java/util/Enumeration.html)<[URL](http://docs.oracle.com/javase/6/docs/api/java/net/URL.html)></code><br/> |
+| [loadClass](load-class.md) | <code>fun loadClass(name: String, resolve: Boolean): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*></code><br/><code>fun loadClass(name: String): [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<*></code><br/> |
+| [setClassAssertionStatus](set-class-assertion-status.md) | <code>fun setClassAssertionStatus(className: String?, enabled: Boolean): Unit</code><br/> |
+| [setDefaultAssertionStatus](set-default-assertion-status.md) | <code>fun setDefaultAssertionStatus(enabled: Boolean): Unit</code><br/> |
+| [setPackageAssertionStatus](set-package-assertion-status.md) | <code>fun setPackageAssertionStatus(packageName: String, enabled: Boolean): Unit</code><br/> |

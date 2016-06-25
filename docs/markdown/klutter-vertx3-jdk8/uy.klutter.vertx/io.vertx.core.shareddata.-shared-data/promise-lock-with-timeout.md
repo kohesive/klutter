@@ -2,8 +2,7 @@
 
 
 # promiseLockWithTimeout
-`fun SharedData.promiseLockWithTimeout(name:&nbsp;String, timeout:&nbsp;Long): Promise<Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)>` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/VertxSharedData.kt#L61)
-
+<code>fun SharedData.promiseLockWithTimeout(name: String, timeout: Long): Promise<Lock, [Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)></code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/VertxSharedData.kt#L61)<br/>
 Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)
 
 ### Parameters

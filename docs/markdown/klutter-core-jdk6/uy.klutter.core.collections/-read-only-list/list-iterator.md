@@ -2,7 +2,5 @@
 
 
 # listIterator
-`open fun listIterator(): ListIterator<T>` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L89)
-`open fun listIterator(index:&nbsp;Int): ListIterator<T>` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L93)
-
+<code>open fun listIterator(): ListIterator<T></code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L89)<br/><code>open fun listIterator(index: Int): ListIterator<T></code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L93)<br/>
 

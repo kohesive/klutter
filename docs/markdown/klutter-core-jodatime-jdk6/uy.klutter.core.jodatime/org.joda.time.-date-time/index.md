@@ -5,4 +5,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [toIsoString](to-iso-string.md) | `fun DateTime.toIsoString(): String`<p>Convert the date into a String in the ISO Date Time format yyyy-MM-dd`T`hh:mm:ss.SSSZ</p> |
+| [toIsoString](to-iso-string.md) | <code>fun DateTime.toIsoString(): String</code><br/>Convert the date into a String in the ISO Date Time format yyyy-MM-dd`T`hh:mm:ss.SSSZ |

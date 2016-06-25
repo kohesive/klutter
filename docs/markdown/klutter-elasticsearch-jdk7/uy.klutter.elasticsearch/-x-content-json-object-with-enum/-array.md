@@ -2,6 +2,5 @@
 
 
 # Array
-`fun Array(field:&nbsp;T, init:&nbsp;[XContentJsonArray](../-x-content-json-array/index.md).()&nbsp;->&nbsp;Unit): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L34)
-
+<code>fun Array(field: T, init: [XContentJsonArray](../-x-content-json-array/index.md).() -> Unit): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L34)<br/>
 

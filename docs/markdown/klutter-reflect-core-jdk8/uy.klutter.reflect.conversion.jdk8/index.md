@@ -7,4 +7,4 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [RegisterJdk8Converters](-register-jdk8-converters/index.md) | `class RegisterJdk8Converters&nbsp;:&nbsp;SelfRegisteringConverters` |
+| [RegisterJdk8Converters](-register-jdk8-converters/index.md) | <code>class RegisterJdk8Converters : SelfRegisteringConverters</code><br/> |

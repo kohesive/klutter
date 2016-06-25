@@ -2,8 +2,6 @@
 
 
 # encodedPath
-`var encodedPath: String?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L120)
-Overrides [ImmutableUri.encodedPath](../-immutable-uri/encoded-path.md)
-`fun encodedPath(newPath:&nbsp;String?): [UriBuilder](index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L213)
-
+<code>var encodedPath: String?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L120)<br/>Overrides [ImmutableUri.encodedPath](../-immutable-uri/encoded-path.md)
+<code>fun encodedPath(newPath: String?): [UriBuilder](index.md)</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L213)<br/>
 

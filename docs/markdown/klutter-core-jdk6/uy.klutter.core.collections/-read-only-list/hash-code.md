@@ -2,6 +2,5 @@
 
 
 # hashCode
-`open fun hashCode(): Int` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L109)
-
+<code>open fun hashCode(): Int</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/common/Immutable.kt#L109)<br/>
 

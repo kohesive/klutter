@@ -2,6 +2,5 @@
 
 
 # edge
-`fun edge(relation:&nbsp;R): [GraphBuilderTempStep2](../-graph-builder-temp-step2/index.md)<N,&nbsp;R>` [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L88)
-
+<code>fun edge(relation: R): [GraphBuilderTempStep2](../-graph-builder-temp-step2/index.md)<N, R></code> [(source)](https://github.com/kohesive/klutter/blob/master/netflix-graph-jdk6/src/main/kotlin/uy/klutter/graph/netflix/internal/Building.kt#L88)<br/>
 

@@ -2,6 +2,5 @@
 
 
 # asIntListOrNull
-`fun asIntListOrNull(): List<Int>?` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L89)
-
+<code>fun asIntListOrNull(): List<Int>?</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L89)<br/>
 

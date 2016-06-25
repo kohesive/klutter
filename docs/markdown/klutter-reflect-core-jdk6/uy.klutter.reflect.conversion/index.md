@@ -7,6 +7,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [SelfRegisteringConverters](-self-registering-converters/index.md) | `interface SelfRegisteringConverters` |
-| [TypeConversionConfig](-type-conversion-config/index.md) | `object TypeConversionConfig` |
-| [TypeConverters](-type-converters/index.md) | `class TypeConverters` |
+| [SelfRegisteringConverters](-self-registering-converters/index.md) | <code>interface SelfRegisteringConverters</code><br/> |
+| [TypeConversionConfig](-type-conversion-config/index.md) | <code>object TypeConversionConfig</code><br/> |
+| [TypeConverters](-type-converters/index.md) | <code>class TypeConverters</code><br/> |

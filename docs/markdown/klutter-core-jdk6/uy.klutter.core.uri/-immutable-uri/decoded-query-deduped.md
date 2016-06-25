@@ -2,6 +2,5 @@
 
 
 # decodedQueryDeduped
-`abstract val decodedQueryDeduped: Map<String,&nbsp;String>?` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L40)
-
+<code>abstract val decodedQueryDeduped: Map<String, String>?</code> [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L40)<br/>
 

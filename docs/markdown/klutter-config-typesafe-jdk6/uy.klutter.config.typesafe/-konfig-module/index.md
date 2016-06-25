@@ -2,8 +2,7 @@
 
 
 # KonfigModule
-`interface KonfigModule` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L109)
-
+<code>interface KonfigModule</code> [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/InjektConfig.kt#L109)<br/>
 A package of configuration bound items that can be included into a scope of someone else
 
 
@@ -12,11 +11,11 @@ A package of configuration bound items that can be included into a scope of some
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [registerConfigurables](register-configurables.md) | `abstract fun [KonfigRegistrar](../-konfig-registrar/index.md).registerConfigurables(): Unit` |
-| [registerWith](register-with.md) | `open fun registerWith(intoModule:&nbsp;[KonfigRegistrar](../-konfig-registrar/index.md)): Unit` |
+| [registerConfigurables](register-configurables.md) | <code>abstract fun [KonfigRegistrar](../-konfig-registrar/index.md).registerConfigurables(): Unit</code><br/> |
+| [registerWith](register-with.md) | <code>open fun registerWith(intoModule: [KonfigRegistrar](../-konfig-registrar/index.md)): Unit</code><br/> |
 
 ### Inheritors
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [KonfigAndInjektScopedMain](../-konfig-and-injekt-scoped-main/index.md) | `abstract class KonfigAndInjektScopedMain&nbsp;:&nbsp;InjektModule, KonfigModule`<p>A startup module that registers and uses singletons/object factories from a specific scope,<br/>and an ObjectMapper to bind configuration properties into class instances.</p> |
+| [KonfigAndInjektScopedMain](../-konfig-and-injekt-scoped-main/index.md) | <code>abstract class KonfigAndInjektScopedMain : InjektModule, KonfigModule</code><br/>A startup module that registers and uses singletons/object factories from a specific scope,<br/>and an ObjectMapper to bind configuration properties into class instances. |

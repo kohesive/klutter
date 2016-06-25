@@ -2,6 +2,5 @@
 
 
 # &lt;init&gt;
-`VertxInjektModule()`
-
+<code>VertxInjektModule()</code><br/>
 

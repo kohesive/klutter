@@ -2,8 +2,7 @@
 
 
 # &lt;init&gt;
-`ReadOnlySet(delegate:&nbsp;Set<T>)`
-
+<code>ReadOnlySet(delegate: Set<T>)</code><br/>
 Wraps a Set with a lightweight delegating class that prevents casting back to mutable type
 
 

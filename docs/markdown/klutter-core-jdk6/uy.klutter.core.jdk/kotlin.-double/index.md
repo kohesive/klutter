@@ -5,6 +5,6 @@
 
 |&nbsp;|&nbsp;|
 |---|---|
-| [coerce](coerce.md) | `fun Double.coerce(minVal:&nbsp;Double, maxVal:&nbsp;Double): Double` |
-| [maximum](maximum.md) | `fun Double.maximum(maxVal:&nbsp;Double): Double` |
-| [minimum](minimum.md) | `fun Double.minimum(minVal:&nbsp;Double): Double` |
+| [coerce](coerce.md) | <code>fun Double.coerce(minVal: Double, maxVal: Double): Double</code><br/> |
+| [maximum](maximum.md) | <code>fun Double.maximum(maxVal: Double): Double</code><br/> |
+| [minimum](minimum.md) | <code>fun Double.minimum(minVal: Double): Double</code><br/> |
