@@ -2,7 +2,6 @@
 
 
 # JacksonWithAutofindModulesInjektables
-
 `object JacksonWithAutofindModulesInjektables&nbsp;:&nbsp;InjektModule` [(source)](https://github.com/kohesive/klutter/blob/master/json-jackson-jdk6/src/main/kotlin/uy/klutter/json/jackson/Injektable.kt#L24)
 
 Add an ObjectMapper singleton factory to Injekt registry that auto finds and registers all Jackson modules found on
@@ -12,9 +11,8 @@ compile-time, which is safer.
 
 
 
-
 ### Functions
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [registerInjectables](register-injectables.md) | `fun InjektRegistrar.registerInjectables(): Unit` |
-

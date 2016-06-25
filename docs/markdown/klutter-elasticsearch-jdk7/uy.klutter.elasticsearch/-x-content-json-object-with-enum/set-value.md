@@ -2,7 +2,6 @@
 
 
 # setValue
-
 `fun setValue(field:&nbsp;T, value:&nbsp;String): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L9)
 `fun setValue(field:&nbsp;T, value:&nbsp;Long): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L10)
 `fun setValue(field:&nbsp;T, value:&nbsp;Int): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L11)

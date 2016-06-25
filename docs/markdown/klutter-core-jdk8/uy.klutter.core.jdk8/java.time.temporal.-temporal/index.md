@@ -3,9 +3,6 @@
 
 ### Extensions for java.time.temporal.Temporal
 
-
-| [toIsoString](to-iso-string.md) | `fun [Temporal](http://docs.oracle.com/javase/6/docs/api/java/time/temporal/Temporal.html).toIsoString(): String`
-Convert the Instant into a String in the ISO Date Time format yyyy-MM-dd`T`hh:mm:ss.SSSZ
-
- |
-
+|&nbsp;|&nbsp;|
+|---|---|
+| [toIsoString](to-iso-string.md) | `fun [Temporal](http://docs.oracle.com/javase/6/docs/api/java/time/temporal/Temporal.html).toIsoString(): String`<p>Convert the Instant into a String in the ISO Date Time format yyyy-MM-dd`T`hh:mm:ss.SSSZ</p> |

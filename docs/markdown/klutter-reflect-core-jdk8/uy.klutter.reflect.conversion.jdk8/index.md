@@ -3,9 +3,8 @@
 
 ## Package uy.klutter.reflect.conversion.jdk8
 
-
 ### Types
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [RegisterJdk8Converters](-register-jdk8-converters/index.md) | `class RegisterJdk8Converters&nbsp;:&nbsp;SelfRegisteringConverters` |
-

@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `XContentJsonObjectWithClass(x:&nbsp;XContentBuilder)`
 
 

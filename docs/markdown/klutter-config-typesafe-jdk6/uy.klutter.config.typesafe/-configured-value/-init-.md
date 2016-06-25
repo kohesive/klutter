@@ -2,10 +2,8 @@
 
 
 # &lt;init&gt;
-
 `ConfiguredValue(cfg:&nbsp;Config, key:&nbsp;String)`
 
 Intermediate object for providing additional functionality on a configured item
-
 
 

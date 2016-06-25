@@ -3,10 +3,10 @@
 
 ## Package uy.klutter.graph.netflix.internal
 
-
 ### Types
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [CompiledGraphSchema](-compiled-graph-schema/index.md) | `class CompiledGraphSchema&lt;N&nbsp;:&nbsp;Enum&lt;N&gt;, R&nbsp;:&nbsp;Enum&lt;R&gt;&gt;` |
 | [GraphBuilder](-graph-builder/index.md) | `class GraphBuilder&lt;N&nbsp;:&nbsp;Enum&lt;N&gt;, R&nbsp;:&nbsp;Enum&lt;R&gt;&gt;&nbsp;:&nbsp;[GraphOrdinalContainer](-graph-ordinal-container/index.md)&lt;N&gt;` |
 | [GraphBuilderTempStep1](-graph-builder-temp-step1/index.md) | `class GraphBuilderTempStep1&lt;N&nbsp;:&nbsp;Enum&lt;N&gt;, R&nbsp;:&nbsp;Enum&lt;R&gt;&gt;` |
@@ -18,4 +18,3 @@
 | [GraphRelationPredicateWithBackEdge](-graph-relation-predicate-with-back-edge/index.md) | `class GraphRelationPredicateWithBackEdge&lt;N&nbsp;:&nbsp;Enum&lt;N&gt;, R&nbsp;:&nbsp;Enum&lt;R&gt;&gt;` |
 | [GraphSchemaBuilder](-graph-schema-builder/index.md) | `class GraphSchemaBuilder&lt;N&nbsp;:&nbsp;Enum&lt;N&gt;, R&nbsp;:&nbsp;Enum&lt;R&gt;&gt;` |
 | [ReadOnlyGraph](-read-only-graph/index.md) | `class ReadOnlyGraph&lt;N&nbsp;:&nbsp;Enum&lt;N&gt;, R&nbsp;:&nbsp;Enum&lt;R&gt;&gt;&nbsp;:&nbsp;[GraphOrdinalContainer](-graph-ordinal-container/index.md)&lt;N&gt;` |
-

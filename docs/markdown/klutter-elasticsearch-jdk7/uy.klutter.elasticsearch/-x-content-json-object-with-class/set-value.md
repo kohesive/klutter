@@ -2,7 +2,6 @@
 
 
 # setValue
-
 `fun setValue(field:&nbsp;KProperty1&lt;T,&nbsp;*&gt;, value:&nbsp;String): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L42)
 `fun setValue(field:&nbsp;KProperty1&lt;T,&nbsp;*&gt;, value:&nbsp;Long): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L43)
 `fun setValue(field:&nbsp;KProperty1&lt;T,&nbsp;*&gt;, value:&nbsp;Int): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/XContent.kt#L44)

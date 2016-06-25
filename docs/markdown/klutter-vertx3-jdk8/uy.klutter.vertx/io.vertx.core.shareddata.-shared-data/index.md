@@ -3,45 +3,13 @@
 
 ### Extensions for io.vertx.core.shareddata.SharedData
 
-
-| [getClusterWideMap](get-cluster-wide-map.md) | `fun &lt;K&nbsp;:&nbsp;Any, V&nbsp;:&nbsp;Any&gt; SharedData.getClusterWideMap(name:&nbsp;String): Promise&lt;AsyncMap&lt;K,&nbsp;V&gt;,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide map (see Vert.x SharedData class for more documentation)
-This alias for [SharedData.promiseClusterWideMap(name)](#) and might be harder
-to locate due to code completion favoring the built-in method of the same name.
-
- |
-| [getCounter](get-counter.md) | `fun SharedData.getCounter(name:&nbsp;String): Promise&lt;Counter,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide counter (see Vert.x SharedData class for more documentation)
-This alias for [SharedData.promiseCounter(name)](#) and might be harder
-to locate due to code completion favoring the built-in method of the same name.
-
- |
-| [getLock](get-lock.md) | `fun SharedData.getLock(name:&nbsp;String): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)
-This alias for [SharedData.promiseLock(name)](#) and might be harder
-to locate due to code completion favoring the built-in method of the same name.
-
- |
-| [getLockWithTimeout](get-lock-with-timeout.md) | `fun SharedData.getLockWithTimeout(name:&nbsp;String, timeout:&nbsp;Long): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)
-This alias for [SharedData.promiseLockWithTimeout(name,timeout)](#) and might be harder
-to locate due to code completion favoring the built-in method of the same name.
-
- |
-| [promiseClusterWideMap](promise-cluster-wide-map.md) | `fun &lt;K&nbsp;:&nbsp;Any, V&nbsp;:&nbsp;Any&gt; SharedData.promiseClusterWideMap(name:&nbsp;String): Promise&lt;AsyncMap&lt;K,&nbsp;V&gt;,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide map (see Vert.x SharedData class for more documentation)
-
- |
-| [promiseCounter](promise-counter.md) | `fun SharedData.promiseCounter(name:&nbsp;String): Promise&lt;Counter,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide counter (see Vert.x SharedData class for more documentation)
-
- |
-| [promiseLock](promise-lock.md) | `fun SharedData.promiseLock(name:&nbsp;String): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)
-
- |
-| [promiseLockWithTimeout](promise-lock-with-timeout.md) | `fun SharedData.promiseLockWithTimeout(name:&nbsp;String, timeout:&nbsp;Long): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`
-Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)
-
- |
-
+|&nbsp;|&nbsp;|
+|---|---|
+| [getClusterWideMap](get-cluster-wide-map.md) | `fun &lt;K&nbsp;:&nbsp;Any, V&nbsp;:&nbsp;Any&gt; SharedData.getClusterWideMap(name:&nbsp;String): Promise&lt;AsyncMap&lt;K,&nbsp;V&gt;,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide map (see Vert.x SharedData class for more documentation)<br/>This alias for [SharedData.promiseClusterWideMap(name)](#) and might be harder<br/>to locate due to code completion favoring the built-in method of the same name.</p> |
+| [getCounter](get-counter.md) | `fun SharedData.getCounter(name:&nbsp;String): Promise&lt;Counter,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide counter (see Vert.x SharedData class for more documentation)<br/>This alias for [SharedData.promiseCounter(name)](#) and might be harder<br/>to locate due to code completion favoring the built-in method of the same name.</p> |
+| [getLock](get-lock.md) | `fun SharedData.getLock(name:&nbsp;String): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)<br/>This alias for [SharedData.promiseLock(name)](#) and might be harder<br/>to locate due to code completion favoring the built-in method of the same name.</p> |
+| [getLockWithTimeout](get-lock-with-timeout.md) | `fun SharedData.getLockWithTimeout(name:&nbsp;String, timeout:&nbsp;Long): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)<br/>This alias for [SharedData.promiseLockWithTimeout(name,timeout)](#) and might be harder<br/>to locate due to code completion favoring the built-in method of the same name.</p> |
+| [promiseClusterWideMap](promise-cluster-wide-map.md) | `fun &lt;K&nbsp;:&nbsp;Any, V&nbsp;:&nbsp;Any&gt; SharedData.promiseClusterWideMap(name:&nbsp;String): Promise&lt;AsyncMap&lt;K,&nbsp;V&gt;,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide map (see Vert.x SharedData class for more documentation)</p> |
+| [promiseCounter](promise-counter.md) | `fun SharedData.promiseCounter(name:&nbsp;String): Promise&lt;Counter,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide counter (see Vert.x SharedData class for more documentation)</p> |
+| [promiseLock](promise-lock.md) | `fun SharedData.promiseLock(name:&nbsp;String): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)</p> |
+| [promiseLockWithTimeout](promise-lock-with-timeout.md) | `fun SharedData.promiseLockWithTimeout(name:&nbsp;String, timeout:&nbsp;Long): Promise&lt;Lock,&nbsp;[Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)&gt;`<p>Retrieve a vert.x cluster wide lock (see Vert.x SharedData class for more documentation)</p> |

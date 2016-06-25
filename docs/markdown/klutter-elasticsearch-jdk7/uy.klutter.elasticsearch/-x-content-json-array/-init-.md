@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `XContentJsonArray(x:&nbsp;XContentBuilder)`
 
 

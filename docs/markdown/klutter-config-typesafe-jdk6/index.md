@@ -3,9 +3,9 @@
 
 ### Packages
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [uy.klutter.config.typesafe](uy.klutter.config.typesafe/index.md) |  |
-
 
 ### Index
 

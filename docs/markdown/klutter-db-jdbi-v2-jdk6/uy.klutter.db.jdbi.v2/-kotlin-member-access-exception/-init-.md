@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `KotlinMemberAccessException(string:&nbsp;String, throwable:&nbsp;Throwable)`
 `KotlinMemberAccessException(cause:&nbsp;Throwable)`
 `KotlinMemberAccessException(message:&nbsp;String)`

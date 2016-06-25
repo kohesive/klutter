@@ -2,14 +2,14 @@
 
 
 # EsSystemFields
-
 `enum class EsSystemFields` [(source)](https://github.com/kohesive/klutter/blob/master/elasticsearch-jdk7/src/main/kotlin/uy/klutter/elasticsearch/Mappings.kt#L10)
 
 
 
 ### Enum Values
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [_uid](_uid.md) |  |
 | [_id](_id.md) |  |
 | [_type](_type.md) |  |
@@ -24,4 +24,3 @@
 | [_size](_size.md) |  |
 | [_timestamp](_timestamp.md) |  |
 | [_ttl](_ttl.md) |  |
-

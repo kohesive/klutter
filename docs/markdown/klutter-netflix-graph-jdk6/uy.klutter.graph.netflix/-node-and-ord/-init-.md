@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `NodeAndOrd(nodeType:&nbsp;N, ord:&nbsp;Int)`
 
 

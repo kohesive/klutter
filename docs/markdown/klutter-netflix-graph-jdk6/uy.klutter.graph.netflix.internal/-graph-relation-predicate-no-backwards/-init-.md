@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `GraphRelationPredicateNoBackwards(builder:&nbsp;[GraphRelationBuilder](../-graph-relation-builder/index.md)&lt;N,&nbsp;R&gt;)`
 
 

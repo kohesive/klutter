@@ -3,9 +3,9 @@
 
 ### Packages
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [uy.klutter.elasticsearch](uy.klutter.elasticsearch/index.md) |  |
-
 
 ### Index
 

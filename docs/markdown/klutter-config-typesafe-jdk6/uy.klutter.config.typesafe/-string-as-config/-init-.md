@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `StringAsConfig(configString:&nbsp;String)`
 
 

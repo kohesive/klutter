@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `NodeAndId(nodeType:&nbsp;N, id:&nbsp;String)`
 
 

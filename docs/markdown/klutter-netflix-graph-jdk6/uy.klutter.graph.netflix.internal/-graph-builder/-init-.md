@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `GraphBuilder(schema:&nbsp;[CompiledGraphSchema](../-compiled-graph-schema/index.md)&lt;N,&nbsp;R&gt;)`
 
 

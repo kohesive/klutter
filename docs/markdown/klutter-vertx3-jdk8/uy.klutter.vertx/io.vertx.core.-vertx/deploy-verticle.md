@@ -2,14 +2,11 @@
 
 
 # deployVerticle
-
 `fun &lt;T&nbsp;:&nbsp;AbstractVerticle&gt; Vertx.deployVerticle(verticleClass:&nbsp;KClass&lt;T&gt;): Unit` [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L186)
 
 Deploy a verticle async without waiting for it to complete or tracking it in any way
 
-
 ### Parameters
-
 `verticleClass` - reference to Verticle class (Kotlin `KClass`) to deploy
 
 
@@ -17,9 +14,7 @@ Deploy a verticle async without waiting for it to complete or tracking it in any
 
 Deploy a verticle async without waiting for it to complete or tracking it in any way
 
-
 ### Parameters
-
 `verticleClass` - reference to Verticle class (Java `Class&lt;*&gt;`) to deploy
 
 

@@ -2,14 +2,14 @@
 
 
 # ImmutableUri
-
 `interface ImmutableUri` [(source)](https://github.com/kohesive/klutter/blob/master/core-jdk6/src/main/kotlin/uy/klutter/core/uri/UriBuilder.kt#L28)
 
 
 
 ### Properties
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [decodedFragment](decoded-fragment.md) | `abstract val decodedFragment: String?` |
 | [decodedPath](decoded-path.md) | `abstract val decodedPath: List&lt;String&gt;?` |
 | [decodedQuery](decoded-query.md) | `abstract val decodedQuery: Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
@@ -23,10 +23,10 @@
 | [port](port.md) | `abstract val port: Int?` |
 | [scheme](scheme.md) | `abstract val scheme: String?` |
 
-
 ### Functions
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [asString](as-string.md) | `open fun asString(): String` |
 | [fragmentAsDecodedPath](fragment-as-decoded-path.md) | `open fun fragmentAsDecodedPath(): List&lt;String&gt;?` |
 | [fragmentAsDecodedQuery](fragment-as-decoded-query.md) | `open fun fragmentAsDecodedQuery(): Map&lt;String,&nbsp;List&lt;String&gt;&gt;?` |
@@ -40,10 +40,9 @@
 | [hasUserInfo](has-user-info.md) | `open fun hasUserInfo(): Boolean` |
 | [toURI](to-u-r-i.md) | `open fun toURI(): [URI](http://docs.oracle.com/javase/6/docs/api/java/net/URI.html)` |
 
-
 ### Inheritors
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [BuiltUri](../-uri-builder/-built-uri/index.md) | `data class BuiltUri&nbsp;:&nbsp;ImmutableUri` |
 | [UriBuilder](../-uri-builder/index.md) | `class UriBuilder&nbsp;:&nbsp;ImmutableUri` |
-

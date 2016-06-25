@@ -1,7 +1,8 @@
 
 ### All Types
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [org.elasticsearch.action.ActionRequestBuilder](../uy.klutter.elasticsearch/org.elasticsearch.action.-action-request-builder/index.md) (extensions in package uy.klutter.elasticsearch) |  |
 | [org.elasticsearch.client.Client](../uy.klutter.elasticsearch/org.elasticsearch.client.-client/index.md) (extensions in package uy.klutter.elasticsearch) |  |
 | [uy.klutter.elasticsearch.EsConfig](../uy.klutter.elasticsearch/-es-config/index.md) |  |
@@ -17,4 +18,3 @@
 | [uy.klutter.elasticsearch.XContentJsonObject](../uy.klutter.elasticsearch/-x-content-json-object/index.md) |  |
 | [uy.klutter.elasticsearch.XContentJsonObjectWithClass](../uy.klutter.elasticsearch/-x-content-json-object-with-class/index.md) |  |
 | [uy.klutter.elasticsearch.XContentJsonObjectWithEnum](../uy.klutter.elasticsearch/-x-content-json-object-with-enum/index.md) |  |
-

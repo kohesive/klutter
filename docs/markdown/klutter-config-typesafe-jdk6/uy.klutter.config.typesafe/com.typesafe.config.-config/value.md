@@ -2,11 +2,9 @@
 
 
 # value
-
 `fun Config.value(key:&nbsp;String): [ConfiguredValue](../-configured-value/index.md)` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/TypesafeConfig_Ext.kt#L21)
 
 Return a value from configuration as a more uniform temporary object that can be checked for existance, and has
 additional methods for retrieving values, including with defaults.
-
 
 

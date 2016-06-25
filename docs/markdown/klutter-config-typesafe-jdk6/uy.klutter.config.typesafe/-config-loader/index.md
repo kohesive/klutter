@@ -2,27 +2,27 @@
 
 
 # ConfigLoader
-
 `abstract class ConfigLoader` [(source)](https://github.com/kohesive/klutter/blob/master/config-typesafe-jdk6/src/main/kotlin/uy/klutter/config/typesafe/ConfigLoading.kt#L59)
 
 
 
 ### Constructors
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [&lt;init&gt;](-init-.md) | `ConfigLoader()` |
-
 
 ### Functions
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [afterAttached](after-attached.md) | `open fun afterAttached(fullConfig:&nbsp;Config): Unit` |
 | [load](load.md) | `abstract fun load(): Config` |
 
-
 ### Inheritors
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [ApplicationConfig](../-application-config/index.md) | `class ApplicationConfig&nbsp;:&nbsp;ConfigLoader` |
 | [ClassResourceConfig](../-class-resource-config/index.md) | `class ClassResourceConfig&nbsp;:&nbsp;ConfigLoader` |
 | [EnvironmentVariablesConfig](../-environment-variables-config/index.md) | `class EnvironmentVariablesConfig&nbsp;:&nbsp;ConfigLoader` |
@@ -36,4 +36,3 @@
 | [StringAsConfig](../-string-as-config/index.md) | `class StringAsConfig&nbsp;:&nbsp;ConfigLoader` |
 | [SystemPropertiesConfig](../-system-properties-config/index.md) | `class SystemPropertiesConfig&nbsp;:&nbsp;ConfigLoader` |
 | [UrlConfig](../-url-config/index.md) | `class UrlConfig&nbsp;:&nbsp;ConfigLoader` |
-

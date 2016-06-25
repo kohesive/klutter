@@ -3,6 +3,6 @@
 
 ### Extensions for org.elasticsearch.action.index.IndexRequestBuilder
 
-
+|&nbsp;|&nbsp;|
+|---|---|
 | [setSourceFromObject](set-source-from-object.md) | `fun IndexRequestBuilder.setSourceFromObject(pojo:&nbsp;Any): Unit` |
-

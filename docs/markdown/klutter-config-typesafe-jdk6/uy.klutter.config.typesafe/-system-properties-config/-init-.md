@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `SystemPropertiesConfig()`
 
 

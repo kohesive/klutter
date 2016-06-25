@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `IndexTypeMapping(type:&nbsp;String, json:&nbsp;XContentBuilder)`
 
 

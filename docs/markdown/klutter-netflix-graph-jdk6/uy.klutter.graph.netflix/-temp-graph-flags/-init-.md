@@ -2,7 +2,6 @@
 
 
 # &lt;init&gt;
-
 `TempGraphFlags(flags:&nbsp;Int)`
 
 
