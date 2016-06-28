@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":klutter-reflect-core")
+    compile "org.jetbrains.kotlinx:kotlinx.reflect.lite:${version_kotlin_reflect_lite}"
+}

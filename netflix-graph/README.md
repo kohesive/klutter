@@ -1,6 +1,6 @@
 ## klutter/netflix-graph
 
-A wrapper library around the "compressed directed graph library" from [Netflix-Graph project](https://github.com/Netflix/netflix-graph) 
+A wrapper library around the "compressed directed graph library" from [Netflix-Graph project](https://github.com/Netflix/netflix-graph)
 -- a Kotlin library to construct, serialize and compress, then load and use a directed graph data at in-memory speeds.  In addition to the features of Netflix-Graph, Klutter includes:
 
 * Schema definition - define node types and relationships as Enums, and allowed linkages
@@ -95,11 +95,11 @@ useGraph<MyNodes, MyRelations>(inputStream) {
 
     test.assertTrue(Award["People's Choice Award"].getConnections(AwardWinner).hasOnly(setOf(Movie("Star Wars"), Movie("Indiana Jones"), Director("Steven Spielberg"), Actor("Harrison Ford"))))
 }
-```        
+```
 
 See the full test cases in [TestNetflixGraph.kt](https://github.com/klutter/klutter/blob/master/netflix-graph/src/test/kotlin/uy/klutter/graph/netflix/TestNetflixGraph.kt) for a good example of using the library and the API.
 
-The Netflix-Graph has been used to create graphs that take for example 10G of memory for construction, and use only 2G after derserialization.  These graphs can include 10's of millions of nodes+edges or more, simply limited by memory and GC.  
+The Netflix-Graph has been used to create graphs that take for example 10G of memory for construction, and use only 2G after derserialization.  These graphs can include 10's of millions of nodes+edges or more, simply limited by memory and GC.
 
 Our graph currently at [Collokia](https://www.collokia.com) is built nightly and takes 12G+ memory to construct a graph of 10's of millions of nodes+edges in about 20 minutes including serialization to disk.  We then read the graph in 90 seconds using ~ 3G of memory for use, executing thousands of node traversals per second per thread on the static graph in memory.  And this is fairly inefficient use of ordinals.  So optimization to be done.
 

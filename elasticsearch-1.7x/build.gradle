@@ -1,0 +1,8 @@
+dependencies {
+    compile project(":klutter-core")
+
+    compile "org.elasticsearch:elasticsearch:$version_elasticsearch"
+    compile "nl.komponents.kovenant:kovenant:$version_kovenant"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson_kotlin"
+
+}

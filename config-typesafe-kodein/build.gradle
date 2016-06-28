@@ -1,0 +1,7 @@
+dependencies {
+    compile project(":klutter-core")
+    compile project(":klutter-config-typesafe")
+    compile project(":klutter-json-jackson-kodein")
+
+    compile "com.github.salomonbrys.kodein:kodein:$version_kodein"
+}

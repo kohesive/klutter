@@ -1,3 +1,4 @@
 dependencies {
-    compile project(":klutter-netflix-graph-jdk6")
+    compile project(":klutter-core")
+    compile "com.netflix.nfgraph:netflix-graph:$version_netflix_graph"
 }

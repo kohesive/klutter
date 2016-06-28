@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":klutter-aws-s3")
+    compile "com.github.salomonbrys.kodein:kodein:$version_kodein"
+}

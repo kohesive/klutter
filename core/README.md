@@ -4,11 +4,8 @@ Core extension functions that are dependency-free (mostly), things improving the
 
 Module is available in artifacts:
 
-* uy.klutter:klutter-core (latest JDK, currently JDK 8)
-* [uy.klutter:klutter-core-jdk6](../core-jdk6)
-* [uy.klutter:klutter-core-jdk7](../core-jdk7)
-* [uy.klutter:klutter-core-jdk8](../core-jdk8)
-* [uy.klutter:klutter-core-jodatime](../core-jodatime-jdk6)
+* uy.klutter.v2:klutter-core
+* uy.klutter.v2:klutter-core-jodatime
 
 ### Initialization extensions
 
@@ -17,9 +14,9 @@ When initializing members or variables, these extensions allow you to encapsulat
 Further Initialization:
 
 ```kotlin
-val myData = SomeDataClass() initializedBy { 
-        it.addExtraData(123) 
-        it.setRateName("fast") 
+val myData = SomeDataClass() initializedBy {
+        it.addExtraData(123)
+        it.setRateName("fast")
 }
 ```
 
@@ -50,7 +47,7 @@ or `verifiedWith` to operate directly on the instance as `this`.
 Turning an instance into a receiver (similar to `with(instance) {}` but is `instance.with {}` and can be used in an expression:
 
 ```kotlin
-val userSet = getAllUsers().with { 
+val userSet = getAllUsers().with {
        addUser("Frank")
        addUser("Gillian")
     }.map { it.userId }.toSet()
@@ -84,7 +81,7 @@ Note:  these have since been added to Kotlin std runtime with different names.  
 Also available for Long and Int, `humanReadable`:
 
 ```kotlin
-println(1024.humanReadble()) // 1KB 
+println(1024.humanReadble()) // 1KB
 ```
 
 ### String Extensions
@@ -138,7 +135,7 @@ Some properties such as `scheme`, `host`, `port`, `userInfo` are somewhat self-e
 * `decodedQuery` - the query string parsed, decoded and available as a multimap, with multiple values possible per parameter name.
 * `decodedQueryDeduped` - the query string parsed, decoded and deduped into a Map<String, String> with one value per parameter name.
 
-Setting `encodedPath` makes `decodedPath` available automatically.  And setting a list of strings to `decodedPath` 
+Setting `encodedPath` makes `decodedPath` available automatically.  And setting a list of strings to `decodedPath`
 will encode them, and concatanate them into a `encodedPath` string.  This two way encode/decode is true for all property
 pairs (or in the case of a query, setting one of the three, updates the others).
 

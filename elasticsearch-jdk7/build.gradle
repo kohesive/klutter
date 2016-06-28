@@ -1,7 +1,0 @@
-dependencies {
-    compile project(":klutter-json-jackson-jdk6")
-    compile project(":klutter-core-jdk7")
-
-    compile "org.elasticsearch:elasticsearch:$version_elasticsearch"
-    compile "nl.komponents.kovenant:kovenant:$version_kovenant"
-}

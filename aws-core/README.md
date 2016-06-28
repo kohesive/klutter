@@ -1,11 +1,13 @@
 # Module klutter/aws-core
 
-Core helper functions for AWS in general.  
+Core helper functions for AWS in general.
 
-Module is available in artifacts:
+Related artifacts and modules:
 
-* uy.klutter:klutter-core (latest JDK, currently JDK 6)
-* [uy.klutter:klutter-core-jdk6](../aws-core-jdk6)
+* uy.klutter.v2:klutter-core:${klutterVersion}
+* [uy.klutter.v2:klutter-aws-s3:${klutterVersion}](../aws-s3)
+* [uy.klutter.v2:klutter-aws-s3-kodein:${klutterVersion}](../aws-s3-kodein)  -- with predefined Kodein module to inject AmazonS3Client
+
 
 This is a tiny module, currently has these methods:
 
@@ -19,5 +21,5 @@ public fun defaultSafeCredentialsProviderChain(): AWSCredentialsProviderChain
 ```
 
 The best bet in Development is to use the [credentials file in your home directory](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/credentials.html).  And
-in Production and IAM role is preferred.  Do not put AWS Credentials in your runtime configurations for your IDE, you might accidentally commit the project files containing 
+in Production and IAM role is preferred.  Do not put AWS Credentials in your runtime configurations for your IDE, you might accidentally commit the project files containing
 the secrets into your source control.

@@ -10,8 +10,8 @@ There is a utility functions to configure Vert.x and Hazelcast (when clustered) 
 setupVertxLoggingToSlf4j()
 ```
 
-When using [Injekt](https://github.com/kohesive/injekt) dependency injection, you can setup logging by importing either `VertxInjektables` module which will add a Vert.x facade based
-logger to be injected by Injekt.  Or `VertxWithSlf4jInjektables` to setup an injectable direct to SLf4j logger.  These modules also setup Vert.x embedded JSON (as noted below).
+When using [Kodein](https://github.com/SalomonBrys/Kodein) dependency injection, you can setup logging by importing either `KodeinVertx.module` module which will add a Vert.x facade based
+logger to be injected by Kodein.  Or `KodeinVertx.moduleWithLoggingToSlf4j` to setup an injectable direct to SLf4j logger.  These modules also setup Vert.x embedded JSON (as noted below).
 
 ## Vertx JSON with Kotlin and JDK 8
 
@@ -21,7 +21,7 @@ To make sure the embedded Jackson used by Vert.x is Kotlin capable, you can use 
 setupVertxJsonForKotlin()
 ```
 
-When using [Injekt](https://github.com/kohesive/injekt) dependency injection, both the `VertxInjektables` and `VertxWithSlf4jInjektables` modules automatically setup
+When using [Kodein](https://github.com/SalomonBrys/Kodein) dependency injection, the `KodeinVertx.module` and `KodeinVertx.moduleWithLoggingToSlf4j` modules automatically setup
 Jackson by calling this utility method and adding a singleton factory for `ObjectMapper` that is the same instance Vert.x uses for data binding.  More JSON helpers are
 provided, see JSON Builders below.
 
@@ -123,15 +123,3 @@ A few helper functions are provided for Vert.x Web:
 
 There is another related library that extends `Klutter/vertx3` called [Kovert](https://github.com/kohesive/kovert) which allows you to bind a Kotlin class to a route and have it act as a REST controller.
 
-## Other Libraries
-
-* [Injekt](https://github.com/kohesive/injekt) - dependency injection for Kotlin
-* [Kovenant](http://kovenant.komponents.nl) - promises for Kotlin
-* [Klutter](https://github.com/klutter/klutter) - the other modules in this library
-* [Kovert](https://github.com/kohesive/kovert) - invisible REST framework for Kotlin + Vert.x
-* [Cy6erGn0m/vertx3-lang-kotlin](https://github.com/cy6erGn0m/vertx3-lang-kotlin) - an alternative library for Vert.x-3 with Kotlin
-
-## Roadmap (in random order)
-
-* helpers for other areas that could use promises, such as HTTP Client, File system access via Vert.x
-* looking at any async pattern in Vert.x that causes nested handlers, and promise-ize

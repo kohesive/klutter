@@ -1,4 +1,0 @@
-dependencies {
-    compile project(":klutter-reflect-core-jdk6")
-    compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
-}

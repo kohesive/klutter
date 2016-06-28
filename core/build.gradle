@@ -1,5 +1,0 @@
-dependencies {
-    compile project(":klutter-core-jdk6")
-    compile project(":klutter-core-jdk7")
-    compile project(":klutter-core-jdk8")
-}
