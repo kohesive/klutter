@@ -4,7 +4,7 @@ Jackson JSON (and other format) parsing helpers and prebuilt Kodein injection mo
 
 Module is available in artifacts:
 
-* uy.klutter.v2:klutter-json-jackson
+* uy.kohesive.klutter:klutter-json-jackson
 
 A top level function is available to add appropriate JDK 8 modules to Jackson given an existing mapper:
 

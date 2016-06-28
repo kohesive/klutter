@@ -3,7 +3,7 @@
 =========================================================
 
 Breaking Changes:
-* Dependencies all change to have `uy.klutter.v2` group name
+* Dependencies all change to have `uy.kohesive.klutter` group name
 * Klutter is now JDK 8 only (use previous versions for other JDK options)
 * Injekt replaced with Kodein, and importable Kodein modules are in separate artifacts
 * Module names changed, naming no longer includes minimum JDK level

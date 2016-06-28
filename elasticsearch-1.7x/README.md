@@ -4,7 +4,7 @@ Helper functions for ElasticSearch 1.7x.
 
 Module is available in artifacts:
 
-* uy.klutter.v2:klutter-elasticsearch-1.7x
+* uy.kohesive.klutter:klutter-elasticsearch-1.7x
 
 ## Kovenant Integration
 

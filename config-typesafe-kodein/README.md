@@ -2,8 +2,8 @@
 
 Related artifacts and modules:
 
-* [uy.klutter.v2:klutter-config-typesafe](../config-typesafe)
-* uy.klutter.v2:klutter-config-typesafe-kodein -- injecting configuration as objects via Kodein
+* [uy.kohesive.klutter:klutter-config-typesafe](../config-typesafe)
+* uy.kohesive.klutter:klutter-config-typesafe-kodein -- injecting configuration as objects via Kodein
 
 ## Injecting Configuration into Objects with Kodein
 

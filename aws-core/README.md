@@ -4,9 +4,9 @@ Core helper functions for AWS in general.
 
 Related artifacts and modules:
 
-* uy.klutter.v2:klutter-core:${klutterVersion}
-* [uy.klutter.v2:klutter-aws-s3:${klutterVersion}](../aws-s3)
-* [uy.klutter.v2:klutter-aws-s3-kodein:${klutterVersion}](../aws-s3-kodein)  -- with predefined Kodein module to inject AmazonS3Client
+* uy.kohesive.klutter:klutter-core:${klutterVersion}
+* [uy.kohesive.klutter:klutter-aws-s3:${klutterVersion}](../aws-s3)
+* [uy.kohesive.klutter:klutter-aws-s3-kodein:${klutterVersion}](../aws-s3-kodein)  -- with predefined Kodein module to inject AmazonS3Client
 
 
 This is a tiny module, currently has these methods:

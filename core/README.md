@@ -4,8 +4,8 @@ Core extension functions that are dependency-free (mostly), things improving the
 
 Module is available in artifacts:
 
-* uy.klutter.v2:klutter-core
-* uy.klutter.v2:klutter-core-jodatime
+* uy.kohesive.klutter:klutter-core
+* uy.kohesive.klutter:klutter-core-jodatime
 
 ### Initialization extensions
 

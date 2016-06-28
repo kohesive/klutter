@@ -9,8 +9,8 @@ can be ignored if you want to lose the `loadConfig()` methods from Klutter/confi
 
 Related artifacts and modules:
 
-* uy.klutter.v2:klutter-config-typesafe
-* [uy.klutter.v2:klutter-config-typesafe-kodein](../config-typesafe-kodein) -- injecting configuration as objects via Kodein
+* uy.kohesive.klutter:klutter-config-typesafe
+* [uy.kohesive.klutter:klutter-config-typesafe-kodein](../config-typesafe-kodein) -- injecting configuration as objects via Kodein
 
 ## Configuration Loading
 

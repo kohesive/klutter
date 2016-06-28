@@ -4,6 +4,6 @@ Helper functions for Amazon AWS S3 objects.  See [extension functions in the sou
 
 Related artifacts and modules:
 
-* [uy.klutter.v2:klutter-core:${klutterVersion}](../aws-core)
-* uy.klutter.v2:klutter-aws-s3:${klutterVersion}
-* [uy.klutter.v2:klutter-aws-s3-kodein:${klutterVersion}](../aws-s3-kodein)  -- with predefined Kodein module to inject AmazonS3Client
+* [uy.kohesive.klutter:klutter-core:${klutterVersion}](../aws-core)
+* uy.kohesive.klutter:klutter-aws-s3:${klutterVersion}
+* [uy.kohesive.klutter:klutter-aws-s3-kodein:${klutterVersion}](../aws-s3-kodein)  -- with predefined Kodein module to inject AmazonS3Client

@@ -11,13 +11,13 @@ Each module has its own set of dependencies.  The basic pattern is:
 **Gradle:**
 
 ```
-compile "uy.klutter.v2:klutter-moduleName:2.0.+"
+compile "uy.kohesive.klutter:klutter-moduleName:2.0.+"
 ```
 
 **Maven:**
 ```
 <dependency>
-    <groupId>uy.klutter.v2</groupId>
+    <groupId>uy.kohesive.klutter</groupId>
     <artifactId>klutter-moduleName</artifactId>
     <version>[2.0.0,2.1.0)</version>
 </dependency>
