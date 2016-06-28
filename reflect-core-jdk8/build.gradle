@@ -1,4 +1,0 @@
-dependencies {
-    compile project(":klutter-reflect-core-jdk6")
-    compile project(":klutter-reflect-core-jdk7")
-}

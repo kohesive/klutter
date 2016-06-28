@@ -1,4 +1,18 @@
 =========================================================
+2016-06-24 v2.0.0-BETA-01 release
+=========================================================
+
+Breaking Changes:
+* Dependencies all change to have `uy.klutter.v2` group name
+* Klutter is now JDK 8 only (use previous versions for other JDK options)
+* Injekt replaced with Kodein, and importable Kodein modules are in separate artifacts
+* Module names changed, naming no longer includes minimum JDK level
+* FileConfig class for TypeSafe config on JDK7 renamed to PathConfig
+* things that were in JDK named subpackages were moved up to the main package for the module (just erase the jdkX part)
+* some items moved from package uy.klutter.core.jdk to uy.klutter.core.common (dates, numbers, paths, strings)
+* and more, everything is still there, just maybe moved a bit.
+
+=========================================================
 2016-06-24 v1.20.0 release
 =========================================================
 

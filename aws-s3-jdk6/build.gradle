@@ -1,6 +1,0 @@
-dependencies {
-    compile project(":klutter-aws-core")
-
-    compile "uy.kohesive.injekt:injekt-core:${version_kohesive_injekt}"
-    compile "com.amazonaws:aws-java-sdk-s3:${version_aws_sdk}"
-}

@@ -1,5 +1,0 @@
-[uy.klutter.vertx](index.md) / [promiseVertx](.)
-
-
-# promiseVertx
-<code>fun promiseVertx(): Promise<Vertx, [Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)></code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L44)<br/><p>Start vert.x (alias for [<code>vertx()</code>](vertx.md) function)</p><p>**Return**<br/>Promise<Vertx, Exception></p><br/><br/><code>fun promiseVertx(options: VertxOptions): Promise<Vertx, [Exception](http://docs.oracle.com/javase/6/docs/api/java/lang/Exception.html)></code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L72)<br/><p>Start vert.x (alias for [<code>vertx(options)</code>](vertx.md) function)</p>### Parameters<br/><code>options</code> - configuration options for vert.x<br/><p>**Return**<br/>Promise<Vertx, Exception></p><br/><br/>

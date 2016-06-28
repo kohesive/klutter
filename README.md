@@ -1,37 +1,33 @@
-[![Kotlin](https://img.shields.io/badge/kotlin-1.0.2-blue.svg)](http://kotlinlang.org) [![Maven Version](https://img.shields.io/maven-central/v/uy.klutter/klutter-all-jdk8.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter%22) [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.0.2-blue.svg)](http://kotlinlang.org) [![Maven Version](https://img.shields.io/maven-central/v/uy.klutter.v2/klutter-all-jdk8.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter.v2%22) [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
 
 # klutter
-Random small libraries, usually extensions making other libraries happier.  
 
-Please send contributions, fork the repo, issue a pull request and write a comment in the pull request granting the
-rights for the code to be used in Klutter.
+Random small libraries, usually extensions making other libraries happier. Versions later than 2.x are for JDK 8 and newer only.  Use 1.x for older JDK's.
 
 ## Maven Dependency
 
-Each module has its own set of dependencies.  There is a main dependency which is always the most current JDK
-version of the module, and also a version suffixed by the JDK version for which it is compatible (that version or newer).
-Include the dependency in your Gradle / Maven projects, ones that already have Kotlin configured.
+Each module has its own set of dependencies.  The basic pattern is:
 
 **Gradle:**
 
 ```
-compile "uy.klutter:klutter-all:1.20.+"
+compile "uy.klutter.v2:klutter-moduleName:2.0.+"
 ```
 
 **Maven:**
 ```
 <dependency>
-    <groupId>uy.klutter</groupId>
-    <artifactId>klutter-all</artifactId>
-    <version>[1.20.0,1.21.0)</version>
+    <groupId>uy.klutter.v2</groupId>
+    <artifactId>klutter-moduleName</artifactId>
+    <version>[2.0.0,2.1.0)</version>
 </dependency>
 ```
  
-See all modules and current versions on [Maven Central search](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter%22%20) (or the [raw repo](https://repo1.maven.org/maven2/uy/klutter/))
+See all modules and current versions on [Maven Central search](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter.v2%22%20) (or the [raw repo](https://repo1.maven.org/maven2/uy/klutter/v2/))
 
 ## Modules
 
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Size|Topic|Injekt|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Size|Topic|Kodein module|
 |------|------|------|------|
 |[aws-s3](aws-s3/)|tiny|Amazon AWS SDK S3 helper extensions|Yes|
 |[aws-core](aws-core/)|tiny|Amazon AWS SDK helper extensions|No|
@@ -39,45 +35,14 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |[core](core/)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
 |[db-jdbi-v2](db-jdbi-v2/)|small|Adds Kotlin parameter binding and RestulSet mapping to JDBI versions 2.x|No|
 |[db-jdbi-v3](db-jdbi-v3/)|small|Adds Kotlin parameter binding and RestulSet mapping to JDBI versions 3.x|No|
-|[elasticsearch](elasticsearch/)|medium|Extensions to ElasticSearch client library|No|
+|[elasticsearch-1.7x](elasticsearch-1.7x/)|medium|Extensions to ElasticSearch client library|No|
 |[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
 |[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
-|[reflect](reflect/)|small|Helpers for Kotlin reflection|No|
+|[reflect-core](reflect-core/)|small|Helpers for Kotlin reflection that do not require kotlin-reflect dependency|No|
+|[reflect-full](reflect-full/)|small|Helpers for Kotlin reflection extending the kotlin-reflect dependency|No|
 |[vertx3](vertx3/)|medium|Vert.x-3 helpers and integration with Kovenant Promises|Yes|
 
-Modules marked with "yes" for Injekt, are modules that have intergration with [Kohesive/Injekt](http://github.com/kohesive/injekt) and provide prebuild injectable modules that you can easily import providing factories or singletons for dependency injection.  Using an Injekt module looks something like:
-
-```kotlin
-class MyApp {
-    companion object : InjektMain() {
-        // my app starts here with a static main()
-        platformStatic public fun main(args: Array<String>) {
-            MyApp().run()
-        }
-
-        // the Injekt system will call me back here on a method I override.  And all my functions for registration are
-        // easy to find on the receiver class
-        override fun InjektRegistrar.registerInjectables() {
-            // add my singletons, factories, keyed factories, per-thread factories, ...
-            ...
- 
-            // import prebuilt Injekt modules
-            importModule(AmazonS3Injektables)  
-            importModule(JacksonWithKotlinAndJdk8Injektables)
-        }
-    }
-
-    ...
-    // later, use them in properties in any class
-    val s3: AmazonS3Client by Delegates.injectLazy()
-    // or use them anywhere in code
-    val myObject: CoolObject = Inject.get<ObjectMapper>().readValue(jsonString)
-    // or another form of the same
-    val mapper: ObjectMapper = Inject.get()
-    // or within constructor or method definitions as default values
-    public fun doSomethingWithS3(s3: AmazonS3Client = Inject.get()) { ... }
-}
-```
+Modules marked with "yes" for Kodein, are modules that have prebuilt modules for injecting with [Kodein](https://github.com/SalomonBrys/Kodein).
 
 Some of these modules are "tiny" and may not be overly useful yet, but they carry no extra weight, only have required dependencies and can be expanded over time by anyone that wants to send pull requests.  Submitted modules or changes to existing module consist of things not conflicting with Kotlin runtime libraries, and things useful to most Kotlin developers.
 
@@ -85,9 +50,9 @@ Some of these modules are "tiny" and may not be overly useful yet, but they carr
 
 Other libraries that we recommend a building blocks for Kotlin applications:
 
-* [Injekt](https://github.com/kohesive/injekt/blob/master/README.md) - Injekt is a crazyily easy Dependency Injection for Kotlin. 
 * [Kovenant](http://kovenant.komponents.nl) - promises for Kotlin, easy, fun, and async! (JVM / Android)
 * [Kovert](https://github.com/kohesive/kovert) - invisible REST framework for Kotlin + Vert.x
+* [Kodein](https://github.com/SalomonBrys/Kodein) - very easy yet powerful dependency injection in Kotlin
 
 ## With help from...
 

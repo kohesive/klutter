@@ -1,70 +1,38 @@
 rootProject.name = "klutter"
 
 include 'core',
-        'core-jdk6',
-        'core-jdk7',
-        'core-jdk8',
         'core-jodatime',
-        'core-jodatime-jdk6',
         'aws-core',
-        'aws-core-jdk6',
         'aws-s3',
-        'aws-s3-jdk6',
-        'json-jackson',
-        'json-jackson-jdk6',
-        'json-jackson-jdk8',
+        'aws-s3-kodein',
+        'json-jackson-kodein',
         'config-typesafe',
-        'config-typesafe-jdk6',
-        'config-typesafe-jdk7',
-        'config-typesafe-jdk8',
+        'config-typesafe-kodein',
         'netflix-graph',
-        'netflix-graph-jdk6',
         'vertx3',
-        'vertx3-jdk8',
-        'elasticsearch-jdk7',
-        'elasticsearch',
-        'reflect-core-jdk6',
-        'reflect-core-jdk7',
-        'reflect-core-jdk8',
-        'reflect-lite-jdk6',
-        'reflect-full-jdk6',
-        'reflect',
-        'db-jdbi-v2-jdk6',
+        'vertx3-kodein',
+        'elasticsearch-1.7x',
+        'reflect-core',
+        'reflect-lite',
+        'reflect-full',
         'db-jdbi-v2',
-        'db-jdbi-v3-jdk8',
         'db-jdbi-v3'
 
 project(':core').name = 'klutter-core'
-project(':core-jdk6').name = 'klutter-core-jdk6'
-project(':core-jdk7').name = 'klutter-core-jdk7'
-project(':core-jdk8').name = 'klutter-core-jdk8'
 project(':core-jodatime').name = 'klutter-core-jodatime'
-project(':core-jodatime-jdk6').name = 'klutter-core-jodatime-jdk6'
 project(':aws-core').name = 'klutter-aws-core'
-project(':aws-core-jdk6').name = 'klutter-aws-core-jdk6'
 project(':aws-s3').name = 'klutter-aws-s3'
-project(':aws-s3-jdk6').name = 'klutter-aws-s3-jdk6'
-project(':json-jackson').name = 'klutter-json-jackson'
-project(':json-jackson-jdk6').name = 'klutter-json-jackson-jdk6'
-project(':json-jackson-jdk8').name = 'klutter-json-jackson-jdk8'
-project(':config-typesafe-jdk6').name = 'klutter-config-typesafe-jdk6'
-project(':config-typesafe-jdk7').name = 'klutter-config-typesafe-jdk7'
-project(':config-typesafe-jdk8').name = 'klutter-config-typesafe-jdk8'
+project(':aws-s3-kodein').name = 'klutter-aws-s3-kodein'
+project(':json-jackson-kodein').name = 'klutter-json-jackson-kodein'
 project(':config-typesafe').name = 'klutter-config-typesafe'
+project(':config-typesafe-kodein').name = 'klutter-config-typesafe-kodein'
 project(':netflix-graph').name = 'klutter-netflix-graph'
-project(':netflix-graph-jdk6').name = 'klutter-netflix-graph-jdk6'
 project(':vertx3').name = 'klutter-vertx3'
-project(':vertx3-jdk8').name = 'klutter-vertx3-jdk8'
-project(':elasticsearch').name = 'klutter-elasticsearch'
-project(':elasticsearch-jdk7').name = 'klutter-elasticsearch-jdk7'
-project(':reflect-core-jdk6').name = 'klutter-reflect-core-jdk6'
-project(':reflect-core-jdk7').name = 'klutter-reflect-core-jdk7'
-project(':reflect-core-jdk8').name = 'klutter-reflect-core-jdk8'
-project(':reflect-lite-jdk6').name = 'klutter-reflect-lite-jdk6'
-project(':reflect-full-jdk6').name = 'klutter-reflect-full-jdk6'
-project(':reflect').name = 'klutter-reflect'
-project(':db-jdbi-v3-jdk8').name = 'klutter-db-jdbi-v3-jdk8'
+project(':vertx3-kodein').name = 'klutter-vertx3-kodein'
+project(':elasticsearch-1.7x').name = 'klutter-elasticsearch-1.7x'
+project(':reflect-core').name = 'klutter-reflect-core'
+project(':reflect-lite').name = 'klutter-reflect-lite'
+project(':reflect-full').name = 'klutter-reflect-full'
 project(':db-jdbi-v3').name = 'klutter-db-jdbi-v3'
-project(':db-jdbi-v2-jdk6').name = 'klutter-db-jdbi-v2-jdk6'
 project(':db-jdbi-v2').name = 'klutter-db-jdbi-v2'
 

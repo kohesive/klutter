@@ -1,6 +1,0 @@
-dependencies {
-    compile project(":klutter-config-typesafe-jdk6")
-    compile "com.typesafe:config:$version_typesafe_config"
-
-    compile project(":klutter-json-jackson-jdk6")
-}

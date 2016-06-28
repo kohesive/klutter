@@ -1,5 +1,0 @@
-
-### All Types
-
-|&nbsp;|&nbsp;|
-|---|---|

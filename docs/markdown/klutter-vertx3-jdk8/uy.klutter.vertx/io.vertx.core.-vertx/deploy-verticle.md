@@ -1,5 +1,0 @@
-[uy.klutter.vertx](../index.md) / [io.vertx.core.Vertx](index.md) / [deployVerticle](.)
-
-
-# deployVerticle
-<code>fun <T : AbstractVerticle> Vertx.deployVerticle(verticleClass: KClass<T>): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L186)<br/><p>Deploy a verticle async without waiting for it to complete or tracking it in any way</p>### Parameters<br/><code>verticleClass</code> - reference to Verticle class (Kotlin <code>KClass</code>) to deploy<br/><br/><br/><code>fun <T : AbstractVerticle> Vertx.deployVerticle(verticleClass: [Class](http://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)<T>): Unit</code> [(source)](https://github.com/kohesive/klutter/blob/master/vertx3-jdk8/src/main/kotlin/uy/klutter/vertx/Vertx.kt#L196)<br/><p>Deploy a verticle async without waiting for it to complete or tracking it in any way</p>### Parameters<br/><code>verticleClass</code> - reference to Verticle class (Java <code>Class<*></code>) to deploy<br/><br/><br/>

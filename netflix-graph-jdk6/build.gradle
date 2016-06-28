@@ -1,4 +1,0 @@
-dependencies {
-    compile project(":klutter-core")
-    compile "com.netflix.nfgraph:netflix-graph:$version_netflix_graph"
-}
