@@ -112,16 +112,16 @@ enum class ConstructionWarning {
     MISSING_VALUE, DEFAULT_VALUE_USED_FOR_DATATYPE
 }
 
-class ConstructionPlan <T: Any> (val constructClass: KClass<T>,
+class ConstructionPlan <T: Any, C: T> (val constructClass: KClass<T>,
                                  val constructType: Type,
-                                 val useCallable: KCallable<T>,
+                                 val useCallable: KCallable<C>,
                                  val withParameters: List<Pair<KParameter, Any?>>,
                                  val thenSetProperties: List<Pair<KMutableProperty1<T, *>, Any?>>,
                                  val parameterErrors: List<Pair<KParameter, ConstructionError>>,
                                  val parameterWarnings: List<Pair<KParameter, ConstructionWarning>>,
                                  val propertyErrors: List<Pair<KProperty1<T, *>, ConstructionError>>,
                                  val propertyWarnings: List<Pair<KProperty1<T, *>, ConstructionWarning>>,
-                                 val unusedProvideEntries: Set<String>) {
+                                 val nonmatchingProviderEntries: Set<String>) {
     val errorCount: Int = parameterErrors.groupBy { it.first }.size +
             propertyErrors.groupBy { it.first }.size
     val warningCount: Int = parameterWarnings.groupBy { it.first }.size +
@@ -131,7 +131,7 @@ class ConstructionPlan <T: Any> (val constructClass: KClass<T>,
 
     companion object {
         @Suppress("UNCHECKED_CAST")
-        fun <T: Any> from(constructClass: KClass<T>, constructType: Type, usingCallable: KCallable<T>, valueProvider: NamedValueProvider): ConstructionPlan<T> {
+        fun <T: Any, C: T> from(constructClass: KClass<T>, constructType: Type, usingCallable: KCallable<C>, valueProvider: NamedValueProvider, nullableValuesAcceptMissingAsNull: Boolean = true): ConstructionPlan<T,C> {
             val isConstructorCall = constructClass.constructors.any { it == usingCallable }
             val isCompanionCall = constructClass.companionObject?.declaredFunctions?.any { it == usingCallable } ?: false
 
@@ -151,7 +151,7 @@ class ConstructionPlan <T: Any> (val constructClass: KClass<T>,
             val orderedParamValues = arrayListOf<Pair<KParameter, Any?>>()
             val propertyValues = arrayListOf<Pair<KMutableProperty1<T, *>, Any?>>()
 
-            fun consumeValue(key: String) {
+            fun markValueMatchedSomething(key: String) {
                 usedEntriesFromProvider.add(key)
             }
 
@@ -218,26 +218,27 @@ class ConstructionPlan <T: Any> (val constructClass: KClass<T>,
                     KParameter.Kind.VALUE -> {
                         val paramName = paramDef.name ?: throw IllegalStateException("callable has parameter with unknown name")
                         val isMissing = !valueProvider.existsByName(paramName, paramDef.type.javaType)
-                        val paramVal = valueProvider.valueByName(paramName, paramDef.type.javaType)
 
                         if (!isMissing) {
-                            consumeValue(paramName)
+                            markValueMatchedSomething(paramName)
                         }
 
                         if (isMissing) {
                             if (paramDef.isOptional) {
                                 // this is ok, optional parameter not resolved will have default parameter value of method
                                 consumeProperty(paramName)
-                            } else if (paramVal == null && !paramDef.type.isMarkedNullable) {
-                                errorParam(paramDef, ConstructionError.MISSING_VALUE)
-                                errorParam(paramDef, ConstructionError.NULL_VALUE_NON_NULLABLE_TYPE)
-                            } else {
+                            } else if (paramDef.type.isMarkedNullable && nullableValuesAcceptMissingAsNull) {
                                 // default value for datatype is ok if null and nullable, or is non null and matches type
-                                useParam(paramDef, paramVal)
+                                useParam(paramDef, null)
                                 consumeProperty(paramName)
                                 warnParam(paramDef, ConstructionWarning.DEFAULT_VALUE_USED_FOR_DATATYPE)
+                            } else {
+                                errorParam(paramDef, ConstructionError.MISSING_VALUE)
+                                errorParam(paramDef, ConstructionError.NULL_VALUE_NON_NULLABLE_TYPE)
                             }
                         } else {
+                            val paramVal = valueProvider.valueByName(paramName, paramDef.type.javaType)
+
                             if (paramVal == null && !paramDef.type.isMarkedNullable) {
                                 // value coming in as null for non-nullable type
                                 errorParam(paramDef, ConstructionError.NULL_VALUE_NON_NULLABLE_TYPE)
@@ -256,12 +257,12 @@ class ConstructionPlan <T: Any> (val constructClass: KClass<T>,
             unsetProperties.forEach { propDefx ->
                 if (propDefx is KMutableProperty1<*, *>) {
                     val propDef = propDefx as KMutableProperty1<T, *>
-                    val propName = propDef.name ?: throw IllegalStateException("callable has parameter with unknown name")
+                    val propName = propDef.name
                     val isMissing = !valueProvider.existsByName(propName, propDef.returnType.javaType)
                     val propVal = valueProvider.valueByName(propName, propDef.returnType.javaType)
 
                     if (!isMissing) {
-                        consumeValue(propName)
+                        markValueMatchedSomething(propName)
                     }
 
                     if (isMissing) {
@@ -278,13 +279,14 @@ class ConstructionPlan <T: Any> (val constructClass: KClass<T>,
                         }
                     }
                 } else {
+                    markValueMatchedSomething(propDefx.name) // we can't set it, but it does aline
                     errorProperty(propDefx, ConstructionError.NON_SETTABLE_PROPERTY)
                 }
             }
 
             val unusedEntriesFromProvider = entriesFromProvider - usedEntriesFromProvider
 
-            return ConstructionPlan<T>(constructClass, constructType, usingCallable,
+            return ConstructionPlan(constructClass, constructType, usingCallable,
                     orderedParamValues, propertyValues,
                     paramErrors, paramWarnings, propertyErrors, propertyWarnings, unusedEntriesFromProvider)
         }

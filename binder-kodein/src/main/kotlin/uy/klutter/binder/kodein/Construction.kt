@@ -8,18 +8,16 @@ class KodeinValueProvider(private val kodein: Kodein, private val delegate: Name
     override val supportsDottedNames: Boolean = delegate.supportsDottedNames
     override val knowsEntries: Boolean = delegate.knowsEntries
 
-    override fun <T : Any> valueByName(name: String, targetType: Type?): T? {
+    override fun valueByName(name: String, targetType: Type): Any? {
         return if (delegate.existsByName(name, targetType)) {
             delegate.valueByName(name, targetType)
-        } else if (targetType != null) {
-            kodein._container.providerOrNull<T>(Kodein.Bind(targetType, null))?.invoke() ?: throw IllegalStateException("not found")
         } else {
-            throw IllegalStateException("not found")
+            kodein.container.providerOrNull(Kodein.Bind(targetType, null))?.invoke() ?: throw IllegalStateException("not found")
         }
     }
 
-    override fun existsByName(name: String, targetType: Type?): Boolean {
-        return delegate.existsByName(name, targetType) || (targetType != null && kodein._container.providerOrNull<Any>(Kodein.Bind(targetType, null)) != null)
+    override fun existsByName(name: String, targetType: Type): Boolean {
+        return delegate.existsByName(name, targetType) || kodein.container.providerOrNull(Kodein.Bind(targetType, null)) != null
     }
 
     override fun entries(): List<Pair<String, Any?>> {

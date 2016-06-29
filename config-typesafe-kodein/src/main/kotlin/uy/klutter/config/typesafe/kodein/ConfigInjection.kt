@@ -3,10 +3,7 @@ package uy.klutter.config.typesafe.kodein
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.type.TypeFactory
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.singleton
-import com.github.salomonbrys.kodein.typeToken
+import com.github.salomonbrys.kodein.*
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigRenderOptions
 import com.typesafe.config.ConfigValue
@@ -16,7 +13,7 @@ fun Kodein.Builder.importConfig(config: Config, configExpression: String? = null
     import(KodeinTypesafeConfig.Module(init).Builder(root, mapper).kodeinModule, allowOverride)
 }
 
-// fun Kodein.Companion.ConfigModule(init: KodeinTypesafeConfig.Module.Builder.()->Unit) = KodeinTypesafeConfig.Module { init() }
+fun Kodein.Companion.ConfigModule(init: KodeinTypesafeConfig.Module.Builder.(Config)->Unit) = KodeinTypesafeConfig.Module { init(it) }
 
 class KodeinTypesafeConfig private constructor() {
     class Module internal constructor (private val init: Builder.(Config) -> Unit) {
@@ -61,9 +58,8 @@ class KodeinTypesafeConfig private constructor() {
                     actions.add(BindActions {
                         val asJson = targetConfig.root().render(ConfigRenderOptions.concise().setJson(true))
                         val value: T = mapper.readValue(asJson, TypeFactory.defaultInstance().constructType(_bind.type))!!
-  //                      bind(_bind.type, _bind.tag) with instance(value)
-                        DirectBinder(_bind.tag, overrides)._with(_bind.type, singleton { value })
-                    })
+                        bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
+                       })
                 }
             }
 
@@ -80,14 +76,13 @@ class KodeinTypesafeConfig private constructor() {
                 private fun addAction(configValue: ConfigValue) {
                     actions.add(BindActions {
                         val value = configValue.unwrapped() as T
- //  constant(_bind.tag!!, overrides) with value
-                        this.ConstantBinder(_bind.tag!!, overrides) with(value)
+                        bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
                     })
                 }
             }
 
-            inline fun <reified T : Any> bind(tag: Any? = null, overrides: Boolean? = null): ConfigBinder<T> = ConfigBinder<T>(Kodein.Bind(typeToken<T>(), tag), overrides)
-            inline fun <reified T : Any> constant(tag: Any, overrides: Boolean? = null): ConstantBinder<T> = ConstantBinder<T>(Kodein.Bind(typeToken<T>(), tag), overrides)
+            inline fun <reified T : Any> bind(tag: Any? = null, overrides: Boolean? = null): ConfigBinder<T> = ConfigBinder<T>(Kodein.Bind(typeToken<T>().type, tag), overrides)
+            inline fun <reified T : Any> constant(tag: Any, overrides: Boolean? = null): ConstantBinder<T> = ConstantBinder<T>(Kodein.Bind(typeToken<T>().type, tag), overrides)
         }
     }
 }

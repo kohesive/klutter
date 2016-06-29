@@ -1,10 +1,11 @@
 package uy.klutter.config.typesafe.tests
 
 import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 import org.junit.Test
 import uy.klutter.config.typesafe.MapAsConfig
-import uy.klutter.config.typesafe.kodein.KodeinTypesafeConfig
+import uy.klutter.config.typesafe.kodein.ConfigModule
 import uy.klutter.config.typesafe.kodein.importConfig
 import uy.klutter.config.typesafe.loadConfig
 import kotlin.test.assertEquals
@@ -63,7 +64,7 @@ data class OtherConfig(val name: String)
 data class OtherThingWantingConfig(val cfg: OtherConfig)
 
 object OtherModule {
-    val configModule = KodeinTypesafeConfig.Module {
+    val configModule = Kodein.ConfigModule {
         bind<OtherConfig>() fromConfig(it)
     }
 
