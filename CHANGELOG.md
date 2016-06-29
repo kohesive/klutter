@@ -10,7 +10,9 @@ Breaking Changes:
 * FileConfig class for TypeSafe config on JDK7 renamed to PathConfig
 * things that were in JDK named subpackages were moved up to the main package for the module (just erase the jdkX part)
 * some items moved from package uy.klutter.core.jdk to uy.klutter.core.common (dates, numbers, paths, strings)
+* reflect-core and reflect-full merged into reflect, some packages from full will have changed
 * and more, everything is still there, just maybe moved a bit.
+
 
 =========================================================
 2016-06-24 v1.20.0 release

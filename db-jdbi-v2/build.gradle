@@ -1,7 +1,7 @@
 dependencies {
     compile group:"org.jdbi", name:"jdbi", version:"$version_jdbi2"
     compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
-    compile project(":klutter-reflect-core")
+    compile project(":klutter-reflect")
 
     testCompile group:"com.h2database", name:"h2", version:"$version_h2db"
     testCompile group:"org.jdbi", name:"jdbi", version:"$version_jdbi2", classifier: "tests"

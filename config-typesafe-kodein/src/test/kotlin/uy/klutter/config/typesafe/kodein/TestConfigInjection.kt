@@ -3,9 +3,10 @@ package uy.klutter.config.typesafe.tests
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.singleton
 import org.junit.Test
-import uy.klutter.config.typesafe.*
+import uy.klutter.config.typesafe.MapAsConfig
 import uy.klutter.config.typesafe.kodein.KodeinTypesafeConfig
 import uy.klutter.config.typesafe.kodein.importConfig
+import uy.klutter.config.typesafe.loadConfig
 import kotlin.test.assertEquals
 
 class TestConfigInjection {
@@ -26,7 +27,7 @@ class TestConfigInjection {
     }
 
     @Test fun testConfigSingletonsExist() {
-        val matchHttp = HttpConfig(8080,16)
+        val matchHttp = HttpConfig(8080, 16)
         val matchData = DataConfig("com.test.bucket", "us-east")
 
         assertEquals(matchHttp, kodein.instance<HttpConfig>())
@@ -34,10 +35,10 @@ class TestConfigInjection {
     }
 
     @Test fun testFactoryUsingConfigWorks() {
-        val matchHttp = HttpConfig(8080,16)
+        val matchHttp = HttpConfig(8080, 16)
         val matchData = DataConfig("com.test.bucket", "us-east")
 
-        val thing =  kodein.instance<ConfiguredThing>()
+        val thing = kodein.instance<ConfiguredThing>()
         assertEquals(matchHttp, thing.httpCfg)
         assertEquals(matchData, thing.dataCfg)
     }
@@ -70,7 +71,5 @@ object OtherModule {
         bind() from singleton { OtherThingWantingConfig(instance()) }
     }
 }
-
-
 
 
