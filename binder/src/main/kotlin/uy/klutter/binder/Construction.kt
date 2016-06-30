@@ -110,6 +110,15 @@ enum class ConstructionWarning {
 // TODO: recursive construction, for example if the provider is nested levels of properties, it could provide enough
 //       to construct instances required.
 
+// TODO: if doing recursive construction, or even construction of things like List<Person> we need to change value provider
+//       to return array of things, or object of things.  So Value provider will have to be like the JSON API's but with
+//       difference of having Type and exists calls.  So maybe:
+//           ValueProvider is like JsonObject, can return nested ValueProviders
+//           List<ValueProvider> is like JsonArray, can return list of providers
+//       while still allowing dotted property name access from a value provider "a.b.c.d" to skip down into the provider
+//       but not sure if we need array indexed dotted access, since dotted access is mostly used as optimization from things
+//       like TypeSafeConfig or Map of Maps.
+
 class ConstructionPlan <T : Any, C : T>(val constructClass: KClass<T>,
                                         val constructType: Type,
                                         val useCallable: KCallable<C>,
