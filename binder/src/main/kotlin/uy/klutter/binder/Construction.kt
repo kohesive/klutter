@@ -1,5 +1,6 @@
 package uy.klutter.binder
 
+import kotlinx.support.jdk8.collections.computeIfAbsent
 import uy.klutter.core.collections.toImmutable
 import uy.klutter.reflect.isAssignableFromOrSamePrimitive
 import java.lang.reflect.Type
@@ -149,7 +150,7 @@ class ConstructionPlan <T : Any, C : T>(val constructClass: KClass<T>,
     companion object {
         data class CacheKey(val constructClass: KClass<*>, val constructType: Type, val usingCallable: KCallable<*>, val valueProvider: NamedValueProvider, val nullableValuesAcceptMissingAsNull: Boolean)
 
-        private val planCache = ConcurrentHashMap<CacheKey, ConstructionPlan<*, *>>()
+        private val planCache: MutableMap<CacheKey, ConstructionPlan<*, *>> = ConcurrentHashMap()
 
         @Suppress("UNCHECKED_CAST")
         fun <T : Any, C : T> from(constructClass: KClass<T>,
