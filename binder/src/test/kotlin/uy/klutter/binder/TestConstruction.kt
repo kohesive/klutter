@@ -1,10 +1,13 @@
 package uy.klutter.binder
 
+import org.junit.Ignore
 import org.junit.Test
+import java.lang.reflect.Modifier
 import kotlin.reflect.*
 import kotlin.reflect.jvm.kotlinFunction
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlin.test.fail
 
 
 class TestConstruction {
@@ -15,7 +18,7 @@ class TestConstruction {
             var b: Int = 0
             var c: String? = null
             var d: String = "defaulted"
-            var e: Int = 0
+            var e: Int = 3
             var f: String? = null
         }
 
@@ -24,7 +27,7 @@ class TestConstruction {
             var b: Int = 0
             var c: String? = null
             val d: String = "defaulted"
-            val e: Int = 0
+            val e: Int = 3
             val f: String? = null
         }
 
@@ -48,6 +51,14 @@ class TestConstruction {
             assertEquals(0, check.withParameters.size)
             assertEquals(6, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("valueD", inst.d)
+            assertEquals(456, inst.e)
+            assertEquals("valueF", inst.f)
         }
 
         run {
@@ -71,6 +82,14 @@ class TestConstruction {
             assertEquals(0, check.withParameters.size)
             assertEquals(4, check.thenSetProperties.size) // 4 values can be set after construction
             assertEquals(setOf("unused"), check.nonmatchingProviderEntries)   // one extra value left dangling in the ValueProvider
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("defaulted", inst.d) // not set, defaulted in constructor
+            assertEquals(456, inst.e)
+            assertEquals(null, inst.f) // not set, defaulted in property declaration
         }
 
         run {
@@ -95,6 +114,13 @@ class TestConstruction {
             assertEquals(0, check.withParameters.size)
             assertEquals(3, check.thenSetProperties.size) // 3 properties could be set after construction
             assertEquals(emptySet(), check.nonmatchingProviderEntries)  // even though 3 values can't be set, they did match up
+
+            try {
+                check.execute()
+                fail("expected IllegalStateException, cannot execute a plan when there are errors")
+            }  catch (ex: IllegalStateException) {
+                // expected
+            }
         }
     }
 
@@ -121,6 +147,14 @@ class TestConstruction {
             assertEquals(6, check.withParameters.size)
             assertEquals(0, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("valueD", inst.d)
+            assertEquals(456, inst.e)
+            assertEquals("valueF", inst.f)
         }
 
         run {
@@ -140,6 +174,14 @@ class TestConstruction {
             assertEquals(4, check.withParameters.size)
             assertEquals(0, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("defaulted", inst.d)
+            assertEquals(3, inst.e)
+            assertEquals("valueF", inst.f)
         }
 
         run {
@@ -161,6 +203,14 @@ class TestConstruction {
             assertEquals(6, check.withParameters.size)
             assertEquals(0, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("valueD", inst.d)
+            assertEquals(456, inst.e)
+            assertEquals("valueF", inst.f)
         }
 
     }
@@ -193,6 +243,14 @@ class TestConstruction {
             assertEquals(7, check.withParameters.size) // is param count + 1 because of Receiver being the companion object instance
             assertEquals(0, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("valueD", inst.d)
+            assertEquals(456, inst.e)
+            assertEquals("valueF", inst.f)
         }
 
         run {
@@ -212,15 +270,26 @@ class TestConstruction {
             assertEquals(5, check.withParameters.size)  // is param count 4 + 1 because of Receiver being the companion object instance
             assertEquals(0, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("defaulted", inst.d)
+            assertEquals(3, inst.e)
+            assertEquals("valueF", inst.f)
         }
 
         run {
             // check that static doesn't interfere
             // all values specified
 
+            val findStaticJava = TestConstructWithCompanionCallables::class.java.declaredMethods.first { it.name == "createStatic" && !it.isBridge && Modifier.isStatic(it.modifiers)}
+            val staticAsCallable = findStaticJava.kotlinFunction  as KCallable<TestConstructWithCompanionCallables>
+
             val check = ConstructionPlan.from(TestConstructWithCompanionCallables::class,
                     TestConstructWithCompanionCallables::class.java,
-                    TestConstructWithCompanionCallables::class.companionObject!!.declaredMemberFunctions.first { it.name == "createStatic" } as KCallable<TestConstructWithCompanionCallables>,
+                    staticAsCallable,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -234,16 +303,31 @@ class TestConstruction {
             assertEquals(7, check.withParameters.size) // is param count + 1 because of Receiver being the companion object instance
             assertEquals(0, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
-        }
 
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("valueD", inst.d)
+            assertEquals(456, inst.e)
+            assertEquals("valueF", inst.f)
+        }
+   }
+
+    @Suppress("UNCHECKED_CAST")
+    @Ignore("callBy on static method will fail as of Kotlin 1.0.2")
+    @Test fun testConstructionViaCompanionObjectMethodThatIsStaticWithMissingParameters() {
         run {
             // check that static doesn't interfere, calling from viewpoint of static instead of companion
             // ones with defaults not specified
 
-            val findStatic = TestConstructWithCompanionCallables::class.java.declaredMethods.first { it.name == "createStatic" && !it.isBridge }.kotlinFunction  as KCallable<TestConstructWithCompanionCallables>
+            val findStaticJava = TestConstructWithCompanionCallables::class.java.declaredMethods.first { it.name == "createStatic" && !it.isBridge && Modifier.isStatic(it.modifiers)}
+            val staticAsCallable = findStaticJava.kotlinFunction  as KCallable<TestConstructWithCompanionCallables>
+
+
             val check = ConstructionPlan.from(TestConstructWithCompanionCallables::class,
                     TestConstructWithCompanionCallables::class.java,
-                    findStatic,
+                    staticAsCallable,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -255,16 +339,79 @@ class TestConstruction {
             assertEquals(5, check.withParameters.size)  // is param count 4 + 1 because of Receiver being the companion object instance
             assertEquals(0, check.thenSetProperties.size)
             assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("defaulted", inst.d)
+            assertEquals(3, inst.e)
+            assertEquals("valueF", inst.f)
         }
-
-
     }
 
+    @Test fun testConstructionViaMixedModel() {
+        class TestConstructCompound(val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
+            var e: Int = 3
+            var f: String? = null
+        }
 
+        run {
+            // mixed constructor and setters to be used
 
-    class TestConstructCompound(val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
-        var e: Int = 0
-        var f: String? = null
+            val check = ConstructionPlan.from(TestConstructCompound::class,
+                    TestConstructCompound::class.java,
+                    TestConstructCompound::class.primaryConstructor!!,
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 456,
+                            "f" to "valueF"))
+            )
+
+            assertEquals(0, check.errorCount)
+            assertEquals(0, check.warningCount)
+            assertEquals(4, check.withParameters.size)
+            assertEquals(2, check.thenSetProperties.size)
+            assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("valueD", inst.d)
+            assertEquals(456, inst.e)
+            assertEquals("valueF", inst.f)
+        }
+
+        run {
+            // mixed constructor and setters to be used
+            // drop a few that have defaults, 1 param and 1 property
+
+            val check = ConstructionPlan.from(TestConstructCompound::class,
+                    TestConstructCompound::class.java,
+                    TestConstructCompound::class.primaryConstructor!!,
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "f" to "valueF"))
+            )
+
+            assertEquals(0, check.errorCount)
+            assertEquals(1, check.warningCount) // warning about not setting the setter of 'e' since default value can't be seen
+            assertEquals(3, check.withParameters.size)
+            assertEquals(1, check.thenSetProperties.size)
+            assertEquals(emptySet(), check.nonmatchingProviderEntries)
+
+            val inst = check.execute()
+            assertEquals("valueA", inst.a)
+            assertEquals(123, inst.b)
+            assertEquals("valueC", inst.c)
+            assertEquals("defaulted", inst.d)
+            assertEquals(3, inst.e)
+            assertEquals("valueF", inst.f)
+        }
     }
 
     class TestConstructCompoundMoreThanOneOptionWithObviousBest (val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
