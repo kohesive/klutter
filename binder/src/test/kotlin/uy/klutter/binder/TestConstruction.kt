@@ -315,7 +315,7 @@ class TestConstruction {
    }
 
     @Suppress("UNCHECKED_CAST")
-    @Ignore("callBy on static method will fail as of Kotlin 1.0.2")
+    @Ignore("callBy on static method will fail as of Kotlin 1.0.2, see https://youtrack.jetbrains.com/issue/KT-12915")
     @Test fun testConstructionViaCompanionObjectMethodThatIsStaticWithMissingParameters() {
         run {
             // check that static doesn't interfere, calling from viewpoint of static instead of companion
