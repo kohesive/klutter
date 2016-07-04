@@ -58,7 +58,7 @@ class KodeinTypesafeConfig private constructor() {
                     actions.add(BindActions {
                         val asJson = targetConfig.root().render(ConfigRenderOptions.concise().setJson(true))
                         val value: T = mapper.readValue(asJson, TypeFactory.defaultInstance().constructType(_bind.type))!!
-                        bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
+                        typed.bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
                        })
                 }
             }
@@ -76,7 +76,7 @@ class KodeinTypesafeConfig private constructor() {
                 private fun addAction(configValue: ConfigValue) {
                     actions.add(BindActions {
                         val value = configValue.unwrapped() as T
-                        bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
+                        typed.bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
                     })
                 }
             }
