@@ -3,8 +3,11 @@ package uy.klutter.binder
 import org.junit.Ignore
 import org.junit.Test
 import java.lang.reflect.Modifier
-import kotlin.reflect.*
+import kotlin.reflect.KCallable
+import kotlin.reflect.companionObject
+import kotlin.reflect.declaredMemberFunctions
 import kotlin.reflect.jvm.kotlinFunction
+import kotlin.reflect.primaryConstructor
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
@@ -35,16 +38,14 @@ class TestConstruction {
             // nothing set in constructor,
             // all values settable after
 
-            val check = ConstructionPlan.from(TestConstructOnlyDefaultConstructor::class,
-                    TestConstructOnlyDefaultConstructor::class.java,
-                    TestConstructOnlyDefaultConstructor::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyDefaultConstructor>(TestConstructOnlyDefaultConstructor::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
-                                           "b" to 123,
-                                           "c" to "valueC",
-                                           "d" to "valueD",
-                                           "e" to 456,
-                                           "f" to "valueF"))
-                    )
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 456,
+                            "f" to "valueF"))
+            )
 
             assertEquals(0, check.errorCount)
             assertEquals(0, check.warningCount)
@@ -65,15 +66,13 @@ class TestConstruction {
             // all but 2 values set after
             // one extra value left dangling in the ValueProvider
 
-            val check = ConstructionPlan.from(TestConstructOnlyDefaultConstructor::class,
-                    TestConstructOnlyDefaultConstructor::class.java,
-                    TestConstructOnlyDefaultConstructor::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyDefaultConstructor>(TestConstructOnlyDefaultConstructor::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
                             "e" to 456,
                             "unused" to "bla"
-                            )),
+                    )),
                     treatUnusedValuesFromProviderAsErrors = false
             )
 
@@ -101,9 +100,7 @@ class TestConstruction {
             // all values settable after
             // but 3 values are `val` not `var` and cannot be set, which become warnings by default
 
-            val check = ConstructionPlan.from(TestConstructOnlyDefaultConstructorSomeImmutable::class,
-                    TestConstructOnlyDefaultConstructorSomeImmutable::class.java,
-                    TestConstructOnlyDefaultConstructorSomeImmutable::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyDefaultConstructorSomeImmutable>(TestConstructOnlyDefaultConstructorSomeImmutable::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -114,7 +111,7 @@ class TestConstruction {
             )
 
             assertEquals(0, check.errorCount) // 3 values are immutable and cannot be set but had values for them
-            assertTrue(check.propertyWarnings.all { it.first in setOf("d","e","f") && it.second == ConstructionWarning.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY })
+            assertTrue(check.propertyWarnings.all { it.first in setOf("d", "e", "f") && it.second == ConstructionWarning.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY })
             assertEquals(3, check.warningCount)
             assertEquals(0, check.withParameters.size)
             assertEquals(3, check.thenSetProperties.size) // 3 properties could be set after construction
@@ -133,9 +130,7 @@ class TestConstruction {
             // all values settable after
             // but 3 values are `val` not `var` and cannot be set, which we now want as errors
 
-            val check = ConstructionPlan.from(TestConstructOnlyDefaultConstructorSomeImmutable::class,
-                    TestConstructOnlyDefaultConstructorSomeImmutable::class.java,
-                    TestConstructOnlyDefaultConstructorSomeImmutable::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyDefaultConstructorSomeImmutable>(TestConstructOnlyDefaultConstructorSomeImmutable::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -146,7 +141,7 @@ class TestConstruction {
             )
 
             assertEquals(3, check.errorCount) // 3 values are immutable and cannot be set but had values for them
-            assertTrue(check.propertyErrors.all { it.first in setOf("d","e","f") && it.second == ConstructionError.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY })
+            assertTrue(check.propertyErrors.all { it.first in setOf("d", "e", "f") && it.second == ConstructionError.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY })
             assertEquals(0, check.warningCount)
             assertEquals(0, check.withParameters.size)
             assertEquals(3, check.thenSetProperties.size) // 3 properties could be set after construction
@@ -154,7 +149,7 @@ class TestConstruction {
             try {
                 check.execute()
                 fail("expected IllegalStateException, cannot execute a plan when there are errors")
-            }  catch (ex: IllegalStateException) {
+            } catch (ex: IllegalStateException) {
                 // expected
             }
         }
@@ -167,9 +162,7 @@ class TestConstruction {
         run {
             // Immutable class, all values specified
 
-            val check = ConstructionPlan.from(TestConstructOnlyConstructorAllImmutable::class,
-                    TestConstructOnlyConstructorAllImmutable::class.java,
-                    TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyConstructorAllImmutable>(TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -195,9 +188,7 @@ class TestConstruction {
         run {
             // Immutable class, none of the default values specified
 
-            val check = ConstructionPlan.from(TestConstructOnlyConstructorAllImmutable::class,
-                    TestConstructOnlyConstructorAllImmutable::class.java,
-                    TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyConstructorAllImmutable>(TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -221,9 +212,7 @@ class TestConstruction {
         run {
             // Immutable class, none of the default values specified and one nullable not specified
 
-            val check = ConstructionPlan.from(TestConstructOnlyConstructorAllImmutable::class,
-                    TestConstructOnlyConstructorAllImmutable::class.java,
-                    TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyConstructorAllImmutable>(TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "f" to "valueF")),
@@ -247,9 +236,7 @@ class TestConstruction {
         run {
             // Immutable class, none of the default values specified and one nullable not specified while that is made illegal
 
-            val check = ConstructionPlan.from(TestConstructOnlyConstructorAllImmutable::class,
-                    TestConstructOnlyConstructorAllImmutable::class.java,
-                    TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyConstructorAllImmutable>(TestConstructOnlyConstructorAllImmutable::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "f" to "valueF")),
@@ -257,7 +244,7 @@ class TestConstruction {
             )
 
             assertEquals(1, check.errorCount)
-            assertEquals(1, check.parameterErrors.count { it.first.name == "c" && it.second == CallableError.MISSING_VALUE_FOR_REQUIRED_PARAMETER})
+            assertEquals(1, check.parameterErrors.count { it.first.name == "c" && it.second == CallableError.MISSING_VALUE_FOR_REQUIRED_PARAMETER })
             assertEquals(0, check.warningCount)
             assertEquals(3, check.withParameters.size)
             assertEquals(0, check.thenSetProperties.size)
@@ -265,7 +252,7 @@ class TestConstruction {
             try {
                 check.execute()
                 fail("expected IllegalStateException, cannot execute a plan when there are errors")
-            }  catch (ex: IllegalStateException) {
+            } catch (ex: IllegalStateException) {
                 // expected
             }
         }
@@ -273,9 +260,7 @@ class TestConstruction {
         run {
             // mutable class, all values specified
 
-            val check = ConstructionPlan.from(TestConstructOnlyConstructorMixMutable::class,
-                    TestConstructOnlyConstructorMixMutable::class.java,
-                    TestConstructOnlyConstructorMixMutable::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructOnlyConstructorMixMutable>(TestConstructOnlyConstructorMixMutable::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -300,7 +285,7 @@ class TestConstruction {
 
     }
 
-    open class TestConstructWithCompanionCallables protected constructor(val a: String, val b: Int, val c: String?, val d: String = "defaulted", var e: Int, var f: String?) {
+    internal open class TestConstructWithCompanionCallables protected constructor(val a: String, val b: Int, val c: String?, val d: String = "defaulted", var e: Int, var f: String?) {
         companion object {
             fun create(a: String, b: Int, c: String?, d: String = "defaulted", e: Int = 3, f: String?) = TestConstructWithCompanionCallables(a, b, c, d, e, f)
             @JvmStatic fun createStatic(a: String, b: Int, c: String?, d: String = "defaulted", e: Int = 3, f: String?) = TestConstructWithCompanionCallables(a, b, c, d, e, f)
@@ -308,16 +293,14 @@ class TestConstruction {
         }
     }
 
-    class TestConstructWithCompanionCallablesDescendant(a: String): TestConstructWithCompanionCallables(a, 1, "c", "d", 1, "f")
+    internal class TestConstructWithCompanionCallablesDescendant(a: String) : TestConstructWithCompanionCallables(a, 1, "c", "d", 1, "f")
 
     @Suppress("UNCHECKED_CAST")
     @Test fun testConstructionViaCompanionObjectMethod() {
         run {
             // all values specified
 
-            val check = ConstructionPlan.from(TestConstructWithCompanionCallables::class,
-                    TestConstructWithCompanionCallables::class.java,
-                    TestConstructWithCompanionCallables::class.companionObject!!.declaredMemberFunctions.first { it.name == "create" } as KCallable<TestConstructWithCompanionCallables>,
+            val check = ConstructionBinding.from<TestConstructWithCompanionCallables>(TestConstructWithCompanionCallables::class.companionObject!!.declaredMemberFunctions.first { it.name == "create" } as KCallable<TestConstructWithCompanionCallables>,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -343,9 +326,7 @@ class TestConstruction {
         run {
             // ones with defaults not specified
 
-            val check = ConstructionPlan.from(TestConstructWithCompanionCallables::class,
-                    TestConstructWithCompanionCallables::class.java,
-                    TestConstructWithCompanionCallables::class.companionObject!!.declaredMemberFunctions.first { it.name == "create" } as KCallable<TestConstructWithCompanionCallables>,
+            val check = ConstructionBinding.from<TestConstructWithCompanionCallables>(TestConstructWithCompanionCallables::class.companionObject!!.declaredMemberFunctions.first { it.name == "create" } as KCallable<TestConstructWithCompanionCallables>,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -370,12 +351,10 @@ class TestConstruction {
             // check that static doesn't interfere
             // all values specified
 
-            val findStaticJava = TestConstructWithCompanionCallables::class.java.declaredMethods.first { it.name == "createStatic" && !it.isBridge && Modifier.isStatic(it.modifiers)}
-            val staticAsCallable = findStaticJava.kotlinFunction  as KCallable<TestConstructWithCompanionCallables>
+            val findStaticJava = TestConstructWithCompanionCallables::class.java.declaredMethods.first { it.name == "createStatic" && !it.isBridge && Modifier.isStatic(it.modifiers) }
+            val staticAsCallable = findStaticJava.kotlinFunction as KCallable<TestConstructWithCompanionCallables>
 
-            val check = ConstructionPlan.from(TestConstructWithCompanionCallables::class,
-                    TestConstructWithCompanionCallables::class.java,
-                    staticAsCallable,
+            val check = ConstructionBinding.from<TestConstructWithCompanionCallables>(staticAsCallable,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -401,9 +380,7 @@ class TestConstruction {
         run {
             // a creator that makes a descendant class is ok too
 
-            val check = ConstructionPlan.from(TestConstructWithCompanionCallables::class,
-                    TestConstructWithCompanionCallables::class.java,
-                    TestConstructWithCompanionCallables::class.companionObject!!.declaredMemberFunctions.first { it.name == "createDescendant" } as KCallable<TestConstructWithCompanionCallables>,
+            val check = ConstructionBinding.from<TestConstructWithCompanionCallables>(TestConstructWithCompanionCallables::class.companionObject!!.declaredMemberFunctions.first { it.name == "createDescendant" } as KCallable<TestConstructWithCompanionCallables>,
                     MapValueProvider(mapOf("a" to "valueA"))
             )
 
@@ -420,7 +397,7 @@ class TestConstruction {
             assertEquals(1, inst.e)
             assertEquals("f", inst.f)
         }
-   }
+    }
 
     @Suppress("UNCHECKED_CAST")
     @Ignore("callBy on static method will fail as of Kotlin 1.0.2, see https://youtrack.jetbrains.com/issue/KT-12915")
@@ -429,13 +406,11 @@ class TestConstruction {
             // check that static doesn't interfere, calling from viewpoint of static instead of companion
             // ones with defaults not specified
 
-            val findStaticJava = TestConstructWithCompanionCallables::class.java.declaredMethods.first { it.name == "createStatic" && !it.isBridge && Modifier.isStatic(it.modifiers)}
-            val staticAsCallable = findStaticJava.kotlinFunction  as KCallable<TestConstructWithCompanionCallables>
+            val findStaticJava = TestConstructWithCompanionCallables::class.java.declaredMethods.first { it.name == "createStatic" && !it.isBridge && Modifier.isStatic(it.modifiers) }
+            val staticAsCallable = findStaticJava.kotlinFunction as KCallable<TestConstructWithCompanionCallables>
 
 
-            val check = ConstructionPlan.from(TestConstructWithCompanionCallables::class,
-                    TestConstructWithCompanionCallables::class.java,
-                    staticAsCallable,
+            val check = ConstructionBinding.from<TestConstructWithCompanionCallables>(staticAsCallable,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -466,9 +441,7 @@ class TestConstruction {
         run {
             // mixed constructor and setters to be used
 
-            val check = ConstructionPlan.from(TestConstructCompound::class,
-                    TestConstructCompound::class.java,
-                    TestConstructCompound::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructCompound>(TestConstructCompound::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -495,9 +468,7 @@ class TestConstruction {
             // mixed constructor and setters to be used
             // drop a few that have defaults, 1 param and 1 property
 
-            val check = ConstructionPlan.from(TestConstructCompound::class,
-                    TestConstructCompound::class.java,
-                    TestConstructCompound::class.primaryConstructor!!,
+            val check = ConstructionBinding.from<TestConstructCompound>(TestConstructCompound::class.primaryConstructor!!,
                     MapValueProvider(mapOf("a" to "valueA",
                             "b" to 123,
                             "c" to "valueC",
@@ -519,32 +490,213 @@ class TestConstruction {
         }
     }
 
-    class TestConstructCompoundMoreThanOneOptionWithObviousBest (val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
-        constructor (a: String, b: Int, c: String?, d: String, e: Int):this(a,b,c,d) {
-            this.e = e
+    @Test fun testPickBestPlanWhenObvious() {
+        class TestConstructCompoundMoreThanOneOptionWithObviousBest(val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
+            constructor (a: String, b: Int, c: String?, d: String, e: Int) : this(a, b, c, d) {
+                this.e = e
+            }
+
+            constructor (a: String, b: Int, c: String?, d: String, e: Int, f: String?) : this(a, b, c, d) {
+                this.e = e
+                this.f = f
+            }
+
+            var e: Int = 0
+            var f: String? = null
+            var g: String? = null
+            var h: String? = null
         }
-        constructor (a: String, b: Int, c: String?, d: String, e: Int, f: String?):this(a,b,c,d) {
-            this.e = e
-            this.f = f
+
+        run {
+            // one with most matching parameters is obvious, 6 this time
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionWithObviousBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 456,
+                            "f" to "valueF")),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionWithObviousBest::class.constructors.filter { it.parameters.size == 6 }.first(), check.callableBinding.useCallable)
         }
-        var e: Int = 0
-        var f: String? = null
+
+        run {
+            // one with most matching parameters is obvious, 5 this time
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionWithObviousBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 456)),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // same as default ("f" should generate a warning because missing is nullable)
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionWithObviousBest::class.constructors.filter { it.parameters.size == 5 }.first(), check.callableBinding.useCallable)
+        }
+
+        run {
+            // one with most matching parameters is obvious, 5 this time and no nullable missing parms
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionWithObviousBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 456)),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = false, // same as default ("f" should generate a warning because missing is nullable)
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionWithObviousBest::class.constructors.filter { it.parameters.size == 5 }.first(), check.callableBinding.useCallable)
+        }
+
+        run {
+            // one with most matching parameters is obvious, 4 this time
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionWithObviousBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD")),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = false,
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionWithObviousBest::class.constructors.filter { it.parameters.size == 4 }.first(), check.callableBinding.useCallable)
+        }
+
+        run {
+            // one with most matching parameters is obvious, 5 this time plus 2 properties
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionWithObviousBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 456,
+                            "g" to "valueG",
+                            "h" to "valueH")),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionWithObviousBest::class.constructors.filter { it.parameters.size == 5 }.first(), check.callableBinding.useCallable)
+        }
+
     }
 
-    class TestConstructCompoundMoreThanOneOptionEquallyBest (val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
-        constructor (a: String, b: Int, c: String?, d: String, e: Int):this(a,b,c,d) {
-            this.e = e
+    @Test fun testPickBestPlanWhenThereAreEquals() {
+        class TestConstructCompoundMoreThanOneOptionEquallyBest(val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
+            constructor (a: String, b: Int, c: String?, d: String, e: Int) : this(a, b, c, d) {
+                this.e = e
+            }
+
+            constructor (a: String, b: Int, c: String?, d: String, f: String?) : this(a, b, c, d) {
+                this.f = f
+            }
+
+            var e: Int = 0
+            var f: String? = null
         }
-        constructor (a: String, b: Int, c: String?, d: String, f: String?):this(a,b,c,d) {
-            this.f = f
+
+        run {
+            // one with most matching parameters is obvious, 4 this time because only that constructor is possible
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionEquallyBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123)),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionEquallyBest::class.constructors.filter { it.parameters.size == 4 }.first(), check.callableBinding.useCallable)
         }
-        var e: Int = 0
-        var f: String? = null
+
+        run {
+            // one with most matching parameters is obvious, 4 this time because only that constructor is possible
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionEquallyBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC")),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionEquallyBest::class.constructors.filter { it.parameters.size == 4 }.first(), check.callableBinding.useCallable)
+        }
+
+        run {
+            // one with most matching parameters is obvious, 4 this time because only that constructor is possible
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionEquallyBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "d" to "valueD")),
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionEquallyBest::class.constructors.filter { it.parameters.size == 4 }.first(), check.callableBinding.useCallable)
+        }
+
+        run {
+            // ok, we still have same constructor because only one can default "d"
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionEquallyBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            // d will be defaulted
+                            "e" to 3)), // constructor or property
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionEquallyBest::class.constructors.filter { it.parameters.size == 4 }.first(), check.callableBinding.useCallable)
+        }
+
+        run {
+            // ok, we now hit a 5 parameter constructor if we have d and e present
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionEquallyBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 3)), // constructor or property
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionEquallyBest::class.constructors.filter { it.parameters.size == 5 && it.parameters.any { it.name == "e" } }.first(), check.callableBinding.useCallable)
+        }
+
+        run {
+            // ok, we now hit a 5 parameter constructor if we have d and f present
+            val check = ConstructionBinding.findBestBinding<TestConstructCompoundMoreThanOneOptionEquallyBest>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "f" to "valueF")), // constructor or property
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructCompoundMoreThanOneOptionEquallyBest::class.constructors.filter { it.parameters.size == 5 && it.parameters.any { it.name == "f" } }.first(), check.callableBinding.useCallable)
+        }
+
     }
 
-
-
-    class TestConstructDifferentOptions(val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
+    internal class TestConstructDifferentOptions(val a: String, val b: Int, val c: String?, val d: String = "defaulted") {
         var e: Int = 0
         var f: String? = null
 
@@ -553,7 +705,7 @@ class TestConstruction {
         }
 
         companion object {
-            @JvmStatic fun create(a: String, b: Int, c: String?, d: String = "defaulted", e: Int, f: String?): TestConstructDifferentOptions {
+            fun create(a: String, b: Int, c: String?, d: String = "defaulted", e: Int, f: String?): TestConstructDifferentOptions {
                 val temp = TestConstructDifferentOptions(a, b, c, d)
                 temp.e = e
                 temp.f = f
@@ -561,5 +713,104 @@ class TestConstruction {
             }
         }
     }
+
+    @Test fun testPickBestPlanWhenThereAreCreatorVersusConstructors() {
+        run {
+            // ok, we should find the companion creator
+            val check = ConstructionBinding.findBestBinding<TestConstructDifferentOptions>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 0,
+                            "f" to "valueF")), // constructor or property
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertEquals(TestConstructDifferentOptions::class.companionObject!!.declaredMemberFunctions.first { it.parameters.size == 7 } as KCallable<*>, check.callableBinding.useCallable)
+            check.execute()
+        }
+
+        run {
+            // ok, without allowing companion functions, we should find a constructor
+            val check = ConstructionBinding.findBestBinding<TestConstructDifferentOptions>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 0,
+                            "f" to "valueF")), // constructor or property
+                    considerCompanionObjectFactories = false, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertTrue(check.callableBinding.useCallable in TestConstructDifferentOptions::class.constructors)
+            check.execute()
+        }
+
+        run {
+            // ok, we should find the constructor with "f" parameter missing because the warning for missing treated as nullable downgrades the creator
+            val check = ConstructionBinding.findBestBinding<TestConstructDifferentOptions>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 0)), // constructor or property
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = true, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertTrue(check.callableBinding.useCallable in TestConstructDifferentOptions::class.constructors)
+            check.execute()
+        }
+
+        run {
+            // ok, we should find the constructor with "f" parameter missing is now an invalid parameter
+            val check = ConstructionBinding.findBestBinding<TestConstructDifferentOptions>(
+                    MapValueProvider(mapOf("a" to "valueA",
+                            "b" to 123,
+                            "c" to "valueC",
+                            "d" to "valueD",
+                            "e" to 0)), // constructor or property
+                    considerCompanionObjectFactories = true, // same as default
+                    treatMissingAsNullForNullableConstructorParameters = false, // default
+                    treatUnusedValuesFromProviderAsErrors = true // default
+            )!!
+
+            assertTrue(check.callableBinding.useCallable in TestConstructDifferentOptions::class.constructors)
+            check.execute()
+        }
+    }
+
+    @Test fun testEmptyConstructor() {
+        class TestDefaultConstructor() {
+            val a: String = "hello"
+        }
+
+        class TestDefaultConstructorIgnoringOthers() {
+            var a: String = "hello"
+
+            constructor (a: String) : this() {
+                this.a = a
+            }
+        }
+
+        val check1 = constructFromValues<TestDefaultConstructor>(emptyValueProvider())
+        assertEquals("hello", check1.a)
+
+        val check2 = constructFromValues<TestDefaultConstructorIgnoringOthers>(emptyValueProvider())
+        assertEquals("hello", check2.a)
+
+        val check3 = constructFromValues<TestDefaultConstructorIgnoringOthers>(MapValueProvider(mapOf("a" to "goodbye")))
+        assertEquals("goodbye", check3.a)
+
+    }
+
+    // TODO: test for non public setters, non public constructors, non public creators
+
 
 }
