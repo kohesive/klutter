@@ -32,14 +32,14 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
     }
 
     companion object {
-        val DEFAULT_treatMissingAsNullForNullableMethodParameters = true
+        val DEFAULT_treatMissingAsNullForNullableMethodParameters = ConstructionBinding.DEFAULT_treatMissingAsNullForNullableConstructorParameters
 
         @Suppress("UNCHECKED_CAST")
         fun <DT, RT, R> from(usingCallable: KCallable<R>,
                              dispatchInstance: DT?,
                              receiverInstance: RT?,
                              valueProvider: NamedValueProvider,
-                             treatMissingAsNullForNullableMethodParameters: Boolean = ConstructionBinding.DEFAULT_treatMissingAsNullForNullableConstructorParameters): MethodCallBinding<DT, RT, R> {
+                             treatMissingAsNullForNullableMethodParameters: Boolean = DEFAULT_treatMissingAsNullForNullableMethodParameters): MethodCallBinding<DT, RT, R> {
 
             val entriesFromProvider = valueProvider.entries().map { it.first.substringBefore('.') }.toSet()
             val usedEntriesFromProvider = hashSetOf<String>()
