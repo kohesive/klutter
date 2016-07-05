@@ -2,30 +2,24 @@ package uy.klutter.binder.kodein
 
 import com.github.salomonbrys.kodein.Kodein
 import uy.klutter.binder.NamedValueProvider
-import java.lang.reflect.Type
+import uy.klutter.binder.ProvidedValue
+import uy.klutter.binder.ValueProviderTargetScope
+import kotlin.reflect.KType
+import kotlin.reflect.jvm.javaType
 
-class KodeinValueProvider(private val kodein: Kodein, private val delegate: NamedValueProvider) : NamedValueProvider {
-    override val supportsDottedNames: Boolean = delegate.supportsDottedNames
-    override val knowsEntries: Boolean = delegate.knowsEntries
-
-    override fun valueByName(name: String, targetType: Type): Any? {
-        return if (delegate.existsByName(name, targetType)) {
-            delegate.valueByName(name, targetType)
-        } else {
-            kodein.container.providerOrNull(Kodein.Bind(targetType, null))?.invoke() ?: throw IllegalStateException("not found")
+class KodeinValueProvider(private val kodein: Kodein, private val delegate: NamedValueProvider) : NamedValueProvider by delegate {
+    override fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any> {
+        val maybe = delegate.valueByName(name, targetType, scope)
+        return when (maybe) {
+            is ProvidedValue.Present -> maybe
+            is ProvidedValue.Absent -> kodein.container.providerOrNull(Kodein.Bind(targetType.javaType, null))?.invoke()
+                    ?.let { ProvidedValue.of(it) } ?: ProvidedValue.absent()
         }
-    }
-
-    override fun existsByName(name: String, targetType: Type): Boolean {
-        return delegate.existsByName(name, targetType) || kodein.container.providerOrNull(Kodein.Bind(targetType, null)) != null
-    }
-
-    override fun entries(): List<Pair<String, Any?>> {
-        return delegate.entries()
     }
 
     override fun equals(other: Any?): Boolean {
         return other != null &&
+                this.javaClass == other.javaClass &&
                 other is KodeinValueProvider &&
                 other.kodein === this.kodein && // identity compare
                 other.delegate == this.delegate

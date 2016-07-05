@@ -11,6 +11,8 @@ Breaking Changes:
 * things that were in JDK named subpackages were moved up to the main package for the module (just erase the jdkX part)
 * some items moved from package uy.klutter.core.jdk to uy.klutter.core.common (dates, numbers, paths, strings)
 * reflect-core and reflect-full merged into reflect, some packages from full will have changed
+* new binding module for dynamic instantiation of objects, method calls with value providers, type conversion
+* converters have moved to binding module from reflect
 * and more, everything is still there, just maybe moved a bit.
 
 

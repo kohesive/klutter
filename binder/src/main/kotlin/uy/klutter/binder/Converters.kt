@@ -1,4 +1,4 @@
-package uy.klutter.reflect.conversion
+package uy.klutter.binder
 
 import uy.klutter.core.common.with
 import uy.klutter.reflect.TypeReference
@@ -106,7 +106,7 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             String::class.java -> value     // identity
             Short::class.java, java.lang.Short::class.java -> value.toShort()
             Byte::class.java, java.lang.Byte::class.java -> value.toShort().toByte()
-            Int::class.java, java.lang.Integer::class.java -> value.toInt()
+            Int::class.java, Integer::class.java -> value.toInt()
             Long::class.java, java.lang.Long::class.java -> value.toLong()
             Double::class.java, java.lang.Double::class.java -> value.toDouble()
             Float::class.java, java.lang.Float::class.java -> value.toFloat()
@@ -137,14 +137,14 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
         is Number -> when (toType) {
             Short::class.java, java.lang.Short::class.java -> value.toShort()
             Byte::class.java, java.lang.Byte::class.java -> value.toByte()
-            Int::class.java, java.lang.Integer::class.java -> value.toInt()
+            Int::class.java, Integer::class.java -> value.toInt()
             Long::class.java, java.lang.Long::class.java -> value.toLong()
             Double::class.java, java.lang.Double::class.java -> value.toDouble()
             Float::class.java, java.lang.Float::class.java -> value.toFloat()
             BigDecimal::class.java -> BigDecimal(value.toDouble())
             BigInteger::class.java -> BigDecimal(value.toDouble())
             String::class.java -> value.toString()
-            Char::class.java, java.lang.Character::class.java -> value.toChar()
+            Char::class.java, Character::class.java -> value.toChar()
             Boolean::class.java, java.lang.Boolean::class.java -> value != 0
             Date::class.java -> Date(value.toLong())
             else -> {
@@ -158,10 +158,10 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             }
         }
         is Char -> when (toType) {
-            Char::class.java, java.lang.Character::class.java -> value     // identity
+            Char::class.java, Character::class.java -> value     // identity
             Short::class.java, java.lang.Short::class.java -> value.toShort()
             Byte::class.java, java.lang.Byte::class.java -> value.toByte()
-            Int::class.java, java.lang.Integer::class.java -> value.toInt()
+            Int::class.java, Integer::class.java -> value.toInt()
             Long::class.java, java.lang.Long::class.java -> value.toLong()
             Double::class.java, java.lang.Double::class.java -> value.toDouble()
             Float::class.java, java.lang.Float::class.java -> value.toFloat()
@@ -173,10 +173,10 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
         }
         is Boolean -> when (toType) {
             Boolean::class.java, java.lang.Boolean::class.java -> value      // identity
-            Char::class.java, java.lang.Character::class.java -> if (value) 'T' else 'F'
+            Char::class.java, Character::class.java -> if (value) 'T' else 'F'
             Short::class.java, java.lang.Short::class.java -> (if (value) 1 else 0).toShort()
             Byte::class.java, java.lang.Byte::class.java ->  (if (value) 1 else 0).toByte()
-            Int::class.java, java.lang.Integer::class.java -> (if (value) 1 else 0).toInt()
+            Int::class.java, Integer::class.java -> (if (value) 1 else 0).toInt()
             Long::class.java, java.lang.Long::class.java ->  (if (value) 1 else 0).toLong()
             Double::class.java, java.lang.Double::class.java -> (if (value) 1 else 0).toDouble()
             Float::class.java, java.lang.Float::class.java -> (if (value) 1 else 0).toFloat()
@@ -199,7 +199,7 @@ private val primitiveConversion = fun TypeConverters.ExactConverter.(value: Any)
             String::class.java -> value.name
             Byte::class.java, java.lang.Byte::class.java -> value.ordinal.toByte()
             Short::class.java, java.lang.Short::class.java -> value.ordinal.toShort()
-            Int::class.java, java.lang.Integer::class.java -> value.ordinal
+            Int::class.java, Integer::class.java -> value.ordinal
             Long::class.java, java.lang.Long::class.java -> value.ordinal.toLong()
             else -> {
                 val toErased = toType.erasedType()
@@ -240,7 +240,7 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
             String::class.java,
             Short::class.java, java.lang.Short::class.java,
             Byte::class.java, java.lang.Byte::class.java,
-            Int::class.java, java.lang.Integer::class.java,
+            Int::class.java, Integer::class.java,
             Long::class.java, java.lang.Long::class.java,
             Double::class.java, java.lang.Double::class.java,
             Float::class.java, java.lang.Float::class.java,
@@ -270,14 +270,14 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
         Number::class.isAssignableFrom(fromType) -> when (toType) {
             Short::class.java, java.lang.Short::class.java,
             Byte::class.java, java.lang.Byte::class.java,
-            Int::class.java, java.lang.Integer::class.java,
+            Int::class.java, Integer::class.java,
             Long::class.java, java.lang.Long::class.java,
             Double::class.java, java.lang.Double::class.java,
             Float::class.java, java.lang.Float::class.java,
             BigDecimal::class.java,
             BigInteger::class.java,
             String::class.java,
-            Char::class.java, java.lang.Character::class.java,
+            Char::class.java, Character::class.java,
             Boolean::class.java, java.lang.Boolean::class.java,
             Date::class.java -> true
             else -> {
@@ -289,11 +289,11 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
                 }
             }
         }
-        Char::class.isAssignableFrom(fromType) || java.lang.Character::class.isAssignableFrom(fromType) -> when (toType) {
-            Char::class.java, java.lang.Character::class.java,
+        Char::class.isAssignableFrom(fromType) || Character::class.isAssignableFrom(fromType) -> when (toType) {
+            Char::class.java, Character::class.java,
             Short::class.java, java.lang.Short::class.java,
             Byte::class.java, java.lang.Byte::class.java,
-            Int::class.java, java.lang.Integer::class.java,
+            Int::class.java, Integer::class.java,
             Long::class.java, java.lang.Long::class.java,
             Double::class.java, java.lang.Double::class.java,
             Float::class.java, java.lang.Float::class.java,
@@ -305,10 +305,10 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
         }
         Boolean::class.isAssignableFrom(fromType) || java.lang.Boolean::class.isAssignableFrom(fromType) -> when (toType) {
             Boolean::class.java, java.lang.Boolean::class.java,
-            Char::class.java, java.lang.Character::class.java,
+            Char::class.java, Character::class.java,
             Short::class.java, java.lang.Short::class.java,
             Byte::class.java, java.lang.Byte::class.java,
-            Int::class.java, java.lang.Integer::class.java,
+            Int::class.java, Integer::class.java,
             Long::class.java, java.lang.Long::class.java,
             Double::class.java, java.lang.Double::class.java,
             Float::class.java, java.lang.Float::class.java,
@@ -331,7 +331,7 @@ private val primitiveConversionPredicate = fun(fromType: Type, toType: Type): Bo
             String::class.java,
             Byte::class.java, java.lang.Byte::class.java,
             Short::class.java, java.lang.Short::class.java,
-            Int::class.java, java.lang.Integer::class.java,
+            Int::class.java, Integer::class.java,
             Long::class.java, java.lang.Long::class.java -> true
             else -> {
                 val toErased = toType.erasedType()

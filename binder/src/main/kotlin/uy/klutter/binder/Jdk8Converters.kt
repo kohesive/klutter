@@ -1,4 +1,4 @@
-package uy.klutter.reflect.conversion
+package uy.klutter.binder
 
 import uy.klutter.reflect.isAssignableFrom
 import java.lang.reflect.Type

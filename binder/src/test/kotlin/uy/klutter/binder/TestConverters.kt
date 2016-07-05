@@ -1,7 +1,7 @@
 package uy.klutter.reflect.conversion.tests
 
 import org.junit.Test
-import uy.klutter.reflect.conversion.TypeConversionConfig
+import uy.klutter.binder.TypeConversionConfig
 import uy.klutter.reflect.reifiedType
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -9,7 +9,7 @@ import kotlin.test.assertTrue
 
 class TestConverters {
 
-    val converter = TypeConversionConfig.defaultConverter
+    val converter = uy.klutter.binder.TypeConversionConfig.defaultConverter
 
     @Test fun testBasicConversionRegistration() {
         assertTrue(converter.hasConverter(reifiedType<String>(), reifiedType<Int>()))

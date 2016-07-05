@@ -4,23 +4,22 @@ import uy.klutter.reflect.isAssignableFromOrSamePrimitive
 import kotlin.reflect.KCallable
 import kotlin.reflect.KParameter
 import kotlin.reflect.jvm.isAccessible
-import kotlin.reflect.jvm.javaType
 
 class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
-                                   val dispatchInstance: DT?,
-                                   val receiverInstance: RT?,
-                                   val withParameters: List<Pair<KParameter, Any?>>,
-                                   val parameterErrors: List<Pair<KParameter, CallableError>>,
-                                   val parameterWarnings: List<Pair<KParameter, CallableWarning>>,
-                                   val satisfiedParameters: List<KParameter>,
-                                   val nonmatchingProviderEntries: Set<String>) {
+                                       val dispatchInstance: DT?,
+                                       val receiverInstance: RT?,
+                                       val withParameters: List<Pair<KParameter, Any?>>,
+                                       val parameterErrors: List<Pair<KParameter, CallableError>>,
+                                       val parameterWarnings: List<Pair<KParameter, CallableWarning>>,
+                                       val satisfiedParameters: List<KParameter>,
+                                       val nonmatchingProviderEntries: Set<String>) {
     val errorCount: Int = parameterErrors.groupBy { it.first }.size
     val warningCount: Int = parameterWarnings.groupBy { it.first }.size
     val hasErrors: Boolean = errorCount > 0
     val hasWarnings: Boolean = warningCount > 0
 
     fun execute(): R {
-        if (hasErrors) throw IllegalStateException("Callable binding that ahs errors is not executable")
+        if (hasErrors) throw IllegalStateException("Callable binding that has errors is not executable")
 
         useCallable.isAccessible = true
         val instance: R = if (useCallable.parameters.size == withParameters.size) {
@@ -32,14 +31,12 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
     }
 
     companion object {
-        val DEFAULT_treatMissingAsNullForNullableMethodParameters = ConstructionBinding.DEFAULT_treatMissingAsNullForNullableConstructorParameters
-
         @Suppress("UNCHECKED_CAST")
         fun <DT, RT, R> from(usingCallable: KCallable<R>,
                              dispatchInstance: DT?,
                              receiverInstance: RT?,
                              valueProvider: NamedValueProvider,
-                             treatMissingAsNullForNullableMethodParameters: Boolean = DEFAULT_treatMissingAsNullForNullableMethodParameters): MethodCallBinding<DT, RT, R> {
+                             overrideScope: ValueProviderTargetScope = ValueProviderTargetScope.METHOD): MethodCallBinding<DT, RT, R> {
 
             val entriesFromProvider = valueProvider.entries().map { it.first.substringBefore('.') }.toSet()
             val usedEntriesFromProvider = hashSetOf<String>()
@@ -66,11 +63,23 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                 paramWarnings.add(Pair(param, warning))
             }
 
-            fun useParam(param: KParameter, rawValue: Any?) {
-                if (rawValue != null && !param.type.isAssignableFromOrSamePrimitive(rawValue.javaClass)) {
-                    errorParam(param, CallableError.WRONG_TYPE)
-                } else {
-                    orderedParamValues.add(Pair(param, rawValue))
+            fun useParam(param: KParameter, maybe: ProvidedValue<Any>) {
+                when (maybe) {
+                    is ProvidedValue.Present -> {
+                        val rawValue = maybe.value
+                        if (rawValue != null && !param.type.isAssignableFromOrSamePrimitive(rawValue.javaClass)) {
+                            errorParam(param, CallableError.WRONG_TYPE)
+                        } else {
+                            if (maybe is ProvidedValue.Coerced<*, *>) {
+                                warnParam(param, CallableWarning.TYPE_CONVERTED)
+                            }
+                            orderedParamValues.add(Pair(param, rawValue))
+                        }
+                    }
+                    is ProvidedValue.Absent -> {
+                        // should never be able to get here
+                        throw IllegalStateException("Trying to use absent value as parameter value")
+                    }
                 }
             }
 
@@ -80,39 +89,25 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                     KParameter.Kind.EXTENSION_RECEIVER -> orderedParamValues.add(Pair(paramDef, receiverInstance))
                     KParameter.Kind.VALUE -> {
                         val paramName = paramDef.name ?: throw IllegalStateException("callable has parameter with unknown name")
-                        val isMissing = !valueProvider.existsByName(paramName, paramDef.type.javaType)
+                        val maybe = valueProvider.valueByName(paramName, paramDef.type, ValueProviderTargetScope.METHOD)
 
-                        if (!isMissing) {
-                            markValueMatchedSomething(paramName)
-                        }
-
-                        if (isMissing) {
-                            if (paramDef.isOptional) {
-                                // this is ok, optional parameter not resolved will have default parameter value of method
-                                consumeParameter(paramDef)
-                            } else if (paramDef.type.isMarkedNullable) {
-                                if (treatMissingAsNullForNullableMethodParameters) {
-                                    // default value for datatype is ok if null and nullable, or is non null and matches type
-                                    useParam(paramDef, null)
+                        when (maybe) {
+                            is ProvidedValue.Absent -> {
+                                if (paramDef.isOptional) {
+                                    // this is ok, optional parameter not resolved will have default parameter value of method
                                     consumeParameter(paramDef)
-                                    warnParam(paramDef, CallableWarning.DEFAULT_VALUE_USED_FOR_DATATYPE)
                                 } else {
                                     errorParam(paramDef, CallableError.MISSING_VALUE_FOR_REQUIRED_PARAMETER)
                                 }
-                            } else {
-                                errorParam(paramDef, CallableError.MISSING_VALUE_FOR_REQUIRED_PARAMETER)
-                                errorParam(paramDef, CallableError.NULL_VALUE_NON_NULLABLE_TYPE)
                             }
-                        } else {
-                            val paramVal = valueProvider.valueByName(paramName, paramDef.type.javaType)
-
-                            if (paramVal == null && !paramDef.type.isMarkedNullable) {
-                                // value coming in as null for non-nullable type
-                                errorParam(paramDef, CallableError.NULL_VALUE_NON_NULLABLE_TYPE)
-                            } else {
-                                // value present, and can be set
-                                useParam(paramDef, paramVal)
-                                consumeParameter(paramDef)
+                            is ProvidedValue.Present -> {
+                                markValueMatchedSomething(paramName)
+                                if (maybe.value == null && !paramDef.type.isMarkedNullable) {
+                                    errorParam(paramDef, CallableError.NULL_VALUE_NON_NULLABLE_TYPE)
+                                } else {
+                                    useParam(paramDef, maybe)
+                                    consumeParameter(paramDef)
+                                }
                             }
                         }
                     }
@@ -131,12 +126,11 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
 }
 
 enum class CallableError {
-    COERCION_ERROR,
     WRONG_TYPE,
     NULL_VALUE_NON_NULLABLE_TYPE,
     MISSING_VALUE_FOR_REQUIRED_PARAMETER
 }
 
 enum class CallableWarning {
-    DEFAULT_VALUE_USED_FOR_DATATYPE
+    TYPE_CONVERTED
 }

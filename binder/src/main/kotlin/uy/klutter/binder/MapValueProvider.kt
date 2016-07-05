@@ -1,19 +1,16 @@
 package uy.klutter.binder
 
 import uy.klutter.core.collections.toImmutable
-import java.lang.reflect.Type
+import kotlin.reflect.KType
 
 
-class MapValueProvider(wrap: Map<String, Any>) : NamedValueProvider {
+class MapValueProvider(wrap: Map<String, Any?>) : NamedValueProvider {
     val source = wrap.toImmutable()
 
-    override fun existsByName(name: String, targetType: Type): Boolean {
-        return source.containsKey(name)
-    }
-
     @Suppress("UNCHECKED_CAST")
-    override fun valueByName(name: String, targetType: Type): Any? {
-        return source.get(name)
+    override fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any> {
+        return if (!source.containsKey(name)) ProvidedValue.absent()
+               else ProvidedValue.of(source.get(name))
     }
 
     override fun entries(): List<Pair<String, Any?>> {
@@ -22,6 +19,7 @@ class MapValueProvider(wrap: Map<String, Any>) : NamedValueProvider {
 
     override fun equals(other: Any?): Boolean {
         return other != null &&
+                this.javaClass == other.javaClass &&
                 other is MapValueProvider &&
                 other.source == this.source
     }
@@ -35,3 +33,4 @@ class MapValueProvider(wrap: Map<String, Any>) : NamedValueProvider {
 }
 
 fun emptyValueProvider() = MapValueProvider(emptyMap())
+fun mapValueProviderOf(vararg keyValues: Pair<String, Any?>): MapValueProvider = MapValueProvider(mapOf(*keyValues))

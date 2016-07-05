@@ -45,7 +45,8 @@ enum class ConstructionError {
 enum class ConstructionWarning {
     MISSING_VALUE_FOR_SETTABLE_PROPERTY,
     HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY,
-    HAVE_VALUE_NOT_USED
+    HAVE_VALUE_NOT_USED,
+    TYPE_CONVERTED
 }
 
 class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
@@ -74,30 +75,28 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
 
     companion object {
         val DEFAULT_considerCompanionObjectFactories = true
-        val DEFAULT_treatMissingAsNullForNullableConstructorParameters = true
         val DEFAULT_treatUnusedValuesFromProviderAsErrors = true
 
         // TODO: cache is only holding strong references to Class or Companion objects, but if a class reloader is used this could be a problem
         data class CacheKey(val constructClass: KClass<*>, val constructType: Type, val usingCallable: KCallable<*>,
                             val valueProvider: NamedValueProvider,
-                            val treatMissingAsNullForNullableConstructorParameters: Boolean,
                             val treatUnusedValuesFromProviderAsErrors: Boolean)
 
         private val planCache: MutableMap<CacheKey, ConstructionBinding<*, *>> = ConcurrentHashMap()
 
         inline fun <reified T : Any> from(usingCallable: KCallable<T>,
                                          valueProvider: NamedValueProvider,
-                                         treatMissingAsNullForNullableConstructorParameters: Boolean = DEFAULT_treatMissingAsNullForNullableConstructorParameters,
-                                         treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, T> {
-            return from(reifiedType<T>(), usingCallable, valueProvider, treatMissingAsNullForNullableConstructorParameters, treatUnusedValuesFromProviderAsErrors)
+                                         treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
+                                        ): ConstructionBinding<T, T> {
+            return from(reifiedType<T>(), usingCallable, valueProvider, treatUnusedValuesFromProviderAsErrors)
         }
 
         @Suppress("UNCHECKED_CAST")
         fun <T : Any, INSTANCE : T> from(constructType: Type,
                                          usingCallable: KCallable<INSTANCE>,
                                          valueProvider: NamedValueProvider,
-                                         treatMissingAsNullForNullableConstructorParameters: Boolean = DEFAULT_treatMissingAsNullForNullableConstructorParameters,
-                                         treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, INSTANCE> {
+                                         treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
+                                        ): ConstructionBinding<T, INSTANCE> {
 
             @Suppress("UNCHECKED_CAST")
             val constructClass = when (constructType) {
@@ -106,8 +105,8 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 else -> throw IllegalArgumentException("Other types such as ${constructType} not yet supported")
             }.kotlin
 
-            val key = CacheKey(constructClass, constructType, usingCallable, valueProvider,
-                    treatMissingAsNullForNullableConstructorParameters, treatUnusedValuesFromProviderAsErrors)
+            val key = CacheKey(constructClass, constructType, usingCallable, valueProvider, treatUnusedValuesFromProviderAsErrors)
+
             val constructionPlan = planCache.computeIfAbsent(key) {
                 val isConstructorCall = constructClass.constructors.any { it == usingCallable }
                 val isCompanionCall = constructClass.companionObject?.declaredFunctions?.any { it == usingCallable } ?: false
@@ -140,7 +139,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 }
 
                 // create plan for constructor/creator call, and copy out a few of the results
-                val callablePlan = MethodCallBinding.from(usingCallable, dispatchInstance, null, valueProvider, treatMissingAsNullForNullableConstructorParameters)
+                val callablePlan = MethodCallBinding.from(usingCallable, dispatchInstance, null, valueProvider, overrideScope = ValueProviderTargetScope.CONSTRUCTOR)
                 val entriesFromProvider = callablePlan.nonmatchingProviderEntries
                 val previouslyUsedProperties = callablePlan.satisfiedParameters.map { it.name }.filterNotNull()
                 val temp = callablePlan.useCallable.parameters
@@ -187,11 +186,23 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                     propertyWarnings.add(Pair(propertyName, warning))
                 }
 
-                fun useProperty(propDef: KMutableProperty1<T, Any?>, rawValue: Any?) {
-                    if (rawValue != null && !propDef.returnType.isAssignableFromOrSamePrimitive(rawValue.javaClass)) {
-                        errorProperty(propDef, ConstructionError.WRONG_TYPE)
-                    } else {
-                        propertyValues.add(Pair(propDef, rawValue))
+                fun useProperty(propDef: KMutableProperty1<T, Any?>, maybe: ProvidedValue<Any>) {
+                    when (maybe) {
+                        is ProvidedValue.Present -> {
+                            val rawValue = maybe.value
+                            if (rawValue != null && !propDef.returnType.isAssignableFromOrSamePrimitive(rawValue.javaClass)) {
+                                errorProperty(propDef, ConstructionError.WRONG_TYPE)
+                            } else {
+                                if (maybe is ProvidedValue.Coerced<*, *>) {
+                                    warnProperty(propDef, ConstructionWarning.TYPE_CONVERTED)
+                                }
+                                propertyValues.add(Pair(propDef, rawValue))
+                            }
+                        }
+                        is ProvidedValue.Absent -> {
+                            // should never be able to get here
+                            throw IllegalStateException("Trying to use absent value as proeprty value")
+                        }
                     }
                 }
 
@@ -200,40 +211,41 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 val unsetProperties = propertiesOfClass.entries.map { it.value }.toSet() - usedPropertiesOfClass
                 unsetProperties.forEach { propReadOnly ->
                     val propName = propReadOnly.name
-                    val isMissing = !valueProvider.existsByName(propName, propReadOnly.returnType.javaType)
+                    val maybe = valueProvider.valueByName(propName, propReadOnly.returnType, ValueProviderTargetScope.PROPERTY)
 
                     if (propReadOnly is KMutableProperty1<*, *> && propReadOnly.javaSetter.isPublic()) {
                         val propWriteable = propReadOnly as KMutableProperty1<T, Any?>
 
-                        val propVal = valueProvider.valueByName(propName, propWriteable.returnType.javaType)
-
-                        if (!isMissing) {
-                            markValueMatchedSomething(propName)
-                        }
-
-                        if (isMissing) {
-                            // no value for property, which is ok, we just want to know about it
-                            warnProperty(propWriteable, ConstructionWarning.MISSING_VALUE_FOR_SETTABLE_PROPERTY)
-                        } else {
-                            if (propVal == null && !propWriteable.returnType.isMarkedNullable) {
-                                // value coming in as null for non-nullable type
-                                errorProperty(propWriteable, ConstructionError.NULL_VALUE_NON_NULLABLE_TYPE)
-                            } else {
-                                // value present, and can be set
-                                useProperty(propWriteable, propVal)
-                                consumeProperty(propName)
+                        when (maybe) {
+                            is ProvidedValue.Absent -> {
+                                // no value for property, which is ok, we just want to know about it
+                                warnProperty(propWriteable, ConstructionWarning.MISSING_VALUE_FOR_SETTABLE_PROPERTY)
+                            }
+                            is ProvidedValue.Present -> {
+                                markValueMatchedSomething(propName)
+                                if (maybe.value == null && !propWriteable.returnType.isMarkedNullable) {
+                                    // value coming in as null for non-nullable type
+                                    errorProperty(propWriteable, ConstructionError.NULL_VALUE_NON_NULLABLE_TYPE)
+                                } else {
+                                    // value present, and can be set
+                                    useProperty(propWriteable, maybe)
+                                    consumeProperty(propName)
+                                }
                             }
                         }
                     } else {
                         markValueMatchedSomething(propReadOnly.name)
-                        if (isMissing) {
-                            // we can't set it, but it doesn't exist so all good (we hope, we can't really say for sure)
-                        } else {
-                            // we can't set it, but it does align and we have a value for it
-                            if (treatUnusedValuesFromProviderAsErrors) {
-                                errorProperty(propReadOnly, ConstructionError.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY)
-                            } else {
-                                warnProperty(propReadOnly, ConstructionWarning.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY)
+                        when (maybe) {
+                            is ProvidedValue.Absent -> {
+                                // we can't set it, but it doesn't exist so all good (we hope, we can't really say for sure)
+                            }
+                            is ProvidedValue.Present -> {
+                                // we can't set it, but it does align and we have a value for it
+                                if (treatUnusedValuesFromProviderAsErrors) {
+                                    errorProperty(propReadOnly, ConstructionError.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY)
+                                } else {
+                                    warnProperty(propReadOnly, ConstructionWarning.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY)
+                                }
                             }
                         }
                     }
@@ -260,16 +272,14 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
         // TODO: all defaults configurable
 
         inline fun <reified T: Any> findBestBinding(valueProvider: NamedValueProvider,
-                                                          considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
-                                                          treatMissingAsNullForNullableConstructorParameters: Boolean = DEFAULT_treatMissingAsNullForNullableConstructorParameters,
-                                                          treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, T>? {
-            return findBestBinding(reifiedType<T>(), valueProvider, considerCompanionObjectFactories, treatMissingAsNullForNullableConstructorParameters, treatUnusedValuesFromProviderAsErrors)
+                                                    considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
+                                                    treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, T>? {
+            return findBestBinding(reifiedType<T>(), valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)
         }
 
         fun <T : Any, C : T> findBestBinding(constructType: Type,
                                              valueProvider: NamedValueProvider,
                                              considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
-                                             treatMissingAsNullForNullableConstructorParameters: Boolean = DEFAULT_treatMissingAsNullForNullableConstructorParameters,
                                              treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, C>? {
             @Suppress("UNCHECKED_CAST")
             val constructClass = when (constructType) {
@@ -290,7 +300,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
             @Suppress("UNCHECKED_CAST")
             val rawPlans = callables.map { callable ->
                 ConstructionBinding.from<T, C>(constructType, callable as KCallable<C>,
-                        valueProvider, treatMissingAsNullForNullableConstructorParameters, treatUnusedValuesFromProviderAsErrors)
+                        valueProvider, treatUnusedValuesFromProviderAsErrors)
             }
             val plans = rawPlans.filterNot { it.hasErrors }
                     .sortedWith(Comparator<uy.klutter.binder.ConstructionBinding<T, C>> { o1, o2 ->
@@ -342,9 +352,8 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
 
 inline fun <reified T: Any> constructFromValues(valueProvider: NamedValueProvider,
                                          considerCompanionObjectFactories: Boolean = ConstructionBinding.DEFAULT_considerCompanionObjectFactories,
-                                         treatMissingAsNullForNullableConstructorParameters: Boolean =  ConstructionBinding.DEFAULT_treatMissingAsNullForNullableConstructorParameters,
                                          treatUnusedValuesFromProviderAsErrors: Boolean =  ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors): T {
-    return ConstructionBinding.findBestBinding<T>(valueProvider, considerCompanionObjectFactories, treatMissingAsNullForNullableConstructorParameters, treatUnusedValuesFromProviderAsErrors)?.execute() ?: throw IllegalStateException("No clear construction binding can be found for ${T::class}")
+    return ConstructionBinding.findBestBinding<T>(valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)?.execute() ?: throw IllegalStateException("No clear construction binding can be found for ${T::class}")
 }
 
 
