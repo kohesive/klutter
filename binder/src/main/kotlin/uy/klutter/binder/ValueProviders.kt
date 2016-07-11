@@ -11,6 +11,8 @@ import kotlin.reflect.jvm.javaType
 interface NamedValueProvider {
     fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any?>
 
+    // TODO: optimize getting entries as pair of name/value with or without type coersion
+
     fun entryNames(): List<String>
 
     override fun hashCode(): Int
@@ -123,7 +125,6 @@ class MissingConstructorAndMethodParametersTreatedAsNullableNamedValueProviderDe
 }
 
 class MapValueProvider(wrap: Map<String, Any?>) : NamedValueProvider {
-
     val source = wrap.asReadOnly().let { original ->
         // turn dotted property names into nested providers
         original.entries.groupBy { it.key.substringBefore('.') }.map {

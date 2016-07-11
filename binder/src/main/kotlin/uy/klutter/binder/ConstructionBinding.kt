@@ -1,10 +1,8 @@
 package uy.klutter.binder
 
 import kotlinx.support.jdk8.collections.computeIfAbsent
-import uy.klutter.reflect.isAssignableFrom
-import uy.klutter.reflect.isAssignableFromOrSamePrimitive
-import uy.klutter.reflect.isPublic
-import uy.klutter.reflect.reifiedType
+import uy.klutter.reflect.*
+import java.lang.reflect.GenericArrayType
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.*
@@ -40,7 +38,8 @@ enum class ConstructionError {
     NULL_VALUE_NON_NULLABLE_TYPE,
     HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY,
     HAVE_VALUE_NOT_USED,
-    SUB_CONSTRUCTION_ERROR
+    SUB_CONSTRUCTION_ERROR,
+    WRONG_TYPE_FOR_COLLECTION_VALUE
 }
 
 enum class ConstructionWarning {
@@ -56,11 +55,13 @@ interface DeferredExecutable<out T> {
 }
 
 class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
-                                          val constructType: Type,
-                                          val callableBinding: MethodCallBinding<Any, Nothing, R>,
-                                          val thenSetProperties: List<Pair<KMutableProperty1<T, Any?>, Any?>>,
-                                          val propertyErrors: List<Pair<String, ConstructionError>>,
-                                          val propertyWarnings: List<Pair<String, ConstructionWarning>>): DeferredExecutable<T> {
+                                              val constructType: Type,
+                                              val callableBinding: MethodCallBinding<Any, Nothing, R>,
+                                              val thenSetProperties: List<Pair<KMutableProperty1<T, Any?>, Any?>>,
+                                              val propertyErrors: List<Pair<String, ConstructionError>>,
+                                              val propertyWarnings: List<Pair<String, ConstructionWarning>>,
+                                              val thenFillValues: Sequence<Any?> = emptySequence(),
+                                              val fillFunc: T.(Any?) -> Unit = {}) : DeferredExecutable<T> {
     val parameterErrors: List<Pair<KParameter, CallableError>> get() = callableBinding.parameterErrors
     val parameterWarnings: List<Pair<KParameter, CallableWarning>> get() = callableBinding.parameterWarnings
     val errorCount: Int = callableBinding.errorCount + propertyErrors.groupBy { it.first }.size
@@ -72,7 +73,6 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
     override val returnType: Type = constructType
     override fun execute(): T {
         if (hasErrors) throw IllegalStateException("Constructor binding that has errors is not executable")
-
         val instance: T = callableBinding.execute()
         thenSetProperties.forEach {
             val value = it.second
@@ -81,6 +81,9 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 else -> value
             }
             it.first.set(instance, finalValue)
+        }
+        thenFillValues.forEach {
+            instance.fillFunc(it)
         }
         return instance
     }
@@ -97,9 +100,9 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
         private val planCache: MutableMap<CacheKey, ConstructionBinding<*, *>> = ConcurrentHashMap()
 
         inline fun <reified T : Any> from(usingCallable: KCallable<T>,
-                                         valueProvider: NamedValueProvider,
-                                         treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
-                                        ): ConstructionBinding<T, T> {
+                                          valueProvider: NamedValueProvider,
+                                          treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
+        ): ConstructionBinding<T, T> {
             return from(reifiedType<T>(), usingCallable, valueProvider, treatUnusedValuesFromProviderAsErrors)
         }
 
@@ -108,7 +111,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                                          usingCallable: KCallable<INSTANCE>,
                                          valueProvider: NamedValueProvider,
                                          treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
-                                        ): ConstructionBinding<T, INSTANCE> {
+        ): ConstructionBinding<T, INSTANCE> {
 
             @Suppress("UNCHECKED_CAST")
             val constructClass = when (constructType) {
@@ -198,7 +201,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                         is ProvidedValue.Nested -> {
                             // whatever parameter is expecting, try to construct
                             val constructable = ConstructionBinding.findBestBinding<Any, Any>(propDef.returnType.javaType, maybe.value,
-                                    ConstructionBinding.DEFAULT_considerCompanionObjectFactories,  // TODO: this needs to come from settings or this instance of settings, not defaults
+                                    ConstructionBinding.DEFAULT_considerCompanionObjectFactories, // TODO: this needs to come from settings or this instance of settings, not defaults
                                     ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors)   // TODO: this needs to come from settings or this instance of settings, not defaults
                             if (constructable == null || constructable.hasErrors) {
                                 errorProperty(propDef, ConstructionError.SUB_CONSTRUCTION_ERROR)
@@ -300,9 +303,52 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
         // TODO: array type construction
         // TODO: all defaults configurable
 
-        inline fun <reified T: Any> findBestBinding(valueProvider: NamedValueProvider,
-                                                    considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
-                                                    treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, T>? {
+        inline fun <reified T : Any> findBestBinding(valueProvider: OrderedValueProvider,
+                                                     considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
+                                                     treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, T>? {
+            return findBestBinding(reifiedType<T>(), valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)
+        }
+
+        fun <T : Any, C : T> findBestBinding(constructType: Type,
+                                             valueProvider: OrderedValueProvider,
+                                             considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
+                                             treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, C>? {
+            // val constructClass = constructType.erasedType().kotlin
+
+            // special case:  Array, Iterator, Collection, List (w y w/o randomaccess), ListIterator
+            // special case:  Iterable
+            // special case:  Set
+
+            // the actual type is a List vs. MutableList vs. ArrayList vs. LinkedList vs. SomeJaysonList vs ...
+
+            return when {
+                constructType is GenericArrayType -> {
+                    // easy, construct an array
+                    // TODO: array construction
+                    throw NotImplementedError("Need to handle special case of Array construction")
+                }
+                Set::class.isAssignableFrom(constructType) -> {
+                    // TODO: Set construction
+                    throw NotImplementedError("Need to handle special case of Set construction")
+                }
+                List::class.isAssignableFrom(constructType) ||
+                        Collection::class.isAssignableFrom(constructType) ||
+                        ListIterator::class.isAssignableFrom(constructType) ||
+                        Iterator::class.isAssignableFrom(constructType) -> {
+                    // TODO:  List,Collection,ListIterator,Iterator construction
+                    throw NotImplementedError("Need to handle special case of List,Collection,ListIterator,Iterator construction")
+                }
+                Iterable::class.isAssignableFrom(constructType) -> {
+                    // TODO: Iterable construction
+                    throw NotImplementedError("Need to handle special case of Iterable construction")
+                }
+                else -> throw IllegalStateException("Cannot develop a construction plan for type $constructType from an OrderedValueProvider")
+            }
+        }
+
+        inline fun <reified T : Any> findBestBinding(valueProvider: NamedValueProvider,
+                                                     considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
+                                                     treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, T>? {
             return findBestBinding(reifiedType<T>(), valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)
         }
 
@@ -310,12 +356,13 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                                              valueProvider: NamedValueProvider,
                                              considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
                                              treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, C>? {
-            @Suppress("UNCHECKED_CAST")
-            val constructClass = when (constructType) {
-                is Class<*> -> constructType as Class<T>
-                is ParameterizedType -> constructType.rawType as Class<T>
-                else -> throw IllegalArgumentException("Other types such as ${constructType} not yet supported")
-            }.kotlin
+
+            if (Map::class.isAssignableFrom(constructType)) {
+                // TODO: Map construction
+                throw NotImplementedError("Need to handle special case of Map construction")
+            }
+
+            val constructClass = constructType.erasedType().kotlin
 
             val fromCompanion = if (considerCompanionObjectFactories) {
                 constructClass.companionObject?.declaredMemberFunctions?.filter { constructClass.isAssignableFrom(it.returnType) } ?: emptyList()
@@ -379,9 +426,9 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
     }
 }
 
-inline fun <reified T: Any> constructFromValues(valueProvider: NamedValueProvider,
-                                         considerCompanionObjectFactories: Boolean = ConstructionBinding.DEFAULT_considerCompanionObjectFactories,
-                                         treatUnusedValuesFromProviderAsErrors: Boolean =  ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors): T {
+inline fun <reified T : Any> constructFromValues(valueProvider: NamedValueProvider,
+                                                 considerCompanionObjectFactories: Boolean = ConstructionBinding.DEFAULT_considerCompanionObjectFactories,
+                                                 treatUnusedValuesFromProviderAsErrors: Boolean = ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors): T {
     return ConstructionBinding.findBestBinding<T>(valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)?.execute() ?: throw IllegalStateException("No clear construction binding can be found for ${T::class}")
 }
 

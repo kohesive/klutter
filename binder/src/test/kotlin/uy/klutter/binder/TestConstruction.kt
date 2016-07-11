@@ -857,4 +857,23 @@ class TestConstruction {
         assertEquals(12, breed.valueByName("lifespan", Int::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as Int)
 
     }
+
+    @Test fun testMapAsParameterConstruction() {
+        class Something(val mappy: Map<String, String>)
+
+        val prov = MapValueProvider(mapOf("mappy.a" to "a", "mappy.b" to "b", "mappy.c" to "c"))
+        val check = ConstructionBinding.findBestBinding<Something>(prov)!!
+        val obj = check.execute()
+
+        assertEquals(mapOf("a" to "a", "b" to "b", "c" to "c"), obj.mappy)
+    }
+
+    @Test fun testMapConstruction() {
+        val prov = MapValueProvider(mapOf("a" to "a", "b" to "b", "c" to "c"))
+        val check = ConstructionBinding.findBestBinding<Map<String, String>>(prov)!!
+        val obj = check.execute()
+
+        assertEquals(mapOf("a" to "a", "b" to "b", "c" to "c"), obj)
+    }
+
 }
