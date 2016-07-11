@@ -14,13 +14,14 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                                        val parameterErrors: List<Pair<KParameter, CallableError>>,
                                        val parameterWarnings: List<Pair<KParameter, CallableWarning>>,
                                        val satisfiedParameters: List<KParameter>,
-                                       val nonmatchingProviderEntries: Set<String>) {
+                                       val nonmatchingProviderEntries: Set<String>): DeferredExecutable<R> {
     val errorCount: Int = parameterErrors.groupBy { it.first }.size
     val warningCount: Int = parameterWarnings.groupBy { it.first }.size
     val hasErrors: Boolean = errorCount > 0
     val hasWarnings: Boolean = warningCount > 0
 
-    fun execute(): R {
+    override val returnType: Type = useCallable.returnType.javaType
+    override fun execute(): R {
         if (hasErrors) throw IllegalStateException("Callable binding that has errors is not executable")
 
         useCallable.isAccessible = true
@@ -28,8 +29,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
         val finalParameters = withParameters.map {
             val value = it.second
             it.first to when (value) {
-                is MethodCallBinding<*,*,*> -> value.execute()
-                is ConstructionBinding<*,*> -> value.execute()
+                is DeferredExecutable<*> -> value.execute()
                 else -> value
             }
         }
@@ -91,10 +91,8 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                     is ProvidedValue.Present -> {
                         val testValue = maybe.value
 
-                        val testType = if (testValue is ConstructionBinding<*, *>) {
-                            testValue.constructType // construction to happen later
-                        } else if (testValue is MethodCallBinding<*, *, *>) {
-                            testValue.useCallable.returnType.javaType // method call to happen later
+                        val testType = if (testValue is DeferredExecutable<*>) {
+                            testValue.returnType // construction or method call to happen later
                         } else if (testValue != null) {
                             testValue.javaClass
                         } else {

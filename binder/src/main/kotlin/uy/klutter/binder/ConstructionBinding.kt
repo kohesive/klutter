@@ -50,12 +50,17 @@ enum class ConstructionWarning {
     TYPE_CONVERTED
 }
 
+interface DeferredExecutable<out T> {
+    fun execute(): T
+    val returnType: Type
+}
+
 class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                                           val constructType: Type,
                                           val callableBinding: MethodCallBinding<Any, Nothing, R>,
                                           val thenSetProperties: List<Pair<KMutableProperty1<T, Any?>, Any?>>,
                                           val propertyErrors: List<Pair<String, ConstructionError>>,
-                                          val propertyWarnings: List<Pair<String, ConstructionWarning>>) {
+                                          val propertyWarnings: List<Pair<String, ConstructionWarning>>): DeferredExecutable<T> {
     val parameterErrors: List<Pair<KParameter, CallableError>> get() = callableBinding.parameterErrors
     val parameterWarnings: List<Pair<KParameter, CallableWarning>> get() = callableBinding.parameterWarnings
     val errorCount: Int = callableBinding.errorCount + propertyErrors.groupBy { it.first }.size
@@ -64,15 +69,15 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
     val hasWarnings: Boolean = warningCount > 0
     val withParameters: List<Pair<KParameter, Any?>> get() = callableBinding.withParameters
 
-    fun execute(): T {
+    override val returnType: Type = constructType
+    override fun execute(): T {
         if (hasErrors) throw IllegalStateException("Constructor binding that has errors is not executable")
 
         val instance: T = callableBinding.execute()
         thenSetProperties.forEach {
             val value = it.second
             val finalValue = when (value) {
-                is MethodCallBinding<*,*,*> -> value.execute()
-                is ConstructionBinding<*,*> -> value.execute()
+                is DeferredExecutable<*> -> value.execute()
                 else -> value
             }
             it.first.set(instance, finalValue)
@@ -204,10 +209,8 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                         is ProvidedValue.Present -> {
                             val testValue = maybe.value
 
-                            val testType = if (testValue is ConstructionBinding<*, *>) {
-                                testValue.constructType // construction to happen later
-                            } else if (testValue is MethodCallBinding<*, *, *>) {
-                                testValue.useCallable.returnType.javaType // method call to happen later
+                            val testType = if (testValue is DeferredExecutable<*>) {
+                                testValue.returnType // construction or method call to happen later
                             } else if (testValue != null) {
                                 testValue.javaClass
                             } else {
