@@ -812,6 +812,26 @@ class TestConstruction {
             assertEquals(10, obj.sub.a)
             assertEquals("bbb", obj.sub.b)
         }
+
+        class Breed(val type: String, val lifespan: Int)
+        class Dog(val legs: Int, val name: String, val volume: Int, val breed: Breed, val hairlen: Int)
+        class Thing(val a: Int, val b: String, val dog: Dog, val f: Int)
+        run {
+            val prov = MapValueProvider(mapOf("a" to 123, "b" to "cat", "dog.legs" to 4, "dog.volume" to 34, "dog.name" to "frank", "dog.breed.type" to "longhair", "dog.breed.lifespan" to 12, "dog.hairlen" to 33, "f" to 999))
+            val check = ConstructionBinding.findBestBinding<Thing>(prov)!!
+            val obj = check.execute()
+            assertEquals(123, obj.a)
+            assertEquals("cat", obj.b)
+            assertEquals(999,obj.f)
+
+            assertEquals(4, obj.dog.legs)
+            assertEquals(34, obj.dog.volume)
+            assertEquals("frank", obj.dog.name)
+            assertEquals(33, obj.dog.hairlen)
+
+            assertEquals("longhair", obj.dog.breed.type)
+            assertEquals(12, obj.dog.breed.lifespan)
+        }
     }
 
     // TODO: test for non public setters, non public constructors, non public creators

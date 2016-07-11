@@ -39,7 +39,8 @@ enum class ConstructionError {
     WRONG_TYPE,
     NULL_VALUE_NON_NULLABLE_TYPE,
     HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY,
-    HAVE_VALUE_NOT_USED
+    HAVE_VALUE_NOT_USED,
+    SUB_CONSTRUCTION_ERROR
 }
 
 enum class ConstructionWarning {
@@ -68,7 +69,13 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
 
         val instance: T = callableBinding.execute()
         thenSetProperties.forEach {
-            it.first.set(instance, it.second)
+            val value = it.second
+            val finalValue = when (value) {
+                is MethodCallBinding<*,*,*> -> value.execute()
+                is ConstructionBinding<*,*> -> value.execute()
+                else -> value
+            }
+            it.first.set(instance, finalValue)
         }
         return instance
     }
@@ -183,15 +190,37 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
 
                 fun useProperty(propDef: KMutableProperty1<T, Any?>, maybe: ProvidedValue<Any?>) {
                     when (maybe) {
+                        is ProvidedValue.Nested -> {
+                            // whatever parameter is expecting, try to construct
+                            val constructable = ConstructionBinding.findBestBinding<Any, Any>(propDef.returnType.javaType, maybe.value,
+                                    ConstructionBinding.DEFAULT_considerCompanionObjectFactories,  // TODO: this needs to come from settings or this instance of settings, not defaults
+                                    ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors)   // TODO: this needs to come from settings or this instance of settings, not defaults
+                            if (constructable == null || constructable.hasErrors) {
+                                errorProperty(propDef, ConstructionError.SUB_CONSTRUCTION_ERROR)
+                            } else {
+                                propertyValues.add(Pair(propDef, constructable))
+                            }
+                        }
                         is ProvidedValue.Present -> {
-                            val rawValue = maybe.value
-                            if (rawValue != null && !propDef.returnType.isAssignableFromOrSamePrimitive(rawValue.javaClass)) {
+                            val testValue = maybe.value
+
+                            val testType = if (testValue is ConstructionBinding<*, *>) {
+                                testValue.constructType // construction to happen later
+                            } else if (testValue is MethodCallBinding<*, *, *>) {
+                                testValue.useCallable.returnType.javaType // method call to happen later
+                            } else if (testValue != null) {
+                                testValue.javaClass
+                            } else {
+                                Any::class.java
+                            }
+
+                            if (testValue != null && !propDef.returnType.isAssignableFromOrSamePrimitive(testType)) {
                                 errorProperty(propDef, ConstructionError.WRONG_TYPE)
                             } else {
                                 if (maybe is ProvidedValue.Coerced<*, *>) {
                                     warnProperty(propDef, ConstructionWarning.TYPE_CONVERTED)
                                 }
-                                propertyValues.add(Pair(propDef, rawValue))
+                                propertyValues.add(Pair(propDef, testValue))
                             }
                         }
                         is ProvidedValue.Absent -> {
@@ -216,7 +245,8 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                                 // no value for property, which is ok, we just want to know about it
                                 warnProperty(propWriteable, ConstructionWarning.MISSING_VALUE_FOR_SETTABLE_PROPERTY)
                             }
-                            is ProvidedValue.Present -> {
+                            is ProvidedValue.Present,
+                            is ProvidedValue.Nested -> {
                                 markValueMatchedSomething(propName)
                                 if (maybe.value == null && !propWriteable.returnType.isMarkedNullable) {
                                     // value coming in as null for non-nullable type
@@ -234,7 +264,8 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                             is ProvidedValue.Absent -> {
                                 // we can't set it, but it doesn't exist so all good (we hope, we can't really say for sure)
                             }
-                            is ProvidedValue.Present -> {
+                            is ProvidedValue.Present,
+                            is ProvidedValue.Nested -> {
                                 // we can't set it, but it does align and we have a value for it
                                 if (treatUnusedValuesFromProviderAsErrors) {
                                     errorProperty(propReadOnly, ConstructionError.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY)

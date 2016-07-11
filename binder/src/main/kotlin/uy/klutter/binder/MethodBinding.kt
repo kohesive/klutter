@@ -1,9 +1,11 @@
 package uy.klutter.binder
 
 import uy.klutter.reflect.isAssignableFromOrSamePrimitive
+import java.lang.reflect.Type
 import kotlin.reflect.KCallable
 import kotlin.reflect.KParameter
 import kotlin.reflect.jvm.isAccessible
+import kotlin.reflect.jvm.javaType
 
 class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                                        val dispatchInstance: DT?,
@@ -22,10 +24,20 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
         if (hasErrors) throw IllegalStateException("Callable binding that has errors is not executable")
 
         useCallable.isAccessible = true
-        val instance: R = if (useCallable.parameters.size == withParameters.size) {
-            useCallable.call(*withParameters.map { it.second }.toTypedArray())
+
+        val finalParameters = withParameters.map {
+            val value = it.second
+            it.first to when (value) {
+                is MethodCallBinding<*,*,*> -> value.execute()
+                is ConstructionBinding<*,*> -> value.execute()
+                else -> value
+            }
+        }
+
+        val instance: R = if (useCallable.parameters.size == finalParameters.size) {
+            useCallable.call(*finalParameters.map { it.second }.toTypedArray())
         } else {
-            useCallable.callBy(withParameters.toMap())
+            useCallable.callBy(finalParameters.toMap())
         }
         return instance
     }
@@ -65,15 +77,37 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
 
             fun useParam(param: KParameter, maybe: ProvidedValue<Any?>) {
                 when (maybe) {
+                    is ProvidedValue.Nested -> {
+                        // whatever parameter is expecting, try to construct
+                        val constructable = ConstructionBinding.findBestBinding<Any, Any>(param.type.javaType, maybe.value,
+                                ConstructionBinding.DEFAULT_considerCompanionObjectFactories,  // TODO: this needs to come from settings or this instance of settings, not defaults
+                                ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors)   // TODO: this needs to come from settings or this instance of settings, not defaults
+                        if (constructable == null || constructable.hasErrors) {
+                            errorParam(param, CallableError.SUB_CONSTRUCTION_ERROR)
+                        } else {
+                            orderedParamValues.add(Pair(param, constructable))
+                        }
+                    }
                     is ProvidedValue.Present -> {
-                        val rawValue = maybe.value
-                        if (rawValue != null && !param.type.isAssignableFromOrSamePrimitive(rawValue.javaClass)) {
+                        val testValue = maybe.value
+
+                        val testType = if (testValue is ConstructionBinding<*, *>) {
+                            testValue.constructType // construction to happen later
+                        } else if (testValue is MethodCallBinding<*, *, *>) {
+                            testValue.useCallable.returnType.javaType // method call to happen later
+                        } else if (testValue != null) {
+                            testValue.javaClass
+                        } else {
+                            Any::class.java
+                        }
+
+                        if (testValue != null && !param.type.isAssignableFromOrSamePrimitive(testType)) {
                             errorParam(param, CallableError.WRONG_TYPE)
                         } else {
                             if (maybe is ProvidedValue.Coerced<*, *>) {
                                 warnParam(param, CallableWarning.TYPE_CONVERTED)
                             }
-                            orderedParamValues.add(Pair(param, rawValue))
+                            orderedParamValues.add(Pair(param, testValue))
                         }
                     }
                     is ProvidedValue.Absent -> {
@@ -100,7 +134,8 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                                     errorParam(paramDef, CallableError.MISSING_VALUE_FOR_REQUIRED_PARAMETER)
                                 }
                             }
-                            is ProvidedValue.Present -> {
+                            is ProvidedValue.Present,
+                            is ProvidedValue.Nested -> {
                                 markValueMatchedSomething(paramName)
                                 if (maybe.value == null && !paramDef.type.isMarkedNullable) {
                                     errorParam(paramDef, CallableError.NULL_VALUE_NON_NULLABLE_TYPE)
@@ -128,7 +163,8 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
 enum class CallableError {
     WRONG_TYPE,
     NULL_VALUE_NON_NULLABLE_TYPE,
-    MISSING_VALUE_FOR_REQUIRED_PARAMETER
+    MISSING_VALUE_FOR_REQUIRED_PARAMETER,
+    SUB_CONSTRUCTION_ERROR
 }
 
 enum class CallableWarning {
