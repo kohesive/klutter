@@ -16,7 +16,13 @@ class TestCallBinding {
         fun Session.foo(a: String): String { return "$context $a $base" }
         fun Session.longer(a: String, b: Int, c: String = "defaulted", e: String?, isValid: Boolean): String { return "$context $a $b $c $e $isValid $base"}
         fun Session.thing(one: Thingies, two: Thingies, more: Thingies): String { return "$context $one $two $more $base"}
+
+        fun petDog(howMany: Int, specification: Dog): List<Dog> = (1..howMany).map { specification }
     }
+
+    data class Breed(val type: String, val lifespan: Int)
+    data class Dog(val legs: Int, val name: String, val volume: Int, val breed: Breed, val hairlen: Int)
+
 
     enum class Thingies {
         ONE, TWO, THREE
@@ -56,5 +62,14 @@ class TestCallBinding {
 
         val badBinding = MethodCallBinding.from(TestVariousMethods::thing, t, null, mapValueProviderOf("one" to "ONE", "two" to "TWO", "more" to 2))
         assertTrue(badBinding.hasErrors)
+    }
+
+    @Test fun testParameterIsComplexObject() {
+        val t = constructFromValues<TestVariousMethods>(emptyValueProvider())
+        val prov = MapValueProvider(mapOf("howMany" to 1, "specification.legs" to 4, "specification.volume" to 34, "specification.name" to "frank", "specification.breed.type" to "longhair", "specification.breed.lifespan" to 12, "specification.hairlen" to 33))
+        val check = MethodCallBinding.from(TestVariousMethods::petDog, t, null, prov).execute()
+        assertEquals(1, check.size)
+        val firstDog = check.first()
+        assertEquals(Dog(4, "frank", 34, Breed("longhair", 12), 33), firstDog)
     }
 }
