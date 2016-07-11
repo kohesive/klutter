@@ -1,20 +1,22 @@
 package uy.klutter.binder
 
 
-sealed class ProvidedValue<T: Any>() {
+sealed class ProvidedValue<out T>(val value: T) {
     companion object {
-        fun <T: Any> of(value: T?): ProvidedValue<T> = Present.of(value)
-        fun <O: Any, T: Any> coerced(original: ProvidedValue<O>, value: T?): ProvidedValue<T> = Coerced.of(original, value)
-        fun absent(): ProvidedValue<Any> = Absent.of()
+        fun <T> of(value: T): ProvidedValue<T> = Present.of(value)
+        fun nested(subprovider: NamedValueProvider): Nested = Nested.of(subprovider)
+        fun <O, T> coerced(original: ProvidedValue<O>, value: T): ProvidedValue<T> = Coerced.of(original, value)
+        fun absent(): ProvidedValue<Unit> = Absent.of()
     }
 
     fun isAbsent(): Boolean = this is Absent
     fun isPresent(): Boolean = this is Present
     fun isCoerced(): Boolean = this is Coerced<*, *>
+    fun isNested(): Boolean = this is Nested
 
-    open class Present<T: Any> protected constructor (val value: T?): ProvidedValue<T>() {
+    open class Present<out T> protected constructor (value: T): ProvidedValue<T>(value) {
         companion object {
-            fun <T: Any> of(value: T?, warnings: List<String> = arrayListOf()): Present<T> = Present(value)
+            fun <T> of(value: T): Present<T> = Present(value)
         }
 
         override fun toString(): String = "[Present ${value}]"
@@ -29,9 +31,9 @@ sealed class ProvidedValue<T: Any>() {
         }
     }
 
-    class Coerced<O: Any, T: Any> private constructor (val original: ProvidedValue<O>, value: T?): Present<T>(value) {
+    class Coerced<out O, out T> private constructor (val original: ProvidedValue<O>, value: T): Present<T>(value) {
         companion object {
-            fun <O: Any, T: Any> of(original: ProvidedValue<O>, value: T?): Coerced<O, T> = Coerced(original, value)
+            fun <O, T> of(original: ProvidedValue<O>, value: T): Coerced<O, T> = Coerced(original, value)
         }
 
         override fun toString(): String = "[Coerced ${value} from ${original}]"
@@ -46,7 +48,24 @@ sealed class ProvidedValue<T: Any>() {
         }
     }
 
-    class Absent private constructor (): ProvidedValue<Any>() {
+    class Nested private constructor (subprovider: NamedValueProvider): ProvidedValue<NamedValueProvider>(subprovider)  {
+        companion object {
+            fun of(subprovider: NamedValueProvider): Nested = Nested(subprovider)
+        }
+
+        override fun toString(): String = "[Nested ${value}]"
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Nested) return false
+            return value == other.value
+        }
+
+        override fun hashCode(): Int {
+            return value.hashCode() * 49
+        }
+    }
+
+    class Absent private constructor (): ProvidedValue<Unit>(Unit) {
         companion object {
             private val instance = Absent()
 

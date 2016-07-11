@@ -38,7 +38,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                              valueProvider: NamedValueProvider,
                              overrideScope: ValueProviderTargetScope = ValueProviderTargetScope.METHOD): MethodCallBinding<DT, RT, R> {
 
-            val entriesFromProvider = valueProvider.entries().map { it.first.substringBefore('.') }.toSet()
+            val entriesFromProvider = valueProvider.entryNames().map { it.substringBefore('.') }.toSet()
             val usedEntriesFromProvider = hashSetOf<String>()
             val satisfiedParameters = arrayListOf<KParameter>()
 
@@ -63,7 +63,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                 paramWarnings.add(Pair(param, warning))
             }
 
-            fun useParam(param: KParameter, maybe: ProvidedValue<Any>) {
+            fun useParam(param: KParameter, maybe: ProvidedValue<Any?>) {
                 when (maybe) {
                     is ProvidedValue.Present -> {
                         val rawValue = maybe.value

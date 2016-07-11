@@ -2,12 +2,10 @@ package uy.klutter.binder
 
 import org.junit.Ignore
 import org.junit.Test
+import uy.klutter.core.common.maximum
 import java.lang.reflect.Modifier
-import kotlin.reflect.KCallable
-import kotlin.reflect.companionObject
-import kotlin.reflect.declaredMemberFunctions
+import kotlin.reflect.*
 import kotlin.reflect.jvm.kotlinFunction
-import kotlin.reflect.primaryConstructor
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
@@ -792,7 +790,51 @@ class TestConstruction {
 
     }
 
+    @Test fun testNestedConstruction() {
+        // if the value provider has dotted/nested properties it can bind sub object construction
+        class TestSubClass(val a: Int, val b: String)
+        class TestOuterClass(val x: Int, val sub: TestSubClass)
+
+        run {
+            val check = ConstructionBinding.findBestBinding<TestOuterClass>(mapValueProviderOf("x" to 123, "sub.a" to 10, "sub.b" to "bbb"))!!
+            val obj = check.execute()
+
+            assertEquals(123, obj.x)
+            assertEquals(10, obj.sub.a)
+            assertEquals("bbb", obj.sub.b)
+        }
+
+        run {
+            val check = ConstructionBinding.findBestBinding<TestOuterClass>(mapValueProviderOf("x" to 123, "sub" to mapValueProviderOf("a" to 10, "b" to "bbb")))!!
+            val obj = check.execute()
+
+            assertEquals(123, obj.x)
+            assertEquals(10, obj.sub.a)
+            assertEquals("bbb", obj.sub.b)
+        }
+    }
+
     // TODO: test for non public setters, non public constructors, non public creators
 
+    @Test fun testDottedConversion() {
+        val prov = MapValueProvider(mapOf("a" to 123, "b" to "cat", "dog.legs" to 4, "dog.volume" to 34, "dog.name" to "frank", "dog.breed.type" to "longhair", "dog.breed.lifespan" to 12, "dog.hairlen" to 33, "f" to 999))
 
+        // top level
+        assertEquals(123, prov.valueByName("a", Int::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as Int)
+        assertEquals("cat", prov.valueByName("b", String::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as String)
+        assertEquals(999, prov.valueByName("f", Int::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as Int)
+
+        // dog level
+        val dog = (prov.valueByName("dog", Any::class.defaultType, ValueProviderTargetScope.UNKNOWN) as ProvidedValue.Nested).value
+        assertEquals(4, dog.valueByName("legs", Int::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as Int)
+        assertEquals(34, dog.valueByName("volume", Int::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as Int)
+        assertEquals("frank", dog.valueByName("name", String::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as String)
+        assertEquals(33, dog.valueByName("hairlen", Int::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as Int)
+
+        // breed level
+        val breed = (dog.valueByName("breed", Any::class.defaultType, ValueProviderTargetScope.UNKNOWN) as ProvidedValue.Nested).value
+        assertEquals("longhair", breed.valueByName("type", String::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as String)
+        assertEquals(12, breed.valueByName("lifespan", Int::class.defaultType, ValueProviderTargetScope.UNKNOWN).value as Int)
+
+    }
 }

@@ -142,11 +142,6 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 val callablePlan = MethodCallBinding.from(usingCallable, dispatchInstance, null, valueProvider, overrideScope = ValueProviderTargetScope.CONSTRUCTOR)
                 val entriesFromProvider = callablePlan.nonmatchingProviderEntries
                 val previouslyUsedProperties = callablePlan.satisfiedParameters.map { it.name }.filterNotNull()
-                val temp = callablePlan.useCallable.parameters
-                        .filter { it.kind == KParameter.Kind.VALUE }
-                        .map { it.name }
-                        .filterNotNull()
-                        .toSet() - callablePlan.parameterErrors.map { it.first.name }.filterNotNull()
 
                 // based on what hasn't yet been satisfied, set properties
                 val propertiesOfClass = constructClass.declaredMemberProperties
@@ -186,7 +181,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                     propertyWarnings.add(Pair(propertyName, warning))
                 }
 
-                fun useProperty(propDef: KMutableProperty1<T, Any?>, maybe: ProvidedValue<Any>) {
+                fun useProperty(propDef: KMutableProperty1<T, Any?>, maybe: ProvidedValue<Any?>) {
                     when (maybe) {
                         is ProvidedValue.Present -> {
                             val rawValue = maybe.value

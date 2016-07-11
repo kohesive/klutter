@@ -11,7 +11,7 @@ object BindingUtils {
     @Suppress("UNCHECKED_CAST")
     private fun _getDottedFromMapInternal(dottedName: String, nameStack: List<String>, targetType: KType, provider: NamedValueProvider, scope: ValueProviderTargetScope): Any? {
         val allSegments = dottedName.split('.')
-        val startIndex = if (provider.supportsDottedNames) allSegments.size else 1
+        val startIndex = if (false) allSegments.size else 1
         (startIndex..1).forEach { howMany ->
             val currentSegments = allSegments.take(howMany)
             val currentName = currentSegments.joinToString(".")
