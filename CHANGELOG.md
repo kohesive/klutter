@@ -13,6 +13,7 @@ Breaking Changes:
 * reflect-core and reflect-full merged into reflect, some packages from full will have changed
 * new binding module for dynamic instantiation of objects, method calls with value providers, type conversion
 * converters have moved to binding module from reflect
+* Elsaticsearch module renamed to include the 1.7.x version number in the module name to differentiate from future incompatible versions
 * and more, everything is still there, just maybe moved a bit.
 
 
