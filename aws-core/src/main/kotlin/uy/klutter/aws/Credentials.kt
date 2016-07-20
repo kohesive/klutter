@@ -6,7 +6,7 @@ import com.amazonaws.auth.SystemPropertiesCredentialsProvider
 import com.amazonaws.auth.profile.ProfileCredentialsProvider
 
 
-public fun defaultSafeCredentialsProviderChain(): AWSCredentialsProviderChain {
+fun defaultSafeCredentialsProviderChain(): AWSCredentialsProviderChain {
     return AWSCredentialsProviderChain(
             SystemPropertiesCredentialsProvider(), // Allow override from system properties
             InstanceProfileCredentialsProvider(),  // Good for production, from IAM roles
