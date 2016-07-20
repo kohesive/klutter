@@ -20,8 +20,8 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
     val hasErrors: Boolean = errorCount > 0
     val hasWarnings: Boolean = warningCount > 0
 
-    override val returnType: Type = useCallable.returnType.javaType
-    override fun execute(): R {
+    override val returnType: EitherType = EitherType.ofUnchecked(useCallable.returnType)
+    override val executor = {
         if (hasErrors) throw IllegalStateException("Callable binding that has errors is not executable")
 
         useCallable.isAccessible = true
@@ -29,7 +29,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
         val finalParameters = withParameters.map {
             val value = it.second
             it.first to when (value) {
-                is DeferredExecutable<*> -> value.execute()
+                is DeferredExecutable<*> -> value.executor()
                 else -> value
             }
         }
@@ -39,7 +39,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
         } else {
             useCallable.callBy(finalParameters.toMap())
         }
-        return instance
+        instance
     }
 
     companion object {
@@ -77,7 +77,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
 
             fun useParam(param: KParameter, maybe: ProvidedValue<Any?>) {
                 when (maybe) {
-                    is ProvidedValue.Nested -> {
+                    is ProvidedValue.NestedNamedValueProvider -> {
                         // whatever parameter is expecting, try to construct
                         val constructable = ConstructionBinding.findBestBinding<Any, Any>(param.type.javaType, maybe.value,
                                 ConstructionBinding.DEFAULT_considerCompanionObjectFactories,  // TODO: this needs to come from settings or this instance of settings, not defaults
@@ -88,11 +88,20 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                             orderedParamValues.add(Pair(param, constructable))
                         }
                     }
+                    is ProvidedValue.NestedOrderedValueProvider -> {
+                        // whatever parameter is expecting, try to construct
+                        val constructable = ConstructionBinding.findBestBinding<Any, Any>(param.type.javaType, maybe.value)
+                        if (constructable == null || constructable.hasErrors) {
+                            errorParam(param, CallableError.SUB_CONSTRUCTION_ERROR)
+                        } else {
+                            orderedParamValues.add(Pair(param, constructable))
+                        }
+                    }
                     is ProvidedValue.Present -> {
                         val testValue = maybe.value
 
                         val testType = if (testValue is DeferredExecutable<*>) {
-                            testValue.returnType // construction or method call to happen later
+                            testValue.returnType.asJava // construction or method call to happen later
                         } else if (testValue != null) {
                             testValue.javaClass
                         } else {
@@ -121,7 +130,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                     KParameter.Kind.EXTENSION_RECEIVER -> orderedParamValues.add(Pair(paramDef, receiverInstance))
                     KParameter.Kind.VALUE -> {
                         val paramName = paramDef.name ?: throw IllegalStateException("callable has parameter with unknown name")
-                        val maybe = valueProvider.valueByName(paramName, paramDef.type, ValueProviderTargetScope.METHOD)
+                        val maybe = valueProvider.valueByName(paramName, EitherType.ofUnchecked(paramDef.type), ValueProviderTargetScope.METHOD)
 
                         when (maybe) {
                             is ProvidedValue.Absent -> {
@@ -133,7 +142,8 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                                 }
                             }
                             is ProvidedValue.Present,
-                            is ProvidedValue.Nested -> {
+                            is ProvidedValue.NestedNamedValueProvider,
+                            is ProvidedValue.NestedOrderedValueProvider -> {
                                 markValueMatchedSomething(paramName)
                                 if (maybe.value == null && !paramDef.type.isMarkedNullable) {
                                     errorParam(paramDef, CallableError.NULL_VALUE_NON_NULLABLE_TYPE)

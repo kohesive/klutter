@@ -33,11 +33,11 @@ class TestCallBinding {
     @Test fun testCallingInstanceMethods() {
         val t = constructFromValues<TestVariousMethods>(emptyValueProvider())
 
-        assertEquals("Test: hello", MethodCallBinding.from(TestVariousMethods::foo, t, null, mapValueProviderOf("a" to "hello").withMissingInParameterValuesAsNullable()).execute())
-        assertEquals("Test: hello 123 defaulted null true", MethodCallBinding.from(TestVariousMethods::longer, t, null, mapValueProviderOf("a" to "hello", "b" to 123, "isValid" to true).withMissingInParameterValuesAsNullable()).execute())
-        assertEquals("Test: ONE TWO THREE", MethodCallBinding.from(TestVariousMethods::thing, t, null, mapValueProviderOf("one" to Thingies.ONE, "two" to Thingies.TWO, "more" to Thingies.THREE).withMissingInParameterValuesAsNullable()).execute())
-        assertEquals(5, MethodCallBinding.from(TestVariousMethods::withNum, t, null, mapValueProviderOf("x" to 4).withMissingInParameterValuesAsNullable()).execute())
-        assertEquals(Thingies.TWO, MethodCallBinding.from(TestVariousMethods::thingFromNum, t, null, mapValueProviderOf("x" to 1).withMissingInParameterValuesAsNullable()).execute())
+        assertEquals("Test: hello", MethodCallBinding.from(TestVariousMethods::foo, t, null, mapValueProviderOf("a" to "hello").withMissingInParameterValuesAsNullable()).executor())
+        assertEquals("Test: hello 123 defaulted null true", MethodCallBinding.from(TestVariousMethods::longer, t, null, mapValueProviderOf("a" to "hello", "b" to 123, "isValid" to true).withMissingInParameterValuesAsNullable()).executor())
+        assertEquals("Test: ONE TWO THREE", MethodCallBinding.from(TestVariousMethods::thing, t, null, mapValueProviderOf("one" to Thingies.ONE, "two" to Thingies.TWO, "more" to Thingies.THREE).withMissingInParameterValuesAsNullable()).executor())
+        assertEquals(5, MethodCallBinding.from(TestVariousMethods::withNum, t, null, mapValueProviderOf("x" to 4).withMissingInParameterValuesAsNullable()).executor())
+        assertEquals(Thingies.TWO, MethodCallBinding.from(TestVariousMethods::thingFromNum, t, null, mapValueProviderOf("x" to 1).withMissingInParameterValuesAsNullable()).executor())
     }
 
     @Test fun testCallingExtensionMethods() {
@@ -47,18 +47,18 @@ class TestCallBinding {
         val findFoo = TestVariousMethods::class.declaredMemberExtensionFunctions.first { it.name == "foo" }
         val findLonger = TestVariousMethods::class.declaredMemberExtensionFunctions.first { it.name == "longer" }
         val findThing = TestVariousMethods::class.declaredMemberExtensionFunctions.first { it.name == "thing" }
-        assertEquals("CONTEXT:> hello <:BASE", MethodCallBinding.from(findFoo, t, s, mapValueProviderOf("a" to "hello").withMissingInParameterValuesAsNullable()).execute())
-        assertEquals("CONTEXT:> hello 123 defaulted null true <:BASE", MethodCallBinding.from(findLonger, t, s, mapValueProviderOf("a" to "hello", "b" to 123, "isValid" to true).withMissingInParameterValuesAsNullable()).execute())
-        assertEquals("CONTEXT:> ONE TWO THREE <:BASE", MethodCallBinding.from(findThing, t, s, mapValueProviderOf("one" to Thingies.ONE, "two" to Thingies.TWO, "more" to Thingies.THREE).withMissingInParameterValuesAsNullable()).execute())
+        assertEquals("CONTEXT:> hello <:BASE", MethodCallBinding.from(findFoo, t, s, mapValueProviderOf("a" to "hello").withMissingInParameterValuesAsNullable()).executor())
+        assertEquals("CONTEXT:> hello 123 defaulted null true <:BASE", MethodCallBinding.from(findLonger, t, s, mapValueProviderOf("a" to "hello", "b" to 123, "isValid" to true).withMissingInParameterValuesAsNullable()).executor())
+        assertEquals("CONTEXT:> ONE TWO THREE <:BASE", MethodCallBinding.from(findThing, t, s, mapValueProviderOf("one" to Thingies.ONE, "two" to Thingies.TWO, "more" to Thingies.THREE).withMissingInParameterValuesAsNullable()).executor())
     }
 
     @Test fun testTypeConversionOnMethodCalls() {
         val t = constructFromValues<TestVariousMethods>(emptyValueProvider())
 
-        assertEquals("Test: hello 123 defaulted null true", MethodCallBinding.from(TestVariousMethods::longer, t, null, mapValueProviderOf("a" to "hello", "b" to "123", "isValid" to "true").withDefaults()).execute())
-        assertEquals("Test: ONE TWO THREE", MethodCallBinding.from(TestVariousMethods::thing, t, null, mapValueProviderOf("one" to "ONE", "two" to "TWO", "more" to 2).withDefaults()).execute())
-        assertEquals(5, MethodCallBinding.from(TestVariousMethods::withNum, t, null, mapValueProviderOf("x" to "4").withDefaults()).execute())
-        assertEquals(Thingies.TWO, MethodCallBinding.from(TestVariousMethods::thingFromNum, t, null, mapValueProviderOf("x" to "1").withDefaults()).execute())
+        assertEquals("Test: hello 123 defaulted null true", MethodCallBinding.from(TestVariousMethods::longer, t, null, mapValueProviderOf("a" to "hello", "b" to "123", "isValid" to "true").withDefaults()).executor())
+        assertEquals("Test: ONE TWO THREE", MethodCallBinding.from(TestVariousMethods::thing, t, null, mapValueProviderOf("one" to "ONE", "two" to "TWO", "more" to 2).withDefaults()).executor())
+        assertEquals(5, MethodCallBinding.from(TestVariousMethods::withNum, t, null, mapValueProviderOf("x" to "4").withDefaults()).executor())
+        assertEquals(Thingies.TWO, MethodCallBinding.from(TestVariousMethods::thingFromNum, t, null, mapValueProviderOf("x" to "1").withDefaults()).executor())
 
         val badBinding = MethodCallBinding.from(TestVariousMethods::thing, t, null, mapValueProviderOf("one" to "ONE", "two" to "TWO", "more" to 2))
         assertTrue(badBinding.hasErrors)
@@ -67,7 +67,7 @@ class TestCallBinding {
     @Test fun testParameterIsComplexObject() {
         val t = constructFromValues<TestVariousMethods>(emptyValueProvider())
         val prov = MapValueProvider(mapOf("howMany" to 1, "specification.legs" to 4, "specification.volume" to 34, "specification.name" to "frank", "specification.breed.type" to "longhair", "specification.breed.lifespan" to 12, "specification.hairlen" to 33))
-        val check = MethodCallBinding.from(TestVariousMethods::petDog, t, null, prov).execute()
+        val check = MethodCallBinding.from(TestVariousMethods::petDog, t, null, prov).executor()
         assertEquals(1, check.size)
         val firstDog = check.first()
         assertEquals(Dog(4, "frank", 34, Breed("longhair", 12), 33), firstDog)

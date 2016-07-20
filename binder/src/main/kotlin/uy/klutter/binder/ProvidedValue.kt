@@ -4,15 +4,11 @@ package uy.klutter.binder
 sealed class ProvidedValue<out T>(val value: T) {
     companion object {
         fun <T> of(value: T): ProvidedValue<T> = Present.of(value)
-        fun nested(subprovider: NamedValueProvider): Nested = Nested.of(subprovider)
+        fun nested(subprovider: NamedValueProvider): NestedNamedValueProvider = NestedNamedValueProvider.of(subprovider)
+        fun nested(subprovider: OrderedValueProvider): NestedOrderedValueProvider = NestedOrderedValueProvider.of(subprovider)
         fun <O, T> coerced(original: ProvidedValue<O>, value: T): ProvidedValue<T> = Coerced.of(original, value)
         fun absent(): ProvidedValue<Unit> = Absent.of()
     }
-
-    fun isAbsent(): Boolean = this is Absent
-    fun isPresent(): Boolean = this is Present
-    fun isCoerced(): Boolean = this is Coerced<*, *>
-    fun isNested(): Boolean = this is Nested
 
     open class Present<out T> protected constructor (value: T): ProvidedValue<T>(value) {
         companion object {
@@ -48,15 +44,32 @@ sealed class ProvidedValue<out T>(val value: T) {
         }
     }
 
-    class Nested private constructor (subprovider: NamedValueProvider): ProvidedValue<NamedValueProvider>(subprovider)  {
+    class NestedNamedValueProvider private constructor (subprovider: NamedValueProvider): ProvidedValue<NamedValueProvider>(subprovider)  {
         companion object {
-            fun of(subprovider: NamedValueProvider): Nested = Nested(subprovider)
+            fun of(subprovider: NamedValueProvider): NestedNamedValueProvider = NestedNamedValueProvider(subprovider)
         }
 
-        override fun toString(): String = "[Nested ${value}]"
+        override fun toString(): String = "[NestedNamedValueProvider ${value}]"
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
-            if (other !is Nested) return false
+            if (other !is NestedNamedValueProvider) return false
+            return value == other.value
+        }
+
+        override fun hashCode(): Int {
+            return value.hashCode() * 49
+        }
+    }
+
+    class NestedOrderedValueProvider private constructor (subprovider: OrderedValueProvider): ProvidedValue<OrderedValueProvider>(subprovider)  {
+        companion object {
+            fun of(subprovider: OrderedValueProvider): NestedOrderedValueProvider = NestedOrderedValueProvider(subprovider)
+        }
+
+        override fun toString(): String = "[NestedOrderedValueProvider ${value}]"
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is NestedOrderedValueProvider) return false
             return value == other.value
         }
 

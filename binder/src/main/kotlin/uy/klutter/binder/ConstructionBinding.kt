@@ -49,13 +49,16 @@ enum class ConstructionWarning {
     TYPE_CONVERTED
 }
 
-interface DeferredExecutable<out T> {
-    fun execute(): T
-    val returnType: Type
+
+inline fun <reified T : Any> constructFromValues(valueProvider: NamedValueProvider,
+                                                 considerCompanionObjectFactories: Boolean = ConstructionBinding.DEFAULT_considerCompanionObjectFactories,
+                                                 treatUnusedValuesFromProviderAsErrors: Boolean = ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors): T {
+    return ConstructionBinding.findBestBinding<T>(valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)?.executor?.invoke() ?: throw IllegalStateException("No clear construction binding can be found for ${T::class}")
 }
 
+
 class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
-                                              val constructType: Type,
+                                              val constructType: EitherType,
                                               val callableBinding: MethodCallBinding<Any, Nothing, R>,
                                               val thenSetProperties: List<Pair<KMutableProperty1<T, Any?>, Any?>>,
                                               val propertyErrors: List<Pair<String, ConstructionError>>,
@@ -70,14 +73,14 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
     val hasWarnings: Boolean = warningCount > 0
     val withParameters: List<Pair<KParameter, Any?>> get() = callableBinding.withParameters
 
-    override val returnType: Type = constructType
-    override fun execute(): T {
+    override val returnType: EitherType = constructType
+    override val executor = {
         if (hasErrors) throw IllegalStateException("Constructor binding that has errors is not executable")
-        val instance: T = callableBinding.execute()
+        val instance: T = callableBinding.executor()
         thenSetProperties.forEach {
             val value = it.second
             val finalValue = when (value) {
-                is DeferredExecutable<*> -> value.execute()
+                is DeferredExecutable<*> -> value.executor()
                 else -> value
             }
             it.first.set(instance, finalValue)
@@ -85,7 +88,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
         thenFillValues.forEach {
             instance.fillFunc(it)
         }
-        return instance
+        instance
     }
 
     companion object {
@@ -108,10 +111,11 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
 
         @Suppress("UNCHECKED_CAST")
         fun <T : Any, INSTANCE : T> from(constructType: Type,
-                                         usingCallable: KCallable<INSTANCE>,
-                                         valueProvider: NamedValueProvider,
-                                         treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
+                                                 usingCallable: KCallable<INSTANCE>,
+                                                 valueProvider: NamedValueProvider,
+                                                 treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
         ): ConstructionBinding<T, INSTANCE> {
+
 
             @Suppress("UNCHECKED_CAST")
             val constructClass = when (constructType) {
@@ -120,33 +124,38 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 else -> throw IllegalArgumentException("Other types such as ${constructType} not yet supported")
             }.kotlin
 
+            // TODO: dispatch instance is not part of the key because they are static and won't change for a callable, is that ok?  Think so yes.
+
             val key = CacheKey(constructClass, constructType, usingCallable, valueProvider, treatUnusedValuesFromProviderAsErrors)
 
             val constructionPlan = planCache.computeIfAbsent(key) {
                 val isConstructorCall = constructClass.constructors.any { it == usingCallable }
-                val isCompanionCall = constructClass.companionObject?.declaredFunctions?.any { it == usingCallable } ?: false
+                val isCompanionCall = !isConstructorCall && constructClass.companionObject?.declaredFunctions?.any { it == usingCallable } ?: false
+                val isInternalCompanion = !isConstructorCall && !isCompanionCall && ConstructionBinding::class.companionObject!!.declaredFunctions.any { it == usingCallable } ?: false
 
-                if (!isConstructorCall && !isCompanionCall) {
+                if (!isConstructorCall && !isCompanionCall && !isInternalCompanion) {
                     throw IllegalStateException("callable is not from $constructClass nor its companion object")
                 }
 
-                val dispatchInstance = if (isCompanionCall || (usingCallable.parameters.size > 0 && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.defaultType)) {
-                    constructClass.companionObjectInstance
-                    // TODO: what if class is private, we can't get to companion instance at all in a good way
+                // TODO: what if class is private, we can't get to companion instance at all in a good way
 
-                    /* this doesn't solve the exception:
-                     * java.lang.IllegalAccessException: Class kotlin.reflect.jvm.internal.KClassImpl$objectInstance_$1 can not access a member of class uy.klutter.binder.TestConstruction$TestConstructWithCompanionCallables with modifiers "public static final"
-                     *
-                     *
-                    constructClass.companionObject?.let { companion ->
-                        val name = companion.simpleName
-                        val field = companion.java.enclosingClass.getDeclaredField(name)
-                        field.isAccessible = true
-                        constructClass.companionObjectInstance
-                    }
-                    */
-                } else {
-                    null
+                /* this doesn't solve the exception:
+                 * java.lang.IllegalAccessException: Class kotlin.reflect.jvm.internal.KClassImpl$objectInstance_$1 can not access a member of class uy.klutter.binder.TestConstruction$TestConstructWithCompanionCallables with modifiers "public static final"
+                 *
+                 *
+                constructClass.companionObject?.let { companion ->
+                    val name = companion.simpleName
+                    val field = companion.java.enclosingClass.getDeclaredField(name)
+                    field.isAccessible = true
+                    constructClass.companionObjectInstance
+                }
+                */
+
+                val dispatchInstance = when {
+                       isCompanionCall || (usingCallable.parameters.size > 0 && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.defaultType) ->
+                          constructClass.companionObjectInstance
+                       isInternalCompanion -> ConstructionBinding.Companion
+                       else -> null
                 }
 
                 if (!constructType.isAssignableFromOrSamePrimitive(usingCallable.returnType)) {
@@ -198,7 +207,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
 
                 fun useProperty(propDef: KMutableProperty1<T, Any?>, maybe: ProvidedValue<Any?>) {
                     when (maybe) {
-                        is ProvidedValue.Nested -> {
+                        is ProvidedValue.NestedNamedValueProvider -> {
                             // whatever parameter is expecting, try to construct
                             val constructable = ConstructionBinding.findBestBinding<Any, Any>(propDef.returnType.javaType, maybe.value,
                                     ConstructionBinding.DEFAULT_considerCompanionObjectFactories, // TODO: this needs to come from settings or this instance of settings, not defaults
@@ -209,11 +218,20 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                                 propertyValues.add(Pair(propDef, constructable))
                             }
                         }
+                        is ProvidedValue.NestedOrderedValueProvider -> {
+                            // whatever parameter is expecting, try to construct
+                            val constructable = ConstructionBinding.findBestBinding<Any, Any>(propDef.returnType.javaType, maybe.value)
+                            if (constructable == null || constructable.hasErrors) {
+                                errorProperty(propDef, ConstructionError.SUB_CONSTRUCTION_ERROR)
+                            } else {
+                                propertyValues.add(Pair(propDef, constructable))
+                            }
+                        }
                         is ProvidedValue.Present -> {
                             val testValue = maybe.value
 
                             val testType = if (testValue is DeferredExecutable<*>) {
-                                testValue.returnType // construction or method call to happen later
+                                testValue.returnType.asJava // construction or method call to happen later
                             } else if (testValue != null) {
                                 testValue.javaClass
                             } else {
@@ -241,7 +259,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 val unsetProperties = propertiesOfClass.entries.map { it.value }.toSet() - usedPropertiesOfClass
                 unsetProperties.forEach { propReadOnly ->
                     val propName = propReadOnly.name
-                    val maybe = valueProvider.valueByName(propName, propReadOnly.returnType, ValueProviderTargetScope.PROPERTY)
+                    val maybe = valueProvider.valueByName(propName, EitherType.ofUnchecked(propReadOnly.returnType), ValueProviderTargetScope.PROPERTY)
 
                     if (propReadOnly is KMutableProperty1<*, *> && propReadOnly.javaSetter.isPublic()) {
                         val propWriteable = propReadOnly as KMutableProperty1<T, Any?>
@@ -252,7 +270,8 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                                 warnProperty(propWriteable, ConstructionWarning.MISSING_VALUE_FOR_SETTABLE_PROPERTY)
                             }
                             is ProvidedValue.Present,
-                            is ProvidedValue.Nested -> {
+                            is ProvidedValue.NestedNamedValueProvider,
+                            is ProvidedValue.NestedOrderedValueProvider -> {
                                 markValueMatchedSomething(propName)
                                 if (maybe.value == null && !propWriteable.returnType.isMarkedNullable) {
                                     // value coming in as null for non-nullable type
@@ -271,7 +290,8 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                                 // we can't set it, but it doesn't exist so all good (we hope, we can't really say for sure)
                             }
                             is ProvidedValue.Present,
-                            is ProvidedValue.Nested -> {
+                            is ProvidedValue.NestedNamedValueProvider,
+                            is ProvidedValue.NestedOrderedValueProvider -> {
                                 // we can't set it, but it does align and we have a value for it
                                 if (treatUnusedValuesFromProviderAsErrors) {
                                     errorProperty(propReadOnly, ConstructionError.HAVE_VALUE_FOR_NON_SETTABLE_PROPERTY)
@@ -293,26 +313,53 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                     }
                 }
 
-                ConstructionBinding<T, INSTANCE>(constructClass, constructType, callablePlan,
+                ConstructionBinding<T, INSTANCE>(constructClass, EitherType.ofUnchecked(constructType), callablePlan,
                         propertyValues, propertyErrors, propertyWarnings)
             }
             return constructionPlan as ConstructionBinding<T, INSTANCE>
         }
 
-        // TODO: collection type construction
-        // TODO: array type construction
-        // TODO: all defaults configurable
-
-        inline fun <reified T : Any> findBestBinding(valueProvider: OrderedValueProvider,
-                                                     considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
-                                                     treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, T>? {
-            return findBestBinding(reifiedType<T>(), valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)
+        // a callable that can be used in the construction plan
+        @Suppress("UNCHECKED_CAST")
+        private fun constructArray(componentType: Type, allowNulls: Boolean, valueProvider: OrderedValueProvider): Array<Any?> {
+            // TODO: optimize this, but hard if we don't know value count
+            val temp = arrayListOf<Any?>()
+            val ct = componentType.erasedType()
+            valueProvider.valueSequence(EitherType.ofUnchecked(ct)).forEach {
+                val value = if (!allowNulls) it.value!! else it.value
+                if (!ct.isInstance(value)) throw IllegalStateException("Value for array is not of component type")
+                temp.add(value)
+            }
+            val target = java.lang.reflect.Array.newInstance(ct, temp.size)
+            temp.toArray(target as Array<Any?>)
+            return target
         }
 
-        fun <T : Any, C : T> findBestBinding(constructType: Type,
-                                             valueProvider: OrderedValueProvider,
-                                             considerCompanionObjectFactories: Boolean = DEFAULT_considerCompanionObjectFactories,
-                                             treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors): ConstructionBinding<T, C>? {
+        // TODO: array creation all feels hacky and bad generics
+
+        @Suppress("UNCHECKED_CAST")
+        private fun <T> arrayBindingFrom(constructType: Type, valueProvider: OrderedValueProvider): ConstructionBinding<Array<T>, Array<T>> {
+            if (constructType is GenericArrayType || constructType is Class<*> && constructType.isArray()) {
+                // easy, construct an array
+                val allowsNulls = true    // TODO: how can we get nullability of the components here?  no great way I can find
+                val componentType = if (constructType is GenericArrayType) constructType.genericComponentType else (constructType as Class<*>).componentType
+                @Suppress("UNCHECKED_CAST")
+                val callable = ConstructionBinding::class.companionObject!!.declaredMemberFunctions.first { it.name == "constructArray" } as KCallable<Array<T>>
+
+                @Suppress("RemoveExplicitTypeArguments")
+                return ConstructionBinding<Array<T>, Array<T>>(constructType.erasedType().kotlin as KClass<Array<T>>, EitherType.ofUnchecked(constructType),
+                        MethodCallBinding.from(callable, ConstructionBinding.Companion, null,
+                        mapValueProviderOf("componentType" to componentType,
+                                "allowNulls" to allowsNulls,
+                                "valueProvider" to valueProvider), ValueProviderTargetScope.CONSTRUCTOR), emptyList(), emptyList(), emptyList())
+            } else {
+                throw IllegalStateException("array construction binding called for non array type")
+            }
+        }
+
+        fun <T: Any, INSTANCE : T> from(constructType: Type, valueProvider: OrderedValueProvider): ConstructionBinding<T, INSTANCE> {
+            // TODO: should return a plan even if unknown collection Type and set construction error instead
+
             // val constructClass = constructType.erasedType().kotlin
 
             // special case:  Array, Iterator, Collection, List (w y w/o randomaccess), ListIterator
@@ -322,10 +369,9 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
             // the actual type is a List vs. MutableList vs. ArrayList vs. LinkedList vs. SomeJaysonList vs ...
 
             return when {
-                constructType is GenericArrayType -> {
-                    // easy, construct an array
-                    // TODO: array construction
-                    throw NotImplementedError("Need to handle special case of Array construction")
+                constructType is GenericArrayType || constructType is Class<*> && constructType.isArray() -> {
+                    @Suppress("UNCHECKED_CAST")
+                    (arrayBindingFrom<T>(constructType, valueProvider) as ConstructionBinding<T, INSTANCE>)
                 }
                 Set::class.isAssignableFrom(constructType) -> {
                     // TODO: Set construction
@@ -343,6 +389,18 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                     throw NotImplementedError("Need to handle special case of Iterable construction")
                 }
                 else -> throw IllegalStateException("Cannot develop a construction plan for type $constructType from an OrderedValueProvider")
+            }
+        }
+
+        inline fun <reified T : Any> findBestBinding(valueProvider: OrderedValueProvider): ConstructionBinding<T, T>? {
+            return findBestBinding(reifiedType<T>(), valueProvider)
+        }
+
+        fun <T : Any, C : T> findBestBinding(constructType: Type, valueProvider: OrderedValueProvider): ConstructionBinding<T, C>? {
+            return try {
+                from(constructType, valueProvider)
+            } catch (ex: Throwable) {
+                null
             }
         }
 
@@ -426,10 +484,6 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
     }
 }
 
-inline fun <reified T : Any> constructFromValues(valueProvider: NamedValueProvider,
-                                                 considerCompanionObjectFactories: Boolean = ConstructionBinding.DEFAULT_considerCompanionObjectFactories,
-                                                 treatUnusedValuesFromProviderAsErrors: Boolean = ConstructionBinding.DEFAULT_treatUnusedValuesFromProviderAsErrors): T {
-    return ConstructionBinding.findBestBinding<T>(valueProvider, considerCompanionObjectFactories, treatUnusedValuesFromProviderAsErrors)?.execute() ?: throw IllegalStateException("No clear construction binding can be found for ${T::class}")
-}
+
 
 

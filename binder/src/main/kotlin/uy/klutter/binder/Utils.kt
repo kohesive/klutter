@@ -4,12 +4,12 @@ import java.lang.reflect.Type
 import kotlin.reflect.KType
 
 object BindingUtils {
-    fun getDottedFromProvider(dottedName: String, targetType: KType, provider: NamedValueProvider, scope: ValueProviderTargetScope = ValueProviderTargetScope.UNKNOWN): Any? {
+    fun getDottedFromProvider(dottedName: String, targetType: EitherType, provider: NamedValueProvider, scope: ValueProviderTargetScope = ValueProviderTargetScope.UNKNOWN): Any? {
         return _getDottedFromMapInternal(dottedName, emptyList(), targetType, provider, scope)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun _getDottedFromMapInternal(dottedName: String, nameStack: List<String>, targetType: KType, provider: NamedValueProvider, scope: ValueProviderTargetScope): Any? {
+    private fun _getDottedFromMapInternal(dottedName: String, nameStack: List<String>, targetType: EitherType, provider: NamedValueProvider, scope: ValueProviderTargetScope): Any? {
         val allSegments = dottedName.split('.')
         val startIndex = if (false) allSegments.size else 1
         (startIndex..1).forEach { howMany ->

@@ -2,14 +2,16 @@ package uy.klutter.binder
 
 import uy.klutter.core.collections.asReadOnly
 import uy.klutter.core.collections.toImmutable
+import uy.klutter.reflect.erasedType
 import uy.klutter.reflect.isAssignableFrom
 import uy.klutter.reflect.isAssignableFromOrSamePrimitive
+import java.lang.reflect.Type
 import kotlin.reflect.KType
 import kotlin.reflect.jvm.javaType
 
 
 interface NamedValueProvider {
-    fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any?>
+    fun valueByName(name: String, targetType: EitherType, scope: ValueProviderTargetScope): ProvidedValue<Any?>
 
     // TODO: optimize getting entries as pair of name/value with or without type coersion
 
@@ -23,7 +25,7 @@ interface NamedValueProvider {
 
 interface OrderedValueProvider {
     // fun valueByIndex(idx: Int, targetType: KType): ProvidedValue<Any>
-    fun valueSequence(targetType: KType): Sequence<ProvidedValue.Present<Any?>>
+    fun valueSequence(targetType: EitherType): Sequence<ProvidedValue.Present<Any?>>
 
     override fun hashCode(): Int
     override fun equals(other: Any?): Boolean
@@ -39,20 +41,21 @@ fun NamedValueProvider.withMissingInParameterValuesAsNullable() = MissingConstru
 fun NamedValueProvider.withTypeConversion() = TypeConversionNamedValueProviderDelegate(this)
 
 class TypeConversionNamedValueProviderDelegate(private val delegate: NamedValueProvider, private val conversion: TypeConverters = TypeConversionConfig.defaultConverter) : NamedValueProvider by delegate {
-    override fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
+    override fun valueByName(name: String, targetType: EitherType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
         val maybe = delegate.valueByName(name, targetType, scope)
         return when (maybe) {
             is ProvidedValue.Present -> {
                 val rawValue = maybe.value
                 if (rawValue != null &&
-                        !targetType.isAssignableFromOrSamePrimitive(rawValue.javaClass) &&
-                        conversion.hasConverter(rawValue.javaClass, targetType.javaType)) {
-                    ProvidedValue.coerced<Any?, Any>(maybe, conversion.convertValue(rawValue.javaClass, targetType.javaType, rawValue))
+                        !targetType.asJava.isAssignableFromOrSamePrimitive(rawValue.javaClass) &&
+                        conversion.hasConverter(rawValue.javaClass, targetType.asJava)) {
+                    ProvidedValue.coerced<Any?, Any>(maybe, conversion.convertValue(rawValue.javaClass, targetType.asJava, rawValue))
                 } else {
                     maybe
                 }
             }
-            is ProvidedValue.Nested -> maybe
+            is ProvidedValue.NestedNamedValueProvider -> maybe
+            is ProvidedValue.NestedOrderedValueProvider -> maybe
             is ProvidedValue.Absent -> maybe
         }
     }
@@ -69,15 +72,14 @@ class TypeConversionNamedValueProviderDelegate(private val delegate: NamedValueP
     }
 }
 
-
 class TypeConversionOrderedValueProviderDelegate(private val delegate: OrderedValueProvider, private val conversion: TypeConverters = TypeConversionConfig.defaultConverter) : OrderedValueProvider by delegate {
-    override fun valueSequence(targetType: KType): Sequence<ProvidedValue.Present<Any?>> {
+    override fun valueSequence(targetType: EitherType): Sequence<ProvidedValue.Present<Any?>> {
         return delegate.valueSequence(targetType).map { likely ->
             val rawValue = likely.value
             if (rawValue != null &&
-                    !targetType.isAssignableFromOrSamePrimitive(rawValue.javaClass) &&
-                    conversion.hasConverter(rawValue.javaClass, targetType.javaType)) {
-                ProvidedValue.coerced<Any?, Any>(likely, conversion.convertValue(rawValue.javaClass, targetType.javaType, rawValue)) as ProvidedValue.Present<Any>
+                    !targetType.asJava.isAssignableFromOrSamePrimitive(rawValue.javaClass) &&
+                    conversion.hasConverter(rawValue.javaClass, targetType.asJava)) {
+                ProvidedValue.coerced<Any?, Any?>(likely, conversion.convertValue(rawValue.javaClass, targetType.asJava, rawValue)) as ProvidedValue.Present<Any?>
             } else {
                 likely
             }
@@ -97,13 +99,14 @@ class TypeConversionOrderedValueProviderDelegate(private val delegate: OrderedVa
 }
 
 class MissingConstructorAndMethodParametersTreatedAsNullableNamedValueProviderDelegate(private val delegate: NamedValueProvider) : NamedValueProvider by delegate {
-    override fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
+    override fun valueByName(name: String, targetType: EitherType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
         val maybe = delegate.valueByName(name, targetType, scope)
         return when (maybe) {
             is ProvidedValue.Present -> maybe
-            is ProvidedValue.Nested -> maybe
+            is ProvidedValue.NestedNamedValueProvider -> maybe
+            is ProvidedValue.NestedOrderedValueProvider -> maybe
             is ProvidedValue.Absent -> {
-                if (targetType.isMarkedNullable && (scope == ValueProviderTargetScope.CONSTRUCTOR || scope == ValueProviderTargetScope.METHOD)) {
+                if (targetType.isNullable && (scope == ValueProviderTargetScope.CONSTRUCTOR || scope == ValueProviderTargetScope.METHOD)) {
                     ProvidedValue.coerced<Any?, Any?>(maybe, null)
                 } else {
                     maybe
@@ -143,15 +146,19 @@ class MapValueProvider(wrap: Map<String, Any?>) : NamedValueProvider {
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
+    override fun valueByName(name: String, targetType: EitherType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
         return if (!source.containsKey(name)) ProvidedValue.absent()
         else source.get(name)?.let { value ->
-            if (value is NamedValueProvider) {
-                ProvidedValue.nested(value)
-            } else if (value is Map<*, *> && !targetType.isAssignableFrom(Map::class)) {
-                ProvidedValue.nested(MapValueProvider(value as Map<String, Any>))
-            } else {
-                ProvidedValue.of(value)
+            when {
+                value is NamedValueProvider -> ProvidedValue.nested(value)
+                value is OrderedValueProvider -> ProvidedValue.nested(value)
+                value is Map<*, *> && !targetType.asErased.isAssignableFrom(Map::class) -> ProvidedValue.nested(MapValueProvider(value as Map<String, Any>))
+                value is Collection<*> && !targetType.asErased.isAssignableFrom(Collection::class) -> ProvidedValue.nested(seqValueProviderOf(value))
+                value is Array<*> && !targetType.asErased.isArray() -> ProvidedValue.nested(seqValueProviderOf(value))
+                value is Sequence<*> && !targetType.asErased.isAssignableFrom(Sequence::class) -> ProvidedValue.nested(seqValueProviderOf(value))
+                value is Iterator<*> && !targetType.asErased.isAssignableFrom(Iterator::class) -> ProvidedValue.nested(seqValueProviderOf(value))
+                value is Iterable<*> && !targetType.asErased.isAssignableFrom(Iterable::class) -> ProvidedValue.nested(seqValueProviderOf(value))
+                else -> ProvidedValue.of(value)
             }
         } ?: ProvidedValue.of(null)
     }
@@ -180,12 +187,19 @@ fun <T> seqValueProviderOf(collection: Collection<T>): SequenceValueProvider<T> 
 fun <T> seqValueProviderOf(iterate: Iterator<T>): SequenceValueProvider<T> = SequenceValueProvider(iterate.asSequence())
 fun <T> seqValueProviderOf(iterable: Iterable<T>): SequenceValueProvider<T> = SequenceValueProvider(iterable.asSequence())
 fun <T> seqValueProviderOf(sequence: Sequence<T>): SequenceValueProvider<T> = SequenceValueProvider(sequence.asSequence())
+fun <T> seqValueProviderOf(array: Array<T>): SequenceValueProvider<T> = SequenceValueProvider(array.asSequence())
 
-class SequenceValueProvider<out T>(wrap: Sequence<T>): OrderedValueProvider {
+@JvmName("seqValueProviderOfVararg")
+fun <T> seqValueProviderOf(vararg values: T): SequenceValueProvider<T> = SequenceValueProvider(values.asSequence())
+
+class SequenceValueProvider<out ST>(wrap: Sequence<ST>): OrderedValueProvider {
     val source = wrap
 
-    override fun valueSequence(targetType: KType): Sequence<ProvidedValue.Present<Any?>> {
-        return source.map { ProvidedValue.Present.of<Any?>(it) }
+    override fun valueSequence(targetType: EitherType): Sequence<ProvidedValue.Present<Any?>> {
+        return source.map {
+            if (!targetType.isNullable) it!!
+            ProvidedValue.Present.of(it)
+        }
     }
 
     override fun hashCode(): Int {

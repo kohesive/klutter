@@ -3,6 +3,7 @@ package uy.klutter.reflect
 import java.lang.reflect.*
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
+import kotlin.reflect.jvm.javaType
 
 inline fun <reified T: Any> reifiedType(): Type = object:TypeReference<T>(){}.type
 

@@ -1,6 +1,7 @@
 package uy.klutter.binder.kodein
 
 import com.github.salomonbrys.kodein.Kodein
+import uy.klutter.binder.EitherType
 import uy.klutter.binder.NamedValueProvider
 import uy.klutter.binder.ProvidedValue
 import uy.klutter.binder.ValueProviderTargetScope
@@ -8,12 +9,13 @@ import kotlin.reflect.KType
 import kotlin.reflect.jvm.javaType
 
 class KodeinValueProvider(private val kodein: Kodein, private val delegate: NamedValueProvider) : NamedValueProvider by delegate {
-    override fun valueByName(name: String, targetType: KType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
+    override fun valueByName(name: String, targetType: EitherType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
         val maybe = delegate.valueByName(name, targetType, scope)
         return when (maybe) {
             is ProvidedValue.Present -> maybe
-            is ProvidedValue.Nested -> maybe // TODO: should we return this, or check if we have a full object first?
-            is ProvidedValue.Absent -> kodein.container.providerOrNull(Kodein.Bind(targetType.javaType, null))?.invoke()
+            is ProvidedValue.NestedNamedValueProvider -> maybe // TODO: should we return this, or check if we have a full object first?
+            is ProvidedValue.NestedOrderedValueProvider -> maybe // TODO: should we return this, or check if we have a full object first?
+            is ProvidedValue.Absent -> kodein.container.providerOrNull(Kodein.Bind(targetType.asJava, null))?.invoke()
                     ?.let { ProvidedValue.of(it) } ?: ProvidedValue.absent()
         }
     }
