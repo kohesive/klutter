@@ -182,7 +182,11 @@ class MapValueProvider(wrap: Map<String, Any?>) : NamedValueProvider {
 }
 
 fun emptyValueProvider() = MapValueProvider(emptyMap())
-fun mapValueProviderOf(vararg keyValues: Pair<String, Any?>): MapValueProvider = MapValueProvider(mapOf(*keyValues))
+
+fun <K: String, V> mapValueProviderOf(vararg keyValues: Pair<K, V>): MapValueProvider = MapValueProvider(mapOf(*keyValues))
+@Suppress("UNCHECKED_CAST")
+fun <K: String, V> mapValueProviderOf(original: Map<K, V>): MapValueProvider = MapValueProvider(original as Map<String, Any?>)
+
 fun <T> seqValueProviderOf(collection: Collection<T>): SequenceValueProvider<T> = SequenceValueProvider(collection.asSequence())
 fun <T> seqValueProviderOf(iterate: Iterator<T>): SequenceValueProvider<T> = SequenceValueProvider(iterate.asSequence())
 fun <T> seqValueProviderOf(iterable: Iterable<T>): SequenceValueProvider<T> = SequenceValueProvider(iterable.asSequence())

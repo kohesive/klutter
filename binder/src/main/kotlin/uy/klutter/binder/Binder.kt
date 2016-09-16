@@ -156,36 +156,39 @@ class Binder {
     }
 
     // currently we only can construct maps that have string keys
-    fun <K: String, V, R : Map<K, V>> constructMap(mapType: EitherType, valueProvider: NamedValueProvider): BindingPlan<R> {
-        val deferredFunc = fun(): R {
+    fun <K: String, V> constructMap(mapType: EitherType, valueProvider: NamedValueProvider): BindingPlan<Map<K,V>> {
+        val deferredFunc = fun(): Map<K,V> {
             if (!Map::class.isAssignableFrom(mapType.asJava)) {
                 throw IllegalArgumentException("mapType is not of Map interface, instead was ${mapType.asJava}")
             }
 
-            if (Map::class == mapType.asKotlin || Map::class.java == mapType.asJava || java.util.Map::class.java == mapType.asJava) {
+            if (Map::class == mapType.asKotlin || Map::class.java == mapType.asErased || java.util.Map::class.java == mapType.asErased) {
                 // if Map interface, create HashMap
                 val result: MutableMap<K, V> = HashMap()
                 // TODO: try to determine value type parameter instead of Any
                 val valueType = anyNullableType
 
-                valueProvider.entryNames().map { it to valueProvider.valueByName(it, valueType, ValueProviderTargetScope.CONSTRUCTOR)}
-
                 @Suppress("UNCHECKED_CAST")
+                valueProvider.entryNames().forEach {
+                    // TODO: nested named value providers?  or sequence value providers?
+                    result.put(it as K, valueProvider.valueByName(it, valueType, ValueProviderTargetScope.CONSTRUCTOR).value as V)
+                }
+
                 return if (mapType.asJava.isMutableMap()) {
                     result
                 } else {
                     result.asReadOnly()
-                } as R
+                }
             } else {
                 // create the map type they want
                 // TODO: try to determine value type parameter instead of Any
                 // TODO: if known Map type then do normal things, if unknown Map type we could have unknown problems
-                return HashMap<K,V>() as R
+                return HashMap()
             }
         }
 
-        val deferredExec = object : DeferredExecutable<R> {
-            override val executor: () -> R
+        val deferredExec = object : DeferredExecutable<Map<K,V>> {
+            override val executor: () -> Map<K,V>
                 get() = deferredFunc
             override val returnType: EitherType
                 get() = mapType
