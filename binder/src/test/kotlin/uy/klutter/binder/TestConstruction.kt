@@ -2,7 +2,6 @@ package uy.klutter.binder
 
 import org.junit.Ignore
 import org.junit.Test
-import uy.klutter.core.common.maximum
 import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.reflect.*
@@ -795,6 +794,7 @@ class TestConstruction {
     @Test fun testNestedConstruction() {
         // if the value provider has dotted/nested properties it can bind sub object construction
         class TestSubClass(val a: Int, val b: String)
+
         class TestOuterClass(val x: Int, val sub: TestSubClass)
 
         run {
@@ -824,7 +824,7 @@ class TestConstruction {
             val obj = check.executor()
             assertEquals(123, obj.a)
             assertEquals("cat", obj.b)
-            assertEquals(999,obj.f)
+            assertEquals(999, obj.f)
 
             assertEquals(4, obj.dog.legs)
             assertEquals(34, obj.dog.volume)
@@ -862,7 +862,7 @@ class TestConstruction {
 
     @Ignore("TODO")
     @Test fun testArrayConstruction() {
-        val prov = SequenceValueProvider(sequenceOf("one","two","three"))
+        val prov = SequenceValueProvider(sequenceOf("one", "two", "three"))
         val check = ConstructionBinding.findBestBinding<Array<String>>(prov)
         val obj = check!!.executor()
 
@@ -959,5 +959,4 @@ class TestConstruction {
 
         assertEquals(mapOf("a" to "a", "b" to "b", "c" to "c"), obj)
     }
-
 }
