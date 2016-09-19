@@ -4,6 +4,7 @@ import io.vertx.ext.web.Route
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.Session
 import uy.klutter.core.common.mustStartWith
+import uy.klutter.core.uri.buildUri
 import java.net.URI
 
 
@@ -32,28 +33,45 @@ fun Session.removeSafely(key: String): Any? {
  * would return only `path1/path2?parm=123#fraggy`
  *
  */
-private fun pathPlusParmsOfUrl(original: URI): String {
-    val path = original.getRawPath().let { if (it.isNullOrBlank()) "" else it.mustStartWith('/') }
-    val query = original.getRawQuery().let { if (it.isNullOrBlank()) "" else it.mustStartWith('?') }
-    val fragment = original.getRawFragment().let { if (it.isNullOrBlank()) "" else it.mustStartWith('#')}
+internal fun URI.pathPlusParmsOfUrl(): String {
+    val path = this.getRawPath().let { if (it.isNullOrBlank()) "" else it.mustStartWith('/') }
+    val query = this.getRawQuery().let { if (it.isNullOrBlank()) "" else it.mustStartWith('?') }
+    val fragment = this.getRawFragment().let { if (it.isNullOrBlank()) "" else it.mustStartWith('#') }
     return "$path$query$fragment"
+}
+
+/**
+ * Divide a host and port, both for ipv4 and ipv6
+ * return null for absent port
+ */
+internal fun dividePort(hostWithOptionalPort: String): Pair<String, String?> {
+    val parts = if (hostWithOptionalPort.startsWith('[')) { // ipv6
+        Pair(hostWithOptionalPort.substringBefore(']') + ']', hostWithOptionalPort.substringAfter("]:", ""))
+    } else { // ipv4
+        Pair(hostWithOptionalPort.substringBefore(':'), hostWithOptionalPort.substringAfter(':', ""))
+    }
+    return Pair(parts.first, if (parts.second.isNullOrBlank()) null else parts.second)
 }
 
 /**
  * Return the current routed URL as fully qualified externally accessible URL.  This takes into account proxy and
  * load balancer headers.
- *     X-Forwarded-Proto
+ *     X-Forwarded-Proto (or X-Forwarded-Scheme: https)
  *     X-Forwarded-Host
  *     X-Forwarded-Port
  */
 fun RoutingContext.externalizeUrl(): String {
-    return externalizeUrl(pathPlusParmsOfUrl(URI(request().absoluteURI())))
+    return externalizeUrl(URI(request().absoluteURI()).pathPlusParmsOfUrl())
+}
+
+fun RoutingContext.externalizeUrlToUri(): URI {
+    return externalizeUrlToUri(URI(request().absoluteURI()).pathPlusParmsOfUrl())
 }
 
 /**
  * Return the specified URL as fully qualified external accessible URL.  This will substitute the values of proxy/load
  * balancer using headers:
- *     X-Forwarded-Proto
+ *     X-Forwarded-Proto (or X-Forwarded-Scheme: https)
  *     X-Forwarded-Host
  *     X-Forwarded-Port
  *
@@ -65,69 +83,51 @@ fun RoutingContext.externalizeUrl(): String {
  *
  * Url's that will cause unknown results, those of the form "somehost.com:8983/solr" might be treated as relative paths on current server
  */
-fun RoutingContext.externalizeUrl(url: String): String {
-    val requestUri: URI = URI(request().absoluteURI()) // fallback values for scheme/host/port  ... and for relative paths
+fun RoutingContext.externalizeUrl(resolveUrl: String): String {
+    return externalizeUrlToUri(resolveUrl).toString()
+}
 
-    val requestScheme: String = run {
-        return@run request().getHeader("X-Forwarded-Proto").let { scheme: String? ->
-            if (scheme == null || scheme.isEmpty()) {
-                requestUri.getScheme()
-            } else {
-                scheme
-            }
+fun RoutingContext.externalizeUrlToUri(resolveUrl: String): URI {
+    val cleanHeaders = request().headers().filter { it.value.isNullOrBlank() }
+            .map { it.key to it.value }.toMap()
+    return externalizeURI(URI(request().absoluteURI()), resolveUrl, cleanHeaders)
+}
+
+/**
+ * Internal externalizer, easier to test without mocking RoutingContext and the headers map is already cleaned up
+ */
+internal fun externalizeURI(requestUri: URI, resolveUrl: String, headers: Map<String, String>): URI {
+    // special case of not touching fully qualified resolve URL's
+    if (resolveUrl.startsWith("http://") || resolveUrl.startsWith("https://")) return URI(resolveUrl)
+
+    val forwardedScheme = headers.get("X-Forwarded-Proto")
+            ?: headers.get("X-Forwarded-Scheme")
+            ?: requestUri.getScheme()
+
+    // special case of //host/something URL's
+    if (resolveUrl.startsWith("//")) return URI("$forwardedScheme:$resolveUrl")
+
+    val (forwardedHost, forwardedHostOptionalPort) =
+            dividePort(headers.get("X-Forwarded-Host") ?: requestUri.getHost())
+
+    val fallbackPort = requestUri.getPort().let { explicitPort ->
+        if (explicitPort <= 0) {
+            if ("https" == forwardedScheme) 443 else 80
+        } else {
+            explicitPort
         }
     }
-
-    val requestHost: String = run {
-        return@run request().getHeader("X-Forwarded-Host").let inner@ { host: String? ->
-            val hostWithPossiblePort = if (host == null || host.isEmpty()) {
-                requestUri.getHost()
-            } else {
-                host
-            }
-
-            return@inner hostWithPossiblePort.substringBefore(':')
-        }
+    val requestPort = headers.get("X-Forwarded-Port")?.toInt()
+            ?: forwardedHostOptionalPort
+            ?: fallbackPort
+    val finalPort = when {
+        forwardedScheme == "https" && requestPort == 443 -> ""
+        forwardedScheme == "http" && requestPort == 80 -> ""
+        else -> ":$requestPort"
     }
 
-
-    val requestPort = run {
-        val defaultPort: Int = requestUri.getPort().let inner@ { explicitPort ->
-            return@inner if (explicitPort == 0) {
-                if ("https" == requestScheme) 443 else 80
-            } else {
-                explicitPort
-            }
-        }
-
-        return@run request().getHeader("X-Forwarded-Port").let inner@ { proxyOrLoadBalancerPort ->
-            val finalPort: Int = if (proxyOrLoadBalancerPort.isNullOrBlank()) {
-                defaultPort
-            } else {
-                proxyOrLoadBalancerPort.toInt()
-            }
-
-            return@inner if (requestScheme == "https" && finalPort == 443) {
-                ""
-            } else if (requestScheme == "http" && finalPort == 80) {
-                ""
-            } else {
-                ":$finalPort"
-            }
-        }
-    }
-
-    val finalUrl = when {
-        url.startsWith("http://") || url.startsWith("https://") -> url
-        url.startsWith("//") -> "$requestScheme://$url"
-        url.startsWith("/") ->"$requestScheme://$requestHost$requestPort$url"
-        else -> {
-            val newUri = requestUri.resolve(url)
-            val restOfUrl = pathPlusParmsOfUrl(newUri)
-            "$requestScheme://$requestHost$requestPort$restOfUrl"
-        }
-    }
-    return finalUrl
+    val restOfUrl = requestUri.pathPlusParmsOfUrl()
+    return URI("$forwardedScheme://$forwardedHost$finalPort$restOfUrl").resolve(resolveUrl)
 }
 
 /**
@@ -135,25 +135,25 @@ fun RoutingContext.externalizeUrl(url: String): String {
  *
  * @param httpsPort optional port for https, defaults to 443
  * @param redirectCode optional redirect HTTP status code, defauts to 302
+ * @param failOnUrlBuilding if there are errors for URI class parsing the URL, should it continue handling or fail the request
  */
-fun Route.redirectToHttpsHandler(httpsPort: Int = 443, redirectCode: Int = 302) {
+fun Route.redirectToHttpsHandler(httpsPort: Int = 443, redirectCode: Int = 302, failOnUrlBuilding: Boolean = true) {
     handler { context ->
-        if (context.request().isSSL) {
-            // if not behind load balancer, we would see this, otherwise won't.
+        val proto = context.request().getHeader("X-Forwarded-Proto")
+                ?: context.request().getHeader("X-Forwarded-Scheme")
+        if (proto == "https") {
+            context.next()
+        } else if (proto.isNullOrBlank() && context.request().isSSL) {
             context.next()
         } else {
-            if (context.request().getHeader("X-Forwarded-Proto") == "https") {
-                context.next()
-            } else {
-                try {
-                    val myOriginalUrl = context.externalizeUrl()
-                    val myNewUrl = uy.klutter.core.uri.buildUri(myOriginalUrl).scheme("https").port(httpsPort).toString()
-                    context.response().putHeader("location", myNewUrl).setStatusCode(redirectCode).end()
-                } catch (ex: Throwable) {
-                    context.next()
-                }
+            try {
+                val myPublicUri = context.externalizeUrl()
+                val myHttpsPublicUri = buildUri(myPublicUri).scheme("https").port(httpsPort).toString()
+                context.response().putHeader("location", myHttpsPublicUri).setStatusCode(redirectCode).end()
+            } catch (ex: Throwable) {
+                if (failOnUrlBuilding) context.fail(ex)
+                else context.next()
             }
         }
     }
 }
-
