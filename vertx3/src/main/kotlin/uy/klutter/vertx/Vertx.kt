@@ -1,11 +1,10 @@
 package uy.klutter.vertx
 
 import io.vertx.core.*
+import io.vertx.core.Context
 import io.vertx.core.eventbus.Message
-import nl.komponents.kovenant.Deferred
-import nl.komponents.kovenant.Kovenant
-import nl.komponents.kovenant.Promise
-import nl.komponents.kovenant.deferred
+import nl.komponents.kovenant.*
+import nl.komponents.kovenant.functional.bind
 import kotlin.reflect.KClass
 
 
@@ -393,11 +392,15 @@ fun promiseVoidResult(deferred: Deferred<Unit, Exception>): (AsyncResult<Void>) 
  * @param codeBlock the block of code that is executed and will resolve or reject the `deferred`
  * @return Promise<T, Exception> where `T` is the return type of the codeBlock
  */
-fun <T : Any?> withDeferred(codeBlock: (deferred: Deferred<T, Exception>) -> Unit): Promise<T, Exception> {
+fun <T : Any?, E: Exception> withDeferred(codeBlock: (deferred: Deferred<T, E>) -> Unit): Promise<T, E> {
     VertxInit.ensure()
 
-    val deferred = deferred<T, Exception>()
-    codeBlock(deferred)
+    val deferred = deferred<T, E>()
+    try {
+        codeBlock(deferred)
+    }
+    catch (ex: E) {
+        deferred.reject(ex)
+    }
     return deferred.promise
 }
-
