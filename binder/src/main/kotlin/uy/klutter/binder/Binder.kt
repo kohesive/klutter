@@ -5,6 +5,7 @@ package uy.klutter.binder
 import uy.klutter.core.collections.asReadOnly
 import uy.klutter.reflect.*
 import java.lang.reflect.GenericArrayType
+import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.*
 import kotlin.reflect.KCallable
@@ -17,7 +18,7 @@ interface DeferredExecutable<out T> {
     val returnType: EitherType
 }
 
-inline fun <reified T: Any> eitherTypeOf() = EitherType.ofUnchecked(reifiedType<T>())
+inline fun <reified T> eitherTypeOf() = EitherType.ofUnchecked(reifiedType<T>())
 
 data class EitherType constructor(val type: Type?, val ktype: KType?) {
     init {
@@ -37,7 +38,7 @@ data class EitherType constructor(val type: Type?, val ktype: KType?) {
             return if (T::class.isAssignableFromOrSamePrimitive(type)) {
                 EitherType(type, null)
             } else {
-                throw IllegalArgumentException("type is not matching the reified type paramter")
+                throw IllegalArgumentException("type is not matching the reified type paramteer")
             }
         }
 
@@ -47,7 +48,7 @@ data class EitherType constructor(val type: Type?, val ktype: KType?) {
             return if (T::class.isAssignableFromOrSamePrimitive(ktype)) {
                 EitherType(null, ktype)
             } else {
-                throw IllegalArgumentException("ktype is not matching the reified type paramter")
+                throw IllegalArgumentException("ktype is not matching the reified type parameter")
             }
         }
 
@@ -73,7 +74,6 @@ class Binder {
         }
 
         internal val anyNullableType: EitherType = run {
-
             EitherType.ofUnchecked(::fakeAnyType.returnType)
         }
 
@@ -162,28 +162,78 @@ class Binder {
                 throw IllegalArgumentException("mapType is not of Map interface, instead was ${mapType.asJava}")
             }
 
-            if (Map::class == mapType.asKotlin || Map::class.java == mapType.asErased || java.util.Map::class.java == mapType.asErased) {
-                // if Map interface, create HashMap
-                val result: MutableMap<K, V> = HashMap()
-                // TODO: try to determine value type parameter instead of Any
-                val valueType = anyNullableType
+            val mapTypeJava = mapType.asJava
+            val (keyType, valueType) = if (mapTypeJava is ParameterizedType && mapTypeJava.actualTypeArguments.size == 2) {
+                EitherType.ofUnchecked(mapTypeJava.actualTypeArguments[0]) to
+                        EitherType.ofUnchecked(mapTypeJava.actualTypeArguments[1])
+            } else EitherType.ofUnchecked(String::class.java) to anyNullableType
 
+            @Suppress("UNCHECKED_CAST")
+            fun makeCheckedMutableMap(wrapMap: MutableMap<K,V> = HashMap<K, V>()): MutableMap<K, V> =
+                 Collections.checkedMap<K, V>(wrapMap, keyType.asErased as Class<K>, valueType.asErased as Class<V>)
+
+            fun fillMap(mapToFill: MutableMap<K, V>  = makeCheckedMutableMap()): MutableMap<K, V> {
                 @Suppress("UNCHECKED_CAST")
                 valueProvider.entryNames().forEach {
                     // TODO: nested named value providers?  or sequence value providers?
-                    result.put(it as K, valueProvider.valueByName(it, valueType, ValueProviderTargetScope.CONSTRUCTOR).value as V)
+                    // for the following we need to have the correctly known value type or
+                    // assume a generic type if we have no guidance:
+                    //   if the value is a list convert to sequence value provider or shove into map?
+                    //   if the value is a sequence value provider, convert to a list or array?
+                    //   if the value is a map convert to a named value provider or shove into map?
+                    //   if the value is a named value provider, convert to a nested map or object?
+                    val value = valueProvider.valueByName(it, valueType, ValueProviderTargetScope.CONSTRUCTOR).let {
+                        if (!valueType.isNullable) it.value!! else it.value
+                    }
+                    mapToFill.put(it as K, value as V)
                 }
+                return mapToFill
+            }
+
+            fun isMapInterface(checkType: EitherType): Boolean =
+                    Map::class == checkType.asKotlin || Map::class.java == checkType.asErased || java.util.Map::class.java == checkType.asErased
+
+            // if Map interface, create HashMap and return as MutableMap o Map
+            if (isMapInterface(mapType)) {
+                val result = fillMap()
 
                 return if (mapType.asJava.isMutableMap()) {
                     result
                 } else {
                     result.asReadOnly()
                 }
-            } else {
-                // create the map type they want
-                // TODO: try to determine value type parameter instead of Any
-                // TODO: if known Map type then do normal things, if unknown Map type we could have unknown problems
-                return HashMap()
+            } else { // otherwise they want a specific map type
+                // order of constructor call (to avoid problems with some immutable maps we cannot modify later):
+
+                // 1. constructor that accepts a Map in the constructor with same generics
+                // 2. static that accepts Map in the constructor with same generics and returns this type
+                // 3. default constructor, then add all after
+                if (mapTypeJava is ParameterizedType && mapTypeJava.actualTypeArguments.size == 2) {
+                    val constructType = mapTypeJava.rawType as Class<*>
+                    val constructorTakingAMap = constructType.declaredConstructors.firstOrNull {
+                        it.parameterCount == 1 &&
+                                it.genericParameterTypes[0] is ParameterizedType &&
+                                isMapInterface(EitherType.ofUnchecked((it.genericParameterTypes[0] as ParameterizedType).rawType)) &&
+                                (it.genericParameterTypes[0] as ParameterizedType).actualTypeArguments.size == 2
+                    }
+                    if (constructorTakingAMap != null) {
+                        val constructorMap = fillMap()
+                        @Suppress("UNCHECKED_CAST")
+                        return constructorTakingAMap.newInstance(constructorMap) as MutableMap<K, V>
+                    } else {
+                        // TODO: scan statics for factory (#2 above)
+                        @Suppress("UNCHECKED_CAST")
+                        return fillMap(makeCheckedMutableMap(constructType.newInstance() as MutableMap<K, V>))
+                    }
+                }
+
+                // TODO: feature switch for the static factory in construction selection, or some way to pick for this class
+
+                // TODO: other map constructor types (i.e. Guava)
+
+                // TODO: allow untyped maps?!?
+                throw IllegalStateException("untyped map construction is dangerous, maybe later")
+
             }
         }
 
@@ -219,7 +269,7 @@ class Binder {
             val ct = arrayComponentType.asErased
             valueProvider.valueSequence(arrayComponentType).forEach {
                 val value = if (!arrayComponentType.isNullable) it.value!! else it.value
-                if (!ct.isInstance(value)) throw IllegalStateException("Value for array is not of component type")
+                if (value != null && !ct.isInstance(value)) throw IllegalStateException("Value for array is not of component type")
                 temp.add(value)
             }
             val target = java.lang.reflect.Array.newInstance(ct, temp.size)
