@@ -1,17 +1,14 @@
 package uy.klutter.reflect
 
 import java.lang.reflect.*
-import kotlin.reflect.KClass
-import kotlin.reflect.KType
-import kotlin.reflect.jvm.javaType
 
-inline fun <reified T: Any> reifiedType(): Type = object:TypeReference<T>(){}.type
+inline fun <reified T> reifiedType(): Type = object : TypeReference<T>() {}.type
 
 interface TypeToken {
     val type: Type
 }
 
-abstract class TypeReference<T> protected constructor(): TypeToken {
+abstract class TypeReference<T> protected constructor() : TypeToken {
     override val type: Type by lazy {
         javaClass.getGenericSuperclass().let { superClass ->
             if (superClass is Class<*>) {
