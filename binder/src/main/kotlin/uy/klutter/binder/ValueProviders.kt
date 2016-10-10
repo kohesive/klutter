@@ -42,21 +42,21 @@ fun NamedValueProvider.withTypeConversion() = TypeConversionNamedValueProviderDe
 
 class TypeConversionNamedValueProviderDelegate(private val delegate: NamedValueProvider, private val conversion: TypeConverters = TypeConversionConfig.defaultConverter) : NamedValueProvider by delegate {
     override fun valueByName(name: String, targetType: EitherType, scope: ValueProviderTargetScope): ProvidedValue<Any?> {
-        val maybe = delegate.valueByName(name, targetType, scope)
-        return when (maybe) {
+        val likely = delegate.valueByName(name, targetType, scope)
+        return when (likely) {
             is ProvidedValue.Present -> {
-                val rawValue = maybe.value
+                val rawValue = likely.value
                 if (rawValue != null &&
                         !targetType.asJava.isAssignableFromOrSamePrimitive(rawValue.javaClass) &&
                         conversion.hasConverter(rawValue.javaClass, targetType.asJava)) {
-                    ProvidedValue.coerced<Any?, Any>(maybe, conversion.convertValue(rawValue.javaClass, targetType.asJava, rawValue))
+                    ProvidedValue.coerced<Any?, Any>(likely, conversion.convertValue(rawValue.javaClass, targetType.asJava, rawValue))
                 } else {
-                    maybe
+                    likely
                 }
             }
-            is ProvidedValue.NestedNamedValueProvider -> maybe
-            is ProvidedValue.NestedOrderedValueProvider -> maybe
-            is ProvidedValue.Absent -> maybe
+            is ProvidedValue.NestedNamedValueProvider -> likely
+            is ProvidedValue.NestedOrderedValueProvider -> likely
+            is ProvidedValue.Absent -> likely
         }
     }
 
@@ -202,6 +202,8 @@ class SequenceValueProvider<out ST>(wrap: Sequence<ST>): OrderedValueProvider {
     override fun valueSequence(targetType: EitherType): Sequence<ProvidedValue.Present<Any?>> {
         return source.map {
             if (!targetType.isNullable) it!!
+            // TODO: mapping sequence o named to their native type
+            // TODO: mapping native type to sequence o named
             ProvidedValue.Present.of(it)
         }
     }
