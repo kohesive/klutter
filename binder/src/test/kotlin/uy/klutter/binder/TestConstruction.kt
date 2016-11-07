@@ -888,6 +888,7 @@ class TestConstruction {
         }
     }
 
+    @Ignore("Not yet ready...")
     @Test fun testMapAsParameterConstruction() {
         class Something(val mappy: Map<String, String>)
 
@@ -916,6 +917,7 @@ class TestConstruction {
         }
     }
 
+    @Ignore("Not yet ready...")
     @Test fun testMapSpecificTypeAsParameterConstruction() {
         class Something(val mappy: HashMap<String, String>)
 
@@ -944,6 +946,7 @@ class TestConstruction {
         }
     }
 
+    @Ignore("Not yet ready...")
     @Test fun testMapConstruction() {
         val prov = mapValueProviderOf("a" to "a", "b" to "b", "c" to "c")
         val check = ConstructionBinding.findBestBinding<Map<String, String>>(prov)!!
@@ -952,6 +955,7 @@ class TestConstruction {
         assertEquals(mapOf("a" to "a", "b" to "b", "c" to "c"), obj)
     }
 
+    @Ignore("Not yet ready...")
     @Test fun testMapSpecificTypeConstruction() {
         val prov = mapValueProviderOf("a" to "a", "b" to "b", "c" to "c")
         val check = ConstructionBinding.findBestBinding<HashMap<String, String>>(prov)!!
