@@ -4,9 +4,6 @@ import org.junit.Test
 import uy.klutter.core.uri.dividePort
 import uy.klutter.core.uri.externalizeURI
 import uy.klutter.core.uri.pathPlusParmsOfUrl
-import uy.klutter.vertx.dividePort
-import uy.klutter.vertx.externalizeURI
-import uy.klutter.vertx.pathPlusParmsOfUrl
 import java.net.URI
 import kotlin.test.assertEquals
 
