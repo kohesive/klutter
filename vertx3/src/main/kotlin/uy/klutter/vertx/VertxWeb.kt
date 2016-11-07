@@ -5,6 +5,8 @@ import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.Session
 import uy.klutter.core.common.mustStartWith
 import uy.klutter.core.uri.buildUri
+import uy.klutter.core.uri.externalizeURI
+import uy.klutter.core.uri.pathPlusParmsOfUrl
 import java.net.URI
 
 
@@ -24,33 +26,6 @@ fun Session.putSafely(key: String, value: Any?) {
  */
 fun Session.removeSafely(key: String): Any? {
     return remove<Any?>(key)
-}
-
-/**
- * Extract unencoded path?query#hash from URL and return as a string.
- *
- * for example `http://www.klutter.uy/path1/path2?parm=123#fraggy`
- * would return only `path1/path2?parm=123#fraggy`
- *
- */
-internal fun URI.pathPlusParmsOfUrl(): String {
-    val path = this.getRawPath().let { if (it.isNullOrBlank()) "" else it.mustStartWith('/') }
-    val query = this.getRawQuery().let { if (it.isNullOrBlank()) "" else it.mustStartWith('?') }
-    val fragment = this.getRawFragment().let { if (it.isNullOrBlank()) "" else it.mustStartWith('#') }
-    return "$path$query$fragment"
-}
-
-/**
- * Divide a host and port, both for ipv4 and ipv6
- * return null for absent port
- */
-internal fun dividePort(hostWithOptionalPort: String): Pair<String, String?> {
-    val parts = if (hostWithOptionalPort.startsWith('[')) { // ipv6
-        Pair(hostWithOptionalPort.substringBefore(']') + ']', hostWithOptionalPort.substringAfter("]:", ""))
-    } else { // ipv4
-        Pair(hostWithOptionalPort.substringBefore(':'), hostWithOptionalPort.substringAfter(':', ""))
-    }
-    return Pair(parts.first, if (parts.second.isNullOrBlank()) null else parts.second)
 }
 
 /**
@@ -88,47 +63,12 @@ fun RoutingContext.externalizeUrl(resolveUrl: String): String {
 }
 
 fun RoutingContext.externalizeUrlToUri(resolveUrl: String): URI {
-    val cleanHeaders = request().headers().filter { it.value.isNullOrBlank() }
+    val cleanHeaders = request().headers().filterNot { it.value.isNullOrBlank() }
             .map { it.key to it.value }.toMap()
     return externalizeURI(URI(request().absoluteURI()), resolveUrl, cleanHeaders)
 }
 
-/**
- * Internal externalizer, easier to test without mocking RoutingContext and the headers map is already cleaned up
- */
-internal fun externalizeURI(requestUri: URI, resolveUrl: String, headers: Map<String, String>): URI {
-    // special case of not touching fully qualified resolve URL's
-    if (resolveUrl.startsWith("http://") || resolveUrl.startsWith("https://")) return URI(resolveUrl)
 
-    val forwardedScheme = headers.get("X-Forwarded-Proto")
-            ?: headers.get("X-Forwarded-Scheme")
-            ?: requestUri.getScheme()
-
-    // special case of //host/something URL's
-    if (resolveUrl.startsWith("//")) return URI("$forwardedScheme:$resolveUrl")
-
-    val (forwardedHost, forwardedHostOptionalPort) =
-            dividePort(headers.get("X-Forwarded-Host") ?: requestUri.getHost())
-
-    val fallbackPort = requestUri.getPort().let { explicitPort ->
-        if (explicitPort <= 0) {
-            if ("https" == forwardedScheme) 443 else 80
-        } else {
-            explicitPort
-        }
-    }
-    val requestPort = headers.get("X-Forwarded-Port")?.toInt()
-            ?: forwardedHostOptionalPort
-            ?: fallbackPort
-    val finalPort = when {
-        forwardedScheme == "https" && requestPort == 443 -> ""
-        forwardedScheme == "http" && requestPort == 80 -> ""
-        else -> ":$requestPort"
-    }
-
-    val restOfUrl = requestUri.pathPlusParmsOfUrl()
-    return URI("$forwardedScheme://$forwardedHost$finalPort$restOfUrl").resolve(resolveUrl)
-}
 
 /**
  * If a request is not HTTPS, reroute it to the same request as HTTPS
