@@ -1,9 +1,11 @@
 package uy.klutter.reflect.full.tests
 
+import org.junit.Ignore
 import org.junit.Test
 import uy.klutter.reflect.KCallableFuncRefOrLambda
-import kotlin.reflect.memberExtensionFunctions
-import kotlin.reflect.memberProperties
+import kotlin.reflect.jvm.reflect
+import kotlin.reflect.full.memberExtensionFunctions
+import kotlin.reflect.full.memberProperties
 import kotlin.test.assertEquals
 
 @Suppress("NOTHING_TO_INLINE") class TestKt9005 {
@@ -46,6 +48,19 @@ import kotlin.test.assertEquals
         val inst = method.parameters.first()
         val recv = method.parameters.drop(1).first()
         assertEquals(126, method.callBy(mapOf(inst to this, recv to Nothing(10), pmap.get("a")!! to 3, pmap.get("b")!! to 4)))
+    }
+
+    @Test fun testReferenceCallingAsFun() {
+        val normMethod = TestKt9005::referenceCallable
+        assertEquals(22, normMethod.get(this)(3, 4, 5))
+    }
+
+    @Ignore("Not yet working in Kotlin...")
+    @Test fun testUsingSpecialRefect() {
+        val member = TestKt9005::class.memberProperties.first { it.name == "referenceCallable" }
+
+        val funcInstance = member.get(this) as Function<*>
+        assertEquals(22, funcInstance.reflect()!!.call(3, 4, 5))
     }
 
     @Test fun testReferenceCallable() {

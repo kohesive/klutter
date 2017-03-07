@@ -5,6 +5,7 @@ import uy.klutter.reflect.isAssignableFrom
 import uy.klutter.reflect.isAssignableFromOrSamePrimitive
 import java.lang.reflect.Type
 import kotlin.reflect.defaultType
+import kotlin.reflect.full.createType
 import kotlin.test.assertTrue
 
 class TestAssignable {
@@ -29,7 +30,7 @@ class TestAssignable {
         // KClass - Type
         assertTrue(AncestorThing::class.isAssignableFrom(DescendentThing::class.java as Type))
         // KClass - KType
-        assertTrue(AncestorThing::class.isAssignableFrom(DescendentThing::class.defaultType))
+        assertTrue(AncestorThing::class.isAssignableFrom(DescendentThing::class.createType()))
 
         // Class - KClass
         assertTrue(AncestorThing::class.java.isAssignableFrom(DescendentThing::class))
@@ -38,7 +39,7 @@ class TestAssignable {
         // Class - Type
         assertTrue(AncestorThing::class.java.isAssignableFrom(DescendentThing::class.java as Type))
         // Class - KType
-        assertTrue(AncestorThing::class.java.isAssignableFrom(DescendentThing::class.defaultType))
+        assertTrue(AncestorThing::class.java.isAssignableFrom(DescendentThing::class.createType()))
 
         // Type - KClass
         assertTrue((AncestorThing::class.java as Type).isAssignableFrom(DescendentThing::class))
@@ -47,16 +48,16 @@ class TestAssignable {
         // Type - Type
         assertTrue((AncestorThing::class.java as Type).isAssignableFrom(DescendentThing::class.java as Type))
         // Type - KType
-        assertTrue((AncestorThing::class.java as Type).isAssignableFrom(DescendentThing::class.defaultType))
+        assertTrue((AncestorThing::class.java as Type).isAssignableFrom(DescendentThing::class.createType()))
 
         // KType - KClass
-        assertTrue((AncestorThing::class.defaultType).isAssignableFrom(DescendentThing::class))
+        assertTrue((AncestorThing::class.createType()).isAssignableFrom(DescendentThing::class))
         // KType - Class
-        assertTrue((AncestorThing::class.defaultType).isAssignableFrom(DescendentThing::class.java))
+        assertTrue((AncestorThing::class.createType()).isAssignableFrom(DescendentThing::class.java))
         // KType - Type
-        assertTrue((AncestorThing::class.defaultType).isAssignableFrom(DescendentThing::class.java as Type))
+        assertTrue((AncestorThing::class.createType()).isAssignableFrom(DescendentThing::class.java as Type))
         // KType - KType
-        assertTrue((AncestorThing::class.defaultType).isAssignableFrom(DescendentThing::class.defaultType))
+        assertTrue((AncestorThing::class.createType()).isAssignableFrom(DescendentThing::class.createType()))
     }
 
     @Test fun testCombinationsOfCLassKClassKTypeTypeWithAssignabilityIncludingPrimitives() {
@@ -67,7 +68,7 @@ class TestAssignable {
         // KClass - Type
         assertTrue(AncestorThing::class.isAssignableFromOrSamePrimitive(DescendentThing::class.java as Type))
         // KClass - KType
-        assertTrue(AncestorThing::class.isAssignableFromOrSamePrimitive(DescendentThing::class.defaultType))
+        assertTrue(AncestorThing::class.isAssignableFromOrSamePrimitive(DescendentThing::class.createType()))
 
         // Class - KClass
         assertTrue(AncestorThing::class.java.isAssignableFromOrSamePrimitive(DescendentThing::class))
@@ -76,7 +77,7 @@ class TestAssignable {
         // Class - Type
         assertTrue(AncestorThing::class.java.isAssignableFromOrSamePrimitive(DescendentThing::class.java as Type))
         // Class - KType
-        assertTrue(AncestorThing::class.java.isAssignableFromOrSamePrimitive(DescendentThing::class.defaultType))
+        assertTrue(AncestorThing::class.java.isAssignableFromOrSamePrimitive(DescendentThing::class.createType()))
 
         // Type - KClass
         assertTrue((AncestorThing::class.java as Type).isAssignableFromOrSamePrimitive(DescendentThing::class))
@@ -85,15 +86,15 @@ class TestAssignable {
         // Type - Type
         assertTrue((AncestorThing::class.java as Type).isAssignableFromOrSamePrimitive(DescendentThing::class.java as Type))
         // Type - KType
-        assertTrue((AncestorThing::class.java as Type).isAssignableFromOrSamePrimitive(DescendentThing::class.defaultType))
+        assertTrue((AncestorThing::class.java as Type).isAssignableFromOrSamePrimitive(DescendentThing::class.createType()))
 
         // KType - KClass
-        assertTrue((AncestorThing::class.defaultType).isAssignableFromOrSamePrimitive(DescendentThing::class))
+        assertTrue((AncestorThing::class.createType()).isAssignableFromOrSamePrimitive(DescendentThing::class))
         // KType - Class
-        assertTrue((AncestorThing::class.defaultType).isAssignableFromOrSamePrimitive(DescendentThing::class.java))
+        assertTrue((AncestorThing::class.createType()).isAssignableFromOrSamePrimitive(DescendentThing::class.java))
         // KType - Type
-        assertTrue((AncestorThing::class.defaultType).isAssignableFromOrSamePrimitive(DescendentThing::class.java as Type))
+        assertTrue((AncestorThing::class.createType()).isAssignableFromOrSamePrimitive(DescendentThing::class.java as Type))
         // KType - KType
-        assertTrue((AncestorThing::class.defaultType).isAssignableFromOrSamePrimitive(DescendentThing::class.defaultType))
+        assertTrue((AncestorThing::class.createType()).isAssignableFromOrSamePrimitive(DescendentThing::class.createType()))
     }
 }

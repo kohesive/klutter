@@ -11,15 +11,9 @@ buildscript {
         maven {
             url 'http://dl.bintray.com/jaysonminard/kohesive'
         }
-/*  disabled during non EAP builds
-        maven {
-            url 'http://dl.bintray.com/kotlin/kotlin-eap'
-        }
-*/
     }
     //noinspection GroovyAssignabilityCheck
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
         // classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$version_dokka"
@@ -27,11 +21,15 @@ buildscript {
     }
 }
 
+plugins {
+    id 'nebula.kotlin' version '1.1.0' apply false
+}
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
     apply plugin: 'idea'
-    apply plugin: 'kotlin'
+    apply plugin: 'nebula.kotlin'
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -61,26 +59,16 @@ subprojects {
     repositories {
         mavenCentral()
         jcenter()
-  /* disabled during non EAP builds
-        maven {
-            url 'http://dl.bintray.com/kotlin/kotlin-eap'
-        }
-        maven {
-            url 'http://dl.bintray.com/jaysonminard/kohesive'
-        }
-        maven {
-            url 'http://dl.bintray.com/mplatvoet/komponents'
-        }
-  */
     }
 
     dependencies {
-        compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
-        testCompile "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
-        testRuntime "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
+        compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+        testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+        testRuntime "org.jetbrains.kotlin:kotlin-stdlib-jre8"
 
         testCompile "junit:junit:$version_junit"
-        testCompile "org.jetbrains.kotlin:kotlin-test:$version_kotlin"
+        testCompile "org.jetbrains.kotlin:kotlin-test"
+        testCompile "org.jetbrains.kotlin:kotlin-test-junit"
 
        // testCompile "org.slf4j:slf4j-api:$version_slf4j"
        // testCompile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
@@ -133,6 +121,7 @@ subprojects { subproj ->
 
         def dokkaIncludes = [ "${projectDir}/README.md" ]
 
+        /*
         // TODO: remove when no more JDK specific modules
         def jdkMarkerIndex = moduleName.indexOf("-jdk")
         if (jdkMarkerIndex > 0) {
@@ -145,6 +134,7 @@ subprojects { subproj ->
             dokkaIncludes = [ "${projectDir}/../${cleanModuleName}/README.md", "${projectDir}/README.md" ]
             println(" INCLUDES: ${dokkaIncludes}")
         }
+        */
 
         // our form of JavaDoc for JARs in Maven (from Java perspective, not good docs for Kotlin)
         dokka {

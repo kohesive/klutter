@@ -34,7 +34,7 @@ See all modules and current versions on [Maven Central search](http://search.mav
 |[config-typesafe](config-typesafe/)|medium|Typesafe Config easier loader and access to configuration|No|
 |[core](core/)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
 |[db-jdbi-v2](db-jdbi-v2/)|small|Adds Kotlin parameter binding and RestulSet mapping to JDBI versions 2.x|No|
-|[db-jdbi-v3](db-jdbi-v3/)|small|Adds Kotlin parameter binding and RestulSet mapping to JDBI versions 3.x|No|
+|db-jdbi-v3|n/a|Merged into JDBI official, 3.x snapshot and releases after March 7, 2017|No|
 |[elasticsearch-1.7x](elasticsearch-1.7x/)|medium|Extensions to ElasticSearch client library|No|
 |[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
 |[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|

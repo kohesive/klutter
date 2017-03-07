@@ -1,6 +1,5 @@
 package uy.klutter.binder
 
-import kotlinx.support.jdk8.collections.computeIfAbsent
 import uy.klutter.reflect.*
 import java.lang.reflect.GenericArrayType
 import java.lang.reflect.ParameterizedType
@@ -8,6 +7,10 @@ import java.lang.reflect.Type
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.*
+import kotlin.reflect.full.companionObject
+import kotlin.reflect.full.companionObjectInstance
+import kotlin.reflect.full.declaredFunctions
+import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.*
 
 // TODO: type conversions
@@ -109,11 +112,12 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
             return from(reifiedType<T>(), usingCallable, valueProvider, treatUnusedValuesFromProviderAsErrors)
         }
 
+        @JvmOverloads
         @Suppress("UNCHECKED_CAST")
         fun <T : Any, INSTANCE : T> from(constructType: Type,
-                                                 usingCallable: KCallable<INSTANCE>,
-                                                 valueProvider: NamedValueProvider,
-                                                 treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
+                                         usingCallable: KCallable<INSTANCE>,
+                                         valueProvider: NamedValueProvider,
+                                         treatUnusedValuesFromProviderAsErrors: Boolean = DEFAULT_treatUnusedValuesFromProviderAsErrors
         ): ConstructionBinding<T, INSTANCE> {
 
 
@@ -152,7 +156,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 */
 
                 val dispatchInstance = when {
-                       isCompanionCall || (usingCallable.parameters.size > 0 && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.defaultType) ->
+                       isCompanionCall || (usingCallable.parameters.isNotEmpty() && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.defaultType) ->
                           constructClass.companionObjectInstance
                        isInternalCompanion -> ConstructionBinding.Companion
                        else -> null

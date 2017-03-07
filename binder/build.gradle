@@ -1,4 +1,3 @@
 dependencies {
     compile project(":klutter-reflect")
-    compile "org.jetbrains.kotlinx:kotlinx-support-jdk8:$version_kotlin_jdk_support"
 }

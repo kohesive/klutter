@@ -4,10 +4,22 @@ import java.lang.reflect.Method
 import java.util.*
 import kotlin.reflect.*
 import kotlin.reflect.defaultType
+import kotlin.reflect.full.createType
 import kotlin.reflect.jvm.reflect
 
 
 class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructor(private val _functionClass: Class<T>, private val _kfunc: KFunction<R>, private val _name: String? = null, private val _annotations: List<Annotation>?) : KCallable<R> {
+    override val isAbstract: Boolean
+        get() = false
+    override val isFinal: Boolean
+        get() = true
+    override val isOpen: Boolean
+        get() = false
+    override val typeParameters: List<KTypeParameter>
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    override val visibility: KVisibility?
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+
     companion object {
         fun <T : Function<R>, R : Any?> fromInstance(functionInstance: T): KCallableFuncRefOrLambda<T, R> {
             val kfunc = functionInstance.reflect() ?: throw IllegalStateException("The function instance isn't reflect-able")
@@ -27,16 +39,21 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
     }.first().apply { isAccessible = true }
 
     override val name: String = _name ?: _kfunc.name
-    override val returnType: KType = _invokeMethod.returnType.kotlin.defaultType
+    override val returnType: KType = _invokeMethod.returnType.kotlin.createType()
     override val annotations: List<Annotation> = _annotations ?: emptyList<Annotation>() + _kfunc.annotations
 
     override val parameters: List<KParameter> by lazy {
         val receiver = listOf(object : KParameter {
+            override val isVararg: Boolean = false
             override val index: Int = 0
             override val isOptional: Boolean = false
             override val kind: KParameter.Kind = KParameter.Kind.INSTANCE
             override val name: String? = null
             override val type: KType = object : KType {    // TODO: this is fragile if anyone looks at this type and tries to do much with it (not resolved!)
+                override val arguments: List<KTypeProjection>
+                    get() = emptyList()
+                override val classifier: KClassifier?
+                    get() = null
                 override val isMarkedNullable: Boolean
                     get() = false
             }
@@ -44,11 +61,12 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
         })
         val realParams = _invokeMethod.parameters.withIndex().zip(_kfunc.parameters).map {
                     object : KParameter {
+                        override val isVararg: Boolean = false
                         override val index: Int = it.first.index + 1
                         override val isOptional: Boolean = it.second.isOptional
                         override val kind: KParameter.Kind = it.second.kind
                         override val name: String? = it.second.name
-                        override val type: KType = it.first.value.getType().kotlin.defaultType
+                        override val type: KType = it.first.value.getType().kotlin.createType()
                         override val annotations: List<Annotation> = _annotations ?: emptyList<Annotation>() + _kfunc.annotations
                     }
                 }

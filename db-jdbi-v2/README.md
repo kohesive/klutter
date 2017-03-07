@@ -1,5 +1,7 @@
 ## klutter/db-jdbi-v2
 
+**NOTE:** This has been [merged into JDBI](https://github.com/jdbi/jdbi) as officially supported, see 3.x snapshots and betas since March 7, 2017 for having this built-in.  Support here has been removed.
+
 For JDBI v2.x adding both automatic parameter binding by name for Kotlin methods in SqlObjects.  And
 ResultSet mapping to Kotlin classes anywhere a ResultSet is used.
 

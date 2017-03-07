@@ -43,17 +43,17 @@ class TestVertxHelpers {
         vertxInstance.sharedData().promiseClusterWideMap<String, String>("testmap").bind { map ->
             combine(Promise.of(map), map.put("testKey", "testValue"))
         }.bind { tuple ->
-            val (map, putResult) = tuple
+            val (map, _) = tuple
             combine(Promise.of(map), map.get("testKey"))
         }.bind { tuple ->
             val (map, getResult) = tuple
             assertEquals("testValue", getResult)
             combine(Promise.of(map), map.clear())
         }.bind { tuple ->
-            val (map, clearResult) = tuple
+            val (map, _) = tuple
             combine(Promise.of(map), map.get("testKey"))
         }.then { tuple ->
-            val (map, getResult) = tuple
+            val (_, getResult) = tuple
             assertNull(getResult)
         }.get() // force synchronous
 

@@ -13,7 +13,6 @@ include 'core',
         'vertx3-kodein',
         'elasticsearch-1.7.x',
         'db-jdbi-v2',
-        'db-jdbi-v3',
         'reflect',
         'binder',
         'binder-kodein'
@@ -30,7 +29,6 @@ project(':netflix-graph').name = 'klutter-netflix-graph'
 project(':vertx3').name = 'klutter-vertx3'
 project(':vertx3-kodein').name = 'klutter-vertx3-kodein'
 project(':elasticsearch-1.7.x').name = 'klutter-elasticsearch-1.7.x'
-project(':db-jdbi-v3').name = 'klutter-db-jdbi-v3'
 project(':db-jdbi-v2').name = 'klutter-db-jdbi-v2'
 project(':reflect').name = 'klutter-reflect'
 project(':binder').name = 'klutter-binder'
