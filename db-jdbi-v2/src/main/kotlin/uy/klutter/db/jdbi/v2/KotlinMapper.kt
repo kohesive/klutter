@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KParameter
 import kotlin.reflect.jvm.isAccessible
 import kotlin.reflect.jvm.javaType
-import kotlin.reflect.primaryConstructor
+import kotlin.reflect.full.primaryConstructor
 
 class KotlinMapper<C : Any> internal constructor(private val clazz: Class<C>) : ResultSetMapper<C> {
     private val kclass: KClass<C> = clazz.kotlin

@@ -1,7 +1,7 @@
 package uy.klutter.binder
 
 import org.junit.Test
-import kotlin.reflect.declaredMemberExtensionFunctions
+import kotlin.reflect.full.declaredMemberExtensionFunctions
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

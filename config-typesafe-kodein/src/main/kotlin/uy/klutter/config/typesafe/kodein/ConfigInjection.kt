@@ -81,8 +81,8 @@ class KodeinTypesafeConfig private constructor() {
                 }
             }
 
-            inline fun <reified T : Any> bind(tag: Any? = null, overrides: Boolean? = null): ConfigBinder<T> = ConfigBinder<T>(Kodein.Bind(typeToken<T>().type, tag), overrides)
-            inline fun <reified T : Any> constant(tag: Any, overrides: Boolean? = null): ConstantBinder<T> = ConstantBinder<T>(Kodein.Bind(typeToken<T>().type, tag), overrides)
+            inline fun <reified T : Any> bind(tag: Any? = null, overrides: Boolean? = null): ConfigBinder<T> = ConfigBinder<T>(Kodein.Bind(genericToken<T>().type, tag), overrides)
+            inline fun <reified T : Any> constant(tag: Any, overrides: Boolean? = null): ConstantBinder<T> = ConstantBinder<T>(Kodein.Bind(genericToken<T>().type, tag), overrides)
         }
     }
 }

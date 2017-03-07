@@ -4,6 +4,7 @@ import org.junit.Ignore
 import org.junit.Test
 import java.lang.reflect.Modifier
 import java.util.*
+import kotlin.reflect.full.*
 import kotlin.reflect.*
 import kotlin.reflect.jvm.kotlinFunction
 import kotlin.test.assertEquals
@@ -842,21 +843,21 @@ class TestConstruction {
         val prov = MapValueProvider(mapOf("a" to 123, "b" to "cat", "dog.legs" to 4, "dog.volume" to 34, "dog.name" to "frank", "dog.breed.type" to "longhair", "dog.breed.lifespan" to 12, "dog.hairlen" to 33, "f" to 999))
 
         // top level
-        assertEquals(123, prov.valueByName("a", EitherType.ofUnchecked(Int::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as Int)
-        assertEquals("cat", prov.valueByName("b", EitherType.ofUnchecked(String::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as String)
-        assertEquals(999, prov.valueByName("f", EitherType.ofUnchecked(Int::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as Int)
+        assertEquals(123, prov.valueByName("a", EitherType.ofUnchecked(Int::class.createType()), ValueProviderTargetScope.UNKNOWN).value as Int)
+        assertEquals("cat", prov.valueByName("b", EitherType.ofUnchecked(String::class.createType()), ValueProviderTargetScope.UNKNOWN).value as String)
+        assertEquals(999, prov.valueByName("f", EitherType.ofUnchecked(Int::class.createType()), ValueProviderTargetScope.UNKNOWN).value as Int)
 
         // dog level
-        val dog = (prov.valueByName("dog", EitherType.ofUnchecked(Any::class.defaultType), ValueProviderTargetScope.UNKNOWN) as ProvidedValue.NestedNamedValueProvider).value
-        assertEquals(4, dog.valueByName("legs", EitherType.ofUnchecked(Int::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as Int)
-        assertEquals(34, dog.valueByName("volume", EitherType.ofUnchecked(Int::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as Int)
-        assertEquals("frank", dog.valueByName("name", EitherType.ofUnchecked(String::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as String)
-        assertEquals(33, dog.valueByName("hairlen", EitherType.ofUnchecked(Int::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as Int)
+        val dog = (prov.valueByName("dog", EitherType.ofUnchecked(Any::class.createType()), ValueProviderTargetScope.UNKNOWN) as ProvidedValue.NestedNamedValueProvider).value
+        assertEquals(4, dog.valueByName("legs", EitherType.ofUnchecked(Int::class.createType()), ValueProviderTargetScope.UNKNOWN).value as Int)
+        assertEquals(34, dog.valueByName("volume", EitherType.ofUnchecked(Int::class.createType()), ValueProviderTargetScope.UNKNOWN).value as Int)
+        assertEquals("frank", dog.valueByName("name", EitherType.ofUnchecked(String::class.createType()), ValueProviderTargetScope.UNKNOWN).value as String)
+        assertEquals(33, dog.valueByName("hairlen", EitherType.ofUnchecked(Int::class.createType()), ValueProviderTargetScope.UNKNOWN).value as Int)
 
         // breed level
-        val breed = (dog.valueByName("breed", EitherType.ofUnchecked(Any::class.defaultType), ValueProviderTargetScope.UNKNOWN) as ProvidedValue.NestedNamedValueProvider).value
-        assertEquals("longhair", breed.valueByName("type", EitherType.ofUnchecked(String::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as String)
-        assertEquals(12, breed.valueByName("lifespan", EitherType.ofUnchecked(Int::class.defaultType), ValueProviderTargetScope.UNKNOWN).value as Int)
+        val breed = (dog.valueByName("breed", EitherType.ofUnchecked(Any::class.createType()), ValueProviderTargetScope.UNKNOWN) as ProvidedValue.NestedNamedValueProvider).value
+        assertEquals("longhair", breed.valueByName("type", EitherType.ofUnchecked(String::class.createType()), ValueProviderTargetScope.UNKNOWN).value as String)
+        assertEquals(12, breed.valueByName("lifespan", EitherType.ofUnchecked(Int::class.createType()), ValueProviderTargetScope.UNKNOWN).value as Int)
 
     }
 

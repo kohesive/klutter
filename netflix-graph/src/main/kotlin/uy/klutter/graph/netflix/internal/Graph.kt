@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 package uy.klutter.graph.netflix.internal
 
 import com.netflix.nfgraph.NFGraph

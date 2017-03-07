@@ -1,7 +1,6 @@
 package uy.klutter.binder
 
 import uy.klutter.reflect.isAssignableFromOrSamePrimitive
-import java.lang.reflect.Type
 import kotlin.reflect.KCallable
 import kotlin.reflect.KParameter
 import kotlin.reflect.jvm.isAccessible

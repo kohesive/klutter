@@ -193,6 +193,7 @@ class TestUriBuilder {
 
         // you cannot escape in """ strings, therefore:
 
+        @Suppress("UNUSED_VARIABLE")
         val odd = """\$100.00""" // creates "\$100.00" instead of "$100.00"
         // assertEquals(x5, odd) would fail
     }

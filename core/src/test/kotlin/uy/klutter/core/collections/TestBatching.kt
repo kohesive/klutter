@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 package uy.klutter.core.collections.tests
 
 import org.junit.Test
@@ -183,11 +185,11 @@ class TestGroupingStream {
     }
 
     @Test fun emptySource() {
-        listOf<Int>().asSequence().batch(1).forEach { groupStream ->
+        listOf<Int>().asSequence().batch(1).forEach { _ ->
             fail()
         }
 
-        listOf<Int>().batch(1).forEach { groupStream ->
+        listOf<Int>().batch(1).forEach { _ ->
             fail()
         }
 

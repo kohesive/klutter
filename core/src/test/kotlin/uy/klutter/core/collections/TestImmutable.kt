@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 package uy.klutter.core.collections
 
 import org.junit.Test

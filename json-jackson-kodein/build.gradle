@@ -9,5 +9,5 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$version_jackson"
     compile "com.fasterxml.jackson.module:jackson-module-parameter-names:$version_jackson"
 
-    compile "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
+    compile "org.jetbrains.kotlin:kotlin-reflect"
 }

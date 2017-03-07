@@ -5,4 +5,5 @@ dependencies {
     compile "nl.komponents.kovenant:kovenant:$version_kovenant"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:$version_jackson_kotlin"
 
+    compile "org.jetbrains.kotlin:kotlin-reflect"
 }

@@ -7,10 +7,7 @@ import java.lang.reflect.Type
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.*
-import kotlin.reflect.full.companionObject
-import kotlin.reflect.full.companionObjectInstance
-import kotlin.reflect.full.declaredFunctions
-import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.*
 import kotlin.reflect.jvm.*
 
 // TODO: type conversions
@@ -135,7 +132,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
             val constructionPlan = planCache.computeIfAbsent(key) {
                 val isConstructorCall = constructClass.constructors.any { it == usingCallable }
                 val isCompanionCall = !isConstructorCall && constructClass.companionObject?.declaredFunctions?.any { it == usingCallable } ?: false
-                val isInternalCompanion = !isConstructorCall && !isCompanionCall && ConstructionBinding::class.companionObject!!.declaredFunctions.any { it == usingCallable } ?: false
+                val isInternalCompanion = !isConstructorCall && !isCompanionCall && ConstructionBinding::class.companionObject!!.declaredFunctions.any { it == usingCallable }
 
                 if (!isConstructorCall && !isCompanionCall && !isInternalCompanion) {
                     throw IllegalStateException("callable is not from $constructClass nor its companion object")
@@ -156,10 +153,10 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 */
 
                 val dispatchInstance = when {
-                       isCompanionCall || (usingCallable.parameters.isNotEmpty() && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.defaultType) ->
-                          constructClass.companionObjectInstance
-                       isInternalCompanion -> ConstructionBinding.Companion
-                       else -> null
+                    isCompanionCall || (usingCallable.parameters.isNotEmpty() && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.createType()) ->
+                        constructClass.companionObjectInstance
+                    isInternalCompanion -> ConstructionBinding.Companion
+                    else -> null
                 }
 
                 if (!constructType.isAssignableFromOrSamePrimitive(usingCallable.returnType)) {
@@ -353,15 +350,15 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 @Suppress("RemoveExplicitTypeArguments")
                 return ConstructionBinding<Array<T>, Array<T>>(constructType.erasedType().kotlin as KClass<Array<T>>, EitherType.ofUnchecked(constructType),
                         MethodCallBinding.from(callable, ConstructionBinding.Companion, null,
-                        mapValueProviderOf("componentType" to componentType,
-                                "allowNulls" to allowsNulls,
-                                "valueProvider" to valueProvider), ValueProviderTargetScope.CONSTRUCTOR), emptyList(), emptyList(), emptyList())
+                                mapValueProviderOf("componentType" to componentType,
+                                        "allowNulls" to allowsNulls,
+                                        "valueProvider" to valueProvider), ValueProviderTargetScope.CONSTRUCTOR), emptyList(), emptyList(), emptyList())
             } else {
                 throw IllegalStateException("array construction binding called for non array type")
             }
         }
 
-        fun <T: Any, INSTANCE : T> from(constructType: Type, valueProvider: OrderedValueProvider): ConstructionBinding<T, INSTANCE> {
+        fun <T : Any, INSTANCE : T> from(constructType: Type, valueProvider: OrderedValueProvider): ConstructionBinding<T, INSTANCE> {
             // TODO: should return a plan even if unknown collection Type and set construction error instead
 
             // val constructClass = constructType.erasedType().kotlin

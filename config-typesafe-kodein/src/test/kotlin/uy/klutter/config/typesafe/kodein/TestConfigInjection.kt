@@ -1,6 +1,7 @@
 package uy.klutter.config.typesafe.tests
 
 import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.singleton
 import org.junit.Test

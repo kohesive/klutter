@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package uy.klutter.db.jdbi.v2
 
 import org.skife.jdbi.v2.*
@@ -11,7 +13,7 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import kotlin.reflect.KClass
 import kotlin.reflect.KParameter
-import kotlin.reflect.declaredMemberProperties
+import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.javaType
 import kotlin.reflect.jvm.kotlinFunction
 
@@ -61,7 +63,7 @@ class KotlinBinder(val method: Method, val paramIdx: Int) : Binder<Bind, Any> {
             val erasedType = type.erasedType()
             if (erasedType.isKotlinClass()) {
                 @Suppress("UNCHECKED_CAST")
-                (erasedType.kotlin as KClass<Any>).declaredMemberProperties.forEach { subProp ->
+                erasedType.kotlin.declaredMemberProperties.forEach { subProp ->
                     bind(q, subProp.name, subProp.returnType.javaType, if (value == null) null else subProp.get(value), "${prefix}${bindToParm}.")
                 }
             } else {
