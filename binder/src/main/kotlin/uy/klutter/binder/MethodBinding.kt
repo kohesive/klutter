@@ -99,13 +99,7 @@ class MethodCallBinding<DT, RT, out R>(val useCallable: KCallable<R>,
                     is ProvidedValue.Present -> {
                         val testValue = maybe.value
 
-                        val testType = if (testValue is DeferredExecutable<*>) {
-                            testValue.returnType.asJava // construction or method call to happen later
-                        } else if (testValue != null) {
-                            testValue.javaClass
-                        } else {
-                            Any::class.java
-                        }
+                        val testType = (testValue as? DeferredExecutable<*>)?.returnType?.asJava ?: (testValue?.javaClass ?: Any::class.java)
 
                         if (testValue != null && !param.type.isAssignableFromOrSamePrimitive(testType)) {
                             errorParam(param, CallableError.WRONG_TYPE)
