@@ -1,4 +1,4 @@
-package uy.klutter.binder
+package uy.klutter.conversion
 
 import uy.klutter.core.common.with
 import java.lang.reflect.Type

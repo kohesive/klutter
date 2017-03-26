@@ -1,5 +1,7 @@
 package uy.klutter.binder
 
+import uy.klutter.conversion.TypeConversionConfig
+import uy.klutter.conversion.TypeConverters
 import uy.klutter.core.collections.asReadOnly
 import uy.klutter.reflect.isAssignableFrom
 import uy.klutter.reflect.isAssignableFromOrSamePrimitive

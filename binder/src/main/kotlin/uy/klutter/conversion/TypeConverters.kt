@@ -1,4 +1,4 @@
-package uy.klutter.binder
+package uy.klutter.conversion
 
 import uy.klutter.reflect.TypeReference
 import uy.klutter.reflect.reifiedType

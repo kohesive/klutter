@@ -1,4 +1,4 @@
-package uy.klutter.binder
+package uy.klutter.conversion
 
 import uy.klutter.reflect.erasedType
 import uy.klutter.reflect.isAssignableFrom
@@ -10,7 +10,7 @@ import java.net.URI
 import java.net.URL
 import java.util.*
 
-class PrimitiveConverters: ConverterSet {
+class PrimitiveConverters : ConverterSet {
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
     override fun predicate(fromType: Type, toType: Type): Boolean {
         val fromErased = fromType.erasedType()
