@@ -1,3 +1,0 @@
-dependencies {
-    compile "com.amazonaws:aws-java-sdk-core:${version_aws_sdk}"
-}

@@ -27,24 +27,22 @@ See all modules and current versions on [Maven Central search](http://search.mav
 
 ## Modules
 
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Size|Topic|Kodein module|
-|------|------|------|------|
-|[aws-s3](aws-s3/)|tiny|Amazon AWS SDK S3 helper extensions|Yes|
-|[aws-core](aws-core/)|tiny|Amazon AWS SDK helper extensions|No|
-|[config-typesafe](config-typesafe/)|medium|Typesafe Config easier loader and access to configuration|No|
-|[core](core/)|small|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|No|
-|[db-jdbi-v2](db-jdbi-v2/)|small|Adds Kotlin parameter binding and RestulSet mapping to JDBI versions 2.x|No|
-|db-jdbi-v3|n/a|Merged into JDBI official, 3.x snapshot and releases after March 7, 2017|No|
-|[elasticsearch-1.7x](elasticsearch-1.7x/)|medium|Extensions to ElasticSearch client library|No|
-|[json-jackson](json-jackson/)|tiny|Jackson JSON Data Binding extensions + loading of Kotlin module|Yes|
-|[netflix-graph](netflix-graph/)|medium|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|No|
-|[reflect-core](reflect-core/)|small|Helpers for Kotlin reflection that do not require kotlin-reflect dependency|No|
-|[reflect-full](reflect-full/)|small|Helpers for Kotlin reflection extending the kotlin-reflect dependency|No|
-|[vertx3](vertx3/)|medium|Vert.x-3 helpers and integration with Kovenant Promises|Yes|
-
-Modules marked with "yes" for Kodein, are modules that have prebuilt modules for injecting with [Kodein](https://github.com/SalomonBrys/Kodein).
-
-Some of these modules are "tiny" and may not be overly useful yet, but they carry no extra weight, only have required dependencies and can be expanded over time by anyone that wants to send pull requests.  Submitted modules or changes to existing module consist of things not conflicting with Kotlin runtime libraries, and things useful to most Kotlin developers.
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Topic|
+|------|------|
+|[config-typesafe](config-typesafe/)|Typesafe Config easier loader and access to configuration|
+|[config-typesafe-kodein](config-typesafe/)|Typesafe Config injection into Kodein modules|
+|[conversion](conversion/)|Type converters for primitive and common JDK types|
+|[core](core/)|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|
+|[db-jdbi-v2](db-jdbi-v2/)|Adds Kotlin parameter binding and RestulSet mapping to JDBI versions 2.x|
+|db-jdbi-v3|Merged into JDBI official, 3.x snapshot and releases after March 7, 2017|
+|[elasticsearch-1.7.x](elasticsearch-1.7.x/)|Extensions and kovenant Promises for ElasticSearch client library for ES 1.7.x|
+|[elasticsearch-2.4.x](elasticsearch-2.4.x/)|Extensions and kovenant Promises for ElasticSearch client library for ES 2.4.x|
+|[elasticsearch-5.x](elasticsearch-5.x/)|Extensions and kovenant Promises for ElasticSearch client library for ES 5.x|
+|[json-jackson-kodein](json-jackson/)|Jackson JSON w/Kotlin module Kodein module|
+|[netflix-graph](netflix-graph/)|In memory graph building and compression/serialization.  A wrapper adding schema, ordinal tracking, serialization with ordinals, and is much easier to use API|
+|[reflect](reflect-full/)|Helpers for Kotlin reflection extending the kotlin-reflect dependency|
+|[vertx3](vertx3/)|Vert.x-3 helpers and integration with Kovenant Promises|
+|[vertx3-kodein](vertx3-kodein/)|Vert.x-3 Kodein modules|
 
 ## Recommended libraries:
 
@@ -53,9 +51,4 @@ Other libraries that we recommend a building blocks for Kotlin applications:
 * [Kovenant](http://kovenant.komponents.nl) - promises for Kotlin, easy, fun, and async! (JVM / Android)
 * [Kovert](https://github.com/kohesive/kovert) - invisible REST framework for Kotlin + Vert.x
 * [Kodein](https://github.com/SalomonBrys/Kodein) - very easy yet powerful dependency injection in Kotlin
-
-## With help from...
-
-[![Collokia Logo](https://www.collokia.com/images/collokia-logo-210x75.png)](https://www.collokia.com)
-
 

@@ -2,9 +2,6 @@ rootProject.name = "klutter"
 
 include 'core',
         'core-jodatime',
-        'aws-core',
-        'aws-s3',
-        'aws-s3-kodein',
         'json-jackson-kodein',
         'config-typesafe',
         'config-typesafe-kodein',
@@ -12,17 +9,16 @@ include 'core',
         'vertx3',
         'vertx3-kodein',
         'elasticsearch-1.7.x',
+        'elasticsearch-2.4.x',
+        'elasticsearch-5.x',
         'db-jdbi-v2',
         'reflect',
-        'conversion',
-        'binder',
-        'binder-kodein'
+        'conversion'
+      //  'binder',
+      //  'binder-kodein'
 
 project(':core').name = 'klutter-core'
 project(':core-jodatime').name = 'klutter-core-jodatime'
-project(':aws-core').name = 'klutter-aws-core'
-project(':aws-s3').name = 'klutter-aws-s3'
-project(':aws-s3-kodein').name = 'klutter-aws-s3-kodein'
 project(':json-jackson-kodein').name = 'klutter-json-jackson-kodein'
 project(':config-typesafe').name = 'klutter-config-typesafe'
 project(':config-typesafe-kodein').name = 'klutter-config-typesafe-kodein'
@@ -30,9 +26,12 @@ project(':netflix-graph').name = 'klutter-netflix-graph'
 project(':vertx3').name = 'klutter-vertx3'
 project(':vertx3-kodein').name = 'klutter-vertx3-kodein'
 project(':elasticsearch-1.7.x').name = 'klutter-elasticsearch-1.7.x'
+project(':elasticsearch-2.4.x').name = 'klutter-elasticsearch-2.4.x'
+project(':elasticsearch-5.x').name = 'klutter-elasticsearch-5.x'
 project(':db-jdbi-v2').name = 'klutter-db-jdbi-v2'
 project(':reflect').name = 'klutter-reflect'
 project(':conversion').name = 'klutter-conversion'
-project(':binder').name = 'klutter-binder'
-project(':binder-kodein').name = 'klutter-binder-kodein'
+
+// project(':binder').name = 'klutter-binder'
+// project(':binder-kodein').name = 'klutter-binder-kodein'
 

@@ -1,5 +1,0 @@
-dependencies {
-    compile project(":klutter-aws-core")
-
-    compile "com.amazonaws:aws-java-sdk-s3:${version_aws_sdk}"
-}
