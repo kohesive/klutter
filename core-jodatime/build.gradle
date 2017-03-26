@@ -1,4 +1,4 @@
 dependencies {
     compile project(':klutter-core')
-    compile "joda-time:joda-time:$version_jodatime"
+    compileOnly "joda-time:joda-time:$version_jodatime"
 }

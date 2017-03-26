@@ -153,7 +153,7 @@ class ConstructionBinding<T : Any, out R : T>(val constructClass: KClass<T>,
                 */
 
                 val dispatchInstance = when {
-                    isCompanionCall || (usingCallable.parameters.isNotEmpty() && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.createType()) ->
+                    isCompanionCall || (usingCallable.parameters.isNotEmpty() && usingCallable.parameters[0].kind == KParameter.Kind.INSTANCE && usingCallable.parameters[0].type == constructClass.companionObject?.defaulType) ->  // cannot yet use createType
                         constructClass.companionObjectInstance
                     isInternalCompanion -> ConstructionBinding.Companion
                     else -> null

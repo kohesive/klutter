@@ -11,12 +11,16 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$version_jackson"
     compile "com.fasterxml.jackson.module:jackson-module-parameter-names:$version_jackson"
 
-    compile "io.vertx:vertx-core:$version_vertx"
-    compile "io.vertx:vertx-web:$version_vertx"
-    compile "io.vertx:vertx-hazelcast:$version_vertx"
+    compileOnly "io.vertx:vertx-core:$version_vertx"
+    compileOnly "io.vertx:vertx-web:$version_vertx"
+    compileOnly "io.vertx:vertx-hazelcast:$version_vertx"
 
     compile "org.slf4j:slf4j-api:$version_slf4j"
 
     testCompile "io.vertx:vertx-unit:$version_vertx"
+    testCompile "io.vertx:vertx-core:$version_vertx"
+    testCompile "io.vertx:vertx-web:$version_vertx"
+    testCompile "io.vertx:vertx-hazelcast:$version_vertx"
+
     testRuntime "ch.qos.logback:logback-classic:$version_logback"
 }

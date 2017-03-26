@@ -4,7 +4,6 @@ import java.lang.reflect.Method
 import java.util.*
 import kotlin.reflect.*
 import kotlin.reflect.defaultType
-import kotlin.reflect.full.createType
 import kotlin.reflect.jvm.reflect
 
 
@@ -39,7 +38,7 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
     }.first().apply { isAccessible = true }
 
     override val name: String = _name ?: _kfunc.name
-    override val returnType: KType = _invokeMethod.returnType.kotlin.createType()
+    override val returnType: KType = _invokeMethod.returnType.kotlin.defaultType // cannot yet use createType()
     override val annotations: List<Annotation> = _annotations ?: emptyList<Annotation>() + _kfunc.annotations
 
     override val parameters: List<KParameter> by lazy {
@@ -66,7 +65,7 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
                         override val isOptional: Boolean = it.second.isOptional
                         override val kind: KParameter.Kind = it.second.kind
                         override val name: String? = it.second.name
-                        override val type: KType = it.first.value.getType().kotlin.createType()
+                        override val type: KType = it.first.value.getType().kotlin.defaultType // cannot yet use createType()
                         override val annotations: List<Annotation> = _annotations ?: emptyList<Annotation>() + _kfunc.annotations
                     }
                 }

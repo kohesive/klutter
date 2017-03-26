@@ -5,4 +5,8 @@ dependencies {
 
     compile "com.github.salomonbrys.kodein:kodein:$version_kodein"
     compile "org.slf4j:slf4j-api:$version_slf4j"
+
+    compileOnly "io.vertx:vertx-core:$version_vertx"
+    compileOnly "io.vertx:vertx-web:$version_vertx"
+    compileOnly "io.vertx:vertx-hazelcast:$version_vertx"
 }
