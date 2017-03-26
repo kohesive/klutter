@@ -1,6 +1,6 @@
 ## klutter/binder
 
-**description goes here**
+This is currently a work in progress, incubating for future releases.  It is incomplete and experimental.
 
 Module is available in artifacts:
 
