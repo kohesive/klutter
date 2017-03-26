@@ -1,6 +1,5 @@
 package uy.klutter.conversion
 
-import uy.klutter.core.common.with
 import java.lang.reflect.Type
 import java.util.*
 
@@ -8,7 +7,7 @@ import java.util.*
 object TypeConversionConfig {
     @Volatile var permiteEnumToEnum: Boolean = false
 
-    @Volatile var defaultConverter = TypeConverters().with {
+    @Volatile var defaultConverter = TypeConverters().apply {
         register(PrimitiveConverters())
         RegisterJdk7Converters().registerInto(this)
         RegisterJdk8Converters().registerInto(this)

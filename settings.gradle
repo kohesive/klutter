@@ -14,6 +14,7 @@ include 'core',
         'elasticsearch-1.7.x',
         'db-jdbi-v2',
         'reflect',
+        'conversion',
         'binder',
         'binder-kodein'
 
@@ -31,6 +32,7 @@ project(':vertx3-kodein').name = 'klutter-vertx3-kodein'
 project(':elasticsearch-1.7.x').name = 'klutter-elasticsearch-1.7.x'
 project(':db-jdbi-v2').name = 'klutter-db-jdbi-v2'
 project(':reflect').name = 'klutter-reflect'
+project(':conversion').name = 'klutter-conversion'
 project(':binder').name = 'klutter-binder'
 project(':binder-kodein').name = 'klutter-binder-kodein'
 
