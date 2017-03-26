@@ -177,7 +177,7 @@ class PrimitiveConverters: ConverterSet {
                 BigDecimal::class.java -> BigDecimal(value.toDouble())
                 BigInteger::class.java -> BigDecimal(value.toDouble())
                 String::class.java -> value.toString()
-                Char::class.java, Character::class.java -> value.toChar()
+                Char::class.java, Character::class.java -> value.toInt().toChar() // TODO: working around Kotlin 1.1.0 verifier crash
                 Boolean::class.java, java.lang.Boolean::class.java -> value != 0
                 Date::class.java -> Date(value.toLong())
                 else -> {
