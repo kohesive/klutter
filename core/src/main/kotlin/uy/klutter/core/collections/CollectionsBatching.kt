@@ -103,3 +103,52 @@ private class LazyBatchingSequence<T>(val stream: Iterable<T>, val groupSize: In
         }
     }
 }
+
+
+/**
+ * Batch a sequence into a sequence of lists of max N size
+ */
+fun <T> Sequence<T>.batchWhile(n: Int, predicate: (latestItem: T) -> Boolean): Sequence<List<T>> {
+    return PredicateBatchingSequence(this.asIterable(), n, predicate)
+}
+
+/**
+ * Batch a sequence into a sequence of lists of max N size
+ */
+fun <T> Iterable<T>.batchWhile(n: Int, predicate: (latestItem: T) -> Boolean): Sequence<List<T>> {
+    return PredicateBatchingSequence(this, n, predicate)
+}
+
+/**
+ * Batch a sequence into a sequence of lists of max N size, and execute a lambda for each group
+ */
+fun <T> Sequence<T>.batchWhile(n: Int, predicate: (latestItem: T) -> Boolean, forEachDo: (List<T>)->Unit) {
+    PredicateBatchingSequence(this.asIterable(), n, predicate).forEach { group -> forEachDo(group) }
+}
+
+/**
+ * Batch a sequence into a sequence of lists of max N size, and execute a lambda for each group
+ */
+fun <T> Iterable<T>.batchWhile(n: Int, predicate: (latestItem: T) -> Boolean, forEachDo: (List<T>)->Unit) {
+    PredicateBatchingSequence(this, n, predicate).forEach { group -> forEachDo(group) }
+}
+
+
+private class PredicateBatchingSequence<T>(val source: Iterable<T>, val batchSize: Int, val predicate: (latestItem: T) -> Boolean) : Sequence<List<T>> {
+    override fun iterator(): Iterator<List<T>> = object : AbstractIterator<List<T>>() {
+        private val iterate = if (batchSize > 0) source.iterator() else emptyList<T>().iterator()
+        override fun computeNext() {
+            if (iterate.hasNext()) {
+                var terminateEarly = false
+                val batch = iterate.asSequence().takeWhile {
+                    val decision = predicate(it)
+                    terminateEarly = terminateEarly && decision
+                    decision
+                }.take(batchSize).toList()
+                if (batch.isNotEmpty()) setNext(batch)
+                if (terminateEarly || batch.isEmpty()) done()
+            }
+            else done()
+        }
+    }
+}

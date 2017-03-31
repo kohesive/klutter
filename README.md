@@ -11,7 +11,7 @@ Each module has its own set of dependencies.  The basic pattern is:
 **Gradle:**
 
 ```
-compile "uy.kohesive.klutter:klutter-moduleName:2.0.+"
+compile "uy.kohesive.klutter:klutter-moduleName:2.1.+"
 ```
 
 **Maven:**
@@ -19,7 +19,7 @@ compile "uy.kohesive.klutter:klutter-moduleName:2.0.+"
 <dependency>
     <groupId>uy.kohesive.klutter</groupId>
     <artifactId>klutter-moduleName</artifactId>
-    <version>[2.0.0,2.1.0)</version>
+    <version>[2.1.0,2.2.0)</version>
 </dependency>
 ```
  

@@ -4,6 +4,7 @@ package uy.klutter.core.collections.tests
 
 import org.junit.Test
 import uy.klutter.core.collections.batch
+import uy.klutter.core.collections.batchWhile
 import uy.klutter.core.collections.lazyBatch
 import java.io.Reader
 import java.util.*
@@ -193,5 +194,28 @@ class TestGroupingStream {
             fail()
         }
 
+    }
+
+
+    @Test fun testConvertToListOfGroupsWithoutConsumingGroupAndPredicateSumming() {
+        run {
+            var sum = 0
+            val max = 16
+            val listOfGroups = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).asSequence().batchWhile(2) { sum += it; sum <= max }.toList()
+            assertEquals(3, listOfGroups.size)
+            assertEquals(listOf(1, 2), listOfGroups[0].toList())
+            assertEquals(listOf(3, 4), listOfGroups[1].toList())
+            assertEquals(listOf(5), listOfGroups[2].toList())
+        }
+
+        run {
+            var sum = 0
+            val max = 16
+            val listOfGroups = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).batchWhile(2) { sum += it; sum <= max }.toList()
+            assertEquals(3, listOfGroups.size)
+            assertEquals(listOf(1, 2), listOfGroups[0].toList())
+            assertEquals(listOf(3, 4), listOfGroups[1].toList())
+            assertEquals(listOf(5), listOfGroups[2].toList())
+        }
     }
 }
