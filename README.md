@@ -23,7 +23,7 @@ compile "uy.kohesive.klutter:klutter-moduleName:2.1.+"
 </dependency>
 ```
  
-See all modules and current versions on [Maven Central search](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22uy.klutter.v2%22%20) (or the [raw repo](https://repo1.maven.org/maven2/uy/klutter/v2/))
+See all modules and current versions on [mvenrepository.com](https://mvnrepository.com/artifact/uy.kohesive.klutter)
 
 ## Modules
 
