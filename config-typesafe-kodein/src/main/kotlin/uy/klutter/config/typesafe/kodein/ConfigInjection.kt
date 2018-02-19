@@ -39,7 +39,7 @@ class KodeinTypesafeConfig private constructor() {
 
             fun import(configExpression: String, module: Module, allowOverride: Boolean = false) {
                 actions.add(BindActions {
-                    if (configExpression.isNullOrBlank()) throw IllegalArgumentException("configExpression must be non blank and resolve to a nested configuration")
+                    if (configExpression.isBlank()) throw IllegalArgumentException("configExpression must be non blank and resolve to a nested configuration")
                     val root = config.getConfig(configExpression) ?: throw IllegalArgumentException("configExpression must be non blank and resolve to a nested configuration")
                     import(module.Builder(root, mapper).kodeinModule, allowOverride)
                 })

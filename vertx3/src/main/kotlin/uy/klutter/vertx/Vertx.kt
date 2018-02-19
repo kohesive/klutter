@@ -399,8 +399,9 @@ fun <T : Any?, E: Exception> withDeferred(codeBlock: (deferred: Deferred<T, E>) 
     try {
         codeBlock(deferred)
     }
-    catch (ex: E) {
-        deferred.reject(ex)
+    catch (ex: Exception) { // Kotlin 1.2.21 not allowing (ex: E) here, forcing the cast below
+        @Suppress("UNCHECKED_CAST")
+        deferred.reject(ex as E)
     }
     return deferred.promise
 }

@@ -1,4 +1,4 @@
-[![Kotlin](https://img.shields.io/badge/kotlin-1.1.2-blue.svg)](http://kotlinlang.org)  [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.2.21-blue.svg)](http://kotlinlang.org)  [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
 
 # klutter
 
@@ -11,7 +11,7 @@ Each module has its own set of dependencies.  The basic pattern is:
 **Gradle:**
 
 ```
-compile "uy.kohesive.klutter:klutter-moduleName:2.2.+"
+compile "uy.kohesive.klutter:klutter-moduleName:2.3.+"
 ```
 
 **Maven:**
@@ -19,7 +19,7 @@ compile "uy.kohesive.klutter:klutter-moduleName:2.2.+"
 <dependency>
     <groupId>uy.kohesive.klutter</groupId>
     <artifactId>klutter-moduleName</artifactId>
-    <version>[2.2.0,2.3.0)</version>
+    <version>[2.3.0,2.4.0)</version>
 </dependency>
 ```
  
