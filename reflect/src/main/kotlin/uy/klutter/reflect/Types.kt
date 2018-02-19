@@ -4,6 +4,7 @@ import java.lang.reflect.Type
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 import kotlin.reflect.jvm.javaType
+import kotlin.reflect.jvm.jvmErasure
 
 fun <T : Any> KClass<T>.isAssignableFrom(other: Type): Boolean {
     if (this.java == other) return true
@@ -47,26 +48,26 @@ fun Type.isAssignableFrom(other: KClass<*>): Boolean {
 
 fun KType.isAssignableFrom(other: KType): Boolean {
     if (this == other || this.javaType == other.javaType) return true
-    return (this.javaType.erasedType()).isAssignableFrom(other.javaType.erasedType())
+    return (this.erasedType()).isAssignableFrom(other.erasedType())
 }
 
 fun KType.isAssignableFrom(other: Type): Boolean {
     if (this == other || this.javaType == other) return true
-    return (this.javaType.erasedType()).isAssignableFrom(other.erasedType())
+    return (this.erasedType()).isAssignableFrom(other.erasedType())
 }
 
 fun KType.isAssignableFrom(other: Class<*>): Boolean {
     if (this.javaType == other) return true
-    return (this.javaType.erasedType()).isAssignableFrom(other)
+    return (this.erasedType()).isAssignableFrom(other)
 }
 
 fun KType.isAssignableFrom(other: KClass<*>): Boolean {
-    return (this.javaType.erasedType()).isAssignableFrom(other.java)
+    return (this.erasedType()).isAssignableFrom(other.java)
 }
 
 fun Type.isAssignableFrom(other: KType): Boolean {
     if (this == other || this == other.javaType) return true
-    return (this.erasedType()).isAssignableFrom(other.javaType.erasedType())
+    return (this.erasedType()).isAssignableFrom(other.erasedType())
 }
 
 fun Class<*>.isAssignableFrom(other: KType): Boolean {
@@ -76,7 +77,7 @@ fun Class<*>.isAssignableFrom(other: KType): Boolean {
 
 fun <T : Any> KClass<T>.isAssignableFrom(other: KType): Boolean {
     if (this.java == other.javaType) return true
-    return this.java.isAssignableFrom(other.javaType.erasedType())
+    return this.java.isAssignableFrom(other.erasedType())
 }
 
 fun Type.isAssignableFromOrSamePrimitive(other: Type): Boolean {
@@ -144,6 +145,6 @@ fun Class<*>.isAssignableFromOrSamePrimitive(other: KType): Boolean {
     return (this as Type).isAssignableFromOrSamePrimitive(other.javaType)
 }
 
-fun KType.erasedType(): Class<Any> = this.javaType.erasedType()
+fun KType.erasedType(): Class<out Any> = this.jvmErasure.java
 
 
