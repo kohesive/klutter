@@ -79,7 +79,7 @@ subprojects {
 
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-stdlib:$version_kotlin"
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$version_kotlin"
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version_kotlin"
 
         testCompile "junit:junit:$version_junit"
         testCompile "org.jetbrains.kotlin:kotlin-test:$version_kotlin"
