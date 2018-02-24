@@ -1,0 +1,22 @@
+ext {
+    projectUrl ="https://github.com/kohesive/klutter"
+    projectName = "Klutter"
+    projectDescription = 'Random small libraries for Kotlin.'
+    projectInception = '2017'
+
+    sonatypePackageGroup = "uy.kohesive"
+    sonatypeStagingProfile = "283dd0bd283334"
+    scmUrl = "git://github.com:kohesive/klutter.git"
+    scmGitFile = "scm:git:git@github.com:kohesive/klutter.git"
+
+    pomProjectName = projectName
+    groupName = project.group
+
+    licenseName = "MIT"
+    licenseUrl = "$projectUrl/blob/master/LICENSE"
+
+    organisation = groupName
+    primaryEmail = "oss@kohesive.io"
+
+    binTrayRepo = "kohesive"
+}

@@ -1,23 +1,13 @@
-import org.gradle.plugins.ide.idea.model.IdeaModel
-import org.gradle.plugins.ide.idea.model.IdeaProject
-
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
-        maven {
-            url 'http://oss.sonatype.org/content/repositories/snapshots'
-        }
-        maven {
-            url 'http://dl.bintray.com/jaysonminard/kohesive'
-        }
+        mavenCentral()
     }
-    //noinspection GroovyAssignabilityCheck
     dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-        // classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+        // classpath group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: version_kotlin
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$version_dokka"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.11.0"
     }
 }
 
@@ -26,51 +16,16 @@ plugins {
     id 'nebula.maven-resolved-dependencies' version '4.9.1' apply false
 }
 
+apply from: "$rootDir/project-settings.gradle"
+
+apply from: "$rootDir/gradle/sonatype-top.gradle"
+
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'maven'
-    apply plugin: 'idea'
-    apply plugin: 'nebula.kotlin'
+    apply from: "$rootDir/gradle/kotlin-settings.gradle"
+    apply from: "$rootDir/gradle/idea.gradle"
     apply plugin: 'nebula.maven-resolved-dependencies'
-
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = 1.8
-            languageVersion = 1.2
-        }
-    }
-
-    compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = 1.8
-            languageVersion = 1.2
-        }
-    }
-
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-        options.incremental = true
-        options.compilerArgs << '-Xlint:unchecked'
-    }
-
-    IdeaModel idea = project.idea
-    IdeaProject ideaProject = idea.getProject()
-
-    if (ideaProject != null) {
-        ideaProject.setJdkName(project.targetCompatibility.getName())
-        ideaProject.setLanguageLevel(project.sourceCompatibility.getName())
-        if (ideaProject.hasProperty("vcs")) {
-            ideaProject.setVcs('Git')
-        }
-    }
-
-    idea.module {
-        downloadJavadoc = true
-        downloadSources = true
-    }
+    apply from: "$rootDir/gradle/sonatype-subproj.gradle"
+    apply from: "$rootDir/gradle/bintray.gradle"
 
     repositories {
         mavenCentral()
@@ -108,10 +63,8 @@ subprojects {
     }
 }
 
-subprojects { subproj ->
-    apply plugin: 'com.bmuschko.nexus'
-    apply plugin: 'com.jfrog.bintray'
 
+subprojects { subproj ->
     def pomOnlyModule = !(new File("${projectDir.toString()}/src/main/kotlin").exists())
     if (pomOnlyModule) {
         println("Project $name is POM ONLY (has no code of its own)")
@@ -121,9 +74,6 @@ subprojects { subproj ->
         }
 
         artifacts {}
-        task subRelease() {
-            dependsOn uploadArchives
-        }
     } else {
         apply plugin: 'org.jetbrains.dokka'
 
@@ -135,21 +85,6 @@ subprojects { subproj ->
         def dokkaLinkSuffix = "#L"
 
         def dokkaIncludes = [ "${projectDir}/README.md" ]
-
-        /*
-        // TODO: remove when no more JDK specific modules
-        def jdkMarkerIndex = moduleName.indexOf("-jdk")
-        if (jdkMarkerIndex > 0) {
-            def tempModuleName = moduleName.substring(0, jdkMarkerIndex)
-            def cleanModuleName = tempModuleName
-            if (tempModuleName.startsWith("klutter-")) {
-               cleanModuleName = tempModuleName.substring("klutter-".length())
-            }
-            // TODO: reflect-full and reflect-core should go to reflect readme, odd pattern for these two
-            dokkaIncludes = [ "${projectDir}/../${cleanModuleName}/README.md", "${projectDir}/README.md" ]
-            println(" INCLUDES: ${dokkaIncludes}")
-        }
-        */
 
         // our form of JavaDoc for JARs in Maven (from Java perspective, not good docs for Kotlin)
         dokka {
@@ -177,7 +112,7 @@ subprojects { subproj ->
         task dokkaMarkdown(type: org.jetbrains.dokka.gradle.DokkaTask) {
             outputFormat = "markdown"
             outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
-           // includes = dokkaIncludes
+            // includes = dokkaIncludes
             linkMapping {
                 dir = dokkaLinkDir
                 url = dokkaLinkUrl
@@ -186,7 +121,6 @@ subprojects { subproj ->
         }
 
         // output to docs directory:  Javadoc format
-
         task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
             outputFormat = "javadoc"
             outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
@@ -203,6 +137,7 @@ subprojects { subproj ->
             // dependsOn dokkaJavadoc
         }
 
+
         task jars() {
             dependsOn build
             dependsOn javadoc
@@ -210,66 +145,6 @@ subprojects { subproj ->
         }
 
         javadoc.dependsOn(dokka)
-        task subRelease() {
-            dependsOn jars, uploadArchives
-        }
-    }
-
-    modifyPom {
-        project {
-            name 'Klutter for Kotlin'
-            description 'Random small libraries for Kotlin.'
-            url 'https://github.com/kohesive/klutter'
-            inceptionYear '2015'
-
-            scm {
-                url 'https://github.com/kohesive/klutter'
-                connection 'scm:https://github.com/kohesive/klutter'
-                developerConnection 'scm:git@github.com:klutter/klutter.git'
-            }
-
-            licenses {
-                license {
-                    name 'MIT'
-                    url 'https://github.com/kohesive/klutter/blob/master/LICENSE'
-                    distribution 'repo'
-                }
-            }
-
-            developers {
-                developer {
-                    id 'apatrida'
-                    name 'Jayson Minard'
-                    email 'jayson.minard@gmail.com'
-                }
-            }
-        }
-
-    }
-
-    nexus {
-        sign = true
-    }
-
-    bintray {
-        user = "$bintrayUser"
-        key = "$bintrayKey"
-        pkg {
-            repo = 'kohesive'
-            name = project.name
-            licenses = ['MIT']
-            vcsUrl = 'scm:git:git@github.com:kohesive/klutter.git'
-
-            version {
-                name = project.version
-                desc = 'n/a'
-                released = new Date()
-            }
-            publicDownloadNumbers = false
-            configurations = ['archives']
-        }
-        publish = true
-        dryRun = false
     }
 }
 
@@ -281,9 +156,4 @@ task jars() {
     dependsOn subprojects.jars
 }
 
-task release() {
-    dependsOn subprojects.subRelease
-}
-
-
-defaultTasks 'clean', 'jars'
+defaultTasks 'clean', 'build', 'check'

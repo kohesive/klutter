@@ -1,0 +1,96 @@
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+ext {
+    isSnapshot = project.version.endsWith("-SNAPSHOT")
+    signingEnabled = !isSnapshot
+
+    sonatypeUsername = project.hasProperty('nexusUsername') ? nexusUsername : System.getenv('nexusUsername')
+    sonatypePassword = project.hasProperty('nexusPassword') ? nexusPassword : System.getenv('nexusPassword')
+
+    sonatypeBaseUrl = "https://oss.sonatype.org"
+    sonatypeSnapshotUrl = "$sonatypeBaseUrl/content/repositories/snapshots/"
+    sonatypeRepositoryUrl = "$sonatypeBaseUrl/content/groups/public"
+    sonatypeReleaseUrl = "$sonatypeBaseUrl/service/local/staging/deploy/maven2/"
+    sonatypeUploadUrl = isSnapshot ? sonatypeSnapshotUrl : sonatypeReleaseUrl
+}
+
+Boolean doSigning() {
+    signingEnabled
+}
+
+task javadocJar(type: Jar, dependsOn: "javadoc") {
+    classifier = 'javadoc'
+    from "build/docs/javadoc"
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    required { doSigning() }
+    sign configurations.archives
+}
+
+uploadArchives {
+    enabled = true
+    repositories {
+        mavenDeployer {
+            if (doSigning()) {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            }
+
+            repository(url: sonatypeUploadUrl) {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+            pom {
+                groupId = groupName
+                project {
+                    name pomProjectName
+                    packaging 'jar'
+                    description projectDescription
+                    url projectUrl
+                    inceptionYear projectInception
+                    organization {
+                        name pomProjectName
+                        url projectUrl
+                    }
+                    scm {
+                        url scmUrl
+                    }
+                    licenses {
+                        license {
+                            name licenseName
+                            url licenseUrl
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            email primaryEmail
+                        }
+                        developer {
+                            id 'apatrida'
+                            name 'Jayson Minard'
+                            email 'jayson.minard@gmail.com'
+                        }
+                        developer {
+                            id 'brainoutsource'
+                            name 'Alex Eliseyev'
+                            email 'a.a.eliseyev@gmail.com'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

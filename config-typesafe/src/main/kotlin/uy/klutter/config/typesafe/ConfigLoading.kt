@@ -118,7 +118,7 @@ class ApplicationConfig(val optionalClassLoader: ClassLoader? = null) : ConfigLo
 
 class ResourceConfig(val resouceName: String, val optionalClassLoader: ClassLoader? = null, val failIfMissing: Boolean = true) : ConfigLoader() {
     override fun load(): Config {
-        val options = ConfigParseOptions.defaults().setAllowMissing(failIfMissing)
+        val options = ConfigParseOptions.defaults().setAllowMissing(!failIfMissing)
         return if (optionalClassLoader != null) {
             ConfigFactory.parseResourcesAnySyntax(optionalClassLoader, resouceName, options)
         } else {
@@ -129,21 +129,21 @@ class ResourceConfig(val resouceName: String, val optionalClassLoader: ClassLoad
 
 class ClassResourceConfig(val resouceName: String, val klass: Class<*>, val failIfMissing: Boolean = true) : ConfigLoader() {
     override fun load(): Config {
-        val options = ConfigParseOptions.defaults().setAllowMissing(failIfMissing)
+        val options = ConfigParseOptions.defaults().setAllowMissing(!failIfMissing)
         return ConfigFactory.parseResourcesAnySyntax(klass, resouceName, options)
     }
 }
 
 open class FileConfig(val file: File, val failIfMissing: Boolean = true) : ConfigLoader() {
     override fun load(): Config {
-        val options = ConfigParseOptions.defaults().setAllowMissing(failIfMissing)
+        val options = ConfigParseOptions.defaults().setAllowMissing(!failIfMissing)
         return ConfigFactory.parseFileAnySyntax(file, options)
     }
 }
 
 class UrlConfig(val url: URL, val failIfMissing: Boolean = true) : ConfigLoader() {
     override fun load(): Config {
-        val options = ConfigParseOptions.defaults().setAllowMissing(failIfMissing)
+        val options = ConfigParseOptions.defaults().setAllowMissing(!failIfMissing)
         return ConfigFactory.parseURL(url, options)
     }
 }

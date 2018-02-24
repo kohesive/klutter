@@ -1,0 +1,28 @@
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    bintrayUsername = project.hasProperty('bintrayUser') ? bintrayUser : System.getenv('bintrayUser')
+    bintrayPassword =  project.hasProperty('bintrayKey') ? bintrayKey : System.getenv('bintrayKey')
+}
+
+bintray {
+    user = bintrayUsername
+    key =  bintrayPassword
+    pkg {
+        repo = binTrayRepo
+        name = project.name
+        licenses = [licenseName]
+        vcsUrl = scmGitFile
+
+        version {
+            name = project.version
+            desc = 'n/a'
+            released = new Date()
+        }
+        publicDownloadNumbers = false
+        configurations = ['archives']
+    }
+    publish = true
+    dryRun = false
+}
+

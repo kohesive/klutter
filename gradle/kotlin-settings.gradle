@@ -1,0 +1,29 @@
+apply plugin: 'nebula.kotlin'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = 1.8
+        languageVersion = 1.2
+        suppressWarnings = false
+        freeCompilerArgs = ["-Xskip-runtime-version-check"]
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = 1.8
+        languageVersion = 1.2
+        suppressWarnings = false
+        freeCompilerArgs = ["-Xskip-runtime-version-check"]
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.incremental = true
+    options.compilerArgs << '-Xlint:unchecked'
+}
+
