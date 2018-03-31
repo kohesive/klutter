@@ -3,7 +3,7 @@ dependencies {
     compile project(":klutter-json-jackson-kodein")
     compile project(":klutter-vertx3")
 
-    compile "com.github.salomonbrys.kodein:kodein:$version_kodein"
+    compile "org.kodein.di:kodein-di-generic-jvm:$version_kodein"
     compile "org.slf4j:slf4j-api:$version_slf4j"
 
     compileOnly "io.vertx:vertx-core:$version_vertx"

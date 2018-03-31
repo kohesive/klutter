@@ -3,5 +3,5 @@ dependencies {
     compile project(":klutter-config-typesafe")
     compile project(":klutter-json-jackson-kodein")
 
-    compile "com.github.salomonbrys.kodein:kodein:$version_kodein"
+    compile "org.kodein.di:kodein-di-generic-jvm:$version_kodein"
 }

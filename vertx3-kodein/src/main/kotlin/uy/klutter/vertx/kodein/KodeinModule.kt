@@ -1,10 +1,11 @@
 package uy.klutter.vertx.kodein
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.factory
-import com.github.salomonbrys.kodein.singleton
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.factory
+import org.kodein.di.generic.singleton
+
 import uy.klutter.vertx.VertxInit
 import uy.klutter.vertx.setupVertxLoggingToSlf4j
 import org.slf4j.Logger as Slf4jLogger

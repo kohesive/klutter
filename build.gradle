@@ -28,8 +28,11 @@ subprojects {
     apply from: "$rootDir/gradle/bintray.gradle"
 
     repositories {
-        mavenCentral()
         jcenter()
+        mavenCentral()
+        maven {
+           url 'https://dl.bintray.com/kodein-framework/Kodein-DI/'
+        }
     }
 
     dependencies {

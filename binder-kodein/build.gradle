@@ -1,4 +1,4 @@
 dependencies {
     compile project(":klutter-binder")
-    compile "com.github.salomonbrys.kodein:kodein:$version_kodein"
+    compile "org.kodein.di:kodein-di-generic-jvm:$version_kodein"
 }

@@ -3,10 +3,17 @@ package uy.klutter.config.typesafe.kodein
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.type.TypeFactory
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.github.salomonbrys.kodein.*
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.factory
+import org.kodein.di.generic.singleton
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigRenderOptions
 import com.typesafe.config.ConfigValue
+import org.kodein.di.TypeToken
+import org.kodein.di.bindings.InstanceBinding
+import org.kodein.di.generic
+import org.kodein.di.jvmType
 
 fun Kodein.Builder.importConfig(config: Config, configExpression: String? = null, allowOverride: Boolean = false, mapper: ObjectMapper = jacksonObjectMapper(), init: KodeinTypesafeConfig.Module.Builder.(Config) -> Unit) {
     val root = if (configExpression != null && configExpression.isNotBlank()) config.getConfig(configExpression) else config
@@ -45,7 +52,7 @@ class KodeinTypesafeConfig private constructor() {
                 })
             }
 
-            inner class ConfigBinder<in T : Any>(private val _bind: Kodein.Bind, private val overrides: Boolean?) {
+            inner class ConfigBinder<in T : Any>(private val _bindType: TypeToken<T>, private val _bindTag: Any?, private val overrides: Boolean?) {
                 infix fun fromConfig(targetConfig: Config) {
                     addAction(targetConfig)
                 }
@@ -57,13 +64,13 @@ class KodeinTypesafeConfig private constructor() {
                 private fun addAction(targetConfig: Config) {
                     actions.add(BindActions {
                         val asJson = targetConfig.root().render(ConfigRenderOptions.concise().setJson(true))
-                        val value: T = mapper.readValue(asJson, TypeFactory.defaultInstance().constructType(_bind.type))!!
-                        typed.bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
+                        val value: T = mapper.readValue(asJson, TypeFactory.defaultInstance().constructType(_bindType.jvmType))!!
+                        Bind(_bindType, _bindTag, overrides) with InstanceBinding(_bindType, value)
                        })
                 }
             }
 
-            inner class ConstantBinder<in T : Any>(private val _bind: Kodein.Bind, private val overrides: Boolean?) {
+            inner class ConstantBinder<in T : Any>(private val _bindType: TypeToken<T>, private val _bindTag: Any?, private val overrides: Boolean?) {
                 infix fun fromConfig(configExpression: String) {
                     addAction(config.getValue(configExpression))
                 }
@@ -76,13 +83,13 @@ class KodeinTypesafeConfig private constructor() {
                 private fun addAction(configValue: ConfigValue) {
                     actions.add(BindActions {
                         val value = configValue.unwrapped() as T
-                        typed.bind(_bind.type, _bind.tag, overrides) with CInstance<Any>(_bind.type, value)
+                        Bind(_bindType, _bindTag, overrides) with InstanceBinding(_bindType, value)
                     })
                 }
             }
 
-            inline fun <reified T : Any> bind(tag: Any? = null, overrides: Boolean? = null): ConfigBinder<T> = ConfigBinder<T>(Kodein.Bind(genericToken<T>().type, tag), overrides)
-            inline fun <reified T : Any> constant(tag: Any, overrides: Boolean? = null): ConstantBinder<T> = ConstantBinder<T>(Kodein.Bind(genericToken<T>().type, tag), overrides)
+            inline fun <reified T : Any> bind(tag: Any? = null, overrides: Boolean? = null): ConfigBinder<T> = ConfigBinder(generic(), tag, overrides)
+            inline fun <reified T : Any> constant(tag: Any, overrides: Boolean? = null): ConstantBinder<T> = ConstantBinder(generic(), tag, overrides)
         }
     }
 }

@@ -1,10 +1,12 @@
 package uy.klutter.config.typesafe.tests
 
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.singleton
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.factory
+import org.kodein.di.generic.singleton
 import org.junit.Test
+import org.kodein.di.direct
+import org.kodein.di.generic.instance
 import uy.klutter.config.typesafe.MapAsConfig
 import uy.klutter.config.typesafe.kodein.ConfigModule
 import uy.klutter.config.typesafe.kodein.importConfig
@@ -32,26 +34,26 @@ class TestConfigInjection {
         val matchHttp = HttpConfig(8080, 16)
         val matchData = DataConfig("com.test.bucket", "us-east")
 
-        assertEquals(matchHttp, kodein.instance<HttpConfig>())
-        assertEquals(matchData, kodein.instance<DataConfig>())
+        assertEquals(matchHttp, kodein.direct.instance<HttpConfig>())
+        assertEquals(matchData, kodein.direct.instance<DataConfig>())
     }
 
     @Test fun testFactoryUsingConfigWorks() {
         val matchHttp = HttpConfig(8080, 16)
         val matchData = DataConfig("com.test.bucket", "us-east")
 
-        val thing = kodein.instance<ConfiguredThing>()
+        val thing = kodein.direct.instance<ConfiguredThing>()
         assertEquals(matchHttp, thing.httpCfg)
         assertEquals(matchData, thing.dataCfg)
     }
 
     @Test fun testWithModules() {
-        val thing = kodein.instance<OtherThingWantingConfig>()
+        val thing = kodein.direct.instance<OtherThingWantingConfig>()
         assertEquals("frisbee", thing.cfg.name)
     }
 
     @Test fun testConstant() {
-        assertEquals(8080, kodein.instance("serverPort"))
+        assertEquals(8080, kodein.direct.instance("serverPort"))
     }
 
 

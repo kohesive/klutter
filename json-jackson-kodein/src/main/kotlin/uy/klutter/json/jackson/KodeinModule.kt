@@ -6,14 +6,16 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.singleton
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
+
 
 object KodeinJacksonWithKotlin {
     /**
      * Add an ObjectMapper singleton factory to Kodein registry that is enabled for Kotlin classes
      */
+
     val module = Kodein.Module {
         bind<ObjectMapper>() with singleton {
             jacksonObjectMapper()
