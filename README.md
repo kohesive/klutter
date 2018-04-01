@@ -11,7 +11,7 @@ Each module has its own set of dependencies.  The basic pattern is:
 **Gradle:**
 
 ```
-compile "uy.kohesive.klutter:klutter-moduleName:2.3.+"
+compile "uy.kohesive.klutter:klutter-moduleName:2.5.+"
 ```
 
 **Maven:**
