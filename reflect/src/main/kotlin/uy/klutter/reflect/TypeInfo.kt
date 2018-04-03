@@ -8,6 +8,9 @@ import kotlin.reflect.KVariance
 import kotlin.reflect.full.createType
 
 inline fun <reified T> reifiedType(): Type = object : TypeReference<T>() {}.type
+
+@Deprecated(message = "This is experimental based on https://youtrack.jetbrains.com/issue/KT-15992",
+    level = DeprecationLevel.WARNING)
 inline fun <reified T> reifiedKType(): KType = object : KTypeReference<T>(isNullable<T>()) {}.ktype
 
 inline fun <reified T : Any?> isNullable(): Boolean {
