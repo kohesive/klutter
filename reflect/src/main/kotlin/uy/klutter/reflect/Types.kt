@@ -145,6 +145,4 @@ fun Class<*>.isAssignableFromOrSamePrimitive(other: KType): Boolean {
     return (this as Type).isAssignableFromOrSamePrimitive(other.javaType)
 }
 
-fun KType.erasedType(): Class<out Any> = this.jvmErasure.java
-
 
