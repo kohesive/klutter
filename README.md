@@ -1,8 +1,8 @@
-[![Kotlin](https://img.shields.io/badge/kotlin-1.2.31-blue.svg)](http://kotlinlang.org) [![Maven Central](https://img.shields.io/maven-central/v/uy.kohesive.klutter/klutter-core.svg)](https://mvnrepository.com/artifact/uy.kohesive.klutter)  [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack #kohesive](https://img.shields.io/badge/chat-kotlin%20slack%20%23kohesive-orange.svg)](http://kotlinslackin.herokuapp.com)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.3.10-blue.svg)](http://kotlinlang.org) [![Maven Central](https://img.shields.io/maven-central/v/uy.kohesive.klutter/klutter-core.svg)](https://mvnrepository.com/artifact/uy.kohesive.klutter)  [![CircleCI branch](https://img.shields.io/circleci/project/kohesive/klutter/master.svg)](https://circleci.com/gh/kohesive/klutter/tree/master) [![Issues](https://img.shields.io/github/issues/kohesive/klutter.svg)](https://github.com/kohesive/klutter/issues?q=is%3Aopen) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/kohesive/klutter/blob/master/LICENSE) [![Kotlin Slack #kohesive](https://img.shields.io/badge/chat-kotlin%20slack%20%23kohesive-orange.svg)](http://kotlinslackin.herokuapp.com)
 
 # klutter
 
-Random small libraries, usually extensions making other libraries happier. Versions later than 2.x are for JDK 8 and newer only.  Use 1.x for older JDK's.
+Random small libraries, usually extensions making other libraries happier. Versions later than 2.x are for JDK 8 and newer only.  
 
 ## Maven Dependency
 
@@ -11,7 +11,7 @@ Each module has its own set of dependencies.  The basic pattern is:
 **Gradle:**
 
 ```
-compile "uy.kohesive.klutter:klutter-moduleName:2.5.+"
+compile "uy.kohesive.klutter:klutter-moduleName:2.6.+"
 ```
 
 **Maven:**
@@ -19,7 +19,7 @@ compile "uy.kohesive.klutter:klutter-moduleName:2.5.+"
 <dependency>
     <groupId>uy.kohesive.klutter</groupId>
     <artifactId>klutter-moduleName</artifactId>
-    <version>[2.5.0,2.6.0)</version>
+    <version>[2.6.0,2.7.0)</version>
 </dependency>
 ```
  

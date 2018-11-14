@@ -8,6 +8,8 @@ import kotlin.reflect.jvm.reflect
 
 
 class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructor(private val _functionClass: Class<T>, private val _kfunc: KFunction<R>, private val _name: String? = null, private val _annotations: List<Annotation>?) : KCallable<R> {
+    override val isSuspend: Boolean
+        get() = false
     override val isAbstract: Boolean
         get() = false
     override val isFinal: Boolean
@@ -48,7 +50,10 @@ class KCallableFuncRefOrLambda<T : Function<R>, out R : Any?> private constructo
             override val isOptional: Boolean = false
             override val kind: KParameter.Kind = KParameter.Kind.INSTANCE
             override val name: String? = null
-            override val type: KType = object : KType {    // TODO: this is fragile if anyone looks at this type and tries to do much with it (not resolved!)
+            override val type: KType = object : KType {
+                // TODO: this is fragile if anyone looks at this type and tries to do much with it (not resolved!)
+                override val annotations: List<Annotation>
+                    get() = emptyList()
                 override val arguments: List<KTypeProjection>
                     get() = emptyList()
                 override val classifier: KClassifier?

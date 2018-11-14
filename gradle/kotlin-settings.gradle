@@ -6,7 +6,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 compileKotlin {
     kotlinOptions {
         jvmTarget = 1.8
-        languageVersion = 1.2
+        languageVersion = 1.3
         suppressWarnings = false
         freeCompilerArgs = ["-Xskip-runtime-version-check"]
     }
@@ -15,7 +15,7 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions {
         jvmTarget = 1.8
-        languageVersion = 1.2
+        languageVersion = 1.3
         suppressWarnings = false
         freeCompilerArgs = ["-Xskip-runtime-version-check"]
     }
