@@ -71,7 +71,7 @@ object OtherModule {
         bind<OtherConfig>() fromConfig(it)
     }
 
-    val kodeinModule = Kodein.Module {
+    val kodeinModule = Kodein.Module("klutter-test-other-module-${System.currentTimeMillis()}") {
         bind() from singleton { OtherThingWantingConfig(instance()) }
     }
 }

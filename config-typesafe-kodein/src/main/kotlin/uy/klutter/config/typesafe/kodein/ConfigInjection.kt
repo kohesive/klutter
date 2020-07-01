@@ -14,6 +14,7 @@ import org.kodein.di.TypeToken
 import org.kodein.di.bindings.InstanceBinding
 import org.kodein.di.generic
 import org.kodein.di.jvmType
+import java.lang.System.currentTimeMillis
 
 fun Kodein.Builder.importConfig(config: Config, configExpression: String? = null, allowOverride: Boolean = false, mapper: ObjectMapper = jacksonObjectMapper(), init: KodeinTypesafeConfig.Module.Builder.(Config) -> Unit) {
     val root = if (configExpression != null && configExpression.isNotBlank()) config.getConfig(configExpression) else config
@@ -25,7 +26,7 @@ fun Kodein.Companion.ConfigModule(init: KodeinTypesafeConfig.Module.Builder.(Con
 class KodeinTypesafeConfig private constructor() {
     class Module internal constructor (private val init: Builder.(Config) -> Unit) {
         inner class Builder(val config: Config, val mapper: ObjectMapper = jacksonObjectMapper()) {
-            internal val kodeinModule = Kodein.Module() {
+            internal val kodeinModule = Kodein.Module("klutter-config-${currentTimeMillis()}") {
                 // call init which builds a list of things to do
                 init(config)
                 // execute those things

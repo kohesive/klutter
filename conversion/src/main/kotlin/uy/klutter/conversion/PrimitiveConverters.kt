@@ -13,7 +13,6 @@ import java.util.*
 class PrimitiveConverters : ConverterSet {
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
     override fun predicate(fromType: Type, toType: Type): Boolean {
-        val fromErased = fromType.erasedType()
         return when {
             String::class.isAssignableFrom(fromType) -> when (toType) {
                 String::class.java,

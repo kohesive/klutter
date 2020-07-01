@@ -79,6 +79,7 @@ class TestReadOnlyAndImmutableCollections {
         val x = m.entries as AbstractSet<Map.Entry<String, Int>> // nope, protected
     }
 
+    @Suppress("USELESS_IS_CHECK")
     @Test fun testGithub35_RandomAccessMarkerIsRetained() {
         assertTrue(arrayListOf(1,2,3) is RandomAccess)
         assertTrue(arrayListOf(1,2,3) is RandomAccess)

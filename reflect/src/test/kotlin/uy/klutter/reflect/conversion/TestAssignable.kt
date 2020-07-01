@@ -5,6 +5,7 @@ import uy.klutter.reflect.isAssignableFrom
 import uy.klutter.reflect.isAssignableFromOrSamePrimitive
 import java.lang.reflect.Type
 import kotlin.reflect.full.defaultType
+import kotlin.reflect.full.starProjectedType
 import kotlin.test.assertTrue
 
 class TestAssignable {

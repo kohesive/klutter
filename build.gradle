@@ -12,7 +12,7 @@ buildscript {
 }
 
 plugins {
-    id 'nebula.kotlin' version '1.3.10' apply false
+    id "org.jetbrains.kotlin.jvm" version "1.3.72" apply false
     id 'nebula.maven-resolved-dependencies' version '9.2.0' apply false
 }
 
@@ -28,11 +28,9 @@ subprojects {
     apply from: "$rootDir/gradle/bintray.gradle"
 
     repositories {
+//        maven { url "https://dl.bintray.com/kodein-framework/Kodein-DI/" }
         jcenter()
         mavenCentral()
-        maven {
-           url 'https://dl.bintray.com/kodein-framework/Kodein-DI/'
-        }
     }
 
     dependencies {
@@ -93,10 +91,12 @@ subprojects { subproj ->
         dokka {
             outputFormat = "javadoc"
             outputDirectory = "${buildDir}/javadoc"
-            linkMapping {
-                dir = dokkaLinkDir
-                url = dokkaLinkUrl
-                suffix = dokkaLinkSuffix
+            configuration {
+                sourceLink {
+                    path = dokkaLinkDir
+                    url = dokkaLinkUrl
+                    lineSuffix = dokkaLinkSuffix
+                }
             }
         }
 
@@ -104,10 +104,12 @@ subprojects { subproj ->
         task dokkaHtml(type: org.jetbrains.dokka.gradle.DokkaTask) {
             outputFormat = "html"
             outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
-            linkMapping {
-                dir = dokkaLinkDir
-                url = dokkaLinkUrl
-                suffix = dokkaLinkSuffix
+            configuration {
+                sourceLink {
+                    path = dokkaLinkDir
+                    url = dokkaLinkUrl
+                    lineSuffix = dokkaLinkSuffix
+                }
             }
         }
 
@@ -116,10 +118,12 @@ subprojects { subproj ->
             outputFormat = "markdown"
             outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
             // includes = dokkaIncludes
-            linkMapping {
-                dir = dokkaLinkDir
-                url = dokkaLinkUrl
-                suffix = dokkaLinkSuffix
+            configuration {
+                sourceLink {
+                    path = dokkaLinkDir
+                    url = dokkaLinkUrl
+                    lineSuffix = dokkaLinkSuffix
+                }
             }
         }
 
@@ -127,10 +131,12 @@ subprojects { subproj ->
         task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
             outputFormat = "javadoc"
             outputDirectory = "${dokkaOutputBase}/${outputFormat}/${moduleName}"
-            linkMapping {
-                dir = dokkaLinkDir
-                url = dokkaLinkUrl
-                suffix = dokkaLinkSuffix
+            configuration {
+                sourceLink {
+                    path = dokkaLinkDir
+                    url = dokkaLinkUrl
+                    lineSuffix = dokkaLinkSuffix
+                }
             }
         }
 

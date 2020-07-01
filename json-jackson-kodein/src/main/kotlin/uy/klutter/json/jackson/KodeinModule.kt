@@ -16,7 +16,7 @@ object KodeinJacksonWithKotlin {
      * Add an ObjectMapper singleton factory to Kodein registry that is enabled for Kotlin classes
      */
 
-    val module = Kodein.Module {
+    val module = Kodein.Module("klutter-kotlin-jackson-${System.currentTimeMillis()}") {
         bind<ObjectMapper>() with singleton {
             jacksonObjectMapper()
                     .registerModule(JavaTimeModule())
@@ -33,7 +33,7 @@ object KodeinJacksonWithKotlin {
      * compile-time, which is safer.
      */
 
-    val moduleWithAutoFindJacksonModules = Kodein.Module {
+    val moduleWithAutoFindJacksonModules = Kodein.Module("klutter-kotlin-jackson-auto-${System.currentTimeMillis()}") {
         bind<ObjectMapper>() with singleton { jacksonObjectMapper().findAndRegisterModules() }
     }
 }

@@ -31,7 +31,7 @@ class CompiledGraphSchema<N : Enum<N>, R : Enum<R>>(val schema: GraphSchemaBuild
     init {
         val relationshipFlags = hashMapOf<RelationshipTrippleKey<N, R>, Int>()
 
-        fun createRelation(fromNode: N, relationship: R, toNode: N, relationOptions: GraphRelationOptions, modelScope: String? = null): RelationshipTrippleKey<N, R> {
+        fun createRelation(fromNode: N, relationship: R, toNode: N, relationOptions: GraphRelationOptions, @Suppress("UNUSED_PARAMETER") modelScope: String? = null): RelationshipTrippleKey<N, R> {
             val trippleKey = RelationshipTrippleKey(fromNode, relationship, toNode)
             val oldFlags = relationshipFlags.get(trippleKey)
             if (oldFlags != null && oldFlags != relationOptions.flags) {
