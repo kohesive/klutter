@@ -27,13 +27,15 @@ See all modules and current versions on [mvenrepository.com](https://mvnreposito
 
 ## Modules
 
+In Klutter 3.x some modules were removed as functionality and direct support for Kotlin Couroutines or Kodein has been added to libraries, or other changes have come along that make the module less useful.
+
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven&#8209;Artifact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|Topic|
 |------|------|
 |[config-typesafe](config-typesafe/)|Typesafe Config easier loader and access to configuration|
 |[config-typesafe-kodein](config-typesafe/)|Typesafe Config injection into Kodein 6.5 modules|
 |[conversion](conversion/)|Type converters for primitive and common JDK types|
 |[core](core/)|Core extension methods on strings, numbers, dates, URI Builder, better URL Encoding/Decoding|
-[db-jdbi-v2|See JDBI official support in 3.x|
+|db-jdbi-v2|See JDBI official support in 3.x|
 |db-jdbi-v3|Merged into JDBI official, 3.x snapshot and releases after March 7, 2017|
 |elasticsearch-1.7.x|REMOVED in Klutter 3.x|
 |elasticsearch-2.4.x|REMOVED in Klutter 3.x|
